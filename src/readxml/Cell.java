@@ -1,3 +1,4 @@
+package readxml;
 public class Cell {
 	private String name;
 	private int number;
