@@ -1,6 +1,7 @@
 package readxml;
 
 import java.io.File;
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -16,8 +17,13 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
+import structures.Cell;
+import structures.Grid;
+import structures.State;
+
 public class XmlMapper {
 
+	// main method is only for temporary testing!
 	public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
 		xmlmap.mapXmlToGrid("GameOfLife.xml");

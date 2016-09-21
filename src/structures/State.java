@@ -1,4 +1,4 @@
-package readxml;
+package structures;
 public class State {
 	public State() {
 		
