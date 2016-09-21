@@ -1,12 +1,12 @@
 package readxml;
 import java.util.ArrayList;
 
-public class Graph {
+public class Grid {
 	private int num_vertices;
 	private int num_edges;
 	private ArrayList<ArrayList<Cell>> cell_neighbors;
 	
-	public Graph() {
+	public Grid() {
 		num_vertices = 0;
 		num_edges = 0;
 		cell_neighbors = new ArrayList<ArrayList<Cell>>();
