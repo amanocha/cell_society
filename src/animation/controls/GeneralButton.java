@@ -8,7 +8,15 @@ public class GeneralButton {
 	
 	public GeneralButton(String s) {
 		stringButton = new Button(s);
-		stringButton.setId("main-menu");
+		stringButton.setId("main-button");
+	}
+	
+	public Button getStringButton() {
+		return stringButton;
+	}
+	
+	public void setWidth(double width) {
+		stringButton.setPrefWidth(width);
 	}
 	
 }
