@@ -1,3 +1,4 @@
+package structures;
 public class FireState extends State {
 	public FireState() {
 		super();
