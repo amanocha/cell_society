@@ -16,6 +16,10 @@ public class Grid {
 		this.globalsMap = globalsMap;
 	}
 	
+	public Map<String, String> getGlobalsMap() {
+		return globalsMap;
+	}
+	
 	public int getNumCells() {
 		return cellList.size();
 	}
