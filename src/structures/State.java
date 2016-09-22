@@ -2,13 +2,13 @@ package structures;
 
 import java.util.ArrayList;
 
-public abstract class State {
+public class State {
 	private ArrayList<Object> possible_states;
 	private int state_index;
 	
-	public State() {
+	public State(int state_index) {
 		possible_states = new ArrayList<Object>();
-		state_index = -1;
+		this.state_index = state_index;
 	}
 	
 	public ArrayList<Object> getPossibleStates() {
@@ -18,6 +18,6 @@ public abstract class State {
 	public Object getState() {
 		return possible_states.get(state_index);
 	}
-	
-	public abstract void setPossibleStates();
+
+//	public abstract void setPossibleStates();
 }
