@@ -1,18 +1,20 @@
-<!-- 25 cells, binary state, game of life -->
-
 <file>
 	<global>
 		<chars>
 			<name>simulation_name</name>
-			<value>game_of_life</value>
+			<value>fire</value>
 		</chars>
 		<chars>
 			<name>author</name>
-			<value>john_conway</value>
+			<value>angela_shiflet</value>
 		</chars>
 		<chars>
 			<name>shape</name>
 			<value>square</value>
+		</chars>
+		<chars>
+			<name>probCatch</name>
+			<value>15</value>
 		</chars>
 	</global>
 	<index>25</index>
@@ -21,70 +23,70 @@
 			<index>0</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>1</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>2</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>3</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>4</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>5</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>6</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>7</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>8</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>9</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -98,7 +100,7 @@
 			<index>11</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
@@ -112,14 +114,14 @@
 			<index>13</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>14</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
@@ -133,7 +135,7 @@
 			<index>16</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
@@ -147,21 +149,21 @@
 			<index>18</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>19</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>20</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -182,7 +184,7 @@
 			<index>23</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>

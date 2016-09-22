@@ -5,7 +5,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -33,7 +35,7 @@ public class XmlMapper {
 	
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
-		inputFile = new File(classLoader.getResource("GameOfLife.xml").getFile());
+		inputFile = new File(classLoader.getResource(filename).getFile());
 
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -66,12 +68,14 @@ public class XmlMapper {
 		
 		// Get all global characteristics
 		List<Node> chars = getListOfChildNodes(global);
+		Map<String, String> globalsMap = new HashMap<String, String>();
 		for(Node n : chars) {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
 			String value = charChildren.get(1).getTextContent();
 			System.out.println("name: "+name);
 			System.out.println("value : " + value);
+			globalsMap.put(name, value);
 		}
 		
 		// Get number of total cells
@@ -105,7 +109,7 @@ public class XmlMapper {
 
 		String shape = "square";
 		//HARD CODED SHAPE AND GRID ROWS AND COLS
-		Grid cellGrid = new Grid(cells, shape, 5, 5);
+		Grid cellGrid = new Grid(cells, 5, 5, globalsMap);
 		
 		return cellGrid;
 	}
