@@ -104,7 +104,8 @@ public class XmlMapper {
 		}
 
 		String shape = "square";
-		Grid cellGrid = new Grid(cells, shape);
+		//HARD CODED SHAPE AND GRID ROWS AND COLS
+		Grid cellGrid = new Grid(cells, shape, 5, 5);
 		
 		return cellGrid;
 	}
