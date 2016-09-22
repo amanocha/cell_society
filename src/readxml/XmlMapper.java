@@ -29,7 +29,7 @@ public class XmlMapper {
 		xmlmap.mapXmlToGrid("GameOfLife.xml");
 	}
 
-	public void mapXmlToGrid(String filename) {
+	public Grid mapXmlToGrid(String filename) {
 	
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -79,7 +79,7 @@ public class XmlMapper {
 		System.out.println("Index value: "+indexValue);
 		
 		// Initialize 1-d array of cells
-		Cell[] cells = new Cell[indexValue];
+		List<Cell> cells = new ArrayList<Cell>();
 		
 		// Create grid/array of cells given initial states of each 'square'
 		List<Node> squareList = getListOfChildNodes(squares);
@@ -89,21 +89,24 @@ public class XmlMapper {
 	
 			Node characteristic = squareChildren.get(1);
 			List<Node> squareChars = getListOfChildNodes(characteristic);
-				String sqCharName = squareChars.get(0).getTextContent();
-				Integer sqCharValue = Integer.parseInt(squareChars.get(1).getTextContent());
-				
-				// MUST CHANGE BELOW LINE TO PASS IN RIGHT CONSTRUCTOR PARAMS!!
-				Cell newCell = new Cell("testcell", sqCharValue, new State());
-				cells[squareIndex] = newCell;
+			String sqCharName = squareChars.get(0).getTextContent();
+			Integer sqCharValue = Integer.parseInt(squareChars.get(1).getTextContent());
+			
+			// MUST CHANGE BELOW LINE TO PASS IN RIGHT CONSTRUCTOR PARAMS!!
+			Cell newCell = new Cell(sqCharValue, new State(sqCharValue));
+			cells.add(newCell);
 		}
 		
 		// Testing cell creation
-		for(int i = 0; i < cells.length; i++) {
-			Cell currCell = cells[i];
+		for(int i = 0; i < cells.size(); i++) {
+			Cell currCell = cells.get(i);
 			System.out.println(currCell.getNumber());
 		}
 
-		return;
+		String shape = "square";
+		Grid cellGrid = new Grid(cells, shape);
+		
+		return cellGrid;
 	}
 	
 	/*

@@ -1,17 +1,22 @@
 package structures;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class State {
-	private ArrayList<Object> possible_states;
+	private List<State> possible_states;
 	private int state_index;
 	
 	public State() {
-		possible_states = new ArrayList<Object>();
-		state_index = -1;
+		possible_states = new ArrayList<State>();
 	}
 	
-	public ArrayList<Object> getPossibleStates() {
+	public State(int state_index) {
+		possible_states = new ArrayList<State>();
+		this.state_index = state_index;
+	}
+	
+	public List<State> getPossibleStates() {
 		return possible_states;
 	}
 	
@@ -20,4 +25,5 @@ public class State {
 	}
 	
 	public void setPossibleStates() {}
+
 }

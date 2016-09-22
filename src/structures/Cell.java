@@ -15,7 +15,7 @@ public class Cell {
 	
 	public Cell(int cell_num, State cell_state) {
 		number = cell_num;
-		previous_state = new State();
+		previous_state = new State(-1);
 		current_state = cell_state;
 		next_state = current_state;
 	}
