@@ -1,6 +1,7 @@
 package structures;
 
 import java.util.List;
+import java.util.Map;
 
 public class Grid {
 	
@@ -8,10 +9,11 @@ public class Grid {
 	private List<Cell> cellList;
 	private int rows;
 	private int columns;
+	Map<String, String> globalsMap;
 	
-	public Grid(List<Cell> cellList, String shape, int rows, int columns) {
-		this.setCellList(cellList);
-		this.setCellShape(shape);
+	public Grid(List<Cell> cellList, int rows, int columns, Map<String, String> globalsMap) {
+		this.cellList = cellList;
+		this.globalsMap = globalsMap;
 	}
 	
 	public int getNumCells() {

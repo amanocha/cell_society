@@ -16,6 +16,10 @@ public class State {
 		this.state_index = state_index;
 	}
 	
+	public int getStateIndex() {
+		return state_index;
+	}
+	
 	public List<State> getPossibleStates() {
 		return possible_states;
 	}
