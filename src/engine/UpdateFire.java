@@ -1,6 +1,5 @@
 package engine;
 
-import java.util.ArrayList;
 import java.util.Random;
 import structures.Cell;
 import structures.Grid;
@@ -12,38 +11,7 @@ public class UpdateFire extends Update {
 	
 	public UpdateFire(Grid newGrid) {
 		super(newGrid);
-		probCatch = parseDouble(grid.getGlobalsMap().get("probCatch"));
-	}
-	
-	@Override
-	public ArrayList<Cell> getNeighbors(Cell cell) {
-		int gridSize = grid.getNumCells();
-		int gridWidth = grid.getColumns();
-		int cellNumber = cell.getNumber();
-		int north, east, south, west;
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		
-		if (cellNumber >= gridWidth) {
-			north = cellNumber - gridWidth;
-			neighbors.add(grid.getCellList().get(north));
-		}
-		
-		if (cellNumber % gridWidth != (gridWidth-1)) {
-			east = cellNumber + 1;
-			neighbors.add(grid.getCellList().get(east));
-		}
-		
-		if (cellNumber < gridSize - gridWidth) {
-			south = cellNumber + gridWidth;
-			neighbors.add(grid.getCellList().get(south));
-		}
-		
-		if (cellNumber % gridWidth != 0) {
-			west = cellNumber - 1;
-			neighbors.add(grid.getCellList().get(west));
-		}
-		
-		return neighbors;
+		probCatch = Double.parseDouble(grid.getGlobalsMap().get("probCatch"));
 	}
 	
 	/**
@@ -57,7 +25,7 @@ public class UpdateFire extends Update {
 		for(Cell cell : grid.getCellList()) {
 			boolean checkProb = false;
 			if(cell.getCurrentState().getStateIndex() == 1) { 
-				for(Cell neighbor : getNeighbors(cell)) {
+				for(Cell neighbor : super.getImmediateNeighbors(cell)) {
 					if(neighbor.getCurrentState().getStateIndex() == 2) {
 						checkProb = true;
 						break;
