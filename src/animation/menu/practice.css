@@ -1,0 +1,55 @@
+/* 
+    Document   : controlStyle1
+*/
+
+ 
+#string-button {
+    -fx-background-color: 
+        #BABABA,
+        linear-gradient(#DBDBDB 0%, #8C8C8C 25%, #DBDBDB 75%, #EBEBEB 100%),
+        linear-gradient(#C4C4C4 0%, #9E9E9E 25%, #CDCDCD 75%, #E0E0E0 100%);
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 15 30 15 30;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #FFFFFF;
+}
+
+#shape-button {
+    -fx-background-image: url('play_arrow.png');
+    -fx-background-size: 70px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+
+#shape-button:hover {
+    -fx-background-image: url('play_arrow.png');
+    -fx-background-size: 70px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+
+#string-button:hover {
+    -fx-background-color: 
+        #C4C4C4
+        linear-gradient(#9E9E9E 0%, #E0E0E0 25%, #CDCDCD 75%, #C4C4C4 100%);
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 15 30 15 30;
+}
+
+
+.buttontext {
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 20px;
+    -fx-text-fill: #FFFFFF;
+}
+
+.label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-family: "Helvetica";
+}

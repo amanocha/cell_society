@@ -1,21 +1,22 @@
 package animation.main;
 
-import animation.Screen.Screen;
+import animation.menu.Navigation;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
-	private static final int SIZE = 400;
+	private static final int WIDTH = 800;
+	private static final int HEIGHT = 500;
 
     /**
      * Set things up at the beginning.
      */
     @Override
     public void start (Stage s) {
-    	Screen mainmenu = new Screen();
+    	Navigation mainmenu = new Navigation(s, WIDTH, HEIGHT);
         s.setTitle("Cellular Automata");
-        mainmenu.init(s, SIZE, SIZE);
+        mainmenu.mainMenu();
 	}
     
 	/**
