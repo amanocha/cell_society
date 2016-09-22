@@ -1,33 +1,26 @@
 package structures;
 
 public class Cell {
-	private String name;
 	private int number;
 	private State previous_state;
 	private State current_state;
-	private boolean update;
+	private State next_state;
 	
 	public Cell() {
-		name = "";
 		number = 0;
 		previous_state = new State();
 		current_state = new State();
-		update = false;
+		next_state = new State();
 	}
 	
-	public Cell(String cell_name, int cell_num, State cell_state) {
-		name = cell_name;
+	public Cell(int cell_num, State cell_state) {
 		number = cell_num;
 		previous_state = new State();
 		current_state = cell_state;
-		update = false;
+		next_state = current_state;
 	}
 	
 	/*****GETTERS*****/
-	
-	public String getName() {
-		return name;
-	}
 	
 	public int getNumber() {
 		return number;
@@ -41,15 +34,11 @@ public class Cell {
 		return current_state;
 	}
 	
-	public boolean getUpdate() {
-		return update;
+	public State getNextState() {
+		return next_state;
 	}
 	
 	/*****SETTERS*****/
-	
-	public void setName(String new_name) {
-		name = new_name;
-	}
 	
 	public void setNumber(int new_number) {
 		number = new_number;
@@ -63,7 +52,7 @@ public class Cell {
 		current_state = new_current;
 	}
 	
-	public void setUpdate(boolean new_update) {
-		update = new_update;
+	public void setNextState(State new_next) {
+		next_state = new_next;
 	}
 }
