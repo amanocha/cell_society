@@ -19,17 +19,17 @@ public class GeneralButton {
 	}
 	
 	public GeneralButton(Type t) {
+		button = new Button();
+		button.setMinHeight(40);
+		button.setMinWidth(40);
 		if (t.equals(Type.START)) {
-			button = new Button();
-			button.setId("shape-button");
-			button.setMinHeight(40);
-			button.setMinWidth(40);
+			button.setId("go-button");
 		}
 		if (t.equals(Type.PAUSE)) {
-			
+			button.setId("pause-button");
 		}
-		if (t.equals(Type.PAUSE)) {
-			
+		if (t.equals(Type.STOP)) {
+			button.setId("stop-button");
 		}
 	}
 	
@@ -43,6 +43,14 @@ public class GeneralButton {
 	
 	public void setStringAction(EventHandler<ActionEvent> event) {
 		button.setOnAction(event); 
+	}
+	
+	public void setX(double x) {
+		button.setLayoutX(x);
+	}
+	
+	public void setY(double y){
+		button.setLayoutY(y);
 	}
 	
 }

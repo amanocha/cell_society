@@ -1,15 +1,35 @@
 package animation.simulation;
 
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import java.util.Iterator;
+
+import javafx.geometry.Pos;
+import javafx.scene.layout.TilePane;
+import readxml.Cell;
+import readxml.Graph;
+
 
 public class Simulation {
 	
-	public Rectangle drawGrid() {
-		Rectangle cell = new Rectangle(10, 10, 0, 0);
-		cell.setFill(Color.ALICEBLUE);
-		return cell;
+	private Graph myGraph; 
+	private Iterator<Cell> itr;
+	private AbstractDraw sim;
+	
+	public Simulation() {
+		myGraph = new Graph();
+		itr = myGraph.iterator();
+		sim = new FireSimulation(); 
+	}
+	
+	public TilePane drawGrid(int width) {
+		TilePane graph = new TilePane();
+		graph.setTileAlignment(Pos.CENTER);
+		graph.setPrefColumns(width);
+		while(itr.hasNext()) {
+			Cell current = itr.next();
+			graph.getChildren().add(sim.fillGrid(current));
+		}
+		return graph;
 	}
 	
 }

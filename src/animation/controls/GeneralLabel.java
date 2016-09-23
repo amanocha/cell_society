@@ -11,7 +11,6 @@ public class GeneralLabel {
 	}
 	
 	public Label getHeader() {
-
 		return header;
 	}
 	

@@ -7,6 +7,8 @@ import javafx.stage.Stage;
 
 public class Navigation {
 	
+	private static final String STYLESHEET = "style.css";
+	
 	private static Stage myStage;
 	private Group root;
 	private Scene myScene;
@@ -27,12 +29,12 @@ public class Navigation {
 
 	public void init() {
     	root = new Group();
-    	myScene = new Scene(root, width, height, Color.DARKGRAY);
+    	myScene = new Scene(root, width, height, Color.DIMGRAY);
     	myScene.getStylesheets().add(this.getClass()
-    			.getResource("practice.css").toExternalForm());
+    			.getResource(STYLESHEET).toExternalForm());
         myStage.setScene(myScene);
         myStage.show();
-        myGUI = new GUIGenerator(myScene);
+        myGUI = new GUIGenerator(myScene, root);
 	}
 	
 	public void mainMenu() {
@@ -43,6 +45,8 @@ public class Navigation {
 	
 	public void simulationMenu() {
 		init();
+		root.getChildren().add(myGUI.generateSimulationScreenControls());
+		root.getChildren().add(myGUI.generateSimulationScreenButton());
 		root.getChildren().add(myGUI.generateSimulationScreen());
 	}
 	
