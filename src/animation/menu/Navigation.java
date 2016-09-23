@@ -45,9 +45,7 @@ public class Navigation {
 	
 	public void simulationMenu() {
 		init();
-		root.getChildren().add(myGUI.generateSimulationScreenControls());
-		root.getChildren().add(myGUI.generateSimulationScreenButton());
-		root.getChildren().add(myGUI.generateSimulationScreen());
+		root.getChildren().addAll(myGUI.generateSimulationScreenLabel(), myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton(), myGUI.generateSimulationScreen());
 	}
 	
 	public void xmlMenu() {
