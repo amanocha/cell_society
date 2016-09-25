@@ -1,36 +1,23 @@
 package animation.controls;
 
-import javafx.scene.control.Label;
 
-public class GeneralLabel {
-	
-	private Label header;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+
+public class GeneralLabel extends GeneralControl {
 	
 	public GeneralLabel(String s){
-		header = new Label(s);
+		super(new Label(s));
 	}
 	
-	public Label getHeader() {
-		header.setId("label-header");
-		return header;
+	public Region getHeader() {
+		getControl().setId("label-header");
+		return getControl();
 	}
 	
-	public Label getMessage() {
-		header.setId("message-box");
-		return header;
+	public Region getMessage() {
+		getControl().setId("message-box");
+		return getControl();
 	}
-	
-	public void setWidth(double width) {
-		header.setMinWidth(width);
-	}
-	
-	public void setX(double x) {
-		header.setLayoutX(x);
-	}
-	
-	public void setY(double y) {
-		header.setLayoutY(y);
-	}
-	
 	
 }

@@ -23,23 +23,23 @@ public class GeneralPane {
 		mySimulationMenu = createSimulationMenuPane();
 		xmlMenuPane = createXMLMenuPane();
 	}
-	
-	private GridPane generateGrid(int col, int row, int colsize, int rowsize) {
+
+	private Pane createMainMenuPane() {
 		GridPane grid = new GridPane();
 		grid.prefHeightProperty().bind(myScene.heightProperty());
         grid.prefWidthProperty().bind(myScene.widthProperty());
-        for (int i = 1; i < row; i++) {
-			int num = rowsize;
-			RowConstraints roww = new RowConstraints();
+        for (int i = 1; i < 4; i++) {
+			int num = 10;
+			RowConstraints row = new RowConstraints();
 			if (i == 1) {
 				num = 30;
 			}
-			roww.setPercentHeight(num);
-			grid.getRowConstraints().add(roww);
+			row.setPercentHeight(num);
+			grid.getRowConstraints().add(row);
 		}
 		grid.setVgap(10);
-		for (int i = 1; i < col; i++) {
-			int num = colsize;
+		for (int i = 1; i < 3; i++) {
+			int num = 25;
 			ColumnConstraints column = new ColumnConstraints();
 			if (i == 2) {
 				num = 50;
@@ -48,11 +48,6 @@ public class GeneralPane {
 			grid.getColumnConstraints().add(column);
 		}
 		return grid;
-		
-	}
-
-	private Pane createMainMenuPane() {
-		return generateGrid(3, 4, 25, 10);
 	}
 	
 	public GridPane getMainMenuPane() {
@@ -61,14 +56,8 @@ public class GeneralPane {
 	
 	public Pane createSimulationMenuPane() {
 		StackPane pane = new StackPane();
-		TilePane baby = createSimulationPane();
 		pane.setPrefHeight(myScene.getHeight());
         pane.setPrefWidth(myScene.getWidth());
-        double left = myScene.getWidth() * .1;
-        double top = myScene.getHeight() * .65;
-        double other = myScene.getHeight() * .1;
-        StackPane.setMargin(baby, new Insets(left, top, other, other));
-        pane.getChildren().add(baby);
         pane.setMouseTransparent(true);
 		return pane; 
 	}
@@ -87,11 +76,11 @@ public class GeneralPane {
 	}
 	
 	private Pane createXMLMenuPane() {
-		return generateGrid(0, 6, 0, 10);
+		return new Pane();
 	}
 	
-	public GridPane getXMLMenuPane() {
-		return (GridPane) xmlMenuPane;
+	public Pane getXMLMenuPane() {
+		return xmlMenuPane;
 	}
 	
 }

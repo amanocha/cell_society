@@ -1,48 +1,59 @@
 package animation.menu;
 
 
+import java.util.ResourceBundle;
+
 import animation.controls.GeneralBox;
 import animation.controls.GeneralBox.Orientation;
 import animation.controls.GeneralButton;
-import animation.controls.GeneralButton.Type;
+import animation.controls.GeneralButton.Function;
 import animation.controls.GeneralLabel;
 import animation.controls.GeneralPane;
 import animation.simulation.Simulation;
-import javafx.geometry.Pos;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.TilePane;
 
 public class GUIGenerator {
+	
+	private static String[] SIMULATIONS = {"SEGREGATION", "GAME OF LIFE", "FIRE", "WA-TOR"};
 	
 	private GeneralPane myPane;
 	private Navigation myNav;
 	private Scene myScene;
 	private Simulation mySimulation;
+	private ResourceBundle myResource;
 	
-	public GUIGenerator(Scene scene, Group r) {
+	public GUIGenerator(Scene scene, Group r, ResourceBundle resource) {
 		this.myScene = scene;
+		this.myResource = resource;
 		myPane = new GeneralPane(scene);
 		myNav = new Navigation(scene.getWidth(), scene.getHeight());
 		mySimulation = new Simulation();
 	}
-	
+
+
 	public Pane generateMainScreen() {
 		GridPane grid = myPane.getMainMenuPane();
-		GeneralLabel header = new GeneralLabel("Cellular Automata"); 
-		GeneralButton button = new GeneralButton("START");
+		GeneralLabel header = new GeneralLabel(myResource.getString("Title")); 
+		GeneralButton button = new GeneralButton(myResource.getString("Start"));
 		button.setWidth(myScene.getWidth() * .5);
 		button.setStringAction(e -> myNav.simulationMenu());
 		grid.add(header.getHeader(), 1, 0);
-		grid.add(button.getButton(), 1, 1);
-		button = new GeneralButton("CHANGE PARAMETERS");
+		grid.add(button.getControl(), 1, 1);
+		button = new GeneralButton(myResource.getString("ParameterButton"));
 		button.setWidth(myScene.getWidth() * .5);
 		button.setStringAction(e -> myNav.xmlMenu());
-		grid.add(button.getButton(), 1, 2);
-		GeneralLabel text = new GeneralLabel("THE CURRENT SIMULATION \n \n The current simulation is WA-TOR.");
+		grid.add(button.getControl(), 1, 2);
+		GeneralLabel text = new GeneralLabel(myResource.getString("CurrentSimulation"));
 		text.setWidth(myScene.getWidth() * .5);
 		grid.add(text.getMessage(), 1, 4);
 		return grid;
@@ -50,69 +61,87 @@ public class GUIGenerator {
 
 	public Pane generateSimulationScreen() {
 		StackPane pane = myPane.getSimulationMenuPane();
+		int temp = 5;
+		TilePane baby = mySimulation.drawGrid(temp);
+        double left = myScene.getWidth() * .1;
+        double top = myScene.getHeight() * .5;
+        double other = myScene.getHeight() * .1;
+        StackPane.setMargin(baby, new Insets(left, top, other, other));
+        pane.getChildren().add(baby);
 		return pane;
 	}
 	
+	
 	public Node generateSimulationScreenLabel() {
-		GeneralLabel label = new GeneralLabel("Simulation: WA-TOR");
+		GeneralLabel label = new GeneralLabel(myResource.getString("SimulationLabel"));
 		label.setX(myScene.getWidth() * .07);
 		label.setY(myScene.getHeight() * .06);
 		return label.getHeader();
 	}
 	
 	public Pane generateSimulationScreenButton() {
-		GeneralButton play = new GeneralButton(Type.START);
-		GeneralButton pause = new GeneralButton(Type.PAUSE);
-		GeneralButton stop = new GeneralButton(Type.STOP);
+		GeneralButton play = new GeneralButton(Function.START);
+		GeneralButton pause = new GeneralButton(Function.PAUSE);
+		GeneralButton stop = new GeneralButton(Function.STOP);
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .45) / 3, Orientation.HORIZANTAL);
-		hbox.addAll(play.getButton(), pause.getButton(), stop.getButton());
-		hbox.setX(myScene.getWidth() * .1);
+		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
+		hbox.setX(myScene.getWidth() * .14);
 		hbox.setY(myScene.getHeight() * .91);
-		return hbox.getBox();
+		return (Pane) hbox.getControl();
 	}
 	
 	public Pane generateSimulationScreenControls() {
 		GeneralBox vbox = new GeneralBox(10, Orientation.VERTICAL);
-		GeneralButton main = new GeneralButton("MAIN MENU");
-		main.setWidth(myScene.getWidth() * .25);
-		main.setStringAction(e -> myNav.mainMenu());
-		GeneralButton speed = new GeneralButton("SPEED UP");
-		speed.setWidth(myScene.getWidth() * .25);
+		GeneralButton speed = new GeneralButton(myResource.getString("SpeedUp"));
+		speed.setWidth(myScene.getWidth() * .20);
 		speed.setStringAction(e -> myNav.mainMenu());
-		GeneralButton slow = new GeneralButton("SLOW DOWN");
-		slow.setWidth(myScene.getWidth() * .25);
+		GeneralButton slow = new GeneralButton(myResource.getString("SlowDown"));
+		slow.setWidth(myScene.getWidth() * .20);
 		slow.setStringAction(e -> myNav.mainMenu());
-		GeneralButton step = new GeneralButton("STEP");
-		step.setWidth(myScene.getWidth() * .25);
+		GeneralButton step = new GeneralButton(myResource.getString("Step"));
+		step.setWidth(myScene.getWidth() * .20);
 		step.setStringAction(e -> myNav.mainMenu());
-		vbox.addAll(main.getButton(), speed.getButton(), slow.getButton(), step.getButton());
-		vbox.setX(myScene.getWidth() * .7);
-		vbox.setY(myScene.getHeight() * .2);
-		return vbox.getBox();
+		vbox.addAll(speed.getControl(), slow.getControl(), step.getControl());
+		vbox.setX(myScene.getWidth() * .73);
+		vbox.setY(myScene.getHeight() * .15);
+		return (Pane) vbox.getControl();
+	}
+	
+	public Button generateSimulationScreenMainButton() {
+		GeneralButton main = new GeneralButton(myResource.getString("MainMenu"));
+		main.setWidth(myScene.getWidth() * .20);
+		main.setStringAction(e -> myNav.mainMenu());
+		main.setX(myScene.getWidth() * .73);
+		main.setY(myScene.getHeight() * .8);
+		return (Button) main.getControl();
 	}
 
-	public GridPane generateXMLScreen() {
-		GridPane grid = myPane.getXMLMenuPane();
-		GeneralButton button = new GeneralButton("MAIN MENU");
+	public Pane generateXMLScreen() {
+		Pane grid = myPane.getXMLMenuPane();
+		GeneralButton button = new GeneralButton(myResource.getString("MainMenu"));
 		button.setWidth(myScene.getWidth() * .25);
 		button.setStringAction(e -> myNav.mainMenu());
-		GeneralBox hbox = setXMLSelectionButtons("SEGREGATION", "GAME OF LIFE", "FIRE", "WA-TOR");
-		GeneralLabel title = new GeneralLabel("Simulation Selection");
-		grid.add(title.getHeader(), 0, 0);
-		grid.setAlignment(Pos.CENTER);
-		grid.add(button.getButton(), 0, 3);
-		grid.add(hbox.getBox(), 0, 1);
+		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .01), Orientation.HORIZANTAL);
+		for (String sim : SIMULATIONS) {
+			setXMLSelectionButtons(sim, e -> myNav.mainMenu(), hbox);
+		}
+		GeneralLabel title = new GeneralLabel(myResource.getString("SimulationSelection"));
+		title.setX(myScene.getWidth() * .32);
+		title.setY(myScene.getHeight() * .2);
+		hbox.setX(myScene.getWidth() * .08);
+		hbox.setY(myScene.getHeight() * .35);
+		button.setX(myScene.getWidth() * .38);
+		button.setY(myScene.getHeight() * .6);
+		grid.getChildren().add(title.getHeader());
+		grid.getChildren().add(button.getControl());
+		grid.getChildren().add(hbox.getControl());
 		return grid;
 	}
 	
-	public GeneralBox setXMLSelectionButtons(String...simulation) {
-		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .01), Orientation.HORIZANTAL);
-		for (String sim : simulation) {
-			GeneralButton button = new GeneralButton(sim);
-			button.setWidth(myScene.getWidth() * .20);
-			hbox.add(button.getButton());
-		}
-		return hbox;
+	private void setXMLSelectionButtons(String sim, EventHandler<ActionEvent> e, GeneralBox hbox) {
+		GeneralButton button = new GeneralButton(sim);
+		button.setWidth(myScene.getWidth() * .20);
+		hbox.add(button.getControl());
 	}
 	
 	

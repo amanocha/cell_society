@@ -1,6 +1,5 @@
 package animation.simulation;
 
-import java.util.Iterator;
 
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -19,10 +18,9 @@ public class FireSimulation extends AbstractDraw {
 	@Override
 	public Rectangle fillGrid(Cell current) {
 		Rectangle rec;
-		if (current.getCurrentState() == 1) {
+		if (Math.random() < 0.5) {
 			rec = drawState(Color.GREEN);
-		}
-		if (current.getCurrentState() == 2){
+		} else {
 			rec = drawState(Color.RED);
 		}
 		return rec;

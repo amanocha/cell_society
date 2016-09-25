@@ -1,5 +1,10 @@
 package animation.menu;
 
+import java.io.FileInputStream;
+import java.util.Locale;
+import java.util.PropertyResourceBundle;
+import java.util.ResourceBundle;
+
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
@@ -8,6 +13,8 @@ import javafx.stage.Stage;
 public class Navigation {
 	
 	private static final String STYLESHEET = "style.css";
+	private static final String RESOURCE_PACKAGE = "/src/animation/resources/";
+	private static final String LANGUAGE = "English_en_US";
 	
 	private static Stage myStage;
 	private Group root;
@@ -15,6 +22,7 @@ public class Navigation {
 	private GUIGenerator myGUI;
 	private double width;
 	private double height;
+	private ResourceBundle myResources;
 	
 	public Navigation(Stage s, double w, double h) {
 		myStage = s;
@@ -34,7 +42,8 @@ public class Navigation {
     			.getResource(STYLESHEET).toExternalForm());
         myStage.setScene(myScene);
         myStage.show();
-        myGUI = new GUIGenerator(myScene, root);
+        myResources = PropertyResourceBundle.getBundle(LANGUAGE);
+        myGUI = new GUIGenerator(myScene, root, myResources);
 	}
 	
 	public void mainMenu() {
@@ -45,7 +54,8 @@ public class Navigation {
 	
 	public void simulationMenu() {
 		init();
-		root.getChildren().addAll(myGUI.generateSimulationScreenLabel(), myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton(), myGUI.generateSimulationScreen());
+		root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(), myGUI.generateSimulationScreenLabel(), 
+				myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton(), myGUI.generateSimulationScreen());
 	}
 	
 	public void xmlMenu() {

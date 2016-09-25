@@ -23,12 +23,17 @@ public class Simulation {
 	
 	public TilePane drawGrid(int width) {
 		TilePane graph = new TilePane();
+		graph.setStyle("-fx-background-color: #000000;");
 		graph.setTileAlignment(Pos.CENTER);
 		graph.setPrefColumns(width);
-		while(itr.hasNext()) {
-			Cell current = itr.next();
+		for (int i = 0; i < width * 5; i++) {
+			Cell current = new Cell();
 			graph.getChildren().add(sim.fillGrid(current));
 		}
+		//while(itr.hasNext()) {
+			//Cell current = itr.next();
+			//graph.getChildren().add(sim.fillGrid(current));
+		//}
 		return graph;
 	}
 	
