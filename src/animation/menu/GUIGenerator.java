@@ -73,7 +73,7 @@ public class GUIGenerator {
 		return grid;
 	}
 
-	public Pane generateSimulationScreen() {
+	public Pane generateSimulationScreen(Grid grid) {
 		stack = myPane.getSimulationMenuPane();
 		stack.getChildren().remove(animation);
 		double left = myScene.getWidth() * .1;
@@ -81,11 +81,9 @@ public class GUIGenerator {
 	    double other = myScene.getHeight() * .1;
 	    int width = (int) Math.round((myScene.getWidth() * .5 - other));
 	    int height = (int) Math.round((myScene.getHeight() * .8));
-		animation = mySimulation.drawGrid(myLoop.getGrid(), width, height);
+	    animation = mySimulation.drawGrid(grid, width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
-        //stack.getChildren().add(animation);
-        root.getChildren().clear();
-        root.getChildren().add(animation);
+        stack.getChildren().add(animation);
         stack.setMouseTransparent(true);
 		return stack;
 	}

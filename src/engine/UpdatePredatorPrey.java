@@ -28,7 +28,7 @@ public class UpdatePredatorPrey extends Update {
 		ArrayList<Cell> neighbors = super.getImmediateNeighbors(cell);
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
 		for(Cell neighbor : neighbors) {
-			if(neighbor.getCurrentState() == 0) {
+			if(neighbor.getCurrentState() == 0 && neighbor.getNextState() == 0) {
 				emptyCells.add(neighbor);
 			}
 		}
@@ -48,7 +48,7 @@ public class UpdatePredatorPrey extends Update {
 		ArrayList<Cell> neighbors = super.getImmediateNeighbors(shark);
 		ArrayList<Cell> fishCells = new ArrayList<Cell>();
 		for(Cell neighbor : neighbors) {
-			if (neighbor.getCurrentState() == 1) {
+			if (neighbor.getCurrentState() == 1 && neighbor.getNextState() == 1) {
 				fishCells.add(neighbor);
 			}
 		}
