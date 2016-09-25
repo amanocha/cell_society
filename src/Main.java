@@ -1,5 +1,3 @@
-package animation.main;
-
 import animation.menu.Navigation;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -15,10 +13,10 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage s) {
-    	Navigation mainmenu = new Navigation(s, WIDTH, HEIGHT);
+    	Navigation nav = new Navigation(s, WIDTH, HEIGHT);
         s.setTitle(TITLE);
         s.setResizable(false);
-        mainmenu.mainMenu();
+        nav.mainMenu();
 	}
     
 	/**

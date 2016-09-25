@@ -26,9 +26,9 @@ public class UpdatePredatorPrey extends Update {
 	public void moveFish(Cell cell) {
 		ArrayList<Cell> neighbors = super.getImmediateNeighbors(cell);
 		for(Cell neighbor : neighbors) {
-			if(((Animal) neighbor).isEmpty()) {
+			/*if(((Animal) neighbor).isEmpty()) {
 				
-			}
+			}*/
 		}
 	}
 	

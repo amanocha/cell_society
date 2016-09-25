@@ -1,7 +1,7 @@
 package animation.simulation;
 
 import javafx.scene.shape.Rectangle;
-import readxml.Cell;
+import structures.Cell;
 
 public abstract class AbstractDraw {
 	
