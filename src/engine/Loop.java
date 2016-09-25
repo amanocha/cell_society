@@ -12,7 +12,7 @@ import readxml.XmlMapper;
 import structures.Grid;
 
 public class Loop {
-	private static final int FRAMES_PER_SECOND = 60;
+	private static final int FRAMES_PER_SECOND = 1;
     private static final int MILLISECOND_DELAY = 1000/FRAMES_PER_SECOND;
     
 	private Timeline animation;
@@ -30,16 +30,30 @@ public class Loop {
 	
 
 	public void init() {
+		System.out.println("initial grid");
+		for(int i = 0; i < grid.getRows(); i++) {
+			for (int j = 0; j < grid.getColumns(); j++) {
+				System.out.print(grid.getCellList().get(i+(i*j)).getCurrentState() + " ");
+			}
+			System.out.println();
+		}
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
-		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.setCycleCount(3);
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
 	
 	public void step() {
+		navigator.refreshSimulationMenu(grid);
 		update.determineUpdates();
 		update.updateCells();
-		navigator.makeScreen(Menu.REFRESH);
+		System.out.println("loop grid");
+		for(int i = 0; i < grid.getRows(); i++) {
+			for (int j = 0; j < grid.getColumns(); j++) {
+				System.out.print(grid.getCellList().get(i+(i*j)).getCurrentState() + " ");
+			}
+			System.out.println();
+		}
 	}
 
 	public Grid getGrid() {

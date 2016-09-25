@@ -20,7 +20,6 @@ public class Simulation {
 	}
 	
 	public TilePane drawGrid(Grid grid, int w, int h) {
-		//System.out.println(grid.getCellList().get(5).getCurrentState());
 		screen.getChildren().clear();
 		Iterator<Cell> itr = grid.iterator();
 		screen.setTileAlignment(Pos.CENTER);

@@ -54,27 +54,17 @@ public class Navigation {
         makeScreen(Menu.MAIN);
 	}
 	
-	private GUIGenerator makeGenerator() {
+	public void makeScreen(Menu menu) {
 		myResources = PropertyResourceBundle.getBundle(LANGUAGE);
 		myGUI = new GUIGenerator(myScene, root, myResources);
-		return myGUI;
-	}
-	
-	public void makeScreen(Menu menu) {
 		if (menu.equals(Menu.MAIN)) {
-			makeGenerator();
 			mainMenu();
 		}
 		if (menu.equals(Menu.SIMULATION)) {
-			makeGenerator();
 			simulationMenu();
 		}
 		if (menu.equals(Menu.XML)) {
-			makeGenerator();
 			xmlMenu();
-		}
-		if (menu.equals(Menu.REFRESH)) {
-			refreshSimulationMenu();
 		}
 	}
 	
@@ -90,9 +80,9 @@ public class Navigation {
 				myGUI.generateSimulationScreenControls());
 	}
 	 
-	private void refreshSimulationMenu() {
+	public void refreshSimulationMenu(Grid grid) {
 		root.getChildren().remove(myGUI.getStackPane());
-		root.getChildren().add(myGUI.generateSimulationScreen());
+		root.getChildren().add(myGUI.generateSimulationScreen(grid));
 	}
 	
 	
