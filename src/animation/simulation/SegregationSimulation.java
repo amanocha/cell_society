@@ -1,17 +1,15 @@
 package animation.simulation;
 
-
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import structures.Cell;
 
-public class FireSimulation extends AbstractDraw {
-	
-	public FireSimulation() {
+public class SegregationSimulation extends AbstractDraw {
+
+	public SegregationSimulation() {
 		super();
 		putColor(0, Color.WHITE);
-		putColor(1, Color.DARKGREEN);
-		putColor(2, Color.ORANGE);
+		putColor(1, Color.YELLOW);
 	}
 	
 	@Override
@@ -20,3 +18,6 @@ public class FireSimulation extends AbstractDraw {
 	}
 	
 }
+	
+	
+
