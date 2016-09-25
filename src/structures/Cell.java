@@ -2,20 +2,20 @@ package structures;
 
 public class Cell {
 	private int number;
-	private State previous_state;
-	private State current_state;
-	private State next_state;
+	private int previous_state;
+	private int current_state;
+	private int next_state;
 	
 	public Cell() {
 		number = 0;
-		previous_state = new State();
-		current_state = new State();
-		next_state = new State();
+		previous_state = -1;
+		current_state = -1;
+		next_state = -1;
 	}
 	
-	public Cell(int cell_num, State cell_state) {
+	public Cell(int cell_num, int cell_state) {
 		number = cell_num;
-		previous_state = new State(-1);
+		previous_state = -1;
 		current_state = cell_state;
 		next_state = current_state;
 	}
@@ -26,15 +26,15 @@ public class Cell {
 		return number;
 	}
 	
-	public State getPreviousState() {
+	public int getPreviousState() {
 		return previous_state;
 	}
 	
-	public State getCurrentState() {
+	public int getCurrentState() {
 		return current_state;
 	}
 	
-	public State getNextState() {
+	public int getNextState() {
 		return next_state;
 	}
 	
@@ -44,15 +44,15 @@ public class Cell {
 		number = new_number;
 	}
 	
-	public void setPreviousState(State new_previous) {
+	public void setPreviousState(int new_previous) {
 		previous_state = new_previous;
 	}
 	
-	public void setCurrentState(State new_current) {
+	public void setCurrentState(int new_current) {
 		current_state = new_current;
 	}
 	
-	public void setNextState(State new_next) {
+	public void setNextState(int new_next) {
 		next_state = new_next;
 	}
 }

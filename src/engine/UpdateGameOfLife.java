@@ -3,7 +3,6 @@ package engine;
 import java.util.ArrayList;
 import structures.Cell;
 import structures.Grid;
-import structures.State;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
@@ -13,8 +12,10 @@ public class UpdateGameOfLife extends Update {
 	}
 	
 	/**
-	 * 0 = dead
-	 * 1 = live
+	 * Determines the next state of each cell based on the rules of the Game of Life. Each cell is one of two states
+	 * (0 = dead, 1 = live). If a cell is live and has two or three live neighbors, it remains live. If a cell is live 
+	 * and has less than two or more than three live neighbors, then the cell becomes dead. If a dead cell has exactly
+	 * three live neighbors, then it becomes live.
 	 */
 	@Override
 	public void determineUpdates() {
@@ -23,17 +24,17 @@ public class UpdateGameOfLife extends Update {
 			neighbors.addAll(super.getDiagonalNeighbors(cell));
 			int numLive = 0;
 			for(Cell neighbor : neighbors) {
-				if(neighbor.getCurrentState().getStateIndex() == 1) {
-					numLive++;
+				if(neighbor.getCurrentState() == 1) {
+					numLive++; //count number of live neighbors
 				}
 			}
-			if(cell.getCurrentState().getStateIndex() == 1) { 
+			if(cell.getCurrentState() == 1) { //cell is live
 				if(numLive < 2 || numLive > 3) {
-					cell.setNextState(new State(0));
+					cell.setNextState(0);
 				}
-			} else {
+			} else { //cell is dead
 				if(numLive == 3)
-				cell.setNextState(new State(1));
+				cell.setNextState(1);
 			}
 		}
 	}
