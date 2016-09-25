@@ -41,25 +41,35 @@ public class XMLGenerator {
 		xml.append("</index>");
 		
 		// GENERATE XML FOR SQUARES/CELLS + STATES
-		xml.append("<squares>");
-		xml.append(generateSquareWithRandomState(maxStateValue));
-		xml.append("</squares>");
+		for(int i = 0; i < index; i++) {
+			xml.append("<squares>");
+			xml.append(generateSquareWithRandomState(maxStateValue, i));
+			xml.append("</squares>");
+		}
 		
 		// EOF
 		xml.append("</file>");
 		return xml.toString();
 	}
-	public String generateSquareWithRandomState(int maxStateValue) {
+	public String generateSquareWithRandomState(int maxStateValue, int index) {
 		StringBuilder square = new StringBuilder();
 		int randomNum = (int)Math.floor(Math.random()*maxStateValue);
 		square.append("<square>");
+		
+		square.append("<index>");
+		square.append(index);
+		square.append("</index>");
+		
 		square.append("<characteristic>");
+		
 		square.append("<name>");
 		square.append("state");
 		square.append("</name>");
+		
 		square.append("<value>");
 		square.append(randomNum);
 		square.append("</value>");
+		
 		square.append("</characteristic>");
 		square.append("</square>");
 		return square.toString();
