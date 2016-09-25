@@ -26,10 +26,10 @@ import structures.State;
 public class XmlMapper {
 
 	// main method is only for temporary testing!
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
 		xmlmap.mapXmlToGrid("GameOfLife.xml");
-	}
+	}*/
 
 	public Grid mapXmlToGrid(String filename) {
 	
@@ -97,7 +97,7 @@ public class XmlMapper {
 			Integer sqCharValue = Integer.parseInt(squareChars.get(1).getTextContent());
 			
 			// MUST CHANGE BELOW LINE TO PASS IN RIGHT CONSTRUCTOR PARAMS!!
-			Cell newCell = new Cell(sqCharValue, new State(sqCharValue));
+			Cell newCell = new Cell(sqCharValue, sqCharValue);
 			cells.add(newCell);
 		}
 		

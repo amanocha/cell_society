@@ -3,7 +3,6 @@ package engine;
 import java.util.Random;
 import structures.Cell;
 import structures.Grid;
-import structures.State;
 
 public class UpdateFire extends Update {
 	private Grid grid;
@@ -24,20 +23,20 @@ public class UpdateFire extends Update {
 		Random random = new Random();
 		for(Cell cell : grid.getCellList()) {
 			boolean checkProb = false;
-			if(cell.getCurrentState().getStateIndex() == 1) { 
+			if(cell.getCurrentState() == 1) { 
 				for(Cell neighbor : super.getImmediateNeighbors(cell)) {
-					if(neighbor.getCurrentState().getStateIndex() == 2) {
+					if(neighbor.getCurrentState() == 2) {
 						checkProb = true;
 						break;
 					}
 				}
 				if(checkProb) {
 					if(random.nextDouble() <= probCatch) {
-						cell.setNextState(new State(2));
+						cell.setNextState(2);
 					}
 				}
-			} else if (cell.getCurrentState().getStateIndex() == 2) {
-				cell.setNextState(new State(0));
+			} else if (cell.getCurrentState() == 2) {
+				cell.setNextState(0);
 			}
 		}
 	}

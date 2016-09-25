@@ -11,8 +11,14 @@ public class Grid {
 	private int columns;
 	Map<String, String> globalsMap;
 	
+	public Grid() {
+		
+	}
+	
 	public Grid(List<Cell> cellList, int rows, int columns, Map<String, String> globalsMap) {
 		this.cellList = cellList;
+		this.rows = rows;
+		this.columns = columns;
 		this.globalsMap = globalsMap;
 	}
 	
