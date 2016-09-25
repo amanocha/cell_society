@@ -12,9 +12,13 @@ public class Simulation {
 	
 	private AbstractDraw sim;
 	private TilePane screen;
+	private String SimulationName;
 	
 	public Simulation() {
 		this.sim = new PredatorPreySimulation(); 
+		Grid myGrid = new Grid();
+		this.SimulationName = myGrid.getNameOfSimulation();
+		this.sim = new FireSimulation(); 
 		this.screen = new TilePane();
 	}
 	
