@@ -17,7 +17,7 @@ public class Simulation {
 	public Simulation() {
 		this.sim = new PredatorPreySimulation(); 
 		Grid myGrid = new Grid();
-		this.SimulationName = myGrid.getNameOfSimulation();
+		//this.SimulationName = myGrid.getNameOfSimulation();
 		this.sim = new FireSimulation(); 
 		this.screen = new TilePane();
 	}

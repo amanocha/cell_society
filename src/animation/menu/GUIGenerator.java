@@ -1,6 +1,5 @@
 package animation.menu;
 
-
 import java.util.ResourceBundle;
 
 import animation.controls.GeneralBox;
@@ -26,6 +25,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 import structures.Grid;
 
+
 public class GUIGenerator {
 	
 	private static String[] SIMULATIONS = {"SEGREGATION", "GAME OF LIFE", "FIRE", "WA-TOR"};
@@ -37,7 +37,6 @@ public class GUIGenerator {
 	private ResourceBundle myResource;
 	private Loop myLoop;
 	private StackPane stack;
-	private Group root;
 	private TilePane animation;
 	
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource) {
@@ -47,7 +46,6 @@ public class GUIGenerator {
 		myNav = new Navigation(scene, r);
 		myLoop = new Loop(myNav);
 		mySimulation = new Simulation();
-		this.root = r;
 	}
 
 
@@ -104,8 +102,14 @@ public class GUIGenerator {
 	
 	public Pane generateSimulationScreenButton() {
 		GeneralButton play = new GeneralButton(Function.START);
+		play.setStringAction(e -> myLoop.cont());
 		GeneralButton pause = new GeneralButton(Function.PAUSE);
+		pause.setStringAction(e -> myLoop.stop());
 		GeneralButton stop = new GeneralButton(Function.STOP);
+		stop.setStringAction(e -> {
+			myLoop.stop();
+			myLoop.restart();
+		});
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .45) / 3, Orientation.HORIZANTAL);
 		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
 		hbox.setX(myScene.getWidth() * .14);
@@ -131,12 +135,17 @@ public class GUIGenerator {
 	}
 	
 	public Button generateSimulationScreenMainButton() {
-		GeneralButton main = new GeneralButton(myResource.getString("MainMenu"));
+		GeneralButton main = generateMainMenuButton();
 		main.setWidth(myScene.getWidth() * .20);
-		main.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
 		main.setX(myScene.getWidth() * .73);
 		main.setY(myScene.getHeight() * .8);
 		return (Button) main.getControl();
+	}
+	
+	private GeneralButton generateMainMenuButton() {
+		GeneralButton main = new GeneralButton(myResource.getString("MainMenu"));
+		main.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
+		return main;
 	}
 
 	public Pane generateXMLScreen() {
