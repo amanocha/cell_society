@@ -21,7 +21,6 @@ import org.w3c.dom.Element;
 
 import structures.Cell;
 import structures.Grid;
-import structures.State;
 
 public class XmlMapper {
 
@@ -104,7 +103,7 @@ public class XmlMapper {
 		// Testing cell creation
 		for(int i = 0; i < cells.size(); i++) {
 			Cell currCell = cells.get(i);
-			System.out.println(currCell.getNumber());
+			//System.out.println(currCell.getNumber());
 		}
 
 		String shape = "square";

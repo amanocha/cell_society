@@ -1,19 +1,18 @@
 package animation.menu;
 
-import java.io.FileInputStream;
-import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import structures.Grid;
 
 public class Navigation {
 	
 	private static final String STYLESHEET = "style.css";
-	private static final String RESOURCE_PACKAGE = "/src/animation/resources/";
 	private static final String LANGUAGE = "English_en_US";
 	
 	private static Stage myStage;
@@ -30,8 +29,8 @@ public class Navigation {
     	this.height = h;
 	}
 	
-	public Navigation(double w, double h) {
-		this(myStage, w, h);
+	
+	public Navigation() {
 	}
 	
 
@@ -54,8 +53,13 @@ public class Navigation {
 	
 	public void simulationMenu() {
 		init();
-		root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(), myGUI.generateSimulationScreenLabel(), 
-				myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton(), myGUI.generateSimulationScreen());
+		//root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(), myGUI.generateSimulationScreenLabel(), 
+				//myGUI.generateSimulationScreenControls());
+	}
+	
+	public void simulationMenuRefresh(Grid grid) {
+		root.getChildren().clear();
+		root.getChildren().add(new Rectangle(0, 0, Color.GREEN));
 	}
 	
 	public void simulationMenuRefresh() {
@@ -66,5 +70,6 @@ public class Navigation {
 		init();
 		root.getChildren().add(myGUI.generateXMLScreen());
 	}
+
 
 }

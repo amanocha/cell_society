@@ -10,6 +10,7 @@ import animation.controls.GeneralButton.Function;
 import animation.controls.GeneralLabel;
 import animation.controls.GeneralPane;
 import animation.simulation.Simulation;
+import engine.Loop;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -21,6 +22,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
+import structures.Grid;
 
 public class GUIGenerator {
 	
@@ -31,12 +33,14 @@ public class GUIGenerator {
 	private Scene myScene;
 	private Simulation mySimulation;
 	private ResourceBundle myResource;
+	private Loop myLoop;
 	
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource) {
 		this.myScene = scene;
 		this.myResource = resource;
 		myPane = new GeneralPane(scene);
-		myNav = new Navigation(scene.getWidth(), scene.getHeight());
+		myNav = new Navigation();
+		myLoop = new Loop(myNav);
 		mySimulation = new Simulation();
 	}
 
@@ -46,7 +50,10 @@ public class GUIGenerator {
 		GeneralLabel header = new GeneralLabel(myResource.getString("Title")); 
 		GeneralButton button = new GeneralButton(myResource.getString("Start"));
 		button.setWidth(myScene.getWidth() * .5);
-		button.setStringAction(e -> myNav.simulationMenu());
+		button.setStringAction(e -> {
+			myNav.simulationMenu();
+			myLoop.init();
+		});
 		grid.add(header.getHeader(), 1, 0);
 		grid.add(button.getControl(), 1, 1);
 		button = new GeneralButton(myResource.getString("ParameterButton"));
@@ -59,16 +66,15 @@ public class GUIGenerator {
 		return grid;
 	}
 
-	public Pane generateSimulationScreen() {
-		StackPane pane = myPane.getSimulationMenuPane();
-		int temp = 5;
-		TilePane baby = mySimulation.drawGrid(temp);
-        double left = myScene.getWidth() * .1;
-        double top = myScene.getHeight() * .5;
-        double other = myScene.getHeight() * .1;
-        StackPane.setMargin(baby, new Insets(left, top, other, other));
-        pane.getChildren().add(baby);
-		return pane;
+	public Pane generateSimulationScreen(Grid grid) {
+		//StackPane pane = myPane.getSimulationMenuPane();
+		TilePane baby = mySimulation.drawGrid(grid);
+        //double left = myScene.getWidth() * .1;
+        //double top = myScene.getHeight() * .5;
+        //double other = myScene.getHeight() * .1;
+        //StackPane.setMargin(baby, new Insets(left, top, other, other));
+        //pane.getChildren().add(baby);
+		return baby;
 	}
 	
 	
