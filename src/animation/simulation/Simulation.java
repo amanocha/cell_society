@@ -18,9 +18,9 @@ public class Simulation {
 	private Grid myGrid;
 	
 	public Simulation() {
-		this.sim = new PredatorPreySimulation();
 		this.xml = new XmlMapper();
 		this.SimulationName = xml.mapXmlToGrid("PredatorPrey.xml").getNameOfSimulation();
+		this.sim = new PredatorPreySimulation(); 
 		this.screen = new TilePane();
 	}
 	
