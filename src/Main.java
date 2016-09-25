@@ -16,7 +16,7 @@ public class Main extends Application {
     	Navigation nav = new Navigation(s, WIDTH, HEIGHT);
         s.setTitle(TITLE);
         s.setResizable(false);
-        nav.mainMenu();
+        nav.init();
 	}
     
 	/**

@@ -1,8 +1,12 @@
 package engine;
 
 import animation.menu.Navigation;
+import animation.menu.Navigation.Menu;
+import animation.simulation.Simulation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.Group;
+import javafx.scene.layout.TilePane;
 import javafx.util.Duration;
 import readxml.XmlMapper;
 import structures.Grid;
@@ -21,20 +25,25 @@ public class Loop {
 		animation = new Timeline();
 		grid = xml.mapXmlToGrid("SpreadingOfFire.xml");
 		update = new UpdateFire(grid);
-		navigator = nav;
+		this.navigator = nav;
 	}
 	
+
 	public void init() {
-		navigator.simulationMenuRefresh(grid);
-		//KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
-		//animation.setCycleCount(Timeline.INDEFINITE);
-		//animation.getKeyFrames().add(frame);
-		//animation.play();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
 	}
 	
 	public void step() {
 		update.determineUpdates();
 		update.updateCells();
-		navigator.simulationMenuRefresh(grid);
+		System.out.println(grid.getCellList().get(0).getCurrentState());
+		navigator.makeScreen(Menu.REFRESH);
+	}
+
+	public Grid getGrid() {
+		return grid;
 	}
 }

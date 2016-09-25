@@ -5,6 +5,6 @@ import structures.Cell;
 
 public abstract class AbstractDraw {
 	
-	public abstract Rectangle fillGrid(Cell current);
+	public abstract Rectangle fillGrid(Cell current, int width, int height);
 
 }
