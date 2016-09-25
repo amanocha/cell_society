@@ -76,7 +76,7 @@ public class Navigation {
 	private void simulationMenu() {
 		root.getChildren().clear();
 		root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(), myGUI.generateSimulationScreenLabel(), 
-				myGUI.generateSimulationScreenControls());
+				myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton());
 	}
 	 
 	public void refreshSimulationMenu(Grid grid) {

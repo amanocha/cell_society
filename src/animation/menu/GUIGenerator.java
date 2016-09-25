@@ -109,6 +109,7 @@ public class GUIGenerator {
 		stop.setStringAction(e -> {
 			myLoop.stop();
 			myLoop.restart();
+			myNav.makeScreen(Menu.MAIN);
 		});
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .45) / 3, Orientation.HORIZANTAL);
 		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());

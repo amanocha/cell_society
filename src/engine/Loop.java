@@ -27,7 +27,7 @@ public class Loop {
 
 	public void init() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
-		animation.setCycleCount(2);
+		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
