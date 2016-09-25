@@ -1,6 +1,7 @@
 package animation.menu;
 
 
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import animation.controls.GeneralBox;
@@ -24,13 +25,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import structures.Grid;
 
 public class GUIGenerator {
 	
 	private static String[] SIMULATIONS = {"SEGREGATION", "GAME OF LIFE", "FIRE", "WA-TOR"};
+	private static ArrayList<EventHandler<ActionEvent>> EVENTS = {e -> myLoop.stop
 	
 	private GeneralPane myPane;
 	private Navigation myNav;
@@ -39,7 +38,6 @@ public class GUIGenerator {
 	private ResourceBundle myResource;
 	private Loop myLoop;
 	private StackPane stack;
-	private Group root;
 	private TilePane animation;
 	
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource) {
@@ -49,7 +47,6 @@ public class GUIGenerator {
 		myNav = new Navigation(scene, r);
 		myLoop = new Loop(myNav);
 		mySimulation = new Simulation();
-		this.root = r;
 	}
 
 
@@ -148,6 +145,9 @@ public class GUIGenerator {
 		button.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .01), Orientation.HORIZANTAL);
 		for (String sim : SIMULATIONS) {
+			GeneralButton button = new GeneralButton(sim);
+			button.setWidth(myScene.getWidth() * .20);
+			hbox.add(button.getControl());
 			setXMLSelectionButtons(sim, e -> myNav.makeScreen(Menu.MAIN), hbox);
 		}
 		GeneralLabel title = new GeneralLabel(myResource.getString("SimulationSelection"));
