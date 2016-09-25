@@ -4,6 +4,7 @@ package animation.simulation;
 import java.util.Iterator;
 
 import javafx.scene.layout.TilePane;
+import readxml.XmlMapper;
 import structures.Cell;
 import structures.Grid;
 
@@ -12,13 +13,14 @@ public class Simulation {
 	
 	private AbstractDraw sim;
 	private TilePane screen;
+	private XmlMapper xml;
 	private String SimulationName;
+	private Grid myGrid;
 	
 	public Simulation() {
-		this.sim = new PredatorPreySimulation(); 
-		Grid myGrid = new Grid();
-		this.SimulationName = myGrid.getNameOfSimulation();
-		this.sim = new FireSimulation(); 
+		this.sim = new PredatorPreySimulation();
+		this.xml = new XmlMapper();
+		this.SimulationName = xml.mapXmlToGrid("PredatorPrey.xml").getNameOfSimulation();
 		this.screen = new TilePane();
 	}
 	

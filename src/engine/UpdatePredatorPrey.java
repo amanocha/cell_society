@@ -29,16 +29,17 @@ public class UpdatePredatorPrey extends Update {
 		ArrayList<Cell> neighbors = super.getImmediateNeighbors(cell);
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
 		for(Cell neighbor : neighbors) {
-			if(neighbor.getCurrentState() == 0 && neighbor.getNextState() == 0) {
+			if(neighbor.getNextState() == 0) {
 				emptyCells.add(neighbor);
 			}
 		}
 		if (emptyCells.size() > 0) {
 			int emptyCellIndex = selectCell(emptyCells);
 			Cell emptyCell = grid.getCellList().get(emptyCellIndex);
-			swap((Animal) cell, (Animal) emptyCell);
+			//System.out.print(cell.getNumber() + " moved to " + emptyCell.getNumber() + ", ");
+			swap((Animal) cell, (Animal) emptyCell); //cell's next state is empty, empty cell's next state is fish/shark
 			if(reproduce) {
-				reproduce(cell, emptyCell);
+				reproduce(cell, emptyCell); //change cell's state from empty to fish/shark
 			}
 			return emptyCell;
 		}
@@ -57,7 +58,9 @@ public class UpdatePredatorPrey extends Update {
 			shark.setEnergy(shark.getEnergy() + 1);
 			int fishCellIndex = selectCell(fishCells);
 			Cell fishCell = grid.getCellList().get(fishCellIndex);
-			swap(shark, (Animal) fishCell);
+			System.out.println(shark.getNumber() + " ate " + fishCell.getNumber());
+			swap(shark, (Animal) fishCell); //shark's next state is fish, fish's next state is shark
+			System.out.println("shark next state = " + shark.getNextState());
 			if(reproduce) {
 				reproduce(shark, fishCell);
 			} else {
@@ -89,7 +92,7 @@ public class UpdatePredatorPrey extends Update {
 	}
 	
 	public void reproduce(Cell cell1, Cell cell2) {
-		cell1.setNextState(cell1.getCurrentState());
+		cell1.setNextState(cell2.getCurrentState());
 		((Animal)cell1).setTime(-1);
 		((Animal)cell2).setTime(-1);
 	}
@@ -108,13 +111,10 @@ public class UpdatePredatorPrey extends Update {
 				fishes.add(cell);
 			} else if (cell.getCurrentState() == 2) { //shark
 				sharks.add(cell);
-				boolean reproduce = ((Animal)cell).getTime() >= sharkTime;
-				cell = eat((Animal)cell, reproduce);
-				if (((Animal)cell).getEnergy() == 0) {
-					cell.setNextState(0);
-				}
 			}
 		}
+		determineFishUpdates(fishes);
+		determineSharkUpdates(sharks);
 	}
 	
 	public void determineFishUpdates(ArrayList<Cell> fishes) {
@@ -124,8 +124,14 @@ public class UpdatePredatorPrey extends Update {
 		}
 	}
 	
-	public void determineSharkUpdates() {
-		
+	public void determineSharkUpdates(ArrayList<Cell> sharks) {
+		for(Cell shark : sharks) {
+			boolean reproduce = ((Animal)shark).getTime() >= sharkTime;
+			shark = eat((Animal)shark, reproduce);
+			if (((Animal)shark).getEnergy() == 0) {
+				shark.setNextState(0);
+			}
+		}
 	}
 	
 	/**

@@ -27,20 +27,20 @@ public class Loop {
 
 	public void init() {
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
-		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.setCycleCount(2);
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
 	
 	public void step() {
-		System.out.println("draw grid");
+		//System.out.println("draw grid");
 				int count = 0;
 				for(int i = 0; i < grid.getRows(); i++) {
 					for (int j = 0; j < grid.getColumns(); j++) {
-						System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+						//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
 						count++;
 					}
-					System.out.println();
+					//System.out.println();
 				}
 		navigator.refreshSimulationMenu(grid);
 		update.determineUpdates();
