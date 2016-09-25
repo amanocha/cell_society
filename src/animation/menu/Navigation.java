@@ -58,6 +58,10 @@ public class Navigation {
 				myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton(), myGUI.generateSimulationScreen());
 	}
 	
+	public void simulationMenuRefresh() {
+		root.getChildren().add(myGUI.generateSimulationScreen());
+	}
+	
 	public void xmlMenu() {
 		init();
 		root.getChildren().add(myGUI.generateXMLScreen());
