@@ -1,0 +1,68 @@
+/* 
+    Document   : controlStyle1
+*/
+
+ 
+#string-button {
+    -fx-background-color: #BABABA;
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 15 8 15 8;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424242;
+}
+
+#go-button {
+    -fx-background-image: url('play.png');
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+
+#pause-button {
+    -fx-background-image: url('pause.png');
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+
+#stop-button {
+    -fx-background-image: url('stop.png');
+    -fx-background-size: 20px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+}
+
+#string-button:hover {
+    -fx-background-color: #9E9E9E;
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 15 30 15 30;
+}
+
+#message-box {
+    -fx-background-color: linear-gradient(to bottom, #CDCDCD 40%, #BABABA 40%);
+    -fx-background-insets: 0,2;
+    -fx-background-radius: 9,8,5,4;
+    -fx-padding: 8 8 15 8;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424242;
+}
+
+
+.buttontext {
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 20px;
+    -fx-text-fill: #424242;
+}
+
+#label-header {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 30px;
+    -fx-font-family: "Helvetica";
+}

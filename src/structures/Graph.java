@@ -1,5 +1,6 @@
 package structures;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class Graph {
 	private int num_vertices;
@@ -74,6 +75,10 @@ public class Graph {
 	 */
 	public int getNumEdges() {
 		return num_edges;
+	}
+	
+	public Iterator<Cell> iterator() {
+		return null;
 	}
 	
 	/**
