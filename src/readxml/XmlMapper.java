@@ -72,14 +72,14 @@ public class XmlMapper {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
 			String value = charChildren.get(1).getTextContent();
-			System.out.println("name: "+name);
-			System.out.println("value : " + value);
+			//System.out.println("name: "+name);
+			//System.out.println("value : " + value);
 			globalsMap.put(name, value);
 		}
 		
 		// Get number of total cells
 		Integer indexValue = Integer.parseInt(index.getTextContent());
-		System.out.println("Index value: "+indexValue);
+		//System.out.println("Index value: "+indexValue);
 		
 		// Initialize 1-d array of cells
 		List<Cell> cells = new ArrayList<Cell>();

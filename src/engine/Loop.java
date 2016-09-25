@@ -26,15 +26,16 @@ public class Loop {
 	
 	public void init() {
 		navigator.simulationMenuRefresh(grid);
-		//KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
-		//animation.setCycleCount(Timeline.INDEFINITE);
-		//animation.getKeyFrames().add(frame);
-		//animation.play();
+		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
+		animation.setCycleCount(Timeline.INDEFINITE);
+		animation.getKeyFrames().add(frame);
+		animation.play();
 	}
 	
 	public void step() {
 		update.determineUpdates();
 		update.updateCells();
+		System.out.println(grid.getCellList().get(1).getCurrentState());
 		navigator.simulationMenuRefresh(grid);
 	}
 }
