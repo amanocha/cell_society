@@ -20,6 +20,7 @@ public class UpdatePredatorPrey extends Update {
 	
 	public UpdatePredatorPrey(Grid newGrid, int newFishTime, int newSharkTime) {
 		super(newGrid);
+		grid = newGrid;
 		fishTime = newFishTime;
 		sharkTime = newSharkTime;
 	}
@@ -101,10 +102,10 @@ public class UpdatePredatorPrey extends Update {
 	@Override
 	public void determineUpdates() {
 		for(Cell cell : grid.getCellList()) {
-			if (cell.getCurrentState() == 1) {
+			if (cell.getCurrentState() == 1) { //fish
 				boolean reproduce = ((Animal)cell).getTime() >= fishTime;
 				cell = move(cell, reproduce);
-			} else if (cell.getCurrentState() == 2) {
+			} else if (cell.getCurrentState() == 2) { //shark
 				boolean reproduce = ((Animal)cell).getTime() >= sharkTime;
 				cell = eat((Animal)cell, reproduce);
 				if (((Animal)cell).getEnergy() == 0) {

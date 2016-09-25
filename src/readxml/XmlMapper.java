@@ -19,6 +19,7 @@ import org.xml.sax.SAXException;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
+import structures.Animal;
 import structures.Cell;
 import structures.Grid;
 
@@ -96,7 +97,12 @@ public class XmlMapper {
 			Integer sqCharValue = Integer.parseInt(squareChars.get(1).getTextContent());
 			
 			// MUST CHANGE BELOW LINE TO PASS IN RIGHT CONSTRUCTOR PARAMS!!
-			Cell newCell = new Cell(squareIndex, sqCharValue);
+			Cell newCell = new Cell();
+			if (globalsMap.get("simulation").equals("predator prey")) {
+				newCell = new Animal(squareIndex, sqCharValue, Integer.parseInt(globalsMap.get("energy")));
+			} else  {
+				newCell = new Cell(squareIndex, sqCharValue);
+			}
 			cells.add(newCell);
 		}
 		
@@ -108,7 +114,7 @@ public class XmlMapper {
 
 		String shape = "square";
 		//HARD CODED SHAPE AND GRID ROWS AND COLS
-		Grid cellGrid = new Grid(cells, 1000, 1000, globalsMap);
+		Grid cellGrid = new Grid(cells, 6, 6, globalsMap); //only change dimensions
 		
 		return cellGrid;
 	}

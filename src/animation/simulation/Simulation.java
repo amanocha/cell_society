@@ -14,7 +14,7 @@ public class Simulation {
 	private TilePane screen;
 	
 	public Simulation() {
-		this.sim = new FireSimulation(); 
+		this.sim = new PredatorPreySimulation(); 
 		this.screen = new TilePane();
 	}
 	

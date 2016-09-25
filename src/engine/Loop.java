@@ -19,23 +19,13 @@ public class Loop {
 	
 	public Loop(Navigation nav) {
 		animation = new Timeline();
-		grid = xml.mapXmlToGrid("Fire.xml");
-		System.out.println(grid.getCellList().size());
-		update = new UpdateFire(grid);
+		grid = xml.mapXmlToGrid("PredatorPrey.xml");
+		update = new UpdatePredatorPrey(grid, Integer.parseInt(grid.getGlobalsMap().get("fishTime")), Integer.parseInt(grid.getGlobalsMap().get("sharkTime")));
 		this.navigator = nav;
 	}
 	
 
 	public void init() {
-		//System.out.println("initial grid");
-		int count = 0;
-		for(int i = 0; i < grid.getRows(); i++) {
-			for (int j = 0; j < grid.getColumns(); j++) {
-				//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
-				count++;
-			}
-			//System.out.println();
-		}
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -43,18 +33,30 @@ public class Loop {
 	}
 	
 	public void step() {
-		//System.out.println("draw grid");
+		System.out.println("draw grid");
 				int count = 0;
 				for(int i = 0; i < grid.getRows(); i++) {
 					for (int j = 0; j < grid.getColumns(); j++) {
-						//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+						System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
 						count++;
 					}
-					//System.out.println();
+					System.out.println();
 				}
 		navigator.refreshSimulationMenu(grid);
 		update.determineUpdates();
 		update.updateCells();
+	}
+	
+	public void stop() {
+		animation.stop();
+	}
+	
+	public void restart() {
+		animation.playFromStart();
+	}
+	
+	public void cont() {
+		animation.play();
 	}
 
 	public Grid getGrid() {

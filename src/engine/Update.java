@@ -59,22 +59,22 @@ public abstract class Update {
 		ArrayList<Cell> neighbors = new ArrayList<Cell>();
 		
 		if ((cellNumber >= gridWidth) && (cellNumber % gridWidth != (gridWidth-1))) {
-			northEast = cellNumber - gridWidth;
+			northEast = cellNumber - gridWidth + 1;
 			neighbors.add(grid.getCellList().get(northEast));
 		}
 		
 		if ((cellNumber >= gridWidth) && (cellNumber % gridWidth != 0)) {
-			northWest = cellNumber + 1;
+			northWest = cellNumber - gridWidth - 1;
 			neighbors.add(grid.getCellList().get(northWest));
 		}
 		
 		if ((cellNumber < gridSize - gridWidth) && (cellNumber % gridWidth != (gridWidth-1))) {
-			southEast = cellNumber + gridWidth;
+			southEast = cellNumber + gridWidth + 1;
 			neighbors.add(grid.getCellList().get(southEast));
 		}
 		
 		if ((cellNumber < gridSize - gridWidth) && (cellNumber % gridWidth != 0)) {
-			southWest = cellNumber - 1;
+			southWest = cellNumber + gridWidth - 1;
 			neighbors.add(grid.getCellList().get(southWest));
 		}
 		

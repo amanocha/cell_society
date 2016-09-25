@@ -50,7 +50,6 @@ public class Navigation {
     			.getResource(STYLESHEET).toExternalForm());
         myStage.setScene(myScene);
         myStage.show();
-        System.out.println(root);
         makeScreen(Menu.MAIN);
 	}
 	
