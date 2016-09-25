@@ -30,15 +30,17 @@ public class Loop {
 	
 
 	public void init() {
-		System.out.println("initial grid");
+		//System.out.println("initial grid");
+		int count = 0;
 		for(int i = 0; i < grid.getRows(); i++) {
 			for (int j = 0; j < grid.getColumns(); j++) {
-				System.out.print(grid.getCellList().get(i+(i*j)).getCurrentState() + " ");
+				//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+				count++;
 			}
-			System.out.println();
+			//System.out.println();
 		}
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
-		animation.setCycleCount(3);
+		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
@@ -47,13 +49,6 @@ public class Loop {
 		navigator.refreshSimulationMenu(grid);
 		update.determineUpdates();
 		update.updateCells();
-		System.out.println("loop grid");
-		for(int i = 0; i < grid.getRows(); i++) {
-			for (int j = 0; j < grid.getColumns(); j++) {
-				System.out.print(grid.getCellList().get(i+(i*j)).getCurrentState() + " ");
-			}
-			System.out.println();
-		}
 	}
 
 	public Grid getGrid() {

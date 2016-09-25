@@ -96,7 +96,7 @@ public class XmlMapper {
 			Integer sqCharValue = Integer.parseInt(squareChars.get(1).getTextContent());
 			
 			// MUST CHANGE BELOW LINE TO PASS IN RIGHT CONSTRUCTOR PARAMS!!
-			Cell newCell = new Cell(sqCharValue, sqCharValue);
+			Cell newCell = new Cell(squareIndex, sqCharValue);
 			cells.add(newCell);
 		}
 		

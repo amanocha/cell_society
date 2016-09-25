@@ -32,7 +32,8 @@ public class UpdateFire extends Update {
 					}
 				}
 				if(checkProb) {
-					if(random.nextDouble() <= probCatch) {
+					double probability = random.nextDouble();
+					if(probability <= probCatch) {
 						cell.setNextState(2);
 					}
 				}
