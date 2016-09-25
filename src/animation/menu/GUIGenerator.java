@@ -83,9 +83,7 @@ public class GUIGenerator {
 	    int height = (int) Math.round((myScene.getHeight() * .8));
 		animation = mySimulation.drawGrid(myLoop.getGrid(), width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
-        //stack.getChildren().add(animation);
-        root.getChildren().clear();
-        root.getChildren().add(animation);
+        stack.getChildren().add(animation);
         stack.setMouseTransparent(true);
 		return stack;
 	}

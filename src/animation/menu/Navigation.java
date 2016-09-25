@@ -91,10 +91,8 @@ public class Navigation {
 	}
 	 
 	private void refreshSimulationMenu() {
-		//root.getChildren().remove(myGUI.getStackPane());
-		//root.getChildren().add(myGUI.generateSimulationScreen());
-		myGUI.generateSimulationScreen();
-		myStage.show();
+		root.getChildren().remove(myGUI.getStackPane());
+		root.getChildren().add(myGUI.generateSimulationScreen());
 	}
 	
 	
