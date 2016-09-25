@@ -96,4 +96,9 @@ public class Grid implements Iterable<Cell>{
 	public void setCellShape(String cellShape) {
 		this.cellShape = cellShape;
 	}
+	
+	public String getNameOfSimulation() {
+		return globalsMap.get("simulation");
+	}
+	
 }
