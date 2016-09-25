@@ -3,7 +3,6 @@ package animation.simulation;
 import java.util.HashMap;
 import java.util.Map;
 
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import structures.Cell;
@@ -16,13 +15,13 @@ public abstract class AbstractDraw {
 		colorMap = new HashMap<Integer, Color>();
 	}
 	
-	protected Rectangle drawState(Color c, int width, int height) {
+	public Rectangle fillGrid(Cell current, int width, int height) {
 		int dim = width;
 		if (width > height) {
 			dim = height;
 		}
 		Rectangle rec = new Rectangle();
-		rec.setFill(c);
+		rec.setFill(getColor(current.getCurrentState()));
 		rec.setWidth(dim);
 		rec.setHeight(dim);
 		return rec;
@@ -35,8 +34,6 @@ public abstract class AbstractDraw {
 	protected void putColor(int state, Color color) {
 		colorMap.put(state, color);
 	}
-
-	public abstract Node fillGrid(Cell current, int width, int height);
 	
 
 }
