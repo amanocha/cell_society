@@ -30,6 +30,8 @@ public class Simulation {
 		int width = (int) w / (grid.getColumns());
 		int height = (int) h / (grid.getRows());
 		screen.setPrefColumns(grid.getColumns());
+		screen.setMaxWidth(w + 2 * grid.getColumns());
+		screen.setMaxHeight(h + 2 * grid.getRows());
 		while(itr.hasNext()) {
 			Cell current = itr.next();
 			screen.getChildren().add(sim.fillGrid(current, width, height));

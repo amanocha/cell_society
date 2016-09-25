@@ -11,6 +11,7 @@ import animation.controls.GeneralPane;
 import animation.menu.Navigation.Menu;
 import animation.simulation.Simulation;
 import engine.Loop;
+import engine.Loop.StatusOfSimulation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -80,9 +81,9 @@ public class GUIGenerator {
 	    int height = (int) Math.round((myScene.getHeight() * .8));
 	    animation = mySimulation.drawGrid(grid, width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
-        animation.setMaxWidth(width);
-		animation.setMaxHeight(height);
 		animation.setTileAlignment(Pos.CENTER);
+		animation.setHgap(2);
+		animation.setVgap(2);
         stack.getChildren().add(animation);
         stack.setMouseTransparent(true);
 		return stack;
@@ -102,13 +103,13 @@ public class GUIGenerator {
 	
 	public Pane generateSimulationScreenButton() {
 		GeneralButton play = new GeneralButton(Function.START);
-		play.setStringAction(e -> myLoop.cont());
+		//play.setStringAction(e -> myLoop.cont());
 		GeneralButton pause = new GeneralButton(Function.PAUSE);
 		pause.setStringAction(e -> myLoop.stop());
 		GeneralButton stop = new GeneralButton(Function.STOP);
 		stop.setStringAction(e -> {
 			myLoop.stop();
-			myLoop.restart();
+			//myLoop.restart();
 		});
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .45) / 3, Orientation.HORIZANTAL);
 		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
