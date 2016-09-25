@@ -30,8 +30,6 @@ public class Grid implements Iterable<Cell>{
 	}
 	
 	public int getNumCells() {
-		System.out.println("NUM CELLS2");
-		System.out.println(cellList);
 		return cellList.size();
 	}
 

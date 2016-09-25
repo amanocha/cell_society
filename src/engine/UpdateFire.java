@@ -11,7 +11,6 @@ public class UpdateFire extends Update {
 	public UpdateFire(Grid newGrid) {
 		super(newGrid);
 		grid = newGrid;
-		System.out.println(grid);
 		probCatch = Double.parseDouble(grid.getGlobalsMap().get("probCatch"));
 	}
 	

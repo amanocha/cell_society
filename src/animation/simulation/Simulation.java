@@ -5,36 +5,39 @@ import java.util.Iterator;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.TilePane;
-import javafx.scene.paint.Color;
 import structures.Cell;
 import structures.Grid;
-import javafx.scene.shape.*;
 
 
 public class Simulation {
 	
 	private AbstractDraw sim;
+	private TilePane screen;
 	
 	public Simulation() {
-		sim = new FireSimulation(); 
+		this.sim = new FireSimulation(); 
+		this.screen = new TilePane();
 	}
 	
-	public TilePane drawGrid(Grid grid) {
+	public TilePane drawGrid(Grid grid, int w, int h) {
+		//System.out.println(grid.getCellList().get(5).getCurrentState());
+		screen.getChildren().clear();
 		Iterator<Cell> itr = grid.iterator();
-		TilePane graph = new TilePane();
-		graph.setStyle("-fx-background-color: #000000;");
-		graph.setTileAlignment(Pos.CENTER);
-		graph.setPrefColumns(grid.getColumns());
-		graph.setMinHeight(100);
-		graph.setMinWidth(100);
-		graph.setLayoutX(100);
-		graph.setLayoutY(100);
+		screen.setTileAlignment(Pos.CENTER);
+		int width = (int) w / (grid.getColumns());
+		int height = (int) h / (grid.getRows());
+		screen.setPrefColumns(grid.getColumns());
+		screen.setMaxWidth(w);
+		screen.setMaxHeight(h);
 		while(itr.hasNext()) {
 			Cell current = itr.next();
-			//graph.getChildren().add(sim.fillGrid(current));
-			graph.getChildren().add(new Rectangle(0, 0, Color.GREEN));
+			screen.getChildren().add(sim.fillGrid(current, width, height));
 		}
-		return graph;
+		return screen;
+	}
+	
+	public TilePane getScreen() {
+		return screen;
 	}
 	
 }
