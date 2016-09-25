@@ -3,7 +3,9 @@ package animation.controls;
 import animation.controls.GeneralBox.Orientation;
 import animation.controls.GeneralButton.Function;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -47,6 +49,11 @@ public class GeneralControl {
 		this.me = button;
 		((Button) me).setText(s);
 		((Button) me).setId("string-button");
+	}
+
+	public GeneralControl(ComboBox<ListView<String>> comboBox) {
+		this.me = comboBox;
+		me.setId("combo-box");
 	}
 
 	public void setX(double x) {

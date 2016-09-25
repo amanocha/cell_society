@@ -15,6 +15,7 @@ import engine.Loop;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -83,6 +84,9 @@ public class GUIGenerator {
 	    int height = (int) Math.round((myScene.getHeight() * .8));
 	    animation = mySimulation.drawGrid(grid, width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
+        animation.setMaxWidth(width);
+		animation.setMaxHeight(height);
+		animation.setTileAlignment(Pos.CENTER);
         stack.getChildren().add(animation);
         stack.setMouseTransparent(true);
 		return stack;
