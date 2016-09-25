@@ -9,6 +9,7 @@ public class UpdateGameOfLife extends Update {
 	
 	public UpdateGameOfLife(Grid newGrid) {
 		super(newGrid);
+		grid = newGrid;
 	}
 	
 	/**

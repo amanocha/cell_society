@@ -8,10 +8,10 @@ import java.util.Map;
 
 public class Grid implements Iterable<Cell>{
 	
-	private String cellShape;
 	private List<Cell> cellList;
 	private int rows;
 	private int columns;
+	private String cellShape;
 	Map<String, String> globalsMap;
 	
 	public Grid() {
@@ -30,49 +30,10 @@ public class Grid implements Iterable<Cell>{
 	}
 	
 	public int getNumCells() {
-		System.out.println("NUM CELLS2");
-		System.out.println(cellList);
 		return cellList.size();
 	}
 
-	
-	public String getCellShape() {
-		return cellShape;
-	}
-
-	public void setCellShape(String cellShape) {
-		this.cellShape = cellShape;
-	}
-
-	public List<Cell> getCellList() {
-		return cellList;
-	}
-
-	public void setCellList(List<Cell> cellList) {
-		this.cellList = cellList;
-	}
-
-	public int getRows() {
-		return rows;
-	}
-
-	public void setRows(int rows) {
-		this.rows = rows;
-	}
-
-	public int getColumns() {
-		return columns;
-	}
-
-	public void setColumns(int columns) {
-		this.columns = columns;
-	}
-	
-	public Map<String, String> getGlobalsMap() {
-		return globalsMap;
-	}
-	
-    @Override
+	@Override
     public Iterator<Cell> iterator() {
         Iterator<Cell> iterator = new Iterator<Cell>() {
 
@@ -95,4 +56,44 @@ public class Grid implements Iterable<Cell>{
         };
         return iterator;
     }
+	
+	/*****GETTERS*****/
+
+	public List<Cell> getCellList() {
+		return cellList;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public int getColumns() {
+		return columns;
+	}
+	
+	public String getCellShape() {
+		return cellShape;
+	}
+	
+	public Map<String, String> getGlobalsMap() {
+		return globalsMap;
+	}
+
+	/*****SETTERS*****/
+	
+	public void setCellList(List<Cell> cellList) {
+		this.cellList = cellList;
+	}
+	
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+	
+	public void setColumns(int columns) {
+		this.columns = columns;
+	}
+	
+	public void setCellShape(String cellShape) {
+		this.cellShape = cellShape;
+	}
 }
