@@ -89,7 +89,7 @@ public class XmlMapper {
 		for(Node square: squareList) {
 			List<Node> squareChildren = getListOfChildNodes(square);
 			Integer squareIndex = Integer.parseInt(squareChildren.get(0).getTextContent());
-	
+			
 			Node characteristic = squareChildren.get(1);
 			List<Node> squareChars = getListOfChildNodes(characteristic);
 			String sqCharName = squareChars.get(0).getTextContent();
@@ -108,7 +108,7 @@ public class XmlMapper {
 
 		String shape = "square";
 		//HARD CODED SHAPE AND GRID ROWS AND COLS
-		Grid cellGrid = new Grid(cells, 5, 5, globalsMap);
+		Grid cellGrid = new Grid(cells, 1000, 1000, globalsMap);
 		
 		return cellGrid;
 	}
