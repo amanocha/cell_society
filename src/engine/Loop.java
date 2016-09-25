@@ -39,7 +39,6 @@ public class Loop {
 	public void step() {
 		update.determineUpdates();
 		update.updateCells();
-		System.out.println(grid.getCellList().get(0).getCurrentState());
 		navigator.makeScreen(Menu.REFRESH);
 	}
 
