@@ -14,7 +14,7 @@
 		</chars>
 		<chars>
 			<name>probCatch</name>
-			<value>15</value>
+			<value>0.15</value>
 		</chars>
 	</global>
 	<index>25</index>
