@@ -5,10 +5,10 @@ import java.util.ResourceBundle;
 import animation.controls.GeneralBox;
 import animation.controls.GeneralBox.Orientation;
 import animation.controls.GeneralButton;
-import animation.controls.GeneralButton.Function;
 import animation.controls.GeneralLabel;
 import animation.controls.GeneralPane;
 import animation.menu.Navigation.Menu;
+import engine.Loop;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -59,52 +59,13 @@ public class GUIGenerator {
 		grid.add(text.getMessage(), 1, 4);
 		return grid;
 	}
-
 	
-	
-	public Node generateSimulationScreenLabel() {
-		GeneralLabel label = new GeneralLabel(myResource.getString("SimulationLabel"));
-		label.setX(myScene.getWidth() * .07);
-		label.setY(myScene.getHeight() * .06);
-		return label.getHeader();
-	}
-	
-	public Pane generateSimulationScreenButton() {
-		GeneralButton play = new GeneralButton(Function.START);
-		//play.setStringAction(e -> myLoop.cont());
-		GeneralButton pause = new GeneralButton(Function.PAUSE);
-		pause.setStringAction(e -> myInfo.getLoop().stop());
-		GeneralButton stop = new GeneralButton(Function.STOP);
-		stop.setStringAction(e -> {
-			myNav.getLoop().getAnimation().stop();
-			
+	public Button generateSimulationScreenMainButton(Loop loop) {
+		GeneralButton main = new GeneralButton(myResource.getString("MainMenu"));
+		main.setStringAction(e -> {
+			myNav.makeScreen(Menu.MAIN);
+			loop.getSimulationGUI().stopAnimation();
 		});
-		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .45) / 3, Orientation.HORIZANTAL);
-		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
-		hbox.setX(myScene.getWidth() * .14);
-		hbox.setY(myScene.getHeight() * .91);
-		return (Pane) hbox.getControl();
-	}
-	
-	public Pane generateSimulationScreenControls() {
-		GeneralBox vbox = new GeneralBox(10, Orientation.VERTICAL);
-		GeneralButton speed = new GeneralButton(myResource.getString("SpeedUp"));
-		speed.setWidth(myScene.getWidth() * .20);
-		speed.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
-		GeneralButton slow = new GeneralButton(myResource.getString("SlowDown"));
-		slow.setWidth(myScene.getWidth() * .20);
-		slow.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
-		GeneralButton step = new GeneralButton(myResource.getString("Step"));
-		step.setWidth(myScene.getWidth() * .20);
-		step.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
-		vbox.addAll(speed.getControl(), slow.getControl(), step.getControl());
-		vbox.setX(myScene.getWidth() * .73);
-		vbox.setY(myScene.getHeight() * .15);
-		return (Pane) vbox.getControl();
-	}
-	
-	public Button generateSimulationScreenMainButton() {
-		GeneralButton main = generateMainMenuButton();
 		main.setWidth(myScene.getWidth() * .20);
 		main.setX(myScene.getWidth() * .73);
 		main.setY(myScene.getHeight() * .8);
@@ -125,7 +86,9 @@ public class GUIGenerator {
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .01), Orientation.HORIZANTAL);
 		for (int i = 0; i < SIMULATIONS.length; i++) {
 			String file = FILES[i];
-			setXMLSelectionButtons(SIMULATIONS[i], e -> myInfo.mapXmlToGrid(file), hbox);
+			setXMLSelectionButtons(SIMULATIONS[i], e -> 
+				{myInfo.mapXmlToGrid(file); 
+				myNav.makeScreen(Menu.MAIN);}, hbox);
 		}
 		GeneralLabel title = new GeneralLabel(myResource.getString("SimulationSelection"));
 		title.setX(myScene.getWidth() * .32);
@@ -145,6 +108,30 @@ public class GUIGenerator {
 		button.setWidth(myScene.getWidth() * .20);
 		button.setStringAction(e);
 		hbox.add(button.getControl());
+	}
+	
+	public Pane generateSimulationScreenControls() {
+		GeneralBox vbox = new GeneralBox(10, Orientation.VERTICAL);
+		GeneralButton speed = new GeneralButton(myResource.getString("SpeedUp"));
+		speed.setWidth(myScene.getWidth() * .20);
+		speed.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
+		GeneralButton slow = new GeneralButton(myResource.getString("SlowDown"));
+		slow.setWidth(myScene.getWidth() * .20);
+		slow.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
+		GeneralButton step = new GeneralButton(myResource.getString("Step"));
+		step.setWidth(myScene.getWidth() * .20);
+		step.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
+		vbox.addAll(speed.getControl(), slow.getControl(), step.getControl());
+		vbox.setX(myScene.getWidth() * .73);
+		vbox.setY(myScene.getHeight() * .15);
+		return (Pane) vbox.getControl();
+	}
+	
+	public Node generateSimulationScreenLabel() {
+		GeneralLabel label = new GeneralLabel(myResource.getString("SimulationLabel"));
+		label.setX(myScene.getWidth() * .07);
+		label.setY(myScene.getHeight() * .06);
+		return label.getHeader();
 	}
 	
 	

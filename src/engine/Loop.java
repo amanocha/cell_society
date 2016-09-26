@@ -1,6 +1,6 @@
 package engine;
 
-import animation.simulation.SimulationPane;
+import animation.simulation.GUISimulation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;
@@ -17,30 +17,23 @@ public class Loop {
 	private Timeline animation;
 	private Grid grid;
 	private Update update;
-	private StatusOfSimulation status;
-	private MetaData myMeta;
 	private Group root;
 	private Scene myScene;
 	private XmlMapper myInfo;
-	private SimulationPane mySimulationPane;
-	
-	public enum StatusOfSimulation {
-		CONTINUE, STOP
-	}
+	private GUISimulation mySimulationPane;
+
 	
 	public Loop(MetaData meta, Grid grid) {
 		this.animation = new Timeline();
-		this.status = StatusOfSimulation.CONTINUE;
 		this.grid = grid;
 	}
 	
 	public Loop(Scene s, XmlMapper info, Group r) {
 		this.animation = new Timeline();
-		this.status = StatusOfSimulation.CONTINUE;
 		this.myInfo = info;
 		this.root = r;
 		this.myScene = s;
-		mySimulationPane = new SimulationPane(myScene, myInfo);
+		mySimulationPane = new GUISimulation(myScene, myInfo, animation);
 		this.grid = info.getGrid();
 		update = info.getMeta().getUpdate();
 	}
@@ -74,20 +67,12 @@ public class Loop {
 					System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
 					count++;
 				}
-				System.out.println();
 			}
 	}
 	
-	public void stop() {
-		animation.stop();
-		status = StatusOfSimulation.STOP;
-	}
-	
-	public Timeline getAnimation() {
-		return animation;
+	public GUISimulation getSimulationGUI() {
+		return mySimulationPane;
 	}
 
-	public Grid getGrid() {
-		return grid;
-	}
+
 }
