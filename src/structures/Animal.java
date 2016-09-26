@@ -3,6 +3,8 @@ package structures;
 public class Animal extends Cell {
 	private int time;
 	private int energy;
+	private int sharkTime;
+	private int fishTime;
 	
 	public Animal() {
 		super();
@@ -10,10 +12,20 @@ public class Animal extends Cell {
 		energy = 0;
 	}
 	
-	public Animal(int cell_num, int cell_state, int energy) {
+	public Animal(int cell_num, int cell_state, int energy, int shark, int fish) {
 		super(cell_num, cell_state);
 		time = 0;
 		this.energy = energy;
+		this.sharkTime = shark;
+		this.fishTime = fish;
+	}
+	
+	public int getfishTime() {
+		return fishTime;
+	}
+	
+	public int getSharkTime() {
+		return sharkTime;
 	}
 	
 	public int getTime() {

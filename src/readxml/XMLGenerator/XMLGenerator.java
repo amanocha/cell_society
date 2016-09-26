@@ -8,13 +8,13 @@ public class XMLGenerator {
 	public static void main(String[] args) {
 		XMLGenerator x = new XMLGenerator();
 		Map<String, String> globalMap = new HashMap<String, String>();
-		globalMap.put("simulation", "predator prey");
+		globalMap.put("simulation", "segregation");
 		globalMap.put("probCatch", "0.25");
 		globalMap.put("energy", "10");
 		globalMap.put("fishTime", "5");
 		globalMap.put("sharkTime", "5");
 		globalMap.put("shape", "square");
-		int index = 36; //the only parameter that needs to be changed when changing grid size
+		int index = 25; //the only parameter that needs to be changed when changing grid size
 		int maxStateValue = 3;
 		System.out.println(x.createXML(globalMap, index, maxStateValue));
 	}

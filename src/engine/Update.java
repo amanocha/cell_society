@@ -21,6 +21,7 @@ public abstract class Update {
 		int gridWidth = grid.getColumns();
 		int cellNumber = cell.getNumber();
 		int north, east, south, west;
+		
 		ArrayList<Cell> neighbors = new ArrayList<Cell>();
 		
 		if (cellNumber >= gridWidth) {

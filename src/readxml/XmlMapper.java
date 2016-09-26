@@ -16,22 +16,39 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
+
+import animation.simulation.Simulation;
+import engine.Loop;
+
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 import structures.Animal;
 import structures.Cell;
+import structures.FireCell;
 import structures.Grid;
+import structures.MetaData;
 
 public class XmlMapper {
 
-	// main method is only for temporary testing!
 	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
 		xmlmap.mapXmlToGrid("GameOfLife.xml");
 	}*/
-
-	public Grid mapXmlToGrid(String filename) {
+	
+	private Map<String, String> globalsMap;
+	private MetaData myMeta;
+	private List<Cell> cells;
+	private Grid myGrid;
+	private Loop myLoop;
+	
+	public XmlMapper() {
+	}
+	
+	public void mapXmlToGrid(String filename) {
+		
+		this.globalsMap = new HashMap<String, String>();
+		myMeta = new MetaData();
 	
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
@@ -68,7 +85,6 @@ public class XmlMapper {
 		
 		// Get all global characteristics
 		List<Node> chars = getListOfChildNodes(global);
-		Map<String, String> globalsMap = new HashMap<String, String>();
 		for(Node n : chars) {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
@@ -83,7 +99,7 @@ public class XmlMapper {
 		//System.out.println("Index value: "+indexValue);
 		
 		// Initialize 1-d array of cells
-		List<Cell> cells = new ArrayList<Cell>();
+		cells = new ArrayList<Cell>();
 		
 		// Create grid/array of cells given initial states of each 'square'
 		List<Node> squareList = getListOfChildNodes(squares);
@@ -99,7 +115,9 @@ public class XmlMapper {
 			// MUST CHANGE BELOW LINE TO PASS IN RIGHT CONSTRUCTOR PARAMS!!
 			Cell newCell = new Cell();
 			if (globalsMap.get("simulation").equals("predator prey")) {
-				newCell = new Animal(squareIndex, sqCharValue, Integer.parseInt(globalsMap.get("energy")));
+				newCell = new Animal(squareIndex, sqCharValue, Integer.parseInt(globalsMap.get("energy")), Integer.parseInt(globalsMap.get("fishTime")), Integer.parseInt(globalsMap.get("sharkTime")));
+			} else if (globalsMap.get("simulation").equals("fire")) {
+				newCell = new FireCell(squareIndex, sqCharValue, Double.parseDouble(globalsMap.get("probCatch")));
 			} else  {
 				newCell = new Cell(squareIndex, sqCharValue);
 			}
@@ -114,10 +132,28 @@ public class XmlMapper {
 
 		String shape = "square";
 		//HARD CODED SHAPE AND GRID ROWS AND COLS
-		Grid cellGrid = new Grid(cells, 6, 6, globalsMap); //only change dimensions
-		
-		return cellGrid;
+		//Grid cellGrid = new Grid(cells, 6, 6, myMeta); //only change dimensions
+		for (String key : globalsMap.keySet()) {
+			//System.out.println(key);
+		}
+		myGrid = new Grid(cells, 5, 5, myMeta);
+		myMeta.setShape(shape);
+		myMeta.setSimulationName(globalsMap.get("simulation"), myGrid);	
+		myLoop = new Loop(myMeta, myGrid);
 	}
+	
+	public Grid getGrid() {
+		return myGrid;
+	}
+	
+	public MetaData getMeta() {
+		return myMeta;
+	}
+	
+	public Loop getLoop() {
+		return myLoop;
+	}
+	
 	
 	/*
 	 * Returns a list of child nodes of a given node

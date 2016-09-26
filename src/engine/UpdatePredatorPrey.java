@@ -8,21 +8,10 @@ import structures.Grid;
 
 public class UpdatePredatorPrey extends Update {
 	private Grid grid;
-	private int fishTime;
-	private int sharkTime;
 	
 	public UpdatePredatorPrey(Grid newGrid) {
 		super(newGrid);
 		grid = newGrid;
-		fishTime = 0;
-		sharkTime = 0;
-	}
-	
-	public UpdatePredatorPrey(Grid newGrid, int newFishTime, int newSharkTime) {
-		super(newGrid);
-		grid = newGrid;
-		fishTime = newFishTime;
-		sharkTime = newSharkTime;
 	}
 	
 	public Cell move(Cell cell, boolean reproduce) {
@@ -118,14 +107,14 @@ public class UpdatePredatorPrey extends Update {
 	
 	public void determineFishUpdates(ArrayList<Cell> fishes) {
 		for(Cell fish : fishes) {
-			boolean reproduce = ((Animal)fish).getTime() >= fishTime;
+			boolean reproduce = ((Animal)fish).getTime() >= ((Animal) fish).getfishTime();
 			fish = move(fish, reproduce);
 		}
 	}
 	
 	public void determineSharkUpdates(ArrayList<Cell> sharks) {
 		for(Cell shark : sharks) {
-			boolean reproduce = ((Animal)shark).getTime() >= sharkTime;
+			boolean reproduce = ((Animal)shark).getTime() >= ((Animal) shark).getSharkTime();
 			shark = eat((Animal)shark, reproduce);
 			if (((Animal)shark).getEnergy() == 0) {
 				shark.setNextState(0);
