@@ -3,14 +3,12 @@ package animation.menu;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-import animation.simulation.SimulationPane;
 import engine.Loop;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import readxml.XmlMapper;
-import structures.Grid;
 
 public class Navigation {
 	
@@ -81,8 +79,8 @@ public class Navigation {
 	
 	private void simulationMenu() {
 		root.getChildren().clear();
-		root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(), myGUI.generateSimulationScreenLabel(), 
-				myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton());
+		root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(myLoop), myGUI.generateSimulationScreenLabel(), 
+				myGUI.generateSimulationScreenControls(), myLoop.getSimulationGUI().generateSimulationScreenButton());
 		myLoop.init();
 	}
 	
