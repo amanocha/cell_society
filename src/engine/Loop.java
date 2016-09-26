@@ -16,47 +16,54 @@ public class Loop {
 	private Grid grid;
 	private Update update;
 	private Navigation navigator;
+	private StatusOfSimulation status;
 	
-	public Loop(Navigation nav) {
-		animation = new Timeline();
-		grid = xml.mapXmlToGrid("PredatorPrey.xml");
-		update = new UpdatePredatorPrey(grid, Integer.parseInt(grid.getGlobalsMap().get("fishTime")), Integer.parseInt(grid.getGlobalsMap().get("sharkTime")));
-		this.navigator = nav;
+	public enum StatusOfSimulation {
+		CONTINUE, STOP
 	}
 	
+	public Loop(Navigation nav) {
+		this.animation = new Timeline();
+		this.grid = xml.mapXmlToGrid("PredatorPrey.xml");
+		this.update = new UpdatePredatorPrey(grid, Integer.parseInt(grid.getGlobalsMap().get("fishTime")), Integer.parseInt(grid.getGlobalsMap().get("sharkTime")));
+		this.navigator = nav;
+		this.status = StatusOfSimulation.CONTINUE;
+	}
 
 	public void init() {
+		navigator.refreshSimulationMenu(grid);
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
+<<<<<<< HEAD
 		animation.setCycleCount(Timeline.INDEFINITE);
+=======
+		animation.setCycleCount(1);
+>>>>>>> master
 		animation.getKeyFrames().add(frame);
 		animation.play();
 	}
 	
 	public void step() {
-		//System.out.println("draw grid");
-				int count = 0;
-				for(int i = 0; i < grid.getRows(); i++) {
-					for (int j = 0; j < grid.getColumns(); j++) {
-						//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
-						count++;
-					}
-					//System.out.println();
-				}
-		navigator.refreshSimulationMenu(grid);
-		update.determineUpdates();
-		update.updateCells();
+		if (status == StatusOfSimulation.CONTINUE) {
+			//System.out.println("draw grid");
+			//int count = 0;
+			//for(int i = 0; i < grid.getRows(); i++) {
+				//for (int j = 0; j < grid.getColumns(); j++) {
+					//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+					//count++;
+				//}
+				//System.out.println();
+			//}
+			update.determineUpdates();
+			update.updateCells();
+			navigator.refreshSimulationMenu(grid);
+		} else {
+			System.out.println("Hello");
+			animation.stop();
+		}
 	}
 	
 	public void stop() {
-		animation.stop();
-	}
-	
-	public void restart() {
-		animation.playFromStart();
-	}
-	
-	public void cont() {
-		animation.play();
+		status = StatusOfSimulation.STOP;
 	}
 
 	public Grid getGrid() {

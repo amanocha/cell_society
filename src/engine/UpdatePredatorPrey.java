@@ -60,7 +60,6 @@ public class UpdatePredatorPrey extends Update {
 			Cell fishCell = grid.getCellList().get(fishCellIndex);
 			System.out.println(shark.getNumber() + " ate " + fishCell.getNumber());
 			swap(shark, (Animal) fishCell); //shark's next state is fish, fish's next state is shark
-			System.out.println("shark next state = " + shark.getNextState());
 			if(reproduce) {
 				reproduce(shark, fishCell);
 			} else {
