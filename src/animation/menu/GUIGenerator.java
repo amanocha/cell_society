@@ -9,43 +9,35 @@ import animation.controls.GeneralButton.Function;
 import animation.controls.GeneralLabel;
 import animation.controls.GeneralPane;
 import animation.menu.Navigation.Menu;
-import animation.simulation.Simulation;
-import engine.Loop;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
-import structures.Grid;
+import readxml.XmlMapper;
+
 
 
 public class GUIGenerator {
 	
 	private static String[] SIMULATIONS = {"SEGREGATION", "GAME OF LIFE", "FIRE", "WA-TOR"};
+	private static String[] FILES = {"Segregation.xml", "GameOfLife.xml", "Fire.xml", "PredatorPrey.xml"};
 	
 	private GeneralPane myPane;
 	private Navigation myNav;
 	private Scene myScene;
-	private Simulation mySimulation;
 	private ResourceBundle myResource;
-	private Loop myLoop;
-	private StackPane stack;
-	private TilePane animation;
+	private XmlMapper myInfo;
 	
-	public GUIGenerator(Scene scene, Group r, ResourceBundle resource) {
+	public GUIGenerator(Scene scene, Group r, ResourceBundle resource, XmlMapper info) {
 		this.myScene = scene;
 		this.myResource = resource;
 		myPane = new GeneralPane(scene);
-		myNav = new Navigation(scene, r);
-		myLoop = new Loop(myNav);
-		mySimulation = new Simulation();
+		myInfo = info;
+		myNav = new Navigation(scene, r, info);
 	}
 
 	public Pane generateMainScreen() {
@@ -55,7 +47,6 @@ public class GUIGenerator {
 		button.setWidth(myScene.getWidth() * .5);
 		button.setStringAction(e -> {
 			myNav.makeScreen(Menu.SIMULATION);
-			myLoop.init();
 		});
 		grid.add(header.getHeader(), 1, 0);
 		grid.add(button.getControl(), 1, 1);
@@ -69,27 +60,6 @@ public class GUIGenerator {
 		return grid;
 	}
 
-	public Pane generateSimulationScreen(Grid grid) {
-		stack = myPane.getSimulationMenuPane();
-		stack.getChildren().remove(animation);
-		double left = myScene.getWidth() * .1;
-	    double top = myScene.getHeight() * .5;
-	    double other = myScene.getHeight() * .1;
-	    int width = (int) Math.round((myScene.getWidth() * .5 - other));
-	    int height = (int) Math.round((myScene.getHeight() * .8));
-	    animation = mySimulation.drawGrid(grid, width, height);
-        StackPane.setMargin(animation, new Insets(left, top, other, other));
-		animation.setTileAlignment(Pos.CENTER);
-		animation.setHgap(2);
-		animation.setVgap(2);
-        stack.getChildren().add(animation);
-        stack.setMouseTransparent(true);
-		return stack;
-	}
-	
-	public Pane getStackPane() {
-		return stack;
-	}
 	
 	
 	public Node generateSimulationScreenLabel() {
@@ -103,11 +73,11 @@ public class GUIGenerator {
 		GeneralButton play = new GeneralButton(Function.START);
 		//play.setStringAction(e -> myLoop.cont());
 		GeneralButton pause = new GeneralButton(Function.PAUSE);
-		pause.setStringAction(e -> myLoop.stop());
+		pause.setStringAction(e -> myInfo.getLoop().stop());
 		GeneralButton stop = new GeneralButton(Function.STOP);
 		stop.setStringAction(e -> {
-			myLoop.stop();
-			//myLoop.restart();
+			myNav.getLoop().getAnimation().stop();
+			
 		});
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .45) / 3, Orientation.HORIZANTAL);
 		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
@@ -153,8 +123,9 @@ public class GUIGenerator {
 		button.setWidth(myScene.getWidth() * .25);
 		button.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
 		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .01), Orientation.HORIZANTAL);
-		for (String sim : SIMULATIONS) {
-			setXMLSelectionButtons(sim, e -> myNav.makeScreen(Menu.MAIN), hbox);
+		for (int i = 0; i < SIMULATIONS.length; i++) {
+			String file = FILES[i];
+			setXMLSelectionButtons(SIMULATIONS[i], e -> myInfo.mapXmlToGrid(file), hbox);
 		}
 		GeneralLabel title = new GeneralLabel(myResource.getString("SimulationSelection"));
 		title.setX(myScene.getWidth() * .32);
@@ -172,6 +143,7 @@ public class GUIGenerator {
 	private void setXMLSelectionButtons(String sim, EventHandler<ActionEvent> e, GeneralBox hbox) {
 		GeneralButton button = new GeneralButton(sim);
 		button.setWidth(myScene.getWidth() * .20);
+		button.setStringAction(e);
 		hbox.add(button.getControl());
 	}
 	

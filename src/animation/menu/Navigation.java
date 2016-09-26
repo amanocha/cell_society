@@ -3,13 +3,13 @@ package animation.menu;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import animation.simulation.SimulationPane;
+import engine.Loop;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import readxml.XmlMapper;
 import structures.Grid;
 
 public class Navigation {
@@ -24,23 +24,28 @@ public class Navigation {
 	private double width;
 	private double height;
 	private ResourceBundle myResources;
+	private XmlMapper myInfo;
+	private Loop myLoop;
 	
 	public enum Menu {
 		XML, MAIN, SIMULATION, REFRESH
 	}
 	
+	public Navigation() {
+	}
+	
 	public Navigation(Stage s, double w, double h) {
+		myInfo = new XmlMapper();
+		myInfo.mapXmlToGrid("Fire.xml");
 		myStage = s;
 		this.width = w;
     	this.height = h;
 	}
-	
-	public Navigation() {
-	}
 
-	public Navigation(Scene scene, Group r) {
+	public Navigation(Scene scene, Group r, XmlMapper info) {
 		this.root = r;
 		this.myScene = scene;
+		this.myInfo = info;
 	}
 	
 	public void init() {
@@ -55,11 +60,12 @@ public class Navigation {
 	
 	public void makeScreen(Menu menu) {
 		myResources = PropertyResourceBundle.getBundle(LANGUAGE);
-		myGUI = new GUIGenerator(myScene, root, myResources);
+		myGUI = new GUIGenerator(myScene, root, myResources, myInfo);
 		if (menu.equals(Menu.MAIN)) {
 			mainMenu();
 		}
 		if (menu.equals(Menu.SIMULATION)) {
+			myLoop = new Loop(myScene, myInfo, root);
 			simulationMenu();
 		}
 		if (menu.equals(Menu.XML)) {
@@ -77,17 +83,17 @@ public class Navigation {
 		root.getChildren().clear();
 		root.getChildren().addAll(myGUI.generateSimulationScreenMainButton(), myGUI.generateSimulationScreenLabel(), 
 				myGUI.generateSimulationScreenControls(), myGUI.generateSimulationScreenButton());
-	}
-	 
-	public void refreshSimulationMenu(Grid grid) {
-		root.getChildren().remove(myGUI.getStackPane());
-		root.getChildren().add(myGUI.generateSimulationScreen(grid));
+		myLoop.init();
 	}
 	
 	
 	private void xmlMenu() {
 		root.getChildren().clear();
 		root.getChildren().add(myGUI.generateXMLScreen());
+	}
+	
+	public Loop getLoop() {
+		return myLoop;
 	}
 
 

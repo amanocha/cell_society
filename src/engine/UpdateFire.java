@@ -3,15 +3,14 @@ package engine;
 import java.util.Random;
 import structures.Cell;
 import structures.Grid;
+import structures.FireCell;
 
 public class UpdateFire extends Update {
 	private Grid grid;
-	private double probCatch;
 	
 	public UpdateFire(Grid newGrid) {
 		super(newGrid);
 		grid = newGrid;
-		probCatch = Double.parseDouble(grid.getGlobalsMap().get("probCatch"));
 	}
 	
 	/**
@@ -33,7 +32,7 @@ public class UpdateFire extends Update {
 				}
 				if(checkProb) {
 					double probability = random.nextDouble();
-					if(probability <= probCatch) {
+					if(probability <= ((FireCell) cell).getProbCatch()) {
 						cell.setNextState(2);
 					}
 				}

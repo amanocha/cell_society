@@ -2,7 +2,7 @@
 	<global>
 		<chars>
 			<name>fishTime</name>
-			<value>5</value>
+			<value>1</value>
 		</chars>
 		<chars>
 			<name>shape</name>
@@ -18,14 +18,14 @@
 		</chars>
 		<chars>
 			<name>sharkTime</name>
-			<value>5</value>
+			<value>8</value>
 		</chars>
 		<chars>
 			<name>energy</name>
 			<value>10</value>
 		</chars>
 	</global>
-	<index>36</index>
+	<index>25</index>
 	<squares>
 		<square>
 			<index>0</index>
@@ -59,14 +59,14 @@
 			<index>4</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>5</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>2</value>
 			</characteristic>
 		</square>
 		<square>
@@ -80,7 +80,7 @@
 			<index>7</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -101,7 +101,7 @@
 			<index>10</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -115,21 +115,25 @@
 			<index>12</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>13</index>
 			<characteristic>
 				<name>state</name>
+<<<<<<< HEAD
 				<value>1</value>
+=======
+				<value>0</value>
+>>>>>>> master
 			</characteristic>
 		</square>
 		<square>
 			<index>14</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -157,14 +161,14 @@
 			<index>18</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>19</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -178,14 +182,14 @@
 			<index>21</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>22</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -202,6 +206,7 @@
 				<value>0</value>
 			</characteristic>
 		</square>
+<<<<<<< HEAD
 		<square>
 			<index>25</index>
 			<characteristic>
@@ -279,5 +284,7 @@
 				<value>1</value>
 			</characteristic>
 		</square>
+=======
+>>>>>>> master
 	</squares>
 </file>

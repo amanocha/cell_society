@@ -2,18 +2,16 @@ package engine;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+import structures.SegregationCell;
 import structures.Cell;
 import structures.Grid;
 
 public class UpdateSegregation extends Update {
 	private Grid grid;
-	private double satisfaction;
 	private ArrayList<Cell> emptyCells;
 	
-	public UpdateSegregation(Grid newGrid, double satisfaction) {
+	public UpdateSegregation(Grid newGrid) {
 		super(newGrid);
-		this.satisfaction = satisfaction;
 		grid = newGrid;
 		emptyCells = new ArrayList<Cell>();
 		for(Cell cell : grid.getCellList()) {
@@ -37,7 +35,7 @@ public class UpdateSegregation extends Update {
 			}
 		}
 		double ratio = (double)same/numAgents;
-		return (ratio >= satisfaction);
+		return (ratio >= ((SegregationCell) cell).getSatisfaction());
 	}
 	
 	public void move(Cell cell) {
