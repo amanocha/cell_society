@@ -9,11 +9,15 @@ import structures.Grid;
 public class UpdatePredatorPrey extends Update {
 	private Grid grid;
 	private int energy;
+	private int fishTime;
+	private int sharkTime;
 	
 	public UpdatePredatorPrey(Grid newGrid) {
 		super(newGrid);
 		grid = newGrid;
 		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();
+		fishTime = ((Animal) newGrid.getCellList().get(0)).getFishTime();
+		sharkTime = ((Animal) newGrid.getCellList().get(0)).getSharkTime();
 	}
 	
 	public Cell move(Cell cell, boolean reproduce) {
@@ -61,7 +65,6 @@ public class UpdatePredatorPrey extends Update {
 			return fishCell; 
 		}
 		shark.setEnergy(shark.getEnergy() - 1);
-		//System.out.println(shark.getNumber() + ": " + shark.getEnergy());
 		return move(shark, reproduce);
 	}
 	
@@ -118,20 +121,20 @@ public class UpdatePredatorPrey extends Update {
 		for(Cell fish : fishes) {
 			//System.out.println(fish.getNumber() + ": " + ((Animal)fish).getTime());
 			//System.out.println("MOVING FISH " + fish.getNumber());
-			boolean reproduce = ((Animal)fish).getTime() >= ((Animal) fish).getfishTime();
+			boolean reproduce = ((Animal)fish).getTime() >= fishTime;
 			fish = move(fish, reproduce);
 		}
 	}
 	
 	public void determineSharkUpdates(ArrayList<Cell> sharks) {
 		for(Cell shark : sharks) {
-			//System.out.println(reproduce);
 			//System.out.print(shark.getNumber() + ": " + ((Animal)shark).getTime() + ", ");
-			boolean reproduce = ((Animal)shark).getTime() >= ((Animal) shark).getSharkTime();
+			boolean reproduce = ((Animal)shark).getTime() >= sharkTime;
 			shark = eat((Animal)shark, reproduce);
 			if (((Animal)shark).getEnergy() == 0) {
 				shark.setNextState(0);
 			}
+			System.out.println(shark.getNumber() + ": " + ((Animal)shark).getEnergy());
 		}
 	}
 	

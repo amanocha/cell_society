@@ -47,6 +47,15 @@ public class Loop {
 
 	public void init() {
 		root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+		System.out.println("initial grid");
+		int count = 0;
+		for(int i = 0; i < grid.getRows(); i++) {
+			for (int j = 0; j < grid.getColumns(); j++) {
+				System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+				count++;
+			}
+			System.out.println();
+		}
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -54,23 +63,22 @@ public class Loop {
 	}
 
 	private void step() {
-			System.out.println("draw grid");
-			int count = 0;
-			for(int i = 0; i < grid.getRows(); i++) {
-				for (int j = 0; j < grid.getColumns(); j++) {
-					//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
-					count++;
-				}
-				//System.out.println();
-			}
 			root.getChildren().remove(mySimulationPane.getStackPane());
 			update.determineUpdates();
 			update.updateCells();
 			root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+			System.out.println("draw grid");
+			int count = 0;
+			for(int i = 0; i < grid.getRows(); i++) {
+				for (int j = 0; j < grid.getColumns(); j++) {
+					System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+					count++;
+				}
+				System.out.println();
+			}
 	}
 	
 	public void stop() {
-		System.out.println("he");
 		animation.stop();
 		status = StatusOfSimulation.STOP;
 	}

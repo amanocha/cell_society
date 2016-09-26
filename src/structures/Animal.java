@@ -12,15 +12,15 @@ public class Animal extends Cell {
 		energy = 0;
 	}
 	
-	public Animal(int cell_num, int cell_state, int energy, int shark, int fish) {
+	public Animal(int cell_num, int cell_state, int energy, int fish, int shark) {
 		super(cell_num, cell_state);
 		time = 0;
 		this.energy = energy;
-		this.sharkTime = shark;
 		this.fishTime = fish;
+		this.sharkTime = shark;
 	}
 	
-	public int getfishTime() {
+	public int getFishTime() {
 		return fishTime;
 	}
 	

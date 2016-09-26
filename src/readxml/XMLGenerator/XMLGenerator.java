@@ -8,7 +8,7 @@ public class XMLGenerator {
 	public static void main(String[] args) {
 		XMLGenerator x = new XMLGenerator();
 		Map<String, String> globalMap = new HashMap<String, String>();
-		globalMap.put("simulation", "segregation");
+		globalMap.put("simulation", "predator prey");
 		globalMap.put("probCatch", "0.25");
 		globalMap.put("satisfactionRate", "0.30");
 		globalMap.put("energy", "10");
