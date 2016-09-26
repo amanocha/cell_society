@@ -1,6 +1,10 @@
 package animation.simulation;
 
-import animation.controls.GeneralPane;
+import animation.controls.GeneralBox;
+import animation.controls.GeneralButton;
+import animation.controls.GeneralBox.Orientation;
+import animation.controls.GeneralButton.Function;
+import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -10,19 +14,20 @@ import javafx.scene.layout.TilePane;
 import readxml.XmlMapper;
 import structures.Grid;
 
-public class SimulationPane {
+
+public class GUISimulation {
 	
 	private StackPane stack;
-	private GeneralPane myPane;
 	private Simulation mySimulation;
 	private TilePane animation;
 	private Scene myScene;
+	private Timeline engine;
 	
-	public SimulationPane(Scene scene, XmlMapper info) {
+	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
-		myPane = new GeneralPane(scene);
 		mySimulation = new Simulation(info);
 		stack = new StackPane();
+		this.engine = animation;
 	}
 	
 	public Pane getStackPane() {
@@ -45,4 +50,26 @@ public class SimulationPane {
         stack.setMouseTransparent(true);
 		return stack;
 	}
+	
+	public Pane generateSimulationScreenButton() {
+		GeneralButton play = new GeneralButton(Function.START);
+		play.setStringAction(e -> engine.play());
+		GeneralButton pause = new GeneralButton(Function.PAUSE);
+		pause.setStringAction(e -> stopAnimation());
+		GeneralButton stop = new GeneralButton(Function.STOP);
+		stop.setStringAction(e -> {
+			stopAnimation();
+			engine.playFromStart();
+		});
+		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .40) / 3, Orientation.HORIZANTAL);
+		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
+		hbox.setX(myScene.getWidth() * .08);
+		hbox.setY(myScene.getHeight() * .90);
+		return (Pane) hbox.getControl();
+	}
+	
+	public void stopAnimation() {
+		engine.stop();
+	}
+	
 }
