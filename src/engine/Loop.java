@@ -8,7 +8,7 @@ import readxml.XmlMapper;
 import structures.Grid;
 
 public class Loop {
-	private static final int FRAMES_PER_SECOND = 2;
+	private static final int FRAMES_PER_SECOND = 5;
     private static final int MILLISECOND_DELAY = 1000/FRAMES_PER_SECOND;
     
 	private Timeline animation;
@@ -33,14 +33,14 @@ public class Loop {
 
 	public void init() {
 		navigator.refreshSimulationMenu(grid);
-		System.out.println("initial grid");
+		//System.out.println("initial grid");
 		int count = 0;
 		for(int i = 0; i < grid.getRows(); i++) {
 			for (int j = 0; j < grid.getColumns(); j++) {
-				System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+				//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
 				count++;
 			}
-			System.out.println();
+			//System.out.println();
 		}
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		animation.setCycleCount(Timeline.INDEFINITE);
@@ -49,18 +49,18 @@ public class Loop {
 	}
 	
 	public void step() {
-		if (status == StatusOfSimulation.CONTINUE) {
+		if (status.equals(StatusOfSimulation.CONTINUE)) {
 			update.determineUpdates();
 			update.updateCells();
 			navigator.refreshSimulationMenu(grid);
-			System.out.println("draw grid");
+			//System.out.println("draw grid");
 			int count = 0;
 			for(int i = 0; i < grid.getRows(); i++) {
 				for (int j = 0; j < grid.getColumns(); j++) {
-					System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+					//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
 					count++;
 				}
-				System.out.println();
+				//System.out.println();
 			}
 		} else {
 			animation.stop();
@@ -68,6 +68,7 @@ public class Loop {
 	}
 	
 	public void stop() {
+		System.out.println("STOP");
 		status = StatusOfSimulation.STOP;
 	}
 

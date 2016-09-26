@@ -70,7 +70,7 @@ public class UpdatePredatorPrey extends Update {
 			return fishCell; 
 		}
 		shark.setEnergy(shark.getEnergy() - 1);
-		System.out.println(shark.getNumber() + ": " + shark.getEnergy());
+		//System.out.println(shark.getNumber() + ": " + shark.getEnergy());
 		return move(shark, reproduce);
 	}
 	

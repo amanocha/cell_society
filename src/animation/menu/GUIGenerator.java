@@ -11,7 +11,6 @@ import animation.controls.GeneralPane;
 import animation.menu.Navigation.Menu;
 import animation.simulation.Simulation;
 import engine.Loop;
-import engine.Loop.StatusOfSimulation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -48,7 +47,6 @@ public class GUIGenerator {
 		myLoop = new Loop(myNav);
 		mySimulation = new Simulation();
 	}
-
 
 	public Pane generateMainScreen() {
 		GridPane grid = myPane.getMainMenuPane();
