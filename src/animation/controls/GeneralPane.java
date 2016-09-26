@@ -1,7 +1,6 @@
 package animation.controls;
 
 
-import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;

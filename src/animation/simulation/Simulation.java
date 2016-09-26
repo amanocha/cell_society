@@ -13,14 +13,11 @@ public class Simulation {
 	
 	private AbstractDraw sim;
 	private TilePane screen;
-	private XmlMapper xml;
-	private String SimulationName;
-	private Grid myGrid;
+	private XmlMapper myInfo;
 	
-	public Simulation() {
-		this.xml = new XmlMapper();
-		this.SimulationName = xml.mapXmlToGrid("PredatorPrey.xml").getNameOfSimulation();
-		this.sim = new PredatorPreySimulation(); 
+	public Simulation(XmlMapper info) {
+		this.myInfo = info;
+		sim = myInfo.getMeta().getSimulation();
 		this.screen = new TilePane();
 	}
 	
