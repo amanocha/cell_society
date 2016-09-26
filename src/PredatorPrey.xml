@@ -2,7 +2,7 @@
 	<global>
 		<chars>
 			<name>fishTime</name>
-			<value>5</value>
+			<value>1</value>
 		</chars>
 		<chars>
 			<name>shape</name>
@@ -18,7 +18,7 @@
 		</chars>
 		<chars>
 			<name>sharkTime</name>
-			<value>5</value>
+			<value>8</value>
 		</chars>
 		<chars>
 			<name>energy</name>
@@ -31,7 +31,7 @@
 			<index>0</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -73,7 +73,7 @@
 			<index>6</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -94,14 +94,14 @@
 			<index>9</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>10</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -143,7 +143,7 @@
 			<index>16</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -164,7 +164,7 @@
 			<index>19</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -185,14 +185,14 @@
 			<index>22</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>23</index>
 			<characteristic>
 				<name>state</name>
-				<value>2</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>

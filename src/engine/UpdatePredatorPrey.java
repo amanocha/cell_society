@@ -8,10 +8,12 @@ import structures.Grid;
 
 public class UpdatePredatorPrey extends Update {
 	private Grid grid;
+	private int energy;
 	
 	public UpdatePredatorPrey(Grid newGrid) {
 		super(newGrid);
 		grid = newGrid;
+		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();
 	}
 	
 	public Cell move(Cell cell, boolean reproduce) {
@@ -84,8 +86,7 @@ public class UpdatePredatorPrey extends Update {
 	
 	public void reproduce(Cell cell1, Cell cell2) {
 		cell1.setNextState(cell2.getNextState());
-		//TODO: set energy to MetaData 
-		((Animal)cell1).setEnergy(10);
+		((Animal)cell1).setEnergy(energy);
 		//System.out.println(cell1.getNumber() + " state = " + cell1.getNextState() + " gave birth to " + cell2.getNumber() + " state = " + cell2.getNextState());
 		((Animal)cell1).setTime(-1);
 		((Animal)cell2).setTime(-1);

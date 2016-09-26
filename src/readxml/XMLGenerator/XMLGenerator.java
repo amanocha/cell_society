@@ -10,6 +10,7 @@ public class XMLGenerator {
 		Map<String, String> globalMap = new HashMap<String, String>();
 		globalMap.put("simulation", "segregation");
 		globalMap.put("probCatch", "0.25");
+		globalMap.put("satisfactionRate", "0.30");
 		globalMap.put("energy", "10");
 		globalMap.put("fishTime", "5");
 		globalMap.put("sharkTime", "5");

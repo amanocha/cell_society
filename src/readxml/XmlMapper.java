@@ -28,6 +28,7 @@ import structures.Cell;
 import structures.FireCell;
 import structures.Grid;
 import structures.MetaData;
+import structures.SegregationCell;
 
 public class XmlMapper {
 
@@ -118,6 +119,8 @@ public class XmlMapper {
 				newCell = new Animal(squareIndex, sqCharValue, Integer.parseInt(globalsMap.get("energy")), Integer.parseInt(globalsMap.get("fishTime")), Integer.parseInt(globalsMap.get("sharkTime")));
 			} else if (globalsMap.get("simulation").equals("fire")) {
 				newCell = new FireCell(squareIndex, sqCharValue, Double.parseDouble(globalsMap.get("probCatch")));
+			} else if (globalsMap.get("simulation").equals("segregation")) {
+				newCell = new SegregationCell(squareIndex, sqCharValue, Double.parseDouble(globalsMap.get("satisfactionRate")));
 			} else  {
 				newCell = new Cell(squareIndex, sqCharValue);
 			}
@@ -138,7 +141,6 @@ public class XmlMapper {
 		}
 		myGrid = new Grid(cells, 5, 5, myMeta);
 		myMeta.setShape(shape);
-		myMeta.setEnergy(Integer.parseInt(globalsMap.get("energy")));
 		myMeta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		myLoop = new Loop(myMeta, myGrid);
 	}
