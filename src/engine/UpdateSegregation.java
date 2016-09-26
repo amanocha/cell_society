@@ -11,8 +11,9 @@ public class UpdateSegregation extends Update {
 	private double satisfaction;
 	private ArrayList<Cell> emptyCells;
 	
-	public UpdateSegregation(Grid newGrid) {
+	public UpdateSegregation(Grid newGrid, double satisfaction) {
 		super(newGrid);
+		this.satisfaction = satisfaction;
 		grid = newGrid;
 		emptyCells = new ArrayList<Cell>();
 		for(Cell cell : grid.getCellList()) {
