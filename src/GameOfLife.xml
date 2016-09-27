@@ -1,18 +1,28 @@
-<!-- 25 cells, binary state, game of life -->
-
 <file>
 	<global>
 		<chars>
-			<name>simulation_name</name>
-			<value>game_of_life</value>
-		</chars>
-		<chars>
-			<name>author</name>
-			<value>john_conway</value>
+			<name>fishTime</name>
+			<value>5</value>
 		</chars>
 		<chars>
 			<name>shape</name>
 			<value>square</value>
+		</chars>
+		<chars>
+			<name>probCatch</name>
+			<value>0.25</value>
+		</chars>
+		<chars>
+			<name>simulation</name>
+			<value>game of life</value>
+		</chars>
+		<chars>
+			<name>sharkTime</name>
+			<value>5</value>
+		</chars>
+		<chars>
+			<name>energy</name>
+			<value>10</value>
 		</chars>
 	</global>
 	<index>25</index>
@@ -28,35 +38,35 @@
 			<index>1</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>2</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>3</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>4</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>5</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
@@ -77,14 +87,14 @@
 			<index>8</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>9</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -98,21 +108,21 @@
 			<index>11</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>12</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>13</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -126,28 +136,28 @@
 			<index>15</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>16</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>17</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>18</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
@@ -161,35 +171,35 @@
 			<index>20</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>21</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>22</index>
 			<characteristic>
 				<name>state</name>
-				<value>0</value>
+				<value>1</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>23</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 		<square>
 			<index>24</index>
 			<characteristic>
 				<name>state</name>
-				<value>1</value>
+				<value>0</value>
 			</characteristic>
 		</square>
 	</squares>

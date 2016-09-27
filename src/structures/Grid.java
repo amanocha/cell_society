@@ -1,10 +1,7 @@
 package structures;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Grid implements Iterable<Cell>{
 	
@@ -12,21 +9,13 @@ public class Grid implements Iterable<Cell>{
 	private int rows;
 	private int columns;
 	private String cellShape;
-	Map<String, String> globalsMap;
 	
-	public Grid() {
-		
-	}
 	
-	public Grid(List<Cell> cellList, int rows, int columns, Map<String, String> globalsMap) {
-		this.cellList = new ArrayList<Cell>();
-		this.cellList.addAll(cellList);
+	public Grid(List<Cell> cellList, int rows, int columns, MetaData meta) {
+		this.cellList = cellList;
 		this.rows = rows;
 		this.columns = columns;
-		this.globalsMap = new HashMap<String, String>();
-		for (String str : globalsMap.keySet()) {
-			this.globalsMap.put(str, globalsMap.get(str));
-		}
+		this.cellShape = meta.getShape();
 	}
 	
 	public int getNumCells() {
@@ -75,9 +64,9 @@ public class Grid implements Iterable<Cell>{
 		return cellShape;
 	}
 	
-	public Map<String, String> getGlobalsMap() {
-		return globalsMap;
-	}
+	//public Map<String, String> getGlobalsMap() {
+		//return globalsMap;
+	//}
 
 	/*****SETTERS*****/
 	
@@ -97,8 +86,9 @@ public class Grid implements Iterable<Cell>{
 		this.cellShape = cellShape;
 	}
 	
-	public String getNameOfSimulation() {
-		return globalsMap.get("simulation");
-	}
+	
+	//public String getNameOfSimulation() {
+		//return globalsMap.get("simulation");
+	//}
 	
 }
