@@ -56,18 +56,10 @@ public class Loop {
 	}
 
 	private void step() {
-			root.getChildren().remove(mySimulationPane.getStackPane());
-			update.determineUpdates();
-			update.updateCells();
-			root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
-			System.out.println("draw grid");
-			int count = 0;
-			for(int i = 0; i < grid.getRows(); i++) {
-				for (int j = 0; j < grid.getColumns(); j++) {
-					System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
-					count++;
-				}
-			}
+		root.getChildren().remove(mySimulationPane.getStackPane());
+		update.determineUpdates();
+		update.updateCells();
+		root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
 	}
 	
 	public GUISimulation getSimulationGUI() {

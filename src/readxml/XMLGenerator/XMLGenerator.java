@@ -1,5 +1,8 @@
 package readxml.XMLGenerator;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -8,14 +11,16 @@ public class XMLGenerator {
 	public static void main(String[] args) {
 		XMLGenerator x = new XMLGenerator();
 		Map<String, String> globalMap = new HashMap<String, String>();
-		globalMap.put("simulation", "predator prey");
+		globalMap.put("simulation", "segregation");
 		globalMap.put("probCatch", "0.25");
 		globalMap.put("satisfactionRate", "0.30");
 		globalMap.put("energy", "10");
 		globalMap.put("fishTime", "5");
 		globalMap.put("sharkTime", "5");
+
 		globalMap.put("shape", "square");
-		int index = 25; //the only parameter that needs to be changed when changing grid size
+
+		int index = 100; //the only parameter that needs to be changed when changing grid size
 		int maxStateValue = 3;
 		System.out.println(x.createXML(globalMap, index, maxStateValue));
 	}
@@ -53,7 +58,23 @@ public class XMLGenerator {
 		
 		// EOF
 		xml.append("</file>");
-		return xml.toString();
+		String xmlString = xml.toString();
+		generateFile(xmlString, globalMap, index);
+		return xmlString;
+	}
+	public void generateFile(String text, Map<String, String> globalMap, int index) {
+		String simulationName = globalMap.get("simulation");
+		String fileName = simulationName + "_" + index + ".xml";
+		PrintWriter writer;
+		try {
+			writer = new PrintWriter(fileName, "UTF-8");
+			writer.println(text);
+			writer.close();
+		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	public String generateSquareWithRandomState(int maxStateValue, int index) {
 		StringBuilder square = new StringBuilder();
