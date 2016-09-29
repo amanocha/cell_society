@@ -72,12 +72,7 @@ public class GUIGenerator {
 		main.setY(myScene.getHeight() * .8);
 		return (Button) main.getControl();
 	}
-	
-	private GeneralButton generateMainMenuButton() {
-		GeneralButton main = new GeneralButton(myResource.getString("MainMenu"));
-		main.setStringAction(e -> myNav.makeScreen(Menu.MAIN));
-		return main;
-	}
+
 
 	public Pane generateXMLScreen() {
 		Pane grid = myPane.getXMLMenuPane();

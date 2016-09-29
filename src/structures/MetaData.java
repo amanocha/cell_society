@@ -17,6 +17,7 @@ public class MetaData {
 	public String Shape; 
 	public Update myUpdate;
 	private AbstractDraw mySimulation;
+	private String myFile;
 	
 
 	public void setSimulationName(String name, Grid grid) {
@@ -37,6 +38,14 @@ public class MetaData {
 			myUpdate = new UpdateSegregation(grid);
 			mySimulation = new SegregationSimulation();
 		}
+	}
+	
+	public String getFileName() {
+		return myFile;
+	}
+	
+	public void setFileName(String file) {
+		myFile = file;
 	}
 	
 	public AbstractDraw getSimulation() {

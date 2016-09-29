@@ -19,13 +19,13 @@ public class GUISimulation {
 	
 	private StackPane stack;
 	private Simulation mySimulation;
-	private TilePane animation;
+	private Pane animation;
 	private Scene myScene;
 	private Timeline engine;
 	
 	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
-		mySimulation = new Simulation(info);
+		mySimulation = new TriangleSimulation(info);
 		stack = new StackPane();
 		this.engine = animation;
 	}
@@ -41,11 +41,8 @@ public class GUISimulation {
 	    double other = myScene.getHeight() * .1;
 	    int width = (int) Math.round((myScene.getWidth() * .5 - other));
 	    int height = (int) Math.round((myScene.getHeight() * .8));
-	    animation = mySimulation.drawGrid(grid, width, height);
+	    animation = ((TriangleSimulation) mySimulation).drawGrid(grid, width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
-		animation.setTileAlignment(Pos.CENTER);
-		animation.setHgap(2);
-		animation.setVgap(2);
         stack.getChildren().add(animation);
         stack.setMouseTransparent(true);
 		return stack;
