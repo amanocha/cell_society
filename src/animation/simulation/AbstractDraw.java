@@ -29,13 +29,20 @@ public abstract class AbstractDraw {
 		return rec;
 	}
 	
-	public Polygon fillGridTriangle(Cell current, double screenwid, double screenheight, int wcount, int vcount, double width, double height) {
+	public Polygon fillGridTriangle(Cell current, double screenwid, double screenheight, int wcount, int vcount, double dim, int row) {
 		Polygon triangle = new Polygon();
-		System.out.println((screenwid - wcount * width));
-		triangle.getPoints().setAll(new Double[] {
-		screenwid - wcount * width, screenwid - vcount * width,
-		screenwid - (wcount - 1) * width, screenwid - vcount * width,
-		screenwid - (wcount - .5) * width, screenwid - (vcount - 1) * width });
+		System.out.println((screenwid - wcount * dim));
+		if (row % 2 == 0) {
+			triangle.getPoints().setAll(new Double[] {
+					screenwid - (wcount + .5) * dim, screenwid - (vcount - 1) * dim,
+					screenwid - (wcount - .5) * dim, screenwid - (vcount - 1) * dim,
+					screenwid - (wcount) * dim, screenwid - (vcount) * dim });
+		} else {
+			triangle.getPoints().setAll(new Double[] {
+					screenwid - wcount * dim, screenwid - vcount * dim,
+					screenwid - (wcount - 1) * dim, screenwid - vcount * dim,
+					screenwid - (wcount - .5) * dim, screenwid - (vcount - 1) * dim });
+		}
 		triangle.setFill(getColor(current.getCurrentState()));
 		return triangle;
 	}

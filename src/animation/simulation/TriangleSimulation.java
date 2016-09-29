@@ -20,17 +20,20 @@ public class TriangleSimulation extends Simulation {
 	public Pane drawGrid(Grid grid, int w, int h) {
 		Pane screen = setUpScreen(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
-		int width = (int) w / (grid.getColumns());
-		int height = (int) h / (grid.getRows());
+		int dimension = (int) w / (grid.getColumns());
 		int wcount = grid.getColumns();
 		int vcount = grid.getRows();
+		int row = 1;
 		while(itr.hasNext()) {
 			Cell current = itr.next();
-			screen.getChildren().add(sim.fillGridTriangle(current, w, h, wcount, vcount, width, height));
+			screen.getChildren().add(sim.fillGridTriangle(current, w, h, wcount, vcount, dimension, row));
 			wcount--;
 			if (wcount % grid.getColumns() == 0) {
-				vcount--;
 				wcount = grid.getColumns();
+				row++;
+				if (row % 2 != 0) {
+					vcount--;
+				}
 			}
 		}
 		return screen;
