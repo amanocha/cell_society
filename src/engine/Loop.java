@@ -39,7 +39,7 @@ public class Loop {
 	}
 
 	public void init() {
-		root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+		root.getChildren().add(mySimulationPane.generateSimulationScreen());
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -50,7 +50,7 @@ public class Loop {
 			root.getChildren().remove(mySimulationPane.getStackPane());
 			update.determineUpdates();
 			update.updateCells();
-			root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+			root.getChildren().add(mySimulationPane.generateSimulationScreen());
 			//System.out.println("draw grid");
 			int count = 0;
 			for(int i = 0; i < grid.getRows(); i++) {
@@ -60,11 +60,11 @@ public class Loop {
 				}
 				//System.out.print();
 			}
-			System.out.println();
+			//System.out.println();
 		root.getChildren().remove(mySimulationPane.getStackPane());
 		update.determineUpdates();
 		update.updateCells();
-		root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+		root.getChildren().add(mySimulationPane.generateSimulationScreen());
 		//root.getChildren().add(mySimulationPane.generatSimulationChart());
 	}
 	

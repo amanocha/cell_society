@@ -1,7 +1,10 @@
 package structures;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+
 
 public class Grid implements Iterable<Cell>{
 	
@@ -14,7 +17,8 @@ public class Grid implements Iterable<Cell>{
 	
 	public Grid(List<Cell> cellList, int rows, int columns, MetaData meta) {
 		this.cellList = cellList;
-		this.initialCellList = cellList;
+		this.initialCellList = new ArrayList<Cell>(cellList.size()); 
+		initialCellList.addAll(cellList);
 		this.rows = rows;
 		this.columns = columns;
 		this.cellShape = meta.getShape();
@@ -26,6 +30,16 @@ public class Grid implements Iterable<Cell>{
 	
 	public void reset() {
 		this.cellList = this.initialCellList;
+		System.out.println("draw grid");
+		int count = 0;
+		for(int i = 0; i < this.getRows(); i++) {
+			for (int j = 0; j < this.getColumns(); j++) {
+				System.out.print(initialCellList.get(count).getCurrentState() + " ");
+				count++;
+			}
+			System.out.println();
+		}
+		//System.out.println();
 	}
 
 	@Override

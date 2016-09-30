@@ -24,7 +24,6 @@ public class Navigator {
 	private double width;
 	private double height;
 	private XmlMapper myInfo;
-	private GUIGenerator myGUI;
 	private MainMenu mainMenu;
 	private XmlMenu xmlMenu;
 	private SimulationMenu simulationMenu;
@@ -35,7 +34,7 @@ public class Navigator {
 	
 	public Navigator(Stage s, double w, double h) {
 		myInfo = new XmlMapper();
-		myInfo.mapXmlToGrid("Fire.xml");
+		myInfo.mapXml("GameOfLife.xml");
 		myResource = PropertyResourceBundle.getBundle(LANGUAGE);
 		myStage = s;
 		this.width = w;

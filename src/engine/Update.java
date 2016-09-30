@@ -6,9 +6,9 @@ import structures.Grid;
 
 public abstract class Update {
 	private Grid grid;
-	private Neighbors neighborsObject;
+	private Neighbor neighborsObject;
 	
-	public Update(Grid grid, Neighbors neighbors) {
+	public Update(Grid grid, Neighbor neighbors) {
 		this.grid = grid;
 		this.neighborsObject = neighbors;
 	}

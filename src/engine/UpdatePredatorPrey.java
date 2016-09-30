@@ -12,7 +12,7 @@ public class UpdatePredatorPrey extends Update {
 	private int fishTime;
 	private int sharkTime;
 	
-	public UpdatePredatorPrey(Grid newGrid, Neighbors newNeighbors) {
+	public UpdatePredatorPrey(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
 		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();

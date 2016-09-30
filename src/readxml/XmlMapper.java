@@ -131,10 +131,11 @@ public class XmlMapper {
 		
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		
-		String shape = globalsMap.get(prop.getProperty("shape"));
+
+		String shape = globalsMap.get(prop.getProperty("cellShape"));
 		meta.setCellShape(shape, myGrid);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
-		
+		meta.setFileName(filename);	
 		myLoop = new Loop(meta, myGrid);
 	}
 	
@@ -159,6 +160,7 @@ public class XmlMapper {
 				Integer.parseInt(globalsMap.get(prop.getProperty("fishReproductionTime"))), 
 				Integer.parseInt(globalsMap.get(prop.getProperty("sharkReproductionTime")))
 				);
+
 	}
 	
 	public Grid getGrid() {

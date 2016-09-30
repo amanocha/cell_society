@@ -22,7 +22,7 @@ public class SquareNeighbors extends Neighbor implements NeighborInterface{
 		int cellNumber = cell.getNumber();
 		int north, east, south, west;
 		
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
+		List<Cell> neighbors = new ArrayList<Cell>();
 		
 		if (cellNumber >= getGridWidth()) {
 			north = cellNumber - getGridWidth();
@@ -56,7 +56,7 @@ public class SquareNeighbors extends Neighbor implements NeighborInterface{
 	public List<Cell> getDiagonalNeighbors(Cell cell) {
 		int cellNumber = cell.getNumber();
 		int northEast, northWest, southEast, southWest;
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
+		List<Cell> neighbors = new ArrayList<Cell>();
 		
 		if ((cellNumber >= getGridWidth()) && (cellNumber % getGridWidth() != (getGridWidth()-1))) {
 			northEast = cellNumber - getGridWidth() + 1;
@@ -83,7 +83,36 @@ public class SquareNeighbors extends Neighbor implements NeighborInterface{
 
 	@Override
 	public List<Cell> getToroidalImmediateNeighbors(Cell cell) {
-		
+//		int cellNumber = cell.getNumber();
+//		int north, east, south, west;
+//		
+//		List<Cell> neighbors = new ArrayList<Cell>();
+//		
+//		// Find north neighbor
+//		if (inTopRow(cellNumber)) {
+//			north = 
+//			neighbors.add(north);
+//		} else {
+//			
+//		}
+//		// Find south neighbor
+//		if (inBottomRow(cellNumber)) {
+//			
+//		} else {
+//			
+//		}
+//		// Find east neighbor
+//		if (inLeftColumn(cellNumber)) {
+//			
+//		} else {
+//			
+//		}
+//		// Find west neighbor
+//		if (inRightColumn(cellNumber)) {
+//			
+//		} else {
+//			
+//		}
 		return null;
 	}
 

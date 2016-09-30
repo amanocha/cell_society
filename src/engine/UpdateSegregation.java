@@ -8,11 +8,11 @@ import structures.Grid;
 
 public class UpdateSegregation extends Update {
 	private Grid grid;
-	private Neighbors neighborsObject;
+	private Neighbor neighborsObject;
 	private ArrayList<Cell> emptyCells;
 	private double satisfaction;
 	
-	public UpdateSegregation(Grid newGrid, Neighbors newNeighbors) {
+	public UpdateSegregation(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
 		neighborsObject = newNeighbors;

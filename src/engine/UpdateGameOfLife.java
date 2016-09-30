@@ -6,9 +6,9 @@ import structures.Grid;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
-	private Neighbors neighborsObject;
+	private Neighbor neighborsObject;
 	
-	public UpdateGameOfLife(Grid newGrid, Neighbors newNeighbors) {
+	public UpdateGameOfLife(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
 		neighborsObject = newNeighbors;
