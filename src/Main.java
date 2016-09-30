@@ -1,4 +1,4 @@
-import animation.menu.Navigation;
+import animation.menu.Navigator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -13,7 +13,7 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage s) {
-    	Navigation nav = new Navigation(s, WIDTH, HEIGHT);
+    	Navigator nav = new Navigator(s, WIDTH, HEIGHT);
         s.setTitle(TITLE);
         s.setResizable(false);
         nav.init();

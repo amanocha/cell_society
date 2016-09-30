@@ -61,6 +61,7 @@ public class Loop {
 		update.determineUpdates();
 		update.updateCells();
 		root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+		//root.getChildren().add(mySimulationPane.generatSimulationChart());
 	}
 	
 	public GUISimulation getSimulationGUI() {

@@ -1,16 +1,16 @@
 package animation.simulation;
 
-import animation.controls.GeneralBox;
-import animation.controls.GeneralButton;
-import animation.controls.GeneralBox.Orientation;
-import animation.controls.GeneralButton.Function;
+import animation.controls.button.ButtonGo;
+import animation.controls.button.ButtonPause;
+import animation.controls.button.ButtonStop;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
 import readxml.XmlMapper;
 import structures.Grid;
 
@@ -49,21 +49,29 @@ public class GUISimulation {
 	}
 	
 	public Pane generateSimulationScreenButton() {
-		GeneralButton play = new GeneralButton(Function.START);
-		play.setStringAction(e -> engine.play());
-		GeneralButton pause = new GeneralButton(Function.PAUSE);
-		pause.setStringAction(e -> stopAnimation());
-		GeneralButton stop = new GeneralButton(Function.STOP);
-		stop.setStringAction(e -> {
+		Button play = (new ButtonGo()).getButton();
+		play.setOnAction(e -> engine.play());
+		Button pause = (new ButtonPause()).getButton();
+		pause.setOnAction(e -> stopAnimation());
+		Button stop = (new ButtonStop()).getButton();
+		stop.setOnAction(e -> {
 			stopAnimation();
 			engine.playFromStart();
 		});
-		GeneralBox hbox = new GeneralBox((myScene.getWidth() * .40) / 3, Orientation.HORIZANTAL);
-		hbox.addAll(play.getControl(), pause.getControl(), stop.getControl());
-		hbox.setX(myScene.getWidth() * .08);
-		hbox.setY(myScene.getHeight() * .90);
-		return (Pane) hbox.getControl();
+		HBox hbox = new HBox((myScene.getWidth() * .40) / 3);
+		hbox.getChildren().addAll(play, pause, stop);
+		hbox.setLayoutX(myScene.getWidth() * .08);
+		hbox.setLayoutY(myScene.getHeight() * .90);
+		return hbox;
 	}
+	
+	/*public LineChart generatSimulationChart(double x, double y) {
+		XAxis x = new XAxis();
+		YAxis y = new YAxis();
+		LineChart chart = new LineChart(null, null); 
+		chart.addPoint(x, y);
+		return (LineChart) chart.getControl();
+	}*/
 	
 	public void stopAnimation() {
 		engine.stop();
