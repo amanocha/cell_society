@@ -1,6 +1,8 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import structures.Cell;
 import structures.Grid;
 
@@ -17,10 +19,8 @@ public abstract class Update {
 	 * @param cell - the given cell
 	 * @return ArrayList of all neighbors
 	 */
-	public ArrayList<Cell> getNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		neighbors.addAll(neighborsObject.getImmediateNeighbors(cell));
-		return neighbors;
+	public List<Cell> getNeighbors(Cell cell) {
+		return neighborsObject.getImmediateNeighbors(cell);
 	}
 	
 	/**

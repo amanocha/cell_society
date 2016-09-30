@@ -1,6 +1,7 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import structures.Animal;
 import structures.Cell;
@@ -43,8 +44,8 @@ public class UpdatePredatorPrey extends Update {
 	}
 	
 	public Cell eat(Animal shark, boolean reproduce) {
-		ArrayList<Cell> neighbors = getNeighbors(shark);
-		ArrayList<Cell> fishCells = new ArrayList<Cell>();
+		List<Cell> neighbors = getNeighbors(shark);
+		List<Cell> fishCells = new ArrayList<Cell>();
 		for(Cell neighbor : neighbors) {
 			if (neighbor.getCurrentState() == 1 && neighbor.getNextState() == 1) {
 				fishCells.add(neighbor);
@@ -67,10 +68,10 @@ public class UpdatePredatorPrey extends Update {
 		return move(shark, reproduce);
 	}
 	
-	public int selectCell(ArrayList<Cell> cells) {
+	public int selectCell(List<Cell> fishCells) {
 		Random random = new Random();
-		int neighborCellsIndex = random.nextInt(cells.size());
-		int newIndex = cells.get(neighborCellsIndex).getNumber(); //new cell number to indicate new location
+		int neighborCellsIndex = random.nextInt(fishCells.size());
+		int newIndex = fishCells.get(neighborCellsIndex).getNumber(); //new cell number to indicate new location
 		return newIndex;
 	}
 	
