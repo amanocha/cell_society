@@ -1,27 +1,29 @@
 package readxml.XMLGenerator;
 
+import java.io.File;
+
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Map.Entry;
 
 public class XMLGenerator {
-	public static void main(String[] args) {
-		XMLGenerator x = new XMLGenerator();
-		Map<String, String> globalMap = new HashMap<String, String>();
-		globalMap.put("simulation", "game of life");
-		globalMap.put("probCatch", "0.25");
-		globalMap.put("satisfactionRate", "0.30");
-		globalMap.put("energy", "10");
-		globalMap.put("fishTime", "1");
-		globalMap.put("sharkTime", "10");
-		globalMap.put("shape", "square");
-		int index = 900; //the only parameter that needs to be changed when changing grid size
-		int maxStateValue = 2;
-		System.out.println(x.createXML(globalMap, index, maxStateValue));
-	}
+//	public static void main(String[] args) {
+//		XMLGenerator x = new XMLGenerator();
+//		Map<String, String> globalMap = new HashMap<String, String>();
+//		globalMap.put("simulation", "game of life");
+//		globalMap.put("probCatch", "0.25");
+//		globalMap.put("satisfactionRate", "0.30");
+//		globalMap.put("energy", "10");
+//		globalMap.put("fishTime", "1");
+//		globalMap.put("sharkTime", "10");
+//		globalMap.put("shape", "square");
+//		int index = 900; //the only parameter that needs to be changed when changing grid size
+//		int maxStateValue = 2;
+//		System.out.println(x.createXML(globalMap, index, maxStateValue));
+//	}
 	public String createXML(Map<String, String> globalMap, int index, int maxStateValue) {
 		StringBuilder xml = new StringBuilder();
 		
@@ -29,18 +31,18 @@ public class XMLGenerator {
 		xml.append("<file>");
 		
 		// GENERATE XML FOR GLOBAL CHARACTERISTICS
-		xml.append("<global>");
+		xml.append("<globalCharacteristic>");
 		for (Entry<String, String> entry : globalMap.entrySet()) {
-			xml.append("<chars>");
-			xml.append("<name>");
+			xml.append("<globalCharacteristic>");
+			xml.append("<key>");
 			xml.append(entry.getKey());
-			xml.append("</name>");
+			xml.append("</key>");
 			xml.append("<value>");
 			xml.append(entry.getValue());
 			xml.append("</value>");
-			xml.append("</chars>");
+			xml.append("</globalCharacteristic>");
 		}
-		xml.append("</global>");
+		xml.append("</globalCharacteristic>");
 		
 		// GENERATE XML FOR INDEX (NUM CELLS)
 		xml.append("<index>");
@@ -48,11 +50,11 @@ public class XMLGenerator {
 		xml.append("</index>");
 		
 		// GENERATE XML FOR SQUARES/CELLS + STATES
-		xml.append("<squares>");
+		xml.append("<cells>");
 		for(int i = 0; i < index; i++) {
 			xml.append(generateSquareWithRandomState(maxStateValue, i));
 		}
-		xml.append("</squares>");
+		xml.append("</cells>");
 		
 		// EOF
 		xml.append("</file>");
@@ -61,14 +63,21 @@ public class XMLGenerator {
 		return xmlString;
 	}
 	public void generateFile(String text, Map<String, String> globalMap, int index) {
-		String simulationName = globalMap.get("simulation");
+		Properties prop = new Properties();
+		try {
+			prop.load(getClass().getClassLoader().getResourceAsStream("simulation.properties"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		String simulationName = globalMap.get(prop.getProperty("simulation"));
 		String fileName = simulationName + "_" + index + ".xml";
+		File file = new File("data/xml/"+fileName);
 		PrintWriter writer;
 		try {
-			writer = new PrintWriter(fileName, "UTF-8");
+			writer = new PrintWriter(file);
 			writer.println(text);
 			writer.close();
-		} catch (FileNotFoundException | UnsupportedEncodingException e) {
+		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -77,7 +86,7 @@ public class XMLGenerator {
 	public String generateSquareWithRandomState(int maxStateValue, int index) {
 		StringBuilder square = new StringBuilder();
 		int randomNum = (int)Math.floor(Math.random()*maxStateValue);
-		square.append("<square>");
+		square.append("<cell>");
 		
 		square.append("<index>");
 		square.append(index);
@@ -94,7 +103,7 @@ public class XMLGenerator {
 		square.append("</value>");
 		
 		square.append("</characteristic>");
-		square.append("</square>");
+		square.append("</cell>");
 		return square.toString();
 	}
 }
