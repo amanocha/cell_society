@@ -4,9 +4,9 @@ public class SegregationCell extends Cell {
 	
 	private double satisfaction;
 	
-	public SegregationCell(int num, int state, double sat) {
+	public SegregationCell(int num, int state, double satisfaction) {
 		super(num, state);
-		satisfaction = sat;
+		this.satisfaction = satisfaction;
 	}
 	
 	public double getSatisfaction() {

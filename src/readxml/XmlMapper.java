@@ -140,7 +140,7 @@ public class XmlMapper {
 			//System.out.println(key);
 		}
 		myGrid = new Grid(cells, 30, 30, myMeta);
-		myMeta.setShape(shape);
+		myMeta.setCellShape(shape, myGrid);
 		myMeta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		myLoop = new Loop(myMeta, myGrid);
 	}

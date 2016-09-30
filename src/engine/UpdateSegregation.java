@@ -8,25 +8,33 @@ import structures.Grid;
 
 public class UpdateSegregation extends Update {
 	private Grid grid;
+	private Neighbors neighborsObject;
 	private ArrayList<Cell> emptyCells;
+	private double satisfaction;
 	
-	public UpdateSegregation(Grid newGrid) {
-		super(newGrid);
+	public UpdateSegregation(Grid newGrid, Neighbors newNeighbors) {
+		super(newGrid, newNeighbors);
 		grid = newGrid;
+		neighborsObject = newNeighbors;
 		emptyCells = new ArrayList<Cell>();
 		for(Cell cell : grid.getCellList()) {
 			if (cell.getCurrentState() == 0) {
 				emptyCells.add(cell);
 			}
 		}
+		satisfaction = ((SegregationCell) newGrid.getCellList().get(0)).getSatisfaction();
+	}
+	
+	public ArrayList<Cell> getNeighbors(Cell cell) {
+		ArrayList<Cell> neighbors = super.getNeighbors(cell);
+		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
+		return neighbors;
 	}
 	
 	public boolean isSatisfied(Cell cell) {
-		ArrayList<Cell> neighbors = super.getImmediateNeighbors(cell);
-		neighbors.addAll(super.getDiagonalNeighbors(cell));
 		int numAgents = 0;
 		int same = 0;
-		for (Cell neighbor : neighbors) {
+		for (Cell neighbor : getNeighbors(cell)) {
 			if (neighbor.getCurrentState() != 0) {
 				numAgents++;
 				if (neighbor.getCurrentState() == cell.getCurrentState()) {
@@ -35,7 +43,7 @@ public class UpdateSegregation extends Update {
 			}
 		}
 		double ratio = (double)same/numAgents;
-		return (ratio >= ((SegregationCell) cell).getSatisfaction());
+		return (ratio >= satisfaction);
 	}
 	
 	public void move(Cell cell) {

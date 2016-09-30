@@ -8,8 +8,8 @@ import structures.FireCell;
 public class UpdateFire extends Update {
 	private Grid grid;
 	
-	public UpdateFire(Grid newGrid) {
-		super(newGrid);
+	public UpdateFire(Grid newGrid, Neighbors newNeighbors) {
+		super(newGrid, newNeighbors);
 		grid = newGrid;
 	}
 	
@@ -24,7 +24,7 @@ public class UpdateFire extends Update {
 		for(Cell cell : grid.getCellList()) {
 			boolean checkProb = false;
 			if(cell.getCurrentState() == 1) { 
-				for(Cell neighbor : super.getImmediateNeighbors(cell)) {
+				for(Cell neighbor : getNeighbors(cell)) {
 					if(neighbor.getCurrentState() == 2) {
 						checkProb = true;
 						break;

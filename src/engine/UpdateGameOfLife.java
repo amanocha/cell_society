@@ -6,10 +6,18 @@ import structures.Grid;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
+	private Neighbors neighborsObject;
 	
-	public UpdateGameOfLife(Grid newGrid) {
-		super(newGrid);
+	public UpdateGameOfLife(Grid newGrid, Neighbors newNeighbors) {
+		super(newGrid, newNeighbors);
 		grid = newGrid;
+		neighborsObject = newNeighbors;
+	}
+	
+	public ArrayList<Cell> getNeighbors(Cell cell) {
+		ArrayList<Cell> neighbors = super.getNeighbors(cell);
+		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
+		return neighbors;
 	}
 	
 	/**
@@ -21,10 +29,8 @@ public class UpdateGameOfLife extends Update {
 	@Override
 	public void determineUpdates() {
 		for(Cell cell : grid.getCellList()) {
-			ArrayList<Cell> neighbors = super.getImmediateNeighbors(cell);
-			neighbors.addAll(super.getDiagonalNeighbors(cell));
 			int numLive = 0;
-			for(Cell neighbor : neighbors) {
+			for(Cell neighbor : getNeighbors(cell)) {
 				if(neighbor.getCurrentState() == 1) {
 					numLive++; //count number of live neighbors
 				}

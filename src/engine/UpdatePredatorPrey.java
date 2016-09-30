@@ -12,8 +12,8 @@ public class UpdatePredatorPrey extends Update {
 	private int fishTime;
 	private int sharkTime;
 	
-	public UpdatePredatorPrey(Grid newGrid) {
-		super(newGrid);
+	public UpdatePredatorPrey(Grid newGrid, Neighbors newNeighbors) {
+		super(newGrid, newNeighbors);
 		grid = newGrid;
 		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();
 		fishTime = ((Animal) newGrid.getCellList().get(0)).getFishTime();
@@ -21,9 +21,8 @@ public class UpdatePredatorPrey extends Update {
 	}
 	
 	public Cell move(Cell cell, boolean reproduce) {
-		ArrayList<Cell> neighbors = super.getImmediateNeighbors(cell);
 		ArrayList<Cell> emptyCells = new ArrayList<Cell>();
-		for(Cell neighbor : neighbors) {
+		for(Cell neighbor : getNeighbors(cell)) {
 			if(neighbor.getCurrentState() == 0 && neighbor.getNextState() == 0) {
 				emptyCells.add(neighbor);
 			}
@@ -44,7 +43,7 @@ public class UpdatePredatorPrey extends Update {
 	}
 	
 	public Cell eat(Animal shark, boolean reproduce) {
-		ArrayList<Cell> neighbors = super.getImmediateNeighbors(shark);
+		ArrayList<Cell> neighbors = getNeighbors(shark);
 		ArrayList<Cell> fishCells = new ArrayList<Cell>();
 		for(Cell neighbor : neighbors) {
 			if (neighbor.getCurrentState() == 1 && neighbor.getNextState() == 1) {
@@ -119,8 +118,6 @@ public class UpdatePredatorPrey extends Update {
 	
 	public void determineFishUpdates(ArrayList<Cell> fishes) {
 		for(Cell fish : fishes) {
-			//System.out.println(fish.getNumber() + ": " + ((Animal)fish).getTime());
-			//System.out.println("MOVING FISH " + fish.getNumber());
 			boolean reproduce = ((Animal)fish).getTime() >= fishTime;
 			fish = move(fish, reproduce);
 		}
@@ -128,13 +125,11 @@ public class UpdatePredatorPrey extends Update {
 	
 	public void determineSharkUpdates(ArrayList<Cell> sharks) {
 		for(Cell shark : sharks) {
-			//System.out.print(shark.getNumber() + ": " + ((Animal)shark).getTime() + ", ");
 			boolean reproduce = ((Animal)shark).getTime() >= sharkTime;
 			shark = eat((Animal)shark, reproduce);
 			if (((Animal)shark).getEnergy() == 0) {
 				shark.setNextState(0);
 			}
-			System.out.println(shark.getNumber() + ": " + ((Animal)shark).getEnergy());
 		}
 	}
 	
@@ -153,11 +148,6 @@ public class UpdatePredatorPrey extends Update {
 	 */
 	@Override
 	public void updateCells() {
-		/*for(Cell cell : grid.getCellList()) {
-			cell.setPreviousState(cell.getCurrentState());
-			cell.setCurrentState(cell.getNextState());
-			Animal animal = (Animal) cell; 
-			animal.setTime(animal.getTime() + 1);
-		}*/
+		// there are separate methods for updating fish and sharks individually, so this method is blank
 	}
 }

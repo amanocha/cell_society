@@ -6,6 +6,7 @@ import java.util.List;
 public class Grid implements Iterable<Cell>{
 	
 	private List<Cell> cellList;
+	private List<Cell> initialCellList;
 	private int rows;
 	private int columns;
 	private String cellShape;
@@ -13,6 +14,7 @@ public class Grid implements Iterable<Cell>{
 	
 	public Grid(List<Cell> cellList, int rows, int columns, MetaData meta) {
 		this.cellList = cellList;
+		this.initialCellList = cellList;
 		this.rows = rows;
 		this.columns = columns;
 		this.cellShape = meta.getShape();
@@ -20,6 +22,10 @@ public class Grid implements Iterable<Cell>{
 	
 	public int getNumCells() {
 		return cellList.size();
+	}
+	
+	public void reset() {
+		this.cellList = this.initialCellList;
 	}
 
 	@Override
@@ -51,6 +57,10 @@ public class Grid implements Iterable<Cell>{
 	public List<Cell> getCellList() {
 		return cellList;
 	}
+	
+	public List<Cell> getInitialCellList() {
+		return initialCellList;
+	}
 
 	public int getRows() {
 		return rows;
@@ -63,15 +73,15 @@ public class Grid implements Iterable<Cell>{
 	public String getCellShape() {
 		return cellShape;
 	}
-	
-	//public Map<String, String> getGlobalsMap() {
-		//return globalsMap;
-	//}
 
 	/*****SETTERS*****/
 	
 	public void setCellList(List<Cell> cellList) {
 		this.cellList = cellList;
+	}
+	
+	public void setInitialCellList(List<Cell> cellList) {
+		this.initialCellList = cellList;
 	}
 	
 	public void setRows(int rows) {
@@ -85,10 +95,4 @@ public class Grid implements Iterable<Cell>{
 	public void setCellShape(String cellShape) {
 		this.cellShape = cellShape;
 	}
-	
-	
-	//public String getNameOfSimulation() {
-		//return globalsMap.get("simulation");
-	//}
-	
 }
