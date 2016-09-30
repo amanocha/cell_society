@@ -31,4 +31,21 @@ public class Neighbor {
 	public int getGridWidth() {
 		return gridWidth;
 	}
+	
+	// only subclass needs this check
+	boolean inTopRow(int cellNumber) {
+		return cellNumber < getGridWidth();
+	}
+	
+	boolean inBottomRow(int cellNumber) {
+		return cellNumber >= (getGridSize()-getGridWidth());
+	}
+	
+	boolean inLeftColumn(int cellNumber) {
+		return (cellNumber % getGridWidth()) == 0;
+	}
+	
+	boolean inRightColumn(int cellNumber) {
+		return (cellNumber % getGridWidth()) == (getGridWidth()-1);
+	}
 }

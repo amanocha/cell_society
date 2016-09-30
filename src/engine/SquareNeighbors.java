@@ -83,37 +83,43 @@ public class SquareNeighbors extends Neighbor implements NeighborInterface{
 
 	@Override
 	public List<Cell> getToroidalImmediateNeighbors(Cell cell) {
-//		int cellNumber = cell.getNumber();
-//		int north, east, south, west;
-//		
-//		List<Cell> neighbors = new ArrayList<Cell>();
-//		
-//		// Find north neighbor
-//		if (inTopRow(cellNumber)) {
-//			north = 
-//			neighbors.add(north);
-//		} else {
-//			
-//		}
-//		// Find south neighbor
-//		if (inBottomRow(cellNumber)) {
-//			
-//		} else {
-//			
-//		}
-//		// Find east neighbor
-//		if (inLeftColumn(cellNumber)) {
-//			
-//		} else {
-//			
-//		}
-//		// Find west neighbor
-//		if (inRightColumn(cellNumber)) {
-//			
-//		} else {
-//			
-//		}
-		return null;
+		int cellNumber = cell.getNumber();
+		int north, east, south, west;
+		
+		List<Cell> neighbors = new ArrayList<Cell>();
+		
+		// Find north neighbor
+		if (inTopRow(cellNumber)) {
+			north = (getGridSize() - 1) + cellNumber - getGridWidth();
+		} else {
+			north = cellNumber - getGridWidth();
+		}
+		
+		// Find south neighbor
+		if (inBottomRow(cellNumber)) {
+			south = cellNumber % getGridWidth();
+		} else {
+			south = cellNumber + getGridWidth();
+		}
+		
+		// Find east neighbor
+		if (inLeftColumn(cellNumber)) {
+			east = cellNumber + getGridWidth() - 1;
+		} else {
+			east = cellNumber + 1;
+		}
+		
+		// Find west neighbor
+		if (inRightColumn(cellNumber)) {
+			west = cellNumber - getGridWidth() + 1;
+		} else {
+			west = cellNumber - 1;
+		}
+		neighbors.add(getCellList().get(north));
+		neighbors.add(getCellList().get(south));
+		neighbors.add(getCellList().get(east));
+		neighbors.add(getCellList().get(west));
+		return neighbors;
 	}
 
 	@Override
