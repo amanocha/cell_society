@@ -1,7 +1,8 @@
-package engine;
+package engine.update;
 
 import java.util.List;
 
+import engine.NeighborInterface;
 import structures.Cell;
 import structures.Grid;
 

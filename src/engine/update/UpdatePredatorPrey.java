@@ -1,8 +1,10 @@
-package engine;
+package engine.update;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import engine.NeighborInterface;
 import structures.Animal;
 import structures.Cell;
 import structures.Grid;

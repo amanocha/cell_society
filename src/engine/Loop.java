@@ -1,6 +1,7 @@
 package engine;
 
 import animation.simulation.GUISimulation;
+import engine.update.Update;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.scene.Group;

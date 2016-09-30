@@ -1,6 +1,7 @@
 package structures;
 
 import animation.simulation.color.CellColor;
+
 import animation.simulation.color.FireColor;
 import animation.simulation.color.GameOfLifeColor;
 import animation.simulation.color.PredatorPreyColor;
@@ -12,13 +13,12 @@ import animation.simulation.shape.TriangleGrid;
 import engine.SquareNeighbors;
 import engine.TriangleNeighbors;
 import engine.HexagonalNeighbors;
-import engine.Neighbor;
 import engine.NeighborInterface;
-import engine.Update;
-import engine.UpdateFire;
-import engine.UpdateGameOfLife;
-import engine.UpdatePredatorPrey;
-import engine.UpdateSegregation;
+import engine.update.Update;
+import engine.update.UpdateFire;
+import engine.update.UpdateGameOfLife;
+import engine.update.UpdatePredatorPrey;
+import engine.update.UpdateSegregation;
 
 public class MetaData {
 
