@@ -10,11 +10,9 @@ public abstract class GridShape {
 	
 
 	private Pane screen;
-	private CellColor color;
 	
 	
-	public GridShape(MetaData meta) {
-		color = meta.getColor();
+	public GridShape() {
 		this.screen = new Pane();
 	}
 
@@ -28,10 +26,8 @@ public abstract class GridShape {
 	public Pane getScreen() {
 		return screen;
 	}
+
 	
-	public CellColor getColorPicker() {
-		return color;
-	}
 
 }
 

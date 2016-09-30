@@ -5,6 +5,10 @@ import animation.simulation.color.FireColor;
 import animation.simulation.color.GameOfLifeColor;
 import animation.simulation.color.PredatorPreyColor;
 import animation.simulation.color.SegregationColor;
+import animation.simulation.shape.GridShape;
+import animation.simulation.shape.HexagonGrid;
+import animation.simulation.shape.SquareGrid;
+import animation.simulation.shape.TriangleGrid;
 import engine.Neighbors;
 import engine.SquareNeighbors;
 import engine.TriangleNeighbors;
@@ -24,17 +28,21 @@ public class MetaData {
 	private Update myUpdate;
 	private CellColor myColor;
 	private String myFile;
+	private GridShape myShape;
 
 	public void setCellShape(String name, Grid grid) {
 		this.shape = name;
 		if (shape.equals("square")) {
 			myNeighbors = new SquareNeighbors(grid);
+			myShape = new SquareGrid();
 		}
 		if (shape.equals("triangle")) {
 			myNeighbors = new TriangleNeighbors(grid);
+			myShape = new TriangleGrid();
 		}
 		if (shape.equals("hexagon")) {
 			myNeighbors = new HexagonalNeighbors(grid);
+			myShape = new HexagonGrid();
 		}
 	}
 	

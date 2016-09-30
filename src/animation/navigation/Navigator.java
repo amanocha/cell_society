@@ -24,7 +24,6 @@ public class Navigator {
 	private double width;
 	private double height;
 	private XmlMapper myInfo;
-	private GUIGenerator myGUI;
 	private MainMenu mainMenu;
 	private XmlMenu xmlMenu;
 	private SimulationMenu simulationMenu;
