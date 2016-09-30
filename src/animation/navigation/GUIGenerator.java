@@ -1,10 +1,6 @@
 package animation.navigation;
 
-import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
-
-import javax.swing.AbstractButton;
-
 import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
 import animation.controls.label.Message;
@@ -37,7 +33,6 @@ public class GUIGenerator {
 	private Scene myScene;
 	private ResourceBundle myResource;
 	private XmlMapper myInfo;
-	private Group root;
 	private Navigator myNav;
 	
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource, XmlMapper info) {
@@ -46,7 +41,6 @@ public class GUIGenerator {
 		myPane = new PaneGenerator(scene);
 		myResource = resource;
 		myInfo = info;
-		root = r;
 		myNav = new Navigator(scene, r, info);
 	}
 
@@ -57,7 +51,7 @@ public class GUIGenerator {
 		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .5);
 		button.setOnAction(e -> {
-			myInfo.getGrid().reset();
+			myInfo.mapXmlToGrid(myInfo.getMeta().getFileName());
 			myNav.createSimluationMenu();
 		});
 		grid.add(header, 1, 0);

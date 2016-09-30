@@ -4,6 +4,7 @@ import animation.controls.button.ButtonGo;
 import animation.controls.button.ButtonPause;
 import animation.controls.button.ButtonStop;
 import animation.simulation.shape.GridShape;
+import animation.simulation.shape.HexagonGrid;
 import animation.simulation.shape.TriangleGrid;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
@@ -15,6 +16,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import readxml.XmlMapper;
 import structures.Grid;
+import structures.MetaData;
 
 
 public class GUISimulation {
@@ -24,26 +26,28 @@ public class GUISimulation {
 	private Pane animation;
 	private Scene myScene;
 	private Timeline engine;
+	private XmlMapper myInfo;
 	
 	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
-		mySimulation = new TriangleGrid(info.getMeta());
+		mySimulation = new HexagonGrid(info.getMeta());
 		stack = new StackPane();
 		this.engine = animation;
+		myInfo = info;
 	}
 	
 	public Pane getStackPane() {
 		return stack;
 	}
 
-	public Pane generateSimulationScreen(Grid grid) {
+	public Pane generateSimulationScreen() {
 		stack.getChildren().remove(animation);
 		double left = myScene.getWidth() * .15;
 	    double top = myScene.getHeight() * .55;
 	    double other = myScene.getHeight() * .1;
 	    int width = (int) Math.round((myScene.getWidth() * .5 - other));
 	    int height = (int) Math.round((myScene.getHeight() * .8));
-	    animation = ((TriangleGrid) mySimulation).drawGrid(grid, width, height);
+	    animation = ((HexagonGrid) mySimulation).drawGrid(myInfo.getGrid(), width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
         stack.getChildren().add(animation);
         stack.setMouseTransparent(true);
@@ -57,8 +61,8 @@ public class GUISimulation {
 		pause.setOnAction(e -> stopAnimation());
 		Button stop = (new ButtonStop()).getButton();
 		stop.setOnAction(e -> {
-			stopAnimation();
-			engine.playFromStart();
+			myInfo.mapXmlToGrid(myInfo.getMeta().getFileName());
+			engine.play();
 		});
 		HBox hbox = new HBox((myScene.getWidth() * .40) / 3);
 		hbox.getChildren().addAll(play, pause, stop);

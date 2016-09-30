@@ -4,6 +4,7 @@ package animation.simulation.shape;
 
 import java.util.Iterator;
 
+import animation.simulation.color.CellColor;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
@@ -13,9 +14,16 @@ import structures.MetaData;
 
 public class TriangleGrid extends GridShape {
 	
+	private CellColor myColor;
+	
+	
+	public TriangleGrid() {
+		super();
+	}
 	
 	public TriangleGrid(MetaData meta) {
-		super(meta);
+		super();
+		myColor = meta.getColor();
 	}
 	
 	public Pane drawGrid(Grid grid, int w, int h) {
@@ -41,9 +49,8 @@ public class TriangleGrid extends GridShape {
 	}
 	
 
-	public Shape fillGrid(Cell current, double screenwid, double screenheight, int wcount, int vcount, double dim, int row) {
+	private Shape fillGrid(Cell current, double screenwid, double screenheight, int wcount, int vcount, double dim, int row) {
 		Polygon triangle = new Polygon();
-		System.out.println((screenwid - wcount * dim));
 		if (row % 2 == 0) {
 			triangle.getPoints().setAll(new Double[] {
 					screenwid - (wcount + .5) * dim, screenwid - (vcount - 1) * dim,
@@ -55,7 +62,7 @@ public class TriangleGrid extends GridShape {
 					screenwid - (wcount - 1) * dim, screenwid - vcount * dim,
 					screenwid - (wcount - .5) * dim, screenwid - (vcount - 1) * dim });
 		}
-		triangle.setFill(getColorPicker().getColor((current.getCurrentState())));
+		triangle.setFill(myColor.getColor((current.getCurrentState())));
 		return triangle;
 	}
 

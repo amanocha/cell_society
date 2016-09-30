@@ -3,6 +3,7 @@ package animation.simulation.shape;
 
 import java.util.Iterator;
 
+import animation.simulation.color.CellColor;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -14,9 +15,16 @@ import structures.MetaData;
 
 public class SquareGrid extends GridShape {
 	
+	private CellColor myColor;
+	
+	
+	public SquareGrid() {
+		super();
+	}
 	
 	public SquareGrid(MetaData meta) {
-		super(meta);
+		super();
+		myColor = meta.getColor();
 	}
 
 
@@ -36,13 +44,13 @@ public class SquareGrid extends GridShape {
 		return screen;
 	}
 	
-	public Shape fillGrid(Cell current, int width, int height) {
+	private Shape fillGrid(Cell current, int width, int height) {
 		int dim = width;
 		if (width > height) {
 			dim = height;
 		}
 		Rectangle rectangle = new Rectangle();
-		rectangle.setFill(getColorPicker().getColor(current.getCurrentState()));
+		rectangle.setFill(myColor.getColor(current.getCurrentState()));
 		rectangle.setWidth(dim);
 		rectangle.setHeight(dim);
 		return rectangle;
