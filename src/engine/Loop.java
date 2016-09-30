@@ -60,6 +60,12 @@ public class Loop {
 				}
 				//System.out.print();
 			}
+			System.out.println();
+		root.getChildren().remove(mySimulationPane.getStackPane());
+		update.determineUpdates();
+		update.updateCells();
+		root.getChildren().add(mySimulationPane.generateSimulationScreen(grid));
+		//root.getChildren().add(mySimulationPane.generatSimulationChart());
 	}
 	
 	public GUISimulation getSimulationGUI() {

@@ -1,10 +1,10 @@
-package animation.simulation;
+package animation.simulation.color;
 
 import javafx.scene.paint.Color;
 
-public class SegregationSimulation extends AbstractDraw {
+public class SegregationColor extends CellColor {
 
-	public SegregationSimulation() {
+	public SegregationColor() {
 		super();
 		putColor(0, Color.WHITE);
 		putColor(1, Color.RED);

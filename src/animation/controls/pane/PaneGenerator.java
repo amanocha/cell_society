@@ -1,4 +1,4 @@
-package animation.controls;
+package animation.controls.pane;
 
 
 import javafx.scene.Scene;
@@ -9,14 +9,14 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.TilePane;
 
-public class GeneralPane {
+public class PaneGenerator {
 	
 	private Pane myMainMenu;
 	private Pane mySimulationMenu;
 	private Pane xmlMenuPane;
 	private Scene myScene;
 	
-	public GeneralPane(Scene scene) {
+	public PaneGenerator(Scene scene) {
 		this.myScene = scene;
 		myMainMenu = createMainMenuPane();
 		mySimulationMenu = createSimulationMenuPane();

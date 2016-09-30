@@ -1,10 +1,10 @@
 package structures;
 
-import animation.simulation.AbstractDraw;
-import animation.simulation.FireSimulation;
-import animation.simulation.GameOfLifeSimulation;
-import animation.simulation.PredatorPreySimulation;
-import animation.simulation.SegregationSimulation;
+import animation.simulation.color.CellColor;
+import animation.simulation.color.FireColor;
+import animation.simulation.color.GameOfLifeColor;
+import animation.simulation.color.PredatorPreyColor;
+import animation.simulation.color.SegregationColor;
 import engine.Neighbors;
 import engine.SquareNeighbors;
 import engine.TriangleNeighbors;
@@ -17,11 +17,13 @@ import engine.UpdateSegregation;
 
 public class MetaData {
 
+
 	private String simulationName;
 	private String shape; 
 	private Neighbors myNeighbors;
 	private Update myUpdate;
-	private AbstractDraw mySimulation;
+	private CellColor myColor;
+	private String myFile;
 
 	public void setCellShape(String name, Grid grid) {
 		this.shape = name;
@@ -38,21 +40,21 @@ public class MetaData {
 	
 	public void setSimulationName(String name, Grid grid) {
 		this.simulationName = name;
-		if (simulationName.equals("fire")) {
+		if (name.equals("fire")) {
 			myUpdate = new UpdateFire(grid, myNeighbors); 
-			mySimulation = new FireSimulation();
+			myColor = new FireColor();
 		}
-		if (simulationName.equals("predator prey")) {
+		if (name.equals("predator prey")) {
 			myUpdate = new UpdatePredatorPrey(grid, myNeighbors);
-			mySimulation = new PredatorPreySimulation();
+			myColor = new PredatorPreyColor();
 		}
-		if (simulationName.equals("game of life")) {
+		if (name.equals("game of life")) {
 			myUpdate = new UpdateGameOfLife(grid, myNeighbors);
-			mySimulation = new GameOfLifeSimulation();
+			myColor = new GameOfLifeColor();
 		}
-		if (simulationName.equals("segregation")) {
+		if (name.equals("segregation")) {
 			myUpdate = new UpdateSegregation(grid, myNeighbors);
-			mySimulation = new SegregationSimulation();
+			myColor = new SegregationColor();
 		}
 	}
 
@@ -60,6 +62,15 @@ public class MetaData {
 	
 	public String getSimulationName() {
 		return simulationName;
+	}
+
+	public String getFileName() {
+		return myFile;
+	}
+
+	
+	public CellColor getColor() {
+		return myColor;
 	}
 	
 	public String getShape() {
@@ -73,10 +84,7 @@ public class MetaData {
 	public Update getUpdate() {
 		return myUpdate;
 	}
-	
-	public AbstractDraw getSimulation() {
-		return mySimulation;
-	}
+
 	
 	/*****SETTERS*****/
 	
@@ -87,4 +95,9 @@ public class MetaData {
 	public void setShape(String shape) {
 		this.shape = shape;
 	}
+	
+	public void setFileName(String file) {
+		myFile = file;
+	}
+	
 }

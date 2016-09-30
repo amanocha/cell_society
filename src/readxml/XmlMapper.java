@@ -17,7 +17,6 @@ import org.w3c.dom.NodeList;
 import org.w3c.dom.Text;
 import org.xml.sax.SAXException;
 
-import animation.simulation.Simulation;
 import engine.Loop;
 
 import org.w3c.dom.Node;
