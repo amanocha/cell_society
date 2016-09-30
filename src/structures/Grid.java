@@ -95,4 +95,5 @@ public class Grid implements Iterable<Cell>{
 	public void setCellShape(String cellShape) {
 		this.cellShape = cellShape;
 	}
+	
 }

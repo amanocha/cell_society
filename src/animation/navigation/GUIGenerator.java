@@ -57,6 +57,7 @@ public class GUIGenerator {
 		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .5);
 		button.setOnAction(e -> {
+			myInfo.getGrid().reset();
 			myNav.createSimluationMenu();
 		});
 		grid.add(header, 1, 0);
