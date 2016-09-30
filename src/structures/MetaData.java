@@ -13,6 +13,7 @@ import engine.SquareNeighbors;
 import engine.TriangleNeighbors;
 import engine.HexagonalNeighbors;
 import engine.Neighbor;
+import engine.NeighborInterface;
 import engine.Update;
 import engine.UpdateFire;
 import engine.UpdateGameOfLife;
@@ -24,7 +25,7 @@ public class MetaData {
 
 	private String simulationName;
 	private String shape; 
-	private Neighbor myNeighbors;
+	private NeighborInterface myNeighbors;
 	private Update myUpdate;
 	private CellColor myColor;
 	private String myFile;
@@ -85,7 +86,7 @@ public class MetaData {
 		return shape;
 	}
 	
-	public Neighbor getNeighbors() {
+	public NeighborInterface getNeighbors() {
 		return myNeighbors;
 	}
 	

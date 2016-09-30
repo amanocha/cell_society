@@ -8,7 +8,7 @@ import structures.FireCell;
 public class UpdateFire extends Update {
 	private Grid grid;
 	
-	public UpdateFire(Grid newGrid, Neighbor newNeighbors) {
+	public UpdateFire(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
 	}
