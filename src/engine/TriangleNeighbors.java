@@ -1,27 +1,38 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import structures.Cell;
 import structures.Grid;
 
-public class TriangleNeighbors implements Neighbors{
-	private Grid grid;
+public class TriangleNeighbors extends Neighbor implements NeighborInterface{
 	
 	public TriangleNeighbors(Grid grid) {
-		this.grid = grid;
+		super(grid);
 	}
 	
 	@Override
-	public ArrayList<Cell> getImmediateNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		
+	public List<Cell> getImmediateNeighbors(Cell cell) {
+		List<Cell> neighbors = new ArrayList<Cell>();
 		return neighbors;
 	}
 	
 	@Override
-	public ArrayList<Cell> getDiagonalNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		
+	public List<Cell> getDiagonalNeighbors(Cell cell) {
+		List<Cell> neighbors = new ArrayList<Cell>();
 		return neighbors;
+	}
+
+	@Override
+	public List<Cell> getToroidalImmediateNeighbors(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cell> getToroidalDiagonalNeighbors(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
