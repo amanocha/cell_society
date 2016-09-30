@@ -1,5 +1,6 @@
-package animation.menu;
+package animation.navigation.menu;
 
+import animation.navigation.GUIGenerator;
 import javafx.scene.Group;
 
 public class XmlMenu extends Menu {

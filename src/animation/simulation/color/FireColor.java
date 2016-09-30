@@ -1,12 +1,12 @@
-package animation.simulation;
+package animation.simulation.color;
 
 
 import javafx.scene.paint.Color;
 
 
-public class FireSimulation extends AbstractDraw {
+public class FireColor extends CellColor {
 	
-	public FireSimulation() {
+	public FireColor() {
 		super();
 		putColor(0, Color.WHITE);
 		putColor(1, Color.DARKGREEN);

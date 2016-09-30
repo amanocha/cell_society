@@ -1,4 +1,4 @@
-package animation.menu;
+package animation.navigation;
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
@@ -9,6 +9,8 @@ import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
 import animation.controls.label.Message;
 import animation.controls.pane.PaneGenerator;
+import animation.navigation.menu.MainMenu;
+import animation.navigation.menu.Menu;
 import engine.Loop;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

@@ -1,4 +1,4 @@
-import animation.menu.Navigator;
+import animation.navigation.Navigator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

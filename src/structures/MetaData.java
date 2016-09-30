@@ -1,10 +1,10 @@
 package structures;
 
-import animation.simulation.AbstractDraw;
-import animation.simulation.FireSimulation;
-import animation.simulation.GameOfLifeSimulation;
-import animation.simulation.PredatorPreySimulation;
-import animation.simulation.SegregationSimulation;
+import animation.simulation.color.CellColor;
+import animation.simulation.color.FireColor;
+import animation.simulation.color.GameOfLifeColor;
+import animation.simulation.color.PredatorPreyColor;
+import animation.simulation.color.SegregationColor;
 import engine.Update;
 import engine.UpdateFire;
 import engine.UpdateGameOfLife;
@@ -16,7 +16,7 @@ public class MetaData {
 	public String SimulationName;
 	public String Shape; 
 	public Update myUpdate;
-	private AbstractDraw mySimulation;
+	private CellColor mySimulation;
 	private String myFile;
 	
 
@@ -24,19 +24,19 @@ public class MetaData {
 		this.SimulationName = name;
 		if (name.equals("fire")) {
 			myUpdate = new UpdateFire(grid); 
-			mySimulation = new FireSimulation();
+			mySimulation = new FireColor();
 		}
 		if (name.equals("predator prey")) {
 			myUpdate = new UpdatePredatorPrey(grid);
-			mySimulation = new PredatorPreySimulation();
+			mySimulation = new PredatorPreyColor();
 		}
 		if (name.equals("game of life")) {
 			myUpdate = new UpdateGameOfLife(grid);
-			mySimulation = new GameOfLifeSimulation();
+			mySimulation = new GameOfLifeColor();
 		}
 		if (name.equals("segregation")) {
 			myUpdate = new UpdateSegregation(grid);
-			mySimulation = new SegregationSimulation();
+			mySimulation = new SegregationColor();
 		}
 	}
 	
@@ -48,7 +48,7 @@ public class MetaData {
 		myFile = file;
 	}
 	
-	public AbstractDraw getSimulation() {
+	public CellColor getColor() {
 		return mySimulation;
 	}
 	

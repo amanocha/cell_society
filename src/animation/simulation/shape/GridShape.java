@@ -1,18 +1,22 @@
-package animation.simulation;
+package animation.simulation.shape;
 
 
+import animation.simulation.color.CellColor;
 import javafx.scene.layout.Pane;
 import structures.Grid;
+import structures.MetaData;
 
-
-public class Simulation {
+public abstract class GridShape {
 	
+
 	private Pane screen;
+	private CellColor color;
 	
-	public Simulation() {
+	
+	public GridShape(MetaData meta) {
+		color = meta.getColor();
 		this.screen = new Pane();
 	}
-	
 
 	public Pane setUpScreen(Grid grid, int w, int h) {
 		screen.getChildren().clear();
@@ -25,6 +29,12 @@ public class Simulation {
 		return screen;
 	}
 	
-	
-	
+	public CellColor getColorPicker() {
+		return color;
+	}
+
 }
+
+	
+	
+	

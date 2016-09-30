@@ -1,5 +1,6 @@
-package animation.menu;
+package animation.navigation.menu;
 
+import animation.navigation.GUIGenerator;
 import engine.Loop;
 import javafx.scene.Group;
 import javafx.scene.Scene;

@@ -1,9 +1,12 @@
-package animation.menu;
+package animation.navigation;
 
 
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
+import animation.navigation.menu.MainMenu;
+import animation.navigation.menu.SimulationMenu;
+import animation.navigation.menu.XmlMenu;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
