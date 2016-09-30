@@ -88,7 +88,7 @@ public class GUIGenerator {
 		for (int i = 0; i < SIMULATIONS.length; i++) {
 			String file = FILES[i];
 			setXMLSelectionButtons(SIMULATIONS[i], e -> 
-				{myInfo.mapXmlToGrid(file); 
+				{myInfo.mapXml(file); 
 				myNav.createMainMenu(); }, hbox);
 		}
 		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
