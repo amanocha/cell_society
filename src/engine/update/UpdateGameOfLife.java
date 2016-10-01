@@ -7,12 +7,10 @@ import structures.Cell;
 import structures.Grid;
 
 public class UpdateGameOfLife extends Update {
-	private Grid grid;
 	private NeighborInterface neighbor;
 	
 	public UpdateGameOfLife(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
-		grid = newGrid;
 		neighbor = newNeighbors;
 	}
 	
@@ -31,7 +29,7 @@ public class UpdateGameOfLife extends Update {
 	 */
 	@Override
 	public void determineUpdates() {
-		for(Cell cell : grid.getCellList()) {
+		for(Cell cell : getGrid().getCellList()) {
 			int numLive = 0;
 			for(Cell neighbor : getNeighbors(cell)) {
 				if(neighbor.getCurrentState() == 1) {

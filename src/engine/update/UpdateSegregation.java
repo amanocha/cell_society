@@ -10,17 +10,15 @@ import structures.Cell;
 import structures.Grid;
 
 public class UpdateSegregation extends Update {
-	private Grid grid;
 	private NeighborInterface neighbor;
 	private ArrayList<Cell> emptyCells;
 	private double satisfaction;
 	
 	public UpdateSegregation(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
-		grid = newGrid;
 		neighbor = newNeighbors;
 		emptyCells = new ArrayList<Cell>();
-		for(Cell cell : grid.getCellList()) {
+		for(Cell cell : getGrid().getCellList()) {
 			if (cell.getCurrentState() == 0) {
 				emptyCells.add(cell);
 			}
@@ -52,7 +50,7 @@ public class UpdateSegregation extends Update {
 	public void move(Cell cell) {
 		Random random = new Random();
 		int emptyCellIndex = random.nextInt(emptyCells.size());
-		Cell emptyCell = grid.getCellList().get(emptyCellIndex);
+		Cell emptyCell = getGrid().getCellList().get(emptyCellIndex);
 		emptyCells.add(cell);
 		emptyCells.remove(emptyCell);
 		swap(cell, emptyCell);
@@ -65,7 +63,7 @@ public class UpdateSegregation extends Update {
 	
 	@Override
 	public void determineUpdates() {
-		for(Cell cell : grid.getCellList()) {
+		for(Cell cell : getGrid().getCellList()) {
 			if (cell.getCurrentState() != 0) {
 				if(!isSatisfied(cell)) {
 					move(cell);

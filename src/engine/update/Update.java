@@ -39,4 +39,8 @@ public abstract class Update {
 			cell.setCurrentState(cell.getNextState());
 		}
 	}
+	
+	public Grid getGrid() {
+		return grid;
+	}
 }

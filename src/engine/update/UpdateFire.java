@@ -8,11 +8,9 @@ import structures.Grid;
 import structures.FireCell;
 
 public class UpdateFire extends Update {
-	private Grid grid;
 	
 	public UpdateFire(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
-		grid = newGrid;
 	}
 	
 	/**
@@ -23,7 +21,7 @@ public class UpdateFire extends Update {
 	@Override
 	public void determineUpdates() {
 		Random random = new Random();
-		for(Cell cell : grid.getCellList()) {
+		for(Cell cell : getGrid().getCellList()) {
 			boolean checkProb = false;
 			if(cell.getCurrentState() == 1) { 
 				for(Cell neighbor : getNeighbors(cell)) {

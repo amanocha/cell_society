@@ -10,14 +10,12 @@ import structures.Cell;
 import structures.Grid;
 
 public class UpdatePredatorPrey extends Update {
-	private Grid grid;
 	private int energy;
 	private int fishTime;
 	private int sharkTime;
 	
 	public UpdatePredatorPrey(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
-		grid = newGrid;
 		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();
 		fishTime = ((Animal) newGrid.getCellList().get(0)).getFishTime();
 		sharkTime = ((Animal) newGrid.getCellList().get(0)).getSharkTime();
@@ -32,7 +30,7 @@ public class UpdatePredatorPrey extends Update {
 		}
 		if (emptyCells.size() > 0) {
 			int emptyCellIndex = selectCell(emptyCells);
-			Cell emptyCell = grid.getCellList().get(emptyCellIndex);
+			Cell emptyCell = getGrid().getCellList().get(emptyCellIndex);
 			if (cell.getCurrentState() == 1) {
 				//System.out.println(cell.getNumber() + " moved to " + emptyCell.getNumber());
 			}
@@ -56,7 +54,7 @@ public class UpdatePredatorPrey extends Update {
 		if(fishCells.size() > 0) {
 			shark.setEnergy(shark.getEnergy() + 1);
 			int fishCellIndex = selectCell(fishCells);
-			Cell fishCell = grid.getCellList().get(fishCellIndex);
+			Cell fishCell = getGrid().getCellList().get(fishCellIndex);
 			//System.out.println(shark.getNumber() + " ate " + fishCell.getNumber());
 			swap(shark, (Animal) fishCell); //shark's next state is fish, fish's next state is shark
 			if(reproduce) {
@@ -106,7 +104,7 @@ public class UpdatePredatorPrey extends Update {
 	public void determineUpdates() {
 		ArrayList<Cell> fishes = new ArrayList<Cell>();
 		ArrayList<Cell> sharks = new ArrayList<Cell>();
-		for(Cell cell : grid.getCellList()) {
+		for(Cell cell : getGrid().getCellList()) {
 			if (cell.getCurrentState() == 1) { //fish
 				fishes.add(cell);
 			} else if (cell.getCurrentState() == 2) { //shark
@@ -137,7 +135,7 @@ public class UpdatePredatorPrey extends Update {
 	}
 	
 	public void displayCells(int animalState) {
-		for(Cell cell : grid.getCellList()) {
+		for(Cell cell : getGrid().getCellList()) {
 			cell.setPreviousState(cell.getCurrentState());
 			cell.setCurrentState(cell.getNextState());
 			Animal animal = (Animal) cell; 
