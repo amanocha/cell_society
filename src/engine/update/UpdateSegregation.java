@@ -1,21 +1,24 @@
-package engine;
+package engine.update;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+
+import engine.NeighborInterface;
 import structures.SegregationCell;
 import structures.Cell;
 import structures.Grid;
 
 public class UpdateSegregation extends Update {
 	private Grid grid;
-	private Neighbors neighborsObject;
+	private NeighborInterface neighbor;
 	private ArrayList<Cell> emptyCells;
 	private double satisfaction;
 	
-	public UpdateSegregation(Grid newGrid, Neighbors newNeighbors) {
+	public UpdateSegregation(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
-		neighborsObject = newNeighbors;
+		neighbor = newNeighbors;
 		emptyCells = new ArrayList<Cell>();
 		for(Cell cell : grid.getCellList()) {
 			if (cell.getCurrentState() == 0) {
@@ -25,9 +28,9 @@ public class UpdateSegregation extends Update {
 		satisfaction = ((SegregationCell) newGrid.getCellList().get(0)).getSatisfaction();
 	}
 	
-	public ArrayList<Cell> getNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = super.getNeighbors(cell);
-		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
+	public List<Cell> getNeighbors(Cell cell) {
+		List<Cell> neighbors = super.getNeighbors(cell);
+		neighbors.addAll(neighbor.getDiagonalNeighbors(cell));
 		return neighbors;
 	}
 	

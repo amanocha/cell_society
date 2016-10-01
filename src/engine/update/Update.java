@@ -1,26 +1,26 @@
-package engine;
+package engine.update;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import engine.NeighborInterface;
 import structures.Cell;
 import structures.Grid;
 
 public abstract class Update {
 	private Grid grid;
-	private Neighbors neighborsObject;
+	private NeighborInterface neighbor;
 	
-	public Update(Grid grid, Neighbors neighbors) {
+	public Update(Grid grid, NeighborInterface neighbor) {
 		this.grid = grid;
-		this.neighborsObject = neighbors;
+		this.neighbor = neighbor;
 	}
 	
 	/**Determines the neighbors of a given cell.
 	 * @param cell - the given cell
 	 * @return ArrayList of all neighbors
 	 */
-	public ArrayList<Cell> getNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		neighbors.addAll(neighborsObject.getImmediateNeighbors(cell));
-		return neighbors;
+	public List<Cell> getNeighbors(Cell cell){
+		return neighbor.getImmediateNeighbors(cell);
 	}
 	
 	/**

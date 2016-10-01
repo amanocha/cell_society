@@ -1,18 +1,19 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import structures.Cell;
 import structures.Grid;
 
-public class TriangleNeighbors implements Neighbors{
-	private Grid grid;
+public class TriangleNeighbors extends Neighbor implements NeighborInterface{
 	
 	public TriangleNeighbors(Grid grid) {
-		this.grid = grid;
+		super(grid);
 	}
 	
 	private String getOrientation(Cell cell) {
-		int gridWidth = grid.getColumns();
+		int gridWidth = getGridWidth();
 		int cellNumber = cell.getNumber();
 		
 		if (cellNumber % gridWidth < (gridWidth/2)) {
@@ -23,7 +24,7 @@ public class TriangleNeighbors implements Neighbors{
 	}
 	
 	private int getLeftCell(Cell cell) {
-		int gridWidth = grid.getColumns();
+		int gridWidth = getGridWidth();
 		int cellNumber = cell.getNumber();
 
 		if (getOrientation(cell).equals("up")) {
@@ -47,7 +48,7 @@ public class TriangleNeighbors implements Neighbors{
 	}
 	
 	private int getRightCell(Cell cell) {
-		int gridWidth = grid.getColumns();
+		int gridWidth = getGridWidth();
 		int cellNumber = cell.getNumber();
 
 		if (getOrientation(cell).equals("up")) {
@@ -71,21 +72,19 @@ public class TriangleNeighbors implements Neighbors{
 	}
 	
 	private int getBelowCell(Cell cell) {
-		int gridSize = grid.getNumCells();
-		int gridWidth = grid.getColumns();
 		int cellNumber = cell.getNumber();
 
 		if (getOrientation(cell).equals("up")) {
-			if (cellNumber < gridSize - gridWidth) {
-				return (cellNumber + gridWidth);
+			if (cellNumber < getGridSize() - getGridWidth()) {
+				return (cellNumber + getGridWidth());
 			}
 		}
 		return -1;
 	}
 	
 	private int getAboveCell(Cell cell) {
-		int gridSize = grid.getNumCells();
-		int gridWidth = grid.getColumns();
+		int gridSize = getGridSize();
+		int gridWidth = getGridWidth();
 		int cellNumber = cell.getNumber();
 		
 		if (getOrientation(cell).equals("down")) {
@@ -97,37 +96,48 @@ public class TriangleNeighbors implements Neighbors{
 	}
 	
 	@Override
-	public ArrayList<Cell> getImmediateNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
+	public List<Cell> getImmediateNeighbors(Cell cell) {
+		List<Cell> neighbors = new ArrayList<Cell>();
 		int left, right, below, above;
 		
 		left = getLeftCell(cell);
 		if (left != -1) {
-			neighbors.add(grid.getCellList().get(left));
+			neighbors.add(getCellList().get(left));
 		}
 		
 		right = getRightCell(cell);
 		if (right != -1) {
-			neighbors.add(grid.getCellList().get(right));
+			neighbors.add(getCellList().get(right));
 		}
 		
 		below = getBelowCell(cell);
 		if (below != -1) {
-			neighbors.add(grid.getCellList().get(below));
+			neighbors.add(getCellList().get(below));
 		}
 		
 		above = getAboveCell(cell);
 		if (above != -1) {
-			neighbors.add(grid.getCellList().get(above));
+			neighbors.add(getCellList().get(above));
 		}
 		
 		return neighbors;
 	}
 	
 	@Override
-	public ArrayList<Cell> getDiagonalNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = new ArrayList<Cell>();
-		
+	public List<Cell> getDiagonalNeighbors(Cell cell) {
+		List<Cell> neighbors = new ArrayList<Cell>();
 		return neighbors;
+	}
+
+	@Override
+	public List<Cell> getToroidalImmediateNeighbors(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cell> getToroidalDiagonalNeighbors(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

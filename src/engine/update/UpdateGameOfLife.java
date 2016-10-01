@@ -1,23 +1,26 @@
-package engine;
+package engine.update;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import engine.NeighborInterface;
 import structures.Cell;
 import structures.Grid;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
-	private Neighbors neighborsObject;
+	private NeighborInterface neighbor;
 	
-	public UpdateGameOfLife(Grid newGrid, Neighbors newNeighbors) {
+	public UpdateGameOfLife(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
-		neighborsObject = newNeighbors;
+		neighbor = newNeighbors;
 	}
 	
-	public ArrayList<Cell> getNeighbors(Cell cell) {
-		ArrayList<Cell> neighbors = super.getNeighbors(cell);
-		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
-		return neighbors;
+	public List<Cell> getNeighbors(Cell cell) {
+//		List<Cell> neighbors = getNeighbors(cell);
+//		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
+//		return neighbors;
+		return neighbor.getDiagonalNeighbors(cell);
 	}
 	
 	/**

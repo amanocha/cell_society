@@ -1,6 +1,7 @@
 package structures;
 
 import animation.simulation.color.CellColor;
+
 import animation.simulation.color.FireColor;
 import animation.simulation.color.GameOfLifeColor;
 import animation.simulation.color.PredatorPreyColor;
@@ -9,22 +10,22 @@ import animation.simulation.shape.GridShape;
 import animation.simulation.shape.HexagonGrid;
 import animation.simulation.shape.SquareGrid;
 import animation.simulation.shape.TriangleGrid;
-import engine.Neighbors;
 import engine.SquareNeighbors;
 import engine.TriangleNeighbors;
 import engine.HexagonalNeighbors;
-import engine.Update;
-import engine.UpdateFire;
-import engine.UpdateGameOfLife;
-import engine.UpdatePredatorPrey;
-import engine.UpdateSegregation;
+import engine.NeighborInterface;
+import engine.update.Update;
+import engine.update.UpdateFire;
+import engine.update.UpdateGameOfLife;
+import engine.update.UpdatePredatorPrey;
+import engine.update.UpdateSegregation;
 
 public class MetaData {
 
 
 	private String simulationName;
 	private String shape; 
-	private Neighbors myNeighbors;
+	private NeighborInterface myNeighbors;
 	private Update myUpdate;
 	private CellColor myColor;
 	private String myFile;
@@ -85,7 +86,7 @@ public class MetaData {
 		return shape;
 	}
 	
-	public Neighbors getNeighbors() {
+	public NeighborInterface getNeighbors() {
 		return myNeighbors;
 	}
 	

@@ -1,14 +1,16 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import structures.Cell;
 import structures.Grid;
 
-public class HexagonalNeighbors implements Neighbors{
+public class HexagonalNeighbors extends Neighbor implements NeighborInterface{
 	private Grid grid;
 	
 	public HexagonalNeighbors(Grid grid) {
-		this.grid = grid;
+		super(grid);
 	}
 	
 	@Override
@@ -57,5 +59,17 @@ public class HexagonalNeighbors implements Neighbors{
 	public ArrayList<Cell> getDiagonalNeighbors(Cell cell) {
 		ArrayList<Cell> neighbors = new ArrayList<Cell>();
 		return neighbors;
+	}
+
+	@Override
+	public List<Cell> getToroidalImmediateNeighbors(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Cell> getToroidalDiagonalNeighbors(Cell cell) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
