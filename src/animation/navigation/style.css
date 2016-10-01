@@ -55,12 +55,46 @@
 }
 
 
-#combo-box-base {
-    -fx-background-color: #9E9E9E;
+.combo-box-base {
+    -fx-background-color: #BABABA;
     -fx-background-radius: 5, 5, 4, 3;
     -fx-background-insets: 0 0 -1 0, 0, 1, 2;
-    -fx-padding: 0;
+    -fx-padding: 8 4 8 4;
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 13px;
+    -fx-text-fill: #424242;
 }
+
+
+.combo-box-popup .list-view .list-cell 
+{
+    -fx-padding: 4 0 4 5;
+    -fx-background-color: white;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected, .combo-box-popup .list-view .list-cell:filled:selected:hover 
+{
+    -fx-background: -fx-accent;
+    -fx-background-color: #BABABA;
+    -fx-text-fill: -fx-selection-bar-text;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: white;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover 
+{
+    -fx-background-color: #BABABA;
+    -fx-text-fill: -fx-text-inner-color;
+}
+
+
+
+
+
 
 .buttontext {
     -fx-font-family: "Helvetica";

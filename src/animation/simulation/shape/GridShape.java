@@ -1,10 +1,10 @@
 package animation.simulation.shape;
 
 
-import animation.simulation.color.CellColor;
+
 import javafx.scene.layout.Pane;
 import structures.Grid;
-import structures.MetaData;
+
 
 public abstract class GridShape {
 	

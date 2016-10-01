@@ -9,14 +9,12 @@ import animation.simulation.shape.TriangleGrid;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.chart.LineChart;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import readxml.XmlMapper;
-import structures.Grid;
-import structures.MetaData;
+
 
 
 public class GUISimulation {
@@ -45,8 +43,8 @@ public class GUISimulation {
 		double left = myScene.getWidth() * .15;
 	    double top = myScene.getHeight() * .55;
 	    double other = myScene.getHeight() * .1;
-	    int width = (int) Math.round((myScene.getWidth() * .5 - other));
-	    int height = (int) Math.round((myScene.getHeight() * .8));
+	    int width = (int) Math.round((myScene.getWidth() * .4 - other));
+	    int height = (int) Math.round((myScene.getHeight() * .7));
 	    animation = ((HexagonGrid) mySimulation).drawGrid(myInfo.getGrid(), width, height);
         StackPane.setMargin(animation, new Insets(left, top, other, other));
         stack.getChildren().add(animation);

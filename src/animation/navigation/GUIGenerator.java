@@ -1,5 +1,7 @@
 package animation.navigation;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
@@ -8,12 +10,15 @@ import animation.controls.pane.PaneGenerator;
 import animation.navigation.menu.MainMenu;
 import animation.navigation.menu.Menu;
 import engine.Loop;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -25,8 +30,12 @@ import readxml.XmlMapper;
 
 public class GUIGenerator {
 	
-	private static String[] SIMULATIONS = {"SEGREGATION", "GAME OF LIFE", "FIRE", "WA-TOR"};
-	private static String[] FILES = {"Segregation.xml", "GameOfLife.xml", "Fire.xml", "PredatorPrey.xml"};
+	private static ObservableList<String> SIMULATIONS = 
+		    FXCollections.observableArrayList(
+		    		"SEGREGATION", 
+		    		"GAME OF LIFE", 
+		    		"FIRE", 
+		    		"WA-TOR" );
 	
 	private PaneGenerator myPane;
 	private Menu myMenu;
@@ -51,6 +60,7 @@ public class GUIGenerator {
 		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .5);
 		button.setOnAction(e -> {
+			myInfo = new XmlMapper();
 			myInfo.mapXml(myInfo.getMeta().getFileName());
 			myNav.createSimluationMenu();
 		});
@@ -83,14 +93,13 @@ public class GUIGenerator {
 		Pane grid = myPane.getXMLMenuPane();
 		Button button = (new ButtonString(myResource.getString("MainMenu"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .25);
-		button.setOnAction(e -> ((MainMenu) myMenu).generateMenu());
-		HBox hbox = new HBox((myScene.getWidth() * .01));
-		for (int i = 0; i < SIMULATIONS.length; i++) {
-			String file = FILES[i];
-			setXMLSelectionButtons(SIMULATIONS[i], e -> 
-				{myInfo.mapXml(file); 
-				myNav.createMainMenu(); }, hbox);
-		}
+		//button.setOnAction(e -> ((MainMenu) myMenu).generateMenu());
+		VBox hbox = new VBox((myScene.getHeight() * .01));
+		ComboBox<String> combo = new ComboBox<String>();
+		combo.setItems(SIMULATIONS);
+		combo.setLayoutX(myScene.getWidth() * .38);
+		combo.setLayoutY(myScene.getHeight() * .3);
+		combo.setMinWidth(myScene.getWidth() * .25);
 		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
 		title.setLayoutX(myScene.getWidth() * .32);
 		title.setLayoutY(myScene.getHeight() * .2);
@@ -98,18 +107,14 @@ public class GUIGenerator {
 		hbox.setLayoutY(myScene.getHeight() * .35);
 		button.setLayoutX(myScene.getWidth() * .38);
 		button.setLayoutY(myScene.getHeight() * .6);
+		grid.getChildren().add(combo);
 		grid.getChildren().add(title);
 		grid.getChildren().add(button);
-		grid.getChildren().add(hbox);
+		//grid.getChildren().add(hbox);
 		return grid;
 	}
 	
-	private void setXMLSelectionButtons(String sim, EventHandler<ActionEvent> e, HBox hbox) {
-		Button button = (new ButtonString(sim)).getButton();
-		button.setPrefWidth(myScene.getWidth() * .20);
-		button.setOnAction(e);
-		hbox.getChildren().add(button);
-	}
+
 	
 	public Pane generateSimulationScreenControls() {
 		VBox vbox = new VBox(10);

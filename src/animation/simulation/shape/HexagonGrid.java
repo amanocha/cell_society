@@ -33,14 +33,15 @@ private CellColor myColor;
 		int row = 1;
 		int wcount = 0;
 		int vcount = 0;
-		int count = 1;
-		while(itr.hasNext()) {
+		int count = 0;
+		System.out.println(grid.getCellList().size());
+		while (itr.hasNext()) {
 			Cell current = itr.next();
 			screen.getChildren().add(fillGrid(current, top, diagonal, wcount, vcount, row));
 			wcount = wcount + top * 2 + diagonal * 2;
 			count++;
 			if (count % (grid.getColumns() / 2) == 0) {
-				count = 1;
+				count = 0;
 				wcount = 0;
 				row++;
 				vcount = vcount + diagonal;
