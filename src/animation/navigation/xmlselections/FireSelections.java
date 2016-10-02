@@ -43,7 +43,7 @@ public class FireSelections extends XmlSelection {
 	}
 	
 	private void xmlMap() {
-		UserInputToXML input = super.startXMLMap();
+		UserInputToXML input = super.startXMLMap(3);
 		input.setSimulation(myResource.getString("Firexml"));
 		input.setProbCatch(myProb.getValue());
 		input.generateXML();

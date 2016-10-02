@@ -48,7 +48,7 @@ public class PredatorPreySelections extends XmlSelection {
 	}
 	
 	private void xmlMap() {
-		UserInputToXML input = super.startXMLMap();
+		UserInputToXML input = super.startXMLMap(3);
 		input.setEnergy((int) myEnergy.getValue());
 		input.setFishReproductionTime((int) myFishReproduction.getValue());
 		input.setSharkReproductionTime((int) mySharkReproduction.getValue());

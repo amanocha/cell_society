@@ -26,7 +26,7 @@ public class XmlSelection {
 		    		"SEGREGATION", 
 		    		"GAME OF LIFE", 
 		    		"FIRE", 
-		    		"WA-TOR" );
+		    		"PREDATOR/PREY" );
 
 	private static ObservableList<String> SHAPES = FXCollections.observableArrayList(
 			"SQUARE",
@@ -45,7 +45,6 @@ public class XmlSelection {
 	private ComboBox<String> mySelector;
 	private String myShape;
 	private String gridType;
-	//private int myCellNumber;
 	private Slider cellNumberSlider;
 
 	public XmlSelection(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
@@ -84,8 +83,8 @@ public class XmlSelection {
 		return myScreen;
 	}
 	
-	public UserInputToXML startXMLMap() {
-		UserInputToXML input = new UserInputToXML(getCellNumber(), 2);
+	public UserInputToXML startXMLMap(int numStates) {
+		UserInputToXML input = new UserInputToXML(getCellNumber(), numStates);
 		input.setShape(getShape());
 		input.setWrapping(getWrapping());
 		return input;

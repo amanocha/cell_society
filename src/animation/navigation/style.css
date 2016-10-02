@@ -110,8 +110,6 @@
     -fx-background-color: #9E9E9E;
 }
 
-
-
 .buttontext {
     -fx-font-family: "Helvetica";
     -fx-font-size: 20px;
@@ -129,3 +127,20 @@
     -fx-font-size: 12px;
     -fx-font-family: "Helvetica";
 }
+
+.chart-title {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 12px;
+  -fx-font-family: "Helvetica";
+}
+ 
+.axis-label {
+  -fx-text-fill: #FFFFFF;
+  -fx-font-size: 10px;
+  -fx-font-family: "Helvetica";
+}
+
+
+
+
+
