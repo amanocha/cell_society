@@ -1,24 +1,13 @@
 package engine.update;
 
-import java.util.List;
-
 import engine.NeighborInterface;
 import structures.Cell;
 import structures.Grid;
 
 public class UpdateGameOfLife extends Update {
-	private NeighborInterface neighbor;
 	
 	public UpdateGameOfLife(Grid newGrid, NeighborInterface newNeighbors) {
 		super(newGrid, newNeighbors);
-		neighbor = newNeighbors;
-	}
-	
-	public List<Cell> getNeighbors(Cell cell) {
-//		List<Cell> neighbors = getNeighbors(cell);
-//		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
-//		return neighbors;
-		return neighbor.getDiagonalNeighbors(cell);
 	}
 	
 	/**

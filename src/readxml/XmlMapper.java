@@ -24,6 +24,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
 import structures.Animal;
+import structures.AntCell;
 import structures.Cell;
 import structures.FireCell;
 import structures.Grid;
@@ -123,6 +124,8 @@ public class XmlMapper {
 				newCell = createFireCell(cellIndex, cellInitialState, globalsMap);
 			} else if (globalsMap.get(prop.getProperty("simulation")).equals("segregation")) {
 				newCell = createSegregationCell(cellIndex, cellInitialState, globalsMap);
+			} else if (globalsMap.get(prop.getProperty("simulation")).equals("ants")) {
+				newCell = createAntCell(cellIndex, cellInitialState, globalsMap);
 			} else  {
 				newCell = createCell(cellIndex, cellInitialState);
 			}
@@ -141,6 +144,11 @@ public class XmlMapper {
 	
 	private Cell createCell(Integer cellIndex, Integer cellInitialState){
 		return new Cell(cellIndex, cellInitialState);
+	}
+	
+	private Cell createAntCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap) {
+		return new AntCell(cellIndex, cellInitialState);
+				
 	}
 	
 	private Cell createSegregationCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){

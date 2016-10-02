@@ -24,6 +24,17 @@ public abstract class Update {
 	}
 	
 	/**
+	 * Determines the immediate and diagonal neighbors of a given cell.
+	 * @param cell - given cell
+	 * @return List of all neighbors
+	 */
+	public List<Cell> getAllNeighbors(Cell cell) {
+		List<Cell> neighbors = getNeighbors(cell);
+		neighbors.addAll(neighbor.getDiagonalNeighbors(cell));
+		return neighbors;
+	}
+	
+	/**
 	 * Iterates through all cells in the grid and determines which cells need to be updated as well as what to what 
 	 * state each cell needs to be updated to.
 	 */
