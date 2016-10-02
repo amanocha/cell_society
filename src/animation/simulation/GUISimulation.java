@@ -44,8 +44,9 @@ public class GUISimulation {
 		this.myScene = scene;
 		//this is the right piece of code when we get xml to read in shape
 		myGridIllustrator = info.getMeta().getGridShape();
-		System.out.println(myGridIllustrator);
+		System.out.println("this should print" + myGridIllustrator);
 		//myGridIllustrator = new SquareGrid();
+		System.out.println("this should print color: " + info.getMeta().getColor());
 		myGridIllustrator.setColor(info.getMeta().getColor());
 		stack = new StackPane();
 		this.engine = animation;

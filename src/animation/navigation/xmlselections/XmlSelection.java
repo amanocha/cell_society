@@ -7,6 +7,7 @@ import animation.controls.label.Header;
 import animation.controls.label.SmallLabel;
 import animation.controls.pane.PaneGenerator;
 import animation.navigation.Navigator;
+import engine.UserInputToXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -81,6 +82,13 @@ public class XmlSelection {
 		myScreen.getChildren().add(createSimulationLabel());
 		myScreen.getChildren().add(createCellNumberLabel());
 		return myScreen;
+	}
+	
+	public UserInputToXML startXMLMap() {
+		UserInputToXML input = new UserInputToXML(getCellNumber(), 2);
+		input.setShape(getShape());
+		input.setWrapping(getWrapping());
+		return input;
 	}
 
 	

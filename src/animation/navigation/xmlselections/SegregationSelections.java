@@ -44,8 +44,7 @@ public class SegregationSelections extends XmlSelection {
 	
 	private void xmlMap() {
 		System.out.println(getCellNumber());
-		UserInputToXML input = new UserInputToXML(getCellNumber());
-		input.setShape(getShape());
+		UserInputToXML input = super.startXMLMap();
 		input.setSatisfactionRate(mySatisfactionSlider.getValue());
 		input.setSimulation(myResource.getString("Segregationxml"));
 		input.generateXML();

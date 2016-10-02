@@ -39,8 +39,7 @@ public class GameOfLifeSelections extends XmlSelection {
 	
 	private void xmlMap() {
 		System.out.println(getCellNumber());
-		UserInputToXML input = new UserInputToXML(getCellNumber());
-		input.setShape(getShape());
+		UserInputToXML input = super.startXMLMap();
 		input.setSimulation(myResource.getString("GameOfLifexml"));
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());

@@ -53,11 +53,11 @@ public class MetaData {
 			myUpdate = new UpdateFire(grid, myNeighbor); 
 			myColor = new FireColor();
 		}
-		if (name.equals("predator prey")) {
+		if (name.equals("predator_prey")) {
 			myUpdate = new UpdatePredatorPrey(grid, myNeighbor);
 			myColor = new PredatorPreyColor();
 		}
-		if (name.equals("game of life")) {
+		if (name.equals("game_of_life")) {
 			myUpdate = new UpdateGameOfLife(grid, myNeighbor);
 			myColor = new GameOfLifeColor();
 		}
