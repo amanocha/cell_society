@@ -15,17 +15,19 @@ public class GameOfLifeSelections extends XmlSelection {
 	private Scene myScene;
 	private Group root;
 	private Navigator myNav;
+	private ResourceBundle myResource;
 	
 
 	public GameOfLifeSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
 		root = r;
+		myResource = resource;
 	}
 	
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
-		getSimulationCombo().setValue("GAME OF LIFE");
+		getSimulationCombo().setValue(myResource.getString("GameOfLifeLabel"));
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
@@ -37,9 +39,8 @@ public class GameOfLifeSelections extends XmlSelection {
 	
 	private void xmlMap() {
 		System.out.println(getCellNumber());
-		UserInputToXML input = new UserInputToXML(getCellNumber());
-		input.setShape(getShape());
-		input.setSimulation("game of life");
+		UserInputToXML input = super.startXMLMap();
+		input.setSimulation(myResource.getString("GameOfLifexml"));
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());
 	}

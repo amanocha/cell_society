@@ -34,8 +34,8 @@ public class Navigator {
 	
 	public Navigator(Stage s, double w, double h) {
 		myInfo = new XmlMapper();
-		myInfo.mapXml("fire_400.xml");
 		myResource = PropertyResourceBundle.getBundle(LANGUAGE);
+		myInfo.mapXml(myResource.getString("DefaultSelection"));
 		myStage = s;
 		this.width = w;
     	this.height = h;
@@ -65,7 +65,7 @@ public class Navigator {
 	}
 	
 	public void createSimluationMenu() {
-		simulationMenu = new SimulationMenu(myScene, root, myInfo, new GUIGenerator(myScene, root, myResource, myInfo));
+		simulationMenu = new SimulationMenu(myScene, root, myInfo, new GUIGenerator(myScene, root, myResource, myInfo), myResource);
 		simulationMenu.generateMenu();
 	}
 	

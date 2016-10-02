@@ -17,10 +17,10 @@ public class UserInputToXML {
 	private Properties prop;
 	private XmlMapper mapper;
 	
-	public UserInputToXML(int numCells) {
+	public UserInputToXML(int numCells, int maxStates) {
 		this.globalsMap = new HashMap<String, String>();
 		this.numCells = numCells;
-		this.numStates = numStates;
+		this.numStates = maxStates;
 		this.xmlGenerator = new XMLGenerator();
 		this.mapper = new XmlMapper();
 		this.prop = new Properties();
@@ -49,7 +49,7 @@ public class UserInputToXML {
 	}
 	
 	public void setWrapping(String wrapping) {
-		addParameter(prop.getProperty("wrapping"), wrapping);
+		addParameter(prop.getProperty("gridWrapping"), wrapping);
 	}
 	
 	public void setSatisfactionRate(double rate) {

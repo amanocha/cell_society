@@ -15,20 +15,22 @@ import readxml.XmlMapper;
 public class FireSelections extends XmlSelection {
 	
 	private Scene myScene;
-	private double myProb;
+	private Slider myProb;
 	private Group root;
 	private Navigator myNav;
+	private ResourceBundle myResource; 
 	
 	public FireSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
 		root = r;
+		myResource = resource;
 		
 	}
 	
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
-		getSimulationCombo().setValue("FIRE");
+		getSimulationCombo().setValue(myResource.getString("FireLabel"));
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
@@ -41,24 +43,20 @@ public class FireSelections extends XmlSelection {
 	}
 	
 	private void xmlMap() {
-		UserInputToXML input = new UserInputToXML(getCellNumber());
-		input.setShape(getShape());
-		input.setWrapping(getWrapping());
-		input.setSimulation("fire");
-		input.setProbCatch(myProb);
+		UserInputToXML input = super.startXMLMap();
+		input.setSimulation(myResource.getString("Firexml"));
+		input.setProbCatch(myProb.getValue());
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
 	public Label createProbLabel() {
-		return createSmallLabel("Probability Catch", myScene.getWidth() * .25, myScene.getHeight() * .6);
+		return createSmallLabel(myResource.getString("ProbabilityLabel"), myScene.getWidth() * .25, myScene.getHeight() * .6);
 	}
 	
 	public Slider createProbSlider() {
-		Slider slider = createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
-		myProb = slider.getValue();
-		slider.setOnDragDone(e -> myProb = slider.getValue());
-		return slider;
+		myProb = createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
+		return myProb;
 	}
 	
 

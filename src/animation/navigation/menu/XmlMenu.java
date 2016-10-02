@@ -15,27 +15,29 @@ import readxml.XmlMapper;
 public class XmlMenu extends Menu {
 	
 	private XmlSelection mySelection;
+	private Group root;
 	
 	public XmlMenu(Scene scene, Group r, GUIGenerator gui, XmlMapper info, ResourceBundle resource, String simulationname) {
 		super(r, gui);
+		root = r;
 		if (simulationname == null) {
 			mySelection = new XmlSelection(scene, r, info, resource);
-		} else if (simulationname.equals("FIRE")) {
+		} else if (simulationname.equals(resource.getString("FireLabel"))) {
 			mySelection = new FireSelections(scene, r, info, resource);
-		} else if(simulationname.equals("WA-TOR")) {
+		} else if(simulationname.equals(resource.getString("PredatorPreyLabel"))) {
 			mySelection = new PredatorPreySelections(scene, r, info, resource);
-		} else if(simulationname.equals("SEGREGATION")) {
+		} else if(simulationname.equals(resource.getString("SegregationLabel"))) {
 			mySelection = new SegregationSelections(scene, r, info, resource);
-		} else if(simulationname.equals("GAME OF LIFE")) {
+		} else if(simulationname.equals(resource.getString("GameOfLifeLabel"))) {
 			mySelection = new GameOfLifeSelections(scene, r, info, resource);
 		}
 	}
 		
 
 	public void generateMenu() {
-		getRoot().getChildren().clear();
+		root.getChildren().clear();
 		mySelection.generateXMLScreen();
-		getRoot().getChildren().add(mySelection.getScreen());
+		root.getChildren().add(mySelection.getScreen());
 	}
 	
 	

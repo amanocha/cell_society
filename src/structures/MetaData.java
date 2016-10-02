@@ -24,12 +24,12 @@ public class MetaData {
 
 
 	private String simulationName;
-	private String shape; 
 	private Neighbor myNeighbor;
 	private Update myUpdate;
 	private CellColor myColor;
 	private String myFile;
 	private GridShape myShape;
+	private String shape;
 
 	public void setCellShape(Grid grid, String name, String wrapping) {
 		this.shape = name;
@@ -53,11 +53,11 @@ public class MetaData {
 			myUpdate = new UpdateFire(grid, myNeighbor); 
 			myColor = new FireColor();
 		}
-		if (name.equals("predator prey")) {
+		if (name.equals("predator_prey")) {
 			myUpdate = new UpdatePredatorPrey(grid, myNeighbor);
 			myColor = new PredatorPreyColor();
 		}
-		if (name.equals("game of life")) {
+		if (name.equals("game_of_life")) {
 			myUpdate = new UpdateGameOfLife(grid, myNeighbor);
 			myColor = new GameOfLifeColor();
 		}
@@ -82,8 +82,8 @@ public class MetaData {
 		return myColor;
 	}
 	
-	public String getShape() {
-		return shape;
+	public GridShape getGridShape() {
+		return myShape;
 	}
 	
 	public Neighbor getNeighbors() {
@@ -92,6 +92,10 @@ public class MetaData {
 	
 	public Update getUpdate() {
 		return myUpdate;
+	}
+	
+	public String getShape() {
+		return shape;
 	}
 
 	

@@ -31,10 +31,10 @@ import structures.MetaData;
 import structures.SegregationCell;
 
 public class XmlMapper {
-
-	/**public static void main(String[] args) {
+	
+	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
-		xmlmap.mapXml("fire_400.xml");
+		xmlmap.mapXml(myResource.getString("DefaultSelection"));
 	}*/
 	
 	private Map<String, String> globalsMap;
