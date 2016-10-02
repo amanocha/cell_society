@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import engine.NeighborInterface;
+import engine.Neighbor;
 import structures.SegregationCell;
 import structures.Cell;
 import structures.Grid;
 
 public class UpdateSegregation extends Update {
 	private Grid grid;
-	private NeighborInterface neighbor;
+	private Neighbor neighbor;
 	private ArrayList<Cell> emptyCells;
 	private double satisfaction;
 	
-	public UpdateSegregation(Grid newGrid, NeighborInterface newNeighbors) {
+	public UpdateSegregation(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
 		neighbor = newNeighbors;

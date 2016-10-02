@@ -11,18 +11,13 @@ import readxml.XmlMapper;
 
 public class GameOfLifeSelections extends XmlSelection {
 	
-	private Scene myScene;
-	
-
 	public GameOfLifeSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
-		myScene = scene;
 	}
 	
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		getSimulationCombo().setValue("GAME OF LIFE");
-		addGridOptions();
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();

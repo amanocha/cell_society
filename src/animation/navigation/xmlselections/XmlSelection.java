@@ -61,19 +61,21 @@ public class XmlSelection {
 		mySelector.setOnTouchReleased(e -> {
 			myNav.createXmlMenu(mySelector.getValue().toString());
 		});
-		myScreen.getChildren().add(createCellNumberSlider());
-		myScreen.getChildren().add(mySelector);
-		myScreen.getChildren().add(makeXmlTitle());
-		return myScreen;
-	}
-	
-	public void addGridOptions() {
 		ComboBox<String> combo = createShapeComboBox(); 
 		combo.setOnAction(e -> myShape = combo.getValue());
 		myScreen.getChildren().add(combo);
 		ComboBox<String> combo1 = createGridTypeComboBox();
 		combo.setOnAction(e -> gridType = combo1.getValue());
 		myScreen.getChildren().add(combo1);
+		myScreen.getChildren().add(createCellNumberSlider());
+		myScreen.getChildren().add(mySelector);
+		myScreen.getChildren().add(makeXmlTitle());
+		return myScreen;
+	}
+	
+	
+	public String getWrapping() {
+		return gridType;
 	}
 	
 	public Pane getScreen() {

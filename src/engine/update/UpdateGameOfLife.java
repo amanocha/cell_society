@@ -2,15 +2,15 @@ package engine.update;
 
 import java.util.List;
 
-import engine.NeighborInterface;
+import engine.Neighbor;
 import structures.Cell;
 import structures.Grid;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
-	private NeighborInterface neighbor;
+	private Neighbor neighbor;
 	
-	public UpdateGameOfLife(Grid newGrid, NeighborInterface newNeighbors) {
+	public UpdateGameOfLife(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
 		neighbor = newNeighbors;

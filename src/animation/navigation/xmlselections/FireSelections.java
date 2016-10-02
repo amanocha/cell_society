@@ -24,7 +24,6 @@ public class FireSelections extends XmlSelection {
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		getSimulationCombo().setValue("FIRE");
-		addGridOptions();
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
@@ -38,6 +37,7 @@ public class FireSelections extends XmlSelection {
 	private void xmlMap() {
 		UserInputToXML input = new UserInputToXML(getCellNumber());
 		input.setShape(getShape());
+		input.setWrapping(getWrapping());
 		input.setSimulation("fire");
 		input.setProbCatch(myProb);
 		input.generateXML();

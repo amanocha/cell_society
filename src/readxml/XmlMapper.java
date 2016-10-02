@@ -132,10 +132,10 @@ public class XmlMapper {
 		}
 		
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
-		
-
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
-		meta.setCellShape(shape, myGrid);
+		String wrapping = globalsMap.get(prop.getProperty("wrapping"));
+		
+		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
 		myLoop = new Loop(meta, myGrid);

@@ -45,6 +45,10 @@ public class UserInputToXML {
 		addParameter(prop.getProperty("cellShape"), shape);
 	}
 	
+	public void setWrapping(String wrapping) {
+		addParameter(prop.getProperty("wrapping"), wrapping);
+	}
+	
 	public void setSatisfactionRate(double rate) {
 		addParameter(prop.getProperty("segregationSatisfactionRate"), Double.toString(rate));
 	}

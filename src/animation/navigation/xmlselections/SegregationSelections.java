@@ -23,7 +23,6 @@ public class SegregationSelections extends XmlSelection {
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		getSimulationCombo().setValue("SEGREGATION");
-		addGridOptions();
 		System.out.println(getSimulationCombo().getValue());
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
