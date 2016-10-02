@@ -5,16 +5,32 @@ import java.util.List;
 import structures.Cell;
 import structures.Grid;
 
-public class Neighbor {
+public abstract class Neighbor {
 	private Grid grid;
 	private int gridSize;
 	private int gridWidth;
+	private String wrapping;
 	
-	public Neighbor(Grid grid) {
+	public Neighbor(Grid grid, String wrapping) {
 		this.grid = grid;
 		this.gridSize = grid.getNumCells();
 		this.gridWidth = grid.getColumns();
+		this.wrapping = wrapping;
 	}
+	
+	public abstract List<Cell> getImmediateNeighbors(Cell cell);
+	
+	public abstract List<Cell> getDiagonalNeighbors(Cell cell);
+	
+	public boolean isToroidal() {
+		return (wrapping.equals("toroidal"));
+	}
+	
+	public boolean isInfinite() {
+		return (wrapping.equals("infinite"));
+	}
+	
+	/*****GETTERS*****/
 	
 	public List<Cell> getCellList() {
 		return grid.getCellList();
@@ -30,22 +46,5 @@ public class Neighbor {
 	
 	public int getGridWidth() {
 		return gridWidth;
-	}
-	
-	// only subclass needs this check
-	boolean inTopRow(int cellNumber) {
-		return cellNumber < getGridWidth();
-	}
-	
-	boolean inBottomRow(int cellNumber) {
-		return cellNumber >= (getGridSize()-getGridWidth());
-	}
-	
-	boolean inLeftColumn(int cellNumber) {
-		return (cellNumber % getGridWidth()) == 0;
-	}
-	
-	boolean inRightColumn(int cellNumber) {
-		return (cellNumber % getGridWidth()) == (getGridWidth()-1);
 	}
 }

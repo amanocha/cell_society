@@ -31,18 +31,18 @@ public class MetaData {
 	private String myFile;
 	private GridShape myShape;
 
-	public void setCellShape(String name, Grid grid) {
+	public void setCellShape(Grid grid, String name, String wrapping) {
 		this.shape = name;
 		if (shape.equals("square")) {
-			myNeighbors = new SquareNeighbors(grid);
+			myNeighbors = new SquareNeighbors(grid, wrapping);
 			myShape = new SquareGrid();
 		}
 		if (shape.equals("triangle")) {
-			myNeighbors = new TriangleNeighbors(grid);
+			myNeighbors = new TriangleNeighbors(grid, wrapping);
 			myShape = new TriangleGrid();
 		}
 		if (shape.equals("hexagon")) {
-			myNeighbors = new HexagonalNeighbors(grid);
+			myNeighbors = new HexagonalNeighbors(grid, wrapping);
 			myShape = new HexagonGrid();
 		}
 	}
