@@ -34,7 +34,7 @@ public class XmlMapper {
 
 	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
-		xmlmap.mapXmlToGrid("GameOfLife.xml");
+		xmlmap.mapXml("xml/fire_2500.xml");
 	}*/
 	
 	private Map<String, String> globalsMap;
@@ -63,7 +63,8 @@ public class XmlMapper {
 		// Get XML File loaded
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
-		inputFile = new File(classLoader.getResource(filename).getFile());
+		System.out.println(filename);
+		inputFile = new File(classLoader.getResource("xml/" + filename).getFile());
 
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -153,7 +154,7 @@ public class XmlMapper {
 	private Cell createFireCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
 		return new FireCell(cellIndex, 
 				cellInitialState, 
-				Double.parseDouble(globalsMap.get(prop.getProperty("energy"))));
+				Double.parseDouble(globalsMap.get(prop.getProperty("probabilityOfCatchingFire"))));
 	}
 	
 	private Cell createAnimalCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){

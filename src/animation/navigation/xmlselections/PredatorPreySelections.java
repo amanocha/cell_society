@@ -2,6 +2,7 @@ package animation.navigation.xmlselections;
 
 import java.util.ResourceBundle;
 
+import animation.navigation.Navigator;
 import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -17,10 +18,13 @@ public class PredatorPreySelections extends XmlSelection {
 	private int myEnergy;
 	private int myFishReproduction;
 	private int mySharkReproduction;
+	private Navigator myNav;
+	private Group root;
 
 	public PredatorPreySelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
+		root = r;
 	}
 	
 	public Pane generateXMLScreen() {
@@ -30,7 +34,7 @@ public class PredatorPreySelections extends XmlSelection {
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
-			getNavigator().createMainMenu();
+			myNav.createMainMenu();
 		});
 		getScreen().getChildren().add(button);
 		getScreen().getChildren().add(createEnergyLabel());
@@ -50,6 +54,7 @@ public class PredatorPreySelections extends XmlSelection {
 		input.setSharkReproductionTime(mySharkReproduction);
 		input.setSimulation("predator prey");
 		input.generateXML();
+		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
 	public Label createEnergyLabel() {

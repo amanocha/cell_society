@@ -2,6 +2,7 @@ package animation.navigation.xmlselections;
 
 import java.util.ResourceBundle;
 
+import animation.navigation.Navigator;
 import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -15,10 +16,13 @@ public class SegregationSelections extends XmlSelection {
 	
 	private double mySatisfaction;
 	private Scene myScene;
+	private Group root;
+	private Navigator myNav;
 	
 	public SegregationSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
+		root = r;
 	}
 
 	public Pane generateXMLScreen() {
@@ -29,7 +33,7 @@ public class SegregationSelections extends XmlSelection {
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
-			getNavigator().createMainMenu();
+			myNav.createMainMenu();
 		});
 		getScreen().getChildren().add(createSatisfactionLabel());
 		getScreen().getChildren().add(button);
@@ -44,6 +48,7 @@ public class SegregationSelections extends XmlSelection {
 		input.setSatisfactionRate(mySatisfaction);
 		input.setSimulation("segregation");
 		input.generateXML();
+		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
 	public Label createSatisfactionLabel() {

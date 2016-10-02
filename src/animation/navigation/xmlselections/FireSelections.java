@@ -2,6 +2,7 @@ package animation.navigation.xmlselections;
 
 import java.util.ResourceBundle;
 
+import animation.navigation.Navigator;
 import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -15,10 +16,13 @@ public class FireSelections extends XmlSelection {
 	
 	private Scene myScene;
 	private double myProb;
+	private Group root;
+	private Navigator myNav;
 	
 	public FireSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
+		root = r;
 		
 	}
 	
@@ -29,7 +33,7 @@ public class FireSelections extends XmlSelection {
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
-			getNavigator().createMainMenu();
+			myNav.createMainMenu();
 		});
 		getScreen().getChildren().add(createProbLabel());
 		getScreen().getChildren().add(createProbSlider());
@@ -43,6 +47,7 @@ public class FireSelections extends XmlSelection {
 		input.setSimulation("fire");
 		input.setProbCatch(myProb);
 		input.generateXML();
+		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
 	public Label createProbLabel() {

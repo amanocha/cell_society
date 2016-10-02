@@ -34,7 +34,7 @@ public class Navigator {
 	
 	public Navigator(Stage s, double w, double h) {
 		myInfo = new XmlMapper();
-		myInfo.mapXml("GameOfLife.xml");
+		myInfo.mapXml("fire_2500.xml");
 		myResource = PropertyResourceBundle.getBundle(LANGUAGE);
 		myStage = s;
 		this.width = w;
