@@ -59,8 +59,8 @@ public class Navigator {
         createMainMenu();
 	}
 	
-	public void createXmlMenu() {
-		xmlMenu = new XmlMenu(root, new GUIGenerator(myScene, root, myResource, myInfo)); 
+	public void createXmlMenu(String name) {
+		xmlMenu = new XmlMenu(myScene, root, new GUIGenerator(myScene, root, myResource, myInfo), myInfo, myResource, name); 
 		xmlMenu.generateMenu();
 	}
 	
@@ -73,6 +73,6 @@ public class Navigator {
 		mainMenu = new MainMenu(root, new GUIGenerator(myScene, root, myResource, myInfo));
         mainMenu.generateMenu();
 	}
-
+	
 
 }

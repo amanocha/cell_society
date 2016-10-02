@@ -45,9 +45,9 @@ public class XmlMapper {
 	private Properties prop;
 	
 	public XmlMapper() {
-		this.globalsMap = new HashMap<String, String>();
+		//this.globalsMap = new HashMap<String, String>();
 		this.meta = new MetaData();
-		cells = new ArrayList<Cell>();
+		//this.cells = new ArrayList<Cell>();
 		this.prop = new Properties();
 		try {
 			prop.load(getClass().getClassLoader().getResourceAsStream("simulation.properties"));
@@ -58,6 +58,8 @@ public class XmlMapper {
 	
 	// Maps XML to a grid, loop, and metadata object
 	public void mapXml(String filename) {
+		this.cells = new ArrayList<Cell>();
+		this.globalsMap = new HashMap<String, String>();
 		// Get XML File loaded
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();

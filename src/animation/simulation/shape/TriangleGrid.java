@@ -51,16 +51,26 @@ public class TriangleGrid extends GridShape {
 
 	private Shape fillGrid(Cell current, double screenwid, double screenheight, int wcount, int vcount, double dim, int row) {
 		Polygon triangle = new Polygon();
-		if (row % 2 == 0) {
+		if (row % 4 == 1) {
 			triangle.getPoints().setAll(new Double[] {
 					screenwid - (wcount + .5) * dim, screenwid - (vcount - 1) * dim,
 					screenwid - (wcount - .5) * dim, screenwid - (vcount - 1) * dim,
 					screenwid - (wcount) * dim, screenwid - (vcount) * dim });
-		} else {
+		} else if (row % 4 == 2) {
 			triangle.getPoints().setAll(new Double[] {
 					screenwid - wcount * dim, screenwid - vcount * dim,
 					screenwid - (wcount - 1) * dim, screenwid - vcount * dim,
 					screenwid - (wcount - .5) * dim, screenwid - (vcount - 1) * dim });
+		} else if (row % 4 == 3){
+			triangle.getPoints().setAll(new Double[] {
+					screenwid - (wcount - 1) * dim, screenwid - (vcount - 1) * dim,
+					screenwid - (wcount) * dim, screenwid -  (vcount - 1) * dim,
+					screenwid - (wcount - .5) * dim, screenwid - (vcount) * dim });
+		} else {
+			triangle.getPoints().setAll(new Double[] {
+					screenwid - (wcount) * dim, screenwid - (vcount - 1) * dim,
+					screenwid - (wcount - .5) * dim, screenwid -  (vcount) * dim,
+					screenwid - (wcount + .5) * dim, screenwid -  (vcount) * dim});
 		}
 		triangle.setFill(myColor.getColor((current.getCurrentState())));
 		return triangle;

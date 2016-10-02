@@ -92,7 +92,23 @@
 }
 
 
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
 
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+.slider .thumb{
+    -fx-background-color: #BABABA;
+    -fx-border-radius: 10;
+    -fx-border-color: #BABABA;
+}
+
+.slider .track{
+    -fx-background-color: #9E9E9E;
+}
 
 
 
