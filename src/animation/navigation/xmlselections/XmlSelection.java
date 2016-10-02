@@ -34,8 +34,7 @@ public class XmlSelection {
 	
 	private static ObservableList<String> GRID = FXCollections.observableArrayList(
 			"NORMAL",
-			"TORODIAL",
-			"INFINITE" );
+			"TOROADAL" );
 	
 	private PaneGenerator myPane;
 	private ResourceBundle myResource;
@@ -45,7 +44,8 @@ public class XmlSelection {
 	private ComboBox<String> mySelector;
 	private String myShape;
 	private String gridType;
-	private int myCellNumber;
+	//private int myCellNumber;
+	private Slider cellNumberSlider;
 
 	public XmlSelection(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		myPane = new PaneGenerator(scene);
@@ -62,26 +62,36 @@ public class XmlSelection {
 			myNav.createXmlMenu(mySelector.getValue().toString());
 		});
 		ComboBox<String> combo = createShapeComboBox(); 
-		combo.setOnAction(e -> myShape = combo.getValue());
+		combo.setOnAction(e -> {
+			myShape = combo.getValue();
+			System.out.println(myShape);
+		});
 		myScreen.getChildren().add(createShapeLabel());
 		myScreen.getChildren().add(createGridTypeLabel());
 		myScreen.getChildren().add(combo);
 		ComboBox<String> combo1 = createGridTypeComboBox();
-		combo.setOnAction(e -> gridType = combo1.getValue());
+		combo1.setOnAction(e -> {
+			gridType = combo1.getValue();
+			System.out.println(gridType);
+		});
 		myScreen.getChildren().add(combo1);
 		myScreen.getChildren().add(createCellNumberSlider());
 		myScreen.getChildren().add(mySelector);
 		myScreen.getChildren().add(makeXmlTitle());
 		myScreen.getChildren().add(createSimulationLabel());
 		myScreen.getChildren().add(createCellNumberLabel());
-		myScreen.getChildren().add(createCellNumberSlider());
 		return myScreen;
 	}
 
 	
 	
 	public String getWrapping() {
-		return gridType;
+		if (gridType.equals(myResource.getString("ToroidalLabel"))) {
+			return myResource.getString("Toroidalxml");
+		} else if (gridType.equals(myResource.getString("NormalLabel"))) {
+			return myResource.getString("Normalxml");
+		}
+		return myResource.getString("Normalxml");
 	}
 	
 	public Pane getScreen() {
@@ -89,7 +99,14 @@ public class XmlSelection {
 	}
 	
 	public String getShape() {
-		return myShape;
+		if (myShape.equals(myResource.getString("SquareLabel"))) {
+			return myResource.getString("Squarexml");
+		} else if (myShape.equals(myResource.getString("HexagonLabel"))) {
+			return myResource.getString("Hexagonxml");
+		} else if (myShape.equals(myResource.getString("TriangleLabel"))) {
+			return myResource.getString("Trianglexml");
+		}
+		return myResource.getString("Squarexml");
 	}
 	
 	public ComboBox<String> getSimulationCombo() {
@@ -105,23 +122,23 @@ public class XmlSelection {
 	}
 	
 	public int getCellNumber() {
-		return myCellNumber * myCellNumber;
+		return (int) cellNumberSlider.getValue() * (int) cellNumberSlider.getValue();
 	}
 	
 	public Label createSimulationLabel() {
-		return createSmallLabel("Simulation Selection", myScene.getWidth() * .22, myScene.getHeight() * .2);
+		return createSmallLabel(myResource.getString("SimulationLabel"), myScene.getWidth() * .22, myScene.getHeight() * .2);
 	}
 	
 	public Label createCellNumberLabel() {
-		return createSmallLabel("Cell Number", myScene.getWidth() * .3, myScene.getHeight() * .31);
+		return createSmallLabel(myResource.getString("CellNumberLabel"), myScene.getWidth() * .3, myScene.getHeight() * .31);
 	}
 	
 	public Label createShapeLabel() {
-		return createSmallLabel("Shape", myScene.getWidth() * .3, myScene.getHeight() * .4);
+		return createSmallLabel(myResource.getString("ShapeLabel"), myScene.getWidth() * .3, myScene.getHeight() * .4);
 	}
 	
 	public Label createGridTypeLabel() {
-		return createSmallLabel("Grid Type", myScene.getWidth() * .3, myScene.getHeight() * .5);
+		return createSmallLabel(myResource.getString("GridTypeLabel"), myScene.getWidth() * .3, myScene.getHeight() * .5);
 	}
 
 	public ComboBox<String> createShapeComboBox() {
@@ -154,10 +171,8 @@ public class XmlSelection {
 	}
 	
 	private Slider createCellNumberSlider() {
-		Slider slider = createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .4, myScene.getHeight() * .3, myScene.getWidth() * .25);
-		slider.setOnDragDone(e -> myCellNumber = (int) slider.getValue());
-		myCellNumber = (int) slider.getValue();
-		return slider;
+		cellNumberSlider = createGeneralSlider(0, 50, 25, 10, myScene.getWidth() * .4, myScene.getHeight() * .3, myScene.getWidth() * .25);
+		return cellNumberSlider;
 	}
 	
 	public Slider createGeneralSlider(int start, int end, double position, double tickunit, double x, double y, double minwidth) {
@@ -166,7 +181,7 @@ public class XmlSelection {
 		slider.setShowTickMarks(true);
 		slider.setMajorTickUnit(tickunit);
 		slider.setMinorTickCount(1);
-		//slider.setBlockIncrement(10);
+		slider.setBlockIncrement(1);
 		slider.setLayoutX(x);
 		slider.setLayoutY(y);
 		slider.setMinWidth(minwidth);

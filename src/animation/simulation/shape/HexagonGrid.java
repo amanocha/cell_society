@@ -1,32 +1,21 @@
 package animation.simulation.shape;
 
 import java.util.Iterator;
-
-import animation.simulation.color.CellColor;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import structures.Cell;
 import structures.Grid;
-import structures.MetaData;
 
 public class HexagonGrid extends GridShape {
-	
-	private CellColor myColor;
-	
 	
 	public HexagonGrid() {
 		super();
 	}
-	
-	public HexagonGrid(MetaData meta) {
-		super();
-		myColor = meta.getColor();
-	}
 
 
 	public Pane drawGrid(Grid grid, int w, int h) {
-		Pane screen = (Pane) setUpScreen(grid, w, h);
+		Pane screen = (Pane) super.drawGrid(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
 		int top = (w * 2) / ((3 * grid.getColumns()) + 1);
 		int diagonal = top / 2;
@@ -35,9 +24,9 @@ public class HexagonGrid extends GridShape {
 		double wcount = 0;
 		double vcount = 1;
 		int count = 0;
-		System.out.println(grid.getCellList().size());
 		while (itr.hasNext()) {
 			Cell current = itr.next();
+			insertStatesList(current.getCurrentState());
 			screen.getChildren().add(fillGrid(current, top, diagonal, height, wcount, vcount, row));
 			wcount = wcount + top * 2 + diagonal * 2;
 			count++;
@@ -63,7 +52,7 @@ public class HexagonGrid extends GridShape {
 				(wcount + top * 2 + diag * 2), vcount - (height / 2),
 				(wcount + top * 2 + diag), vcount - (height),
 				(wcount + top + diag), vcount - (height), });
-		hexagon.setFill(myColor.getColor((current.getCurrentState())));
+		hexagon.setFill(getColor().getColor((current.getCurrentState())));
 		return hexagon;
 	}
 

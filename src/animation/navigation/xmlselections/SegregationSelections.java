@@ -14,20 +14,22 @@ import readxml.XmlMapper;
 
 public class SegregationSelections extends XmlSelection {
 	
-	private double mySatisfaction;
+	private Slider mySatisfactionSlider;
 	private Scene myScene;
 	private Group root;
 	private Navigator myNav;
+	private ResourceBundle myResource;
 	
 	public SegregationSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
 		root = r;
+		myResource = resource;
 	}
 
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
-		getSimulationCombo().setValue("SEGREGATION");
+		getSimulationCombo().setValue(myResource.getString("SegregationLabel"));
 		System.out.println(getSimulationCombo().getValue());
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
@@ -44,21 +46,19 @@ public class SegregationSelections extends XmlSelection {
 		System.out.println(getCellNumber());
 		UserInputToXML input = new UserInputToXML(getCellNumber());
 		input.setShape(getShape());
-		input.setSatisfactionRate(mySatisfaction);
-		input.setSimulation("segregation");
+		input.setSatisfactionRate(mySatisfactionSlider.getValue());
+		input.setSimulation(myResource.getString("Segregationxml"));
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
 	public Label createSatisfactionLabel() {
-		return createSmallLabel("Satisfaction Rate", myScene.getWidth() * .25, myScene.getHeight() * .6);
+		return createSmallLabel(myResource.getString("SatisfactionLabel"), myScene.getWidth() * .25, myScene.getHeight() * .6);
 	}
 	
 	private Slider createSatisfactionSlider() {
-		Slider slider = createGeneralSlider(0, 1, 0.5, 0.1,  myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
-		mySatisfaction = slider.getValue();
-		slider.setOnDragDone(e -> mySatisfaction = slider.getValue());
-		return slider;
+		mySatisfactionSlider = createGeneralSlider(0, 1, 0.5, 0.1,  myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
+		return mySatisfactionSlider;
 	}
 
 }

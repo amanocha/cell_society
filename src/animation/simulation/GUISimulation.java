@@ -1,5 +1,8 @@
 package animation.simulation;
 
+import java.util.Iterator;
+import java.util.ResourceBundle;
+
 import animation.controls.button.ButtonGo;
 import animation.controls.button.ButtonPause;
 import animation.controls.button.ButtonStop;
@@ -28,20 +31,27 @@ import readxml.XmlMapper;
 public class GUISimulation {
 	
 	private StackPane stack;
-	private GridShape mySimulation;
+	private GridShape myGridIllustrator;
 	private Pane animation;
 	private Scene myScene;
 	private Timeline engine;
 	private XmlMapper myInfo;
 	private ScrollPane scroll;
+	private int myTime;
+	private LineChart<Number, Number> myChart;
 	
 	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
-		mySimulation = new TriangleGrid(info.getMeta());
+		//this is the right piece of code when we get xml to read in shape
+		myGridIllustrator = info.getMeta().getGridShape();
+		System.out.println(myGridIllustrator);
+		//myGridIllustrator = new SquareGrid();
+		myGridIllustrator.setColor(info.getMeta().getColor());
 		stack = new StackPane();
 		this.engine = animation;
 		myInfo = info;
 		scroll = new ScrollPane();
+		myTime = info.getGrid().getNumCells();
 	}
 	
 	public Pane getStackPane() {
@@ -55,16 +65,8 @@ public class GUISimulation {
 	    double other = myScene.getHeight() * .1;
 	    int width = (int) Math.round((myScene.getWidth() * .6 - other));
 	    int height = (int) Math.round((myScene.getWidth() * .6 - other));
-	    scroll.setMaxWidth(width);
-	    scroll.setMaxHeight(height);
-	    scroll.setFitToWidth(true);
-	    scroll.setFitToHeight(true);
-	    scroll.setPrefSize(width, height);
-	    scroll.setPrefViewportWidth(width);
-	    scroll.setPrefViewportHeight(height); 
-	    scroll.setMinViewportHeight(height);
-	    scroll.setMinViewportWidth(width);
-	    animation = ((TriangleGrid) mySimulation).drawGrid(myInfo.getGrid(), width, height);
+	    scroll = makeScrollPane(width, height);
+	    animation = myGridIllustrator.drawGrid(myInfo.getGrid(), width, height);
 	    scroll.setContent(animation);
 	    StackPane.setMargin(scroll, new Insets(left, top, other, other));
         stack.getChildren().add(scroll);
@@ -89,15 +91,15 @@ public class GUISimulation {
 		return hbox;
 	}
 	
-	public Pane generateSimulationScreenControls() {
+	public Pane generateSimulationScreenControls(ResourceBundle resources) {
 		VBox vbox = new VBox(10);
-		Button speed = (new ButtonString("SPEED UP")).getButton();
+		Button speed = (new ButtonString(resources.getString("ButtonSpeed"))).getButton();
 		speed.setPrefWidth(myScene.getWidth() * .20);
 		speed.setOnAction(e -> engine.setRate(engine.getCurrentRate() + 2));
-		Button slow = (new ButtonString("SLOW DOWN")).getButton();
+		Button slow = (new ButtonString(resources.getString("ButtonSlow"))).getButton();
 		slow.setPrefWidth(myScene.getWidth() * .20);
 		slow.setOnAction(e -> engine.setRate(engine.getCurrentRate() - 2));
-		Button step = (new ButtonString("STEP")).getButton();
+		Button step = (new ButtonString(resources.getString("ButtonStep"))).getButton();
 		step.setPrefWidth(myScene.getWidth() * .20);
 		step.setOnAction(e -> step());
 		vbox.getChildren().addAll(speed, slow, step);
@@ -106,14 +108,27 @@ public class GUISimulation {
 		return (Pane) vbox;
 	}
 	
-	/*public LineChart<Number, Number> generatSimulationChart(double x, double y) {
+	public LineChart<Number, Number> generatSimulationChart(ResourceBundle resources) {
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
-		LineChart chart = new LineChart(xAxis, yAxis); 
-		
-		XYChart.Series series = new XYChart.Series();
-		return (LineChart) chart.getControl();
-	}*/
+		myChart = new LineChart<Number, Number>(xAxis, yAxis); 
+		myChart.setTitle(resources.getString("LineChartTitle"));
+		Iterator<Integer> stateItr = myGridIllustrator.iterator();
+		while(stateItr.hasNext()) {
+			int cellnum = stateItr.next();
+			System.out.println(myTime);
+			XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+			myTime = myTime + myInfo.getGrid().getNumCells();
+			series.getData().add(new XYChart.Data<Number, Number>(myTime, cellnum));
+			myChart.getData().add(series);
+		}
+		myChart.setLayoutX(myScene.getWidth() * .60);
+		myChart.setLayoutY(myScene.getHeight() * .52);
+		myChart.setMaxHeight(myScene.getHeight() * .15);
+		myChart.setMaxWidth(myScene.getWidth() * .38);
+		return myChart;
+	}
+	
 	
 	public void stopAnimation() {
 		engine.stop();
@@ -121,6 +136,23 @@ public class GUISimulation {
 	
 	private void step() {
 		engine.setCycleCount(1);
+	}
+	
+	private ScrollPane makeScrollPane(double width, double height) {
+		scroll.setMaxWidth(width);
+	    scroll.setMaxHeight(height);
+	    scroll.setFitToWidth(true);
+	    scroll.setFitToHeight(true);
+	    scroll.setPrefSize(width, height);
+	    scroll.setPrefViewportWidth(width);
+	    scroll.setPrefViewportHeight(height); 
+	    scroll.setMinViewportHeight(height);
+	    scroll.setMinViewportWidth(width);
+	    return scroll;
+	}
+
+	public LineChart<Number, Number> getLineChart() {
+		return myChart;
 	}
 	
 }

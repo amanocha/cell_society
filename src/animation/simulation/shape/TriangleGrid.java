@@ -3,31 +3,21 @@ package animation.simulation.shape;
 
 
 import java.util.Iterator;
-
-import animation.simulation.color.CellColor;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import structures.Cell;
 import structures.Grid;
-import structures.MetaData;
 
 public class TriangleGrid extends GridShape {
-	
-	private CellColor myColor;
-	
-	
+
 	public TriangleGrid() {
 		super();
 	}
 	
-	public TriangleGrid(MetaData meta) {
-		super();
-		myColor = meta.getColor();
-	}
 	
 	public Pane drawGrid(Grid grid, int w, int h) {
-		Pane screen = setUpScreen(grid, w, h);
+		Pane screen = super.drawGrid(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
 		int width = (int) w / (grid.getColumns() / 2);
 		int height = (int) h / (grid.getRows()); 
@@ -36,6 +26,7 @@ public class TriangleGrid extends GridShape {
 		int row = 1;
 		while(itr.hasNext()) {
 			Cell current = itr.next();
+			insertStatesList(current.getCurrentState());
 			screen.getChildren().add(fillGrid(current, w, h, wcount, vcount, width, height, row));
 			wcount--;
 			if (wcount == 0) {
@@ -73,7 +64,7 @@ public class TriangleGrid extends GridShape {
 					screenwid - (wcount - .5) * width, screenwid -  (vcount) * height,
 					screenwid - (wcount + .5) * width, screenwid -  (vcount) * height });
 		}
-		triangle.setFill(myColor.getColor((current.getCurrentState())));
+		triangle.setFill(getColor().getColor((current.getCurrentState())));
 		return triangle;
 	}
 

@@ -1,5 +1,7 @@
 package engine;
 
+import java.util.ResourceBundle;
+
 import animation.simulation.GUISimulation;
 import engine.update.Update;
 import javafx.animation.KeyFrame;
@@ -22,6 +24,7 @@ public class Loop {
 	private Scene myScene;
 	private XmlMapper myInfo;
 	private GUISimulation mySimulationPane;
+	private ResourceBundle myResources;
 
 	
 	public Loop(MetaData meta, Grid grid) {
@@ -29,7 +32,7 @@ public class Loop {
 		this.grid = grid;
 	}
 	
-	public Loop(Scene s, XmlMapper info, Group r) {
+	public Loop(Scene s, XmlMapper info, Group r, ResourceBundle resources) {
 		this.animation = new Timeline();
 		this.myInfo = info;
 		this.root = r;
@@ -37,6 +40,7 @@ public class Loop {
 		mySimulationPane = new GUISimulation(myScene, myInfo, animation);
 		this.grid = info.getGrid();
 		update = info.getMeta().getUpdate();
+		myResources = resources;
 	}
 
 	public void init() {
@@ -48,25 +52,26 @@ public class Loop {
 	}
 
 	private void step() {
-			root.getChildren().remove(mySimulationPane.getStackPane());
-			update.determineUpdates();
-			update.updateCells();
-			root.getChildren().add(mySimulationPane.generateSimulationScreen());
-			//System.out.println("draw grid");
-			int count = 0;
-			for(int i = 0; i < grid.getRows(); i++) {
-				for (int j = 0; j < grid.getColumns(); j++) {
-					//System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
-					count++;
-				}
-				//System.out.print();
-			}
-			//System.out.println();
 		root.getChildren().remove(mySimulationPane.getStackPane());
 		update.determineUpdates();
 		update.updateCells();
 		root.getChildren().add(mySimulationPane.generateSimulationScreen());
-		//root.getChildren().add(mySimulationPane.generatSimulationChart());
+			//System.out.println("draw grid");
+			int count = 0;
+			for(int i = 0; i < grid.getRows(); i++) {
+				for (int j = 0; j < grid.getColumns(); j++) {
+					System.out.print(grid.getCellList().get(count).getCurrentState() + " ");
+					count++;
+				}
+				System.out.println();
+			}
+			System.out.println();
+		root.getChildren().remove(mySimulationPane.getStackPane());
+		root.getChildren().remove(mySimulationPane.getLineChart());
+		update.determineUpdates();
+		update.updateCells();
+		root.getChildren().add(mySimulationPane.generateSimulationScreen());
+		root.getChildren().add(mySimulationPane.generatSimulationChart(myResources));
 	}
 	
 	public GUISimulation getSimulationGUI() {
