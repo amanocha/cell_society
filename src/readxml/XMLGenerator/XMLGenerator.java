@@ -10,6 +10,8 @@ import java.util.Properties;
 import java.util.Map.Entry;
 
 public class XMLGenerator {
+	
+	private String fileName;
 //	public static void main(String[] args) {
 //		XMLGenerator x = new XMLGenerator();
 //		Map<String, String> globalMap = new HashMap<String, String>();
@@ -59,10 +61,12 @@ public class XMLGenerator {
 		// EOF
 		xml.append("</file>");
 		String xmlString = xml.toString();
-		generateFile(xmlString, globalMap, index);
+		fileName = generateFile(xmlString, globalMap, index);
 		return xmlString;
 	}
-	public void generateFile(String text, Map<String, String> globalMap, int index) {
+	
+	
+	public String generateFile(String text, Map<String, String> globalMap, int index) {
 		Properties prop = new Properties();
 		try {
 			prop.load(getClass().getClassLoader().getResourceAsStream("simulation.properties"));
@@ -70,7 +74,7 @@ public class XMLGenerator {
 			e1.printStackTrace();
 		}
 		String simulationName = globalMap.get(prop.getProperty("simulation"));
-		String fileName = simulationName + "_" + index + ".xml";
+		fileName = simulationName + "_" + index + ".xml";
 		File file = new File("data/xml/"+fileName);
 		PrintWriter writer;
 		try {
@@ -81,8 +85,14 @@ public class XMLGenerator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return fileName;
 	}
+	
+	public String getFileName() {
+		return fileName;
+	}
+	
+
 	public String generateSquareWithRandomState(int maxStateValue, int index) {
 		StringBuilder square = new StringBuilder();
 		int randomNum = (int)Math.floor(Math.random()*maxStateValue);

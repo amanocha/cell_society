@@ -11,6 +11,9 @@ import animation.simulation.shape.SquareGrid;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
@@ -103,11 +106,12 @@ public class GUISimulation {
 		return (Pane) vbox;
 	}
 	
-	/*public LineChart generatSimulationChart(double x, double y) {
-		XAxis x = new XAxis();
-		YAxis y = new YAxis();
-		LineChart chart = new LineChart(null, null); 
-		chart.addPoint(x, y);
+	/*public LineChart<Number, Number> generatSimulationChart(double x, double y) {
+		NumberAxis xAxis = new NumberAxis();
+		NumberAxis yAxis = new NumberAxis();
+		LineChart chart = new LineChart(xAxis, yAxis); 
+		
+		XYChart.Series series = new XYChart.Series();
 		return (LineChart) chart.getControl();
 	}*/
 	
