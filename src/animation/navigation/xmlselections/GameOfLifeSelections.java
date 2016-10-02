@@ -11,10 +11,12 @@ import readxml.XmlMapper;
 
 public class GameOfLifeSelections extends XmlSelection {
 	
+	private Scene myScene;
 	
 
 	public GameOfLifeSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
+		myScene = scene;
 	}
 	
 	public Pane generateXMLScreen() {

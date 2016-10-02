@@ -2,22 +2,51 @@ package animation.navigation.xmlselections;
 
 import java.util.ResourceBundle;
 
+import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 
 public class SegregationSelections extends XmlSelection {
 	
+	private double mySatisfaction;
+	private Scene myScene;
+	
 	public SegregationSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
+		myScene = scene;
 	}
 
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		addGridOptions();
-		getScreen().getChildren().add(createProbSlider());
+		Button button = makeMainMenuButton();
+		button.setOnAction(e -> {
+			xmlMap();
+			getNavigator().createMainMenu();
+		});
+		getScreen().getChildren().add(button);
+		getScreen().getChildren().add(createSatisfactionSlider());
 		return getScreen();
+	}
+	
+	private void xmlMap() {
+		System.out.println(getCellNumber());
+		UserInputToXML input = new UserInputToXML(getCellNumber());
+		input.setShape(getShape());
+		input.setSatisfactionRate(mySatisfaction);
+		input.setSimulation("segregation");
+		input.generateXML();
+	}
+	
+	public Slider createSatisfactionSlider() {
+		Slider slider = createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .30, myScene.getHeight() * .8, myScene.getWidth() * .25);
+		mySatisfaction = slider.getValue();
+		slider.setOnDragDone(e -> mySatisfaction = slider.getValue());
+		return slider;
 	}
 
 }

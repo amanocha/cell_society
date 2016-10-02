@@ -6,7 +6,6 @@ import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
 import animation.controls.pane.PaneGenerator;
 import animation.navigation.Navigator;
-import engine.UserInputToXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -80,6 +79,10 @@ public class XmlSelection {
 		myScreen.getChildren().add(combo1);
 	}
 	
+	public Pane getScreen() {
+		return myScreen;
+	}
+	
 	public String getShape() {
 		return myShape;
 	}
@@ -99,11 +102,7 @@ public class XmlSelection {
 	public int getCellNumber() {
 		return myCellNumber * myCellNumber;
 	}
-	
-	public Pane getScreen() {
-		return myScreen;
-	}
-	
+
 	public void setComboBox(String str) {
 		mySelector.setValue(str);
 	}
