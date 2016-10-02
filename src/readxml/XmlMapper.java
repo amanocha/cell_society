@@ -32,10 +32,10 @@ import structures.SegregationCell;
 
 public class XmlMapper {
 
-	/*public static void main(String[] args) {
+	public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
-		xmlmap.mapXml("xml/fire_2500.xml");
-	}*/
+		xmlmap.mapXml("predator prey_2500.xml");
+	}
 	
 	private Map<String, String> globalsMap;
 	private MetaData meta;
@@ -64,7 +64,7 @@ public class XmlMapper {
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
 		System.out.println(filename);
-		inputFile = new File(classLoader.getResource("xml/" + filename).getFile());
+		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
 
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
