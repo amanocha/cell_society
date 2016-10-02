@@ -32,10 +32,10 @@ import structures.SegregationCell;
 
 public class XmlMapper {
 
-	public static void main(String[] args) {
+	/**public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
-		xmlmap.mapXml("predator prey_2500.xml");
-	}
+		xmlmap.mapXml("fire_400.xml");
+	}*/
 	
 	private Map<String, String> globalsMap;
 	private MetaData meta;
@@ -63,7 +63,7 @@ public class XmlMapper {
 		// Get XML File loaded
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
-		System.out.println(filename);
+		
 		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
 
 		// DBFactory for parsing XML using DOM method
@@ -134,7 +134,7 @@ public class XmlMapper {
 		
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
-		String wrapping = globalsMap.get(prop.getProperty("wrapping"));
+		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
 		
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	

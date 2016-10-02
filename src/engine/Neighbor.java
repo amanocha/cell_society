@@ -22,6 +22,10 @@ public abstract class Neighbor {
 	
 	public abstract List<Cell> getDiagonalNeighbors(Cell cell);
 	
+	public abstract List<Cell> getSurroundingNeighbors(Cell cell, int vision);
+	
+	public abstract List<Cell> getOrderedNeighbors(Cell cell);
+	
 	public boolean isToroidal() {
 		return (wrapping.equals("toroidal"));
 	}

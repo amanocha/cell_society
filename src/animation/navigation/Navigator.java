@@ -16,7 +16,7 @@ import readxml.XmlMapper;
 public class Navigator {
 	
 	private static final String STYLESHEET = "style.css";
-	private static final String LANGUAGE = "English_en_US";
+	private static final String LANGUAGE = "simulation";
 	
 	private static Stage myStage;
 	private Group root;
@@ -34,7 +34,7 @@ public class Navigator {
 	
 	public Navigator(Stage s, double w, double h) {
 		myInfo = new XmlMapper();
-		myInfo.mapXml("fire_2500.xml");
+		myInfo.mapXml("fire_400.xml");
 		myResource = PropertyResourceBundle.getBundle(LANGUAGE);
 		myStage = s;
 		this.width = w;

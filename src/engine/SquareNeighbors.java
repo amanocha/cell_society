@@ -177,6 +177,32 @@ public class SquareNeighbors extends Neighbor {
 		return neighbors;
 	}
 	
+	@Override
+	public List<Cell> getSurroundingNeighbors(Cell cell, int vision) {
+		List<Cell> neighbors = new ArrayList<Cell>();
+		Cell northCell = cell, eastCell = cell, southCell = cell, westCell = cell;
+		int north, east, south, west;
+		for (int i = 1; i <= vision; i++) {
+			north = getNorthCell(northCell);
+			east = getEastCell(eastCell);
+			south = getSouthCell(southCell);
+			west = getWestCell(westCell);
+			if (north != -1) { 
+				northCell = getCellList().get(north);
+				neighbors.add(northCell); }
+			if (east != -1) { 
+				eastCell = getCellList().get(east);
+				neighbors.add(eastCell); }
+			if (south != -1) { 
+				southCell = getCellList().get(south);
+				neighbors.add(getCellList().get(south)); }
+			if (west != -1) { 
+				westCell = getCellList().get(west);
+				neighbors.add(getCellList().get(west)); }
+		}
+		return neighbors;
+	}
+	
 	/**
 	 * 0 = northwest
 	 * 1 = north
@@ -189,6 +215,7 @@ public class SquareNeighbors extends Neighbor {
 	 * @param cell
 	 * @return
 	 */
+	@Override
 	public List<Cell> getOrderedNeighbors(Cell cell) {
 		List<Cell> neighbors = new ArrayList<Cell>();
 		int northwest, north, northeast, east, southeast, south, southwest, west;
