@@ -65,26 +65,7 @@ public class GUIGenerator {
 		return main;
 	}
 
-/*
-	public Pane generateXMLScreen() {
-		Pane grid = myPane.getXMLMenuPane();
-		//Slider slider = createCellNumberSlider();
-		ComboBox<String> combo = makeGameSelectionCombo();
-		combo.setOnAction(e -> {
-			myNav.createXmlMenu();
-		});
-		Button button = makeMainMenuButton();
-		button.setOnAction(e -> {
-			//UserInputToXML input = new UserInputToXML(slider.getValue());
-			myNav.createMainMenu();
-		});
-		grid.getChildren().add(slider);
-		grid.getChildren().add(combo);
-		grid.getChildren().add(makeXmlTitle());
-		grid.getChildren().add(button);
-		return grid;
-	}
-	*/
+
 	public Node generateSimulationScreenLabel() {
 		Label label = (new Header(myResource.getString("SimulationLabel"))).getLabel();
 		label.setLayoutX(myScene.getWidth() * .07);
@@ -103,13 +84,7 @@ public class GUIGenerator {
 		});
 		return button;
 	}
-	
-/*	private Label makeXmlTitle() {
-		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
-		title.setLayoutX(myScene.getWidth() * .34);
-		title.setLayoutY(myScene.getHeight() * .1);
-		return title;
-	}*/
+
 	
 	private Button parameterButton() {
 		Button button = (new ButtonString(myResource.getString("ParameterButton"))).getButton();
@@ -117,129 +92,4 @@ public class GUIGenerator {
 		button.setOnAction(e -> myNav.createXmlMenu(null));
 		return button;
 	}
-	/*
-	private Button makeMainMenuButton() {
-		Button button = (new ButtonString(myResource.getString("MainMenu"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .25);
-		button.setLayoutX(myScene.getWidth() * .38);
-		button.setLayoutY(myScene.getHeight() * .9);
-		return button;
-	}
-	
-	
-	private ComboBox<String> makeGameSelectionCombo() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .3, myScene.getWidth() * .25, SIMULATIONS);
-	}
-	
-	private Slider createCellNumberSlider() {
-		return createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .30, myScene.getHeight() * .7, myScene.getWidth() * .25);
-	}
-	
-	public Slider createGeneralSlider(int start, int end, double position, double tickunit, double x, double y, double minwidth) {
-		Slider slider = new Slider(start, end, position);
-		slider.setShowTickLabels(true);
-		slider.setShowTickMarks(true);
-		slider.setMajorTickUnit(tickunit);
-		slider.setMinorTickCount(1);
-		//slider.setBlockIncrement(10);
-		slider.setLayoutX(x);
-		slider.setLayoutY(y);
-		slider.setMinWidth(minwidth);
-		return slider;
-	}
-	
-	public ComboBox<String> createGeneralComboBox(double x, double y, double minwidth, ObservableList<String> list) {
-		ComboBox<String> combo = new ComboBox<String>();
-		combo.setItems(list);
-		combo.setLayoutX(x);
-		combo.setLayoutY(y);
-		combo.setMinWidth(minwidth);
-		return combo;
-	}
-	*/
-/*	
-	private Label makeXmlTitle() {
-		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
-		title.setLayoutX(myScene.getWidth() * .34);
-		title.setLayoutY(myScene.getHeight() * .2);
-		return title;
-	}
-	
-	private Button makeMainMenuButton() {
-		Button button = (new ButtonString(myResource.getString("MainMenu"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .25);
-		button.setLayoutX(myScene.getWidth() * .38);
-		button.setLayoutY(myScene.getHeight() * .6);
-		return button;
-	}
-	
-	
-	private ComboBox<String> makeGameSelectionCombo() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .3, myScene.getWidth() * .25, SIMULATIONS);
-	}
-	
-	private Slider makeSlider() {
-		return createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .30, myScene.getHeight() * .7, myScene.getWidth() * .25);
-	}
-	
-	private Button startButton() {
-		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .5);
-		button.setOnAction(e -> {
-			myInfo.mapXml(myInfo.getMeta().getFileName());
-			myNav.createSimluationMenu();
-		});
-		return button;
-	}
-	
-	private Button parameterButton() {
-		Button button = (new ButtonString(myResource.getString("ParameterButton"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .5);
-		button.setOnAction(e -> myNav.createXmlMenu());
-		return button;
-	}
-	
-	private Slider createProbSlider() {
-		return createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .30, myScene.getHeight() * .8, myScene.getWidth() * .25);
-	}
-	
-	private Slider createEnergySlider() {
-		return createGeneralSlider(0, 50, 22, 5, myScene.getWidth() * .30, myScene.getHeight() * .9, myScene.getWidth() * .25);
-	}
-	
-	private Slider createReproductiveSlider() {
-		return createGeneralSlider(3, 20, 8, 5, myScene.getWidth() * .30, myScene.getHeight() * .2, myScene.getWidth() * .25);
-	}
-	
-	private ComboBox createShapeComboBox() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .5, myScene.getWidth() * .25, SHAPES);
-	}
-	
-	private ComboBox createGridTypeComboBox() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .6, myScene.getWidth() * .25, GRID);
-	}
-	
-	private Slider createGeneralSlider(int start, int end, double position, double tickunit, double x, double y, double minwidth) {
-		Slider slider = new Slider(start, end, position);
-		slider.setShowTickLabels(true);
-		slider.setShowTickMarks(true);
-		slider.setMajorTickUnit(tickunit);
-		slider.setMinorTickCount(1);
-		//slider.setBlockIncrement(10);
-		slider.setLayoutX(x);
-		slider.setLayoutY(y);
-		slider.setMinWidth(minwidth);
-		return slider;
-	}
-	
-	private ComboBox<String> createGeneralComboBox(double x, double y, double minwidth, ObservableList<String> list) {
-		ComboBox<String> combo = new ComboBox<String>();
-		combo.setItems(list);
-		combo.setLayoutX(x);
-		combo.setLayoutY(y);
-		combo.setMinWidth(minwidth);
-		return combo;
-	}*/
-
-	
 }

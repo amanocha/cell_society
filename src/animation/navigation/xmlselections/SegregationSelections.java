@@ -22,7 +22,9 @@ public class SegregationSelections extends XmlSelection {
 
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
+		getSimulationCombo().setValue("SEGREGATION");
 		addGridOptions();
+		System.out.println(getSimulationCombo().getValue());
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
@@ -42,7 +44,7 @@ public class SegregationSelections extends XmlSelection {
 		input.generateXML();
 	}
 	
-	public Slider createSatisfactionSlider() {
+	private Slider createSatisfactionSlider() {
 		Slider slider = createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .30, myScene.getHeight() * .8, myScene.getWidth() * .25);
 		mySatisfaction = slider.getValue();
 		slider.setOnDragDone(e -> mySatisfaction = slider.getValue());

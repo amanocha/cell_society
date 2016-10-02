@@ -51,20 +51,17 @@ public class XmlSelection {
 		myResource = resource;
 		myNav = new Navigator(scene, r, info);
 		myScene = scene;
-		myScreen = generateXMLScreen();
 		System.out.println(myScreen);
 	}
 	
 	public Pane generateXMLScreen() {
+		myScreen.getChildren().clear();
 		myScreen = myPane.getXMLMenuPane();
-		Slider slider = createCellNumberSlider();
-		slider.setOnDragDone(e -> myCellNumber = (int) slider.getValue());
-		myCellNumber = (int) slider.getValue();
 		mySelector = makeGameSelectionCombo();
-		mySelector.setOnAction(e -> {
+		mySelector.setOnTouchReleased(e -> {
 			myNav.createXmlMenu(mySelector.getValue().toString());
 		});
-		myScreen.getChildren().add(slider);
+		myScreen.getChildren().add(createCellNumberSlider());
 		myScreen.getChildren().add(mySelector);
 		myScreen.getChildren().add(makeXmlTitle());
 		return myScreen;
@@ -103,14 +100,6 @@ public class XmlSelection {
 		return myCellNumber * myCellNumber;
 	}
 
-	public void setComboBox(String str) {
-		mySelector.setValue(str);
-	}
-	
-	public Slider createProbSlider() {
-		return createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .30, myScene.getHeight() * .8, myScene.getWidth() * .25);
-	}
-
 	public ComboBox<String> createShapeComboBox() {
 		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .5, myScene.getWidth() * .25, SHAPES);
 	}
@@ -127,7 +116,7 @@ public class XmlSelection {
 	}
 	
 	
-	protected Button makeMainMenuButton() {
+	public Button makeMainMenuButton() {
 		Button button = (new ButtonString(myResource.getString("MainMenu"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .25);
 		button.setLayoutX(myScene.getWidth() * .38);
@@ -141,7 +130,10 @@ public class XmlSelection {
 	}
 	
 	private Slider createCellNumberSlider() {
-		return createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .30, myScene.getHeight() * .7, myScene.getWidth() * .25);
+		Slider slider = createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .4, myScene.getHeight() * .2, myScene.getWidth() * .25);
+		slider.setOnDragDone(e -> myCellNumber = (int) slider.getValue());
+		myCellNumber = (int) slider.getValue();
+		return slider;
 	}
 	
 	public Slider createGeneralSlider(int start, int end, double position, double tickunit, double x, double y, double minwidth) {

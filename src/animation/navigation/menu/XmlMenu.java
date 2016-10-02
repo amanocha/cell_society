@@ -21,13 +21,12 @@ public class XmlMenu extends Menu {
 		if (simulationname == null) {
 			mySelection = new XmlSelection(scene, r, info, resource);
 		} else if (simulationname.equals("FIRE")) {
-			System.out.println("hello");
 			mySelection = new FireSelections(scene, r, info, resource);
-		} else if(simulationname.equals("WATOR")) {
+		} else if(simulationname.equals("WA-TOR")) {
 			mySelection = new PredatorPreySelections(scene, r, info, resource);
 		} else if(simulationname.equals("SEGREGATION")) {
 			mySelection = new SegregationSelections(scene, r, info, resource);
-		} else {
+		} else if(simulationname.equals("GAME OF LIFE")) {
 			mySelection = new GameOfLifeSelections(scene, r, info, resource);
 		}
 	}

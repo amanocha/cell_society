@@ -29,16 +29,17 @@ public class TriangleGrid extends GridShape {
 	public Pane drawGrid(Grid grid, int w, int h) {
 		Pane screen = setUpScreen(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
-		int dimension = (int) w / (grid.getColumns());
-		int wcount = grid.getColumns();
-		int vcount = grid.getRows();
+		int dimension = (int) w / (grid.getColumns() / 2);
+		int wcount = (grid.getColumns() / 2);
+		System.out.println(wcount);
+		int vcount = (grid.getRows());
 		int row = 1;
 		while(itr.hasNext()) {
 			Cell current = itr.next();
 			screen.getChildren().add(fillGrid(current, w, h, wcount, vcount, dimension, row));
 			wcount--;
-			if (wcount % grid.getColumns() == 0) {
-				wcount = grid.getColumns();
+			if (wcount == 0) {
+				wcount = (grid.getColumns() / 2);
 				row++;
 				if (row % 2 != 0) {
 					vcount--;

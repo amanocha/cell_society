@@ -24,6 +24,7 @@ public class PredatorPreySelections extends XmlSelection {
 	
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
+		getSimulationCombo().setValue("WA-TOR");
 		addGridOptions();
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
