@@ -47,4 +47,8 @@ public abstract class Neighbor {
 	public int getGridWidth() {
 		return gridWidth;
 	}
+	
+	public String getWrapping() {
+		return wrapping;
+	}
 }
