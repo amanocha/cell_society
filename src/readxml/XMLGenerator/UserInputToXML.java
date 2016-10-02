@@ -1,4 +1,4 @@
-package engine;
+package readxml.XMLGenerator;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import readxml.XmlMapper;
-import readxml.XMLGenerator.XMLGenerator;
 
 public class UserInputToXML {
 	private Map<String, String> globalsMap;

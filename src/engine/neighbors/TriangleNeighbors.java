@@ -1,10 +1,10 @@
-package engine;
+package engine.neighbors;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class TriangleNeighbors extends Neighbor{
 	

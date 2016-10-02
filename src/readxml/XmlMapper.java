@@ -23,12 +23,12 @@ import engine.Loop;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-import structures.Animal;
-import structures.Cell;
-import structures.FireCell;
 import structures.Grid;
 import structures.MetaData;
-import structures.SegregationCell;
+import structures.cell.Animal;
+import structures.cell.Cell;
+import structures.cell.FireCell;
+import structures.cell.SegregationCell;
 
 public class XmlMapper {
 	

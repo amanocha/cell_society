@@ -25,6 +25,7 @@ public class XmlMenu extends Menu {
 		} else if (simulationname.equals(resource.getString("FireLabel"))) {
 			mySelection = new FireSelections(scene, r, info, resource);
 		} else if(simulationname.equals(resource.getString("PredatorPreyLabel"))) {
+			System.out.println("Hello");
 			mySelection = new PredatorPreySelections(scene, r, info, resource);
 		} else if(simulationname.equals(resource.getString("SegregationLabel"))) {
 			mySelection = new SegregationSelections(scene, r, info, resource);

@@ -7,8 +7,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class SquareGrid extends GridShape {
 

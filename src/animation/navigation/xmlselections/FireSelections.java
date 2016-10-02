@@ -3,7 +3,6 @@ package animation.navigation.xmlselections;
 import java.util.ResourceBundle;
 
 import animation.navigation.Navigator;
-import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
+import readxml.XMLGenerator.UserInputToXML;
 
 public class FireSelections extends XmlSelection {
 	
@@ -43,8 +43,7 @@ public class FireSelections extends XmlSelection {
 	}
 	
 	private void xmlMap() {
-		UserInputToXML input = new UserInputToXML(getCellNumber(), 3);
-		input = super.startXMLMap(input);
+		UserInputToXML input = super.startXMLMap(3);
 		input.setSimulation(myResource.getString("Firexml"));
 		input.setProbCatch(myProb.getValue());
 		input.generateXML();

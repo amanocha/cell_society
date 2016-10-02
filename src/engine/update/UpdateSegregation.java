@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import engine.Neighbor;
-import structures.SegregationCell;
-import structures.Cell;
+import engine.neighbors.Neighbor;
+import structures.cell.Cell;
+import structures.cell.SegregationCell;
 import structures.Grid;
 
 public class UpdateSegregation extends Update {

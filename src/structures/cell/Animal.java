@@ -1,4 +1,4 @@
-package structures;
+package structures.cell;
 
 public class Animal extends Cell {
 	private int time;
