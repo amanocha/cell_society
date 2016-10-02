@@ -2,8 +2,6 @@ package animation.simulation.shape;
 
 
 import java.util.Iterator;
-
-import animation.simulation.color.CellColor;
 import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
@@ -11,34 +9,29 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
 import structures.Cell;
 import structures.Grid;
-import structures.MetaData;
 
 public class SquareGrid extends GridShape {
-	
-	private CellColor myColor;
-	
+
 	
 	public SquareGrid() {
 		super();
 	}
-	
-	public SquareGrid(MetaData meta) {
-		super();
-		myColor = meta.getColor();
-	}
-
 
 	public Pane drawGrid(Grid grid, int w, int h) {
-		Pane screen = setUpScreen(grid, w, h);
-		int width = (int) w / (grid.getColumns());
-		int height = (int) h / (grid.getRows());
+		Pane screen = new TilePane();
+		screen.setMaxWidth(w);
+		screen.setMaxHeight(h);
+		screen.setPrefSize(w, h);
+		((TilePane) screen).setHgap(1);
+		((TilePane) screen).setVgap(1);
+		int width = (int) ((w + 1) / (grid.getColumns())) - 1;
+		int height = (int) ((h + 1) / (grid.getRows())) - 1;
 		((TilePane) screen).setPrefColumns(grid.getColumns());
 		((TilePane) screen).setTileAlignment(Pos.CENTER);
-		((TilePane) screen).setHgap(2);
-		((TilePane) screen).setVgap(2);
 		Iterator<Cell> itr = grid.iterator();
 		while(itr.hasNext()) {
 			Cell current = itr.next();
+			insertStatesList(current.getCurrentState());
 			screen.getChildren().add(fillGrid(current, width, height));
 		}
 		return screen;
@@ -46,11 +39,11 @@ public class SquareGrid extends GridShape {
 	
 	private Shape fillGrid(Cell current, int width, int height) {
 		int dim = width;
-		if (width > height) {
+		if (width < height) {
 			dim = height;
 		}
 		Rectangle rectangle = new Rectangle();
-		rectangle.setFill(myColor.getColor(current.getCurrentState()));
+		rectangle.setFill(getColor().getColor(current.getCurrentState()));
 		rectangle.setWidth(dim);
 		rectangle.setHeight(dim);
 		return rectangle;

@@ -1,41 +1,26 @@
 package animation.navigation;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.ResourceBundle;
 import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
 import animation.controls.label.Message;
 import animation.controls.pane.PaneGenerator;
-import animation.navigation.menu.MainMenu;
 import animation.navigation.menu.Menu;
 import engine.Loop;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import readxml.XmlMapper;
 
 
 
 public class GUIGenerator {
-	
-	private static ObservableList<String> SIMULATIONS = 
-		    FXCollections.observableArrayList(
-		    		"SEGREGATION", 
-		    		"GAME OF LIFE", 
-		    		"FIRE", 
-		    		"WA-TOR" );
+
 	
 	private PaneGenerator myPane;
 	private Menu myMenu;
@@ -43,6 +28,7 @@ public class GUIGenerator {
 	private ResourceBundle myResource;
 	private XmlMapper myInfo;
 	private Navigator myNav;
+	private Group root;
 	
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource, XmlMapper info) {
 		this.myScene = scene;
@@ -51,25 +37,16 @@ public class GUIGenerator {
 		myResource = resource;
 		myInfo = info;
 		myNav = new Navigator(scene, r, info);
+		root = r;
 	}
 
 
 	public Pane generateMainScreen() {
 		GridPane grid = myPane.getMainMenuPane();
 		Label header = (new Header(myResource.getString("Title"))).getLabel(); 
-		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .5);
-		button.setOnAction(e -> {
-			myInfo = new XmlMapper();
-			myInfo.mapXml(myInfo.getMeta().getFileName());
-			myNav.createSimluationMenu();
-		});
 		grid.add(header, 1, 0);
-		grid.add(button, 1, 1);
-		button = (new ButtonString(myResource.getString("ParameterButton"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .5);
-		button.setOnAction(e -> myNav.createXmlMenu());
-		grid.add(button, 1, 2);
+		grid.add(startButton(), 1, 1);
+		grid.add(parameterButton(), 1, 2);
 		Label text = (new Message(myResource.getString("CurrentSimulation"))).getLabel();
 		text.setPrefWidth(myScene.getWidth() * .5);
 		grid.add(text, 1, 4);
@@ -89,50 +66,6 @@ public class GUIGenerator {
 	}
 
 
-	public Pane generateXMLScreen() {
-		Pane grid = myPane.getXMLMenuPane();
-		Button button = (new ButtonString(myResource.getString("MainMenu"))).getButton();
-		button.setPrefWidth(myScene.getWidth() * .25);
-		//button.setOnAction(e -> ((MainMenu) myMenu).generateMenu());
-		VBox hbox = new VBox((myScene.getHeight() * .01));
-		ComboBox<String> combo = new ComboBox<String>();
-		combo.setItems(SIMULATIONS);
-		combo.setLayoutX(myScene.getWidth() * .38);
-		combo.setLayoutY(myScene.getHeight() * .3);
-		combo.setMinWidth(myScene.getWidth() * .25);
-		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
-		title.setLayoutX(myScene.getWidth() * .32);
-		title.setLayoutY(myScene.getHeight() * .2);
-		hbox.setLayoutX(myScene.getWidth() * .08);
-		hbox.setLayoutY(myScene.getHeight() * .35);
-		button.setLayoutX(myScene.getWidth() * .38);
-		button.setLayoutY(myScene.getHeight() * .6);
-		grid.getChildren().add(combo);
-		grid.getChildren().add(title);
-		grid.getChildren().add(button);
-		//grid.getChildren().add(hbox);
-		return grid;
-	}
-	
-
-	
-	public Pane generateSimulationScreenControls() {
-		VBox vbox = new VBox(10);
-		Button speed = (new ButtonString(myResource.getString("SpeedUp"))).getButton();
-		speed.setPrefWidth(myScene.getWidth() * .20);
-		speed.setOnAction(e -> myNav.createMainMenu());
-		Button slow = (new ButtonString(myResource.getString("SlowDown"))).getButton();
-		slow.setPrefWidth(myScene.getWidth() * .20);
-		slow.setOnAction(e -> myNav.createMainMenu());
-		Button step = (new ButtonString(myResource.getString("Step"))).getButton();
-		step.setPrefWidth(myScene.getWidth() * .20);
-		step.setOnAction(e -> myNav.createMainMenu());
-		vbox.getChildren().addAll(speed, slow, step);
-		vbox.setLayoutX(myScene.getWidth() * .73);
-		vbox.setLayoutY(myScene.getHeight() * .15);
-		return (Pane) vbox;
-	}
-	
 	public Node generateSimulationScreenLabel() {
 		Label label = (new Header(myResource.getString("SimulationLabel"))).getLabel();
 		label.setLayoutX(myScene.getWidth() * .07);
@@ -141,4 +74,22 @@ public class GUIGenerator {
 	}
 	
 	
+	
+	private Button startButton() {
+		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
+		button.setPrefWidth(myScene.getWidth() * .5);
+		button.setOnAction(e -> {
+			myInfo.mapXml(myInfo.getMeta().getFileName());
+			myNav.createSimluationMenu();
+		});
+		return button;
+	}
+
+	
+	private Button parameterButton() {
+		Button button = (new ButtonString(myResource.getString("ParameterButton"))).getButton();
+		button.setPrefWidth(myScene.getWidth() * .5);
+		button.setOnAction(e -> myNav.createXmlMenu(null));
+		return button;
+	}
 }

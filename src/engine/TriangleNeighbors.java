@@ -6,10 +6,10 @@ import java.util.List;
 import structures.Cell;
 import structures.Grid;
 
-public class TriangleNeighbors extends Neighbor implements NeighborInterface{
+public class TriangleNeighbors extends Neighbor{
 	
-	public TriangleNeighbors(Grid grid) {
-		super(grid);
+	public TriangleNeighbors(Grid grid, String wrapping) {
+		super(grid, wrapping);
 	}
 	
 	private String getOrientation(Cell cell) {
@@ -23,49 +23,45 @@ public class TriangleNeighbors extends Neighbor implements NeighborInterface{
 		}
 	}
 	
-	private int getLeftCell(Cell cell) {
-		int gridWidth = getGridWidth();
+	private int getAboveCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-
-		if (getOrientation(cell).equals("up")) {
-			if (cellNumber % 2*gridWidth != 3*gridWidth/4) {
-				if (cellNumber % (2*gridWidth) < gridWidth) {
-					return (cellNumber - gridWidth/2);
-				} else {
-					return (cellNumber - gridWidth/2 - 1);
-				}
-			}
+		if (cellNumber >= getGridWidth()/2) {
+			return (cellNumber - getGridWidth()/2);
 		} else {
-			if (cellNumber % 2*gridWidth != 0) {
-				if (cellNumber % (2*gridWidth) < gridWidth) {
-					return (cellNumber + gridWidth/2 - 1);
-				} else {
-					return (cellNumber + gridWidth/2);
-				}
+			if (isToroidal()) {
+				return (getGridSize() - getGridWidth() + cellNumber);
 			}
 		}
 		return -1;
 	}
 	
-	private int getRightCell(Cell cell) {
-		int gridWidth = getGridWidth();
+	private int getNorthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-
-		if (getOrientation(cell).equals("up")) {
-			if (cellNumber % 2*gridWidth != gridWidth/2 - 1) {
-				if (cellNumber % (2*gridWidth) < gridWidth) {
-					return (cellNumber - gridWidth/2 + 1);
-				} else {
-					return (cellNumber - gridWidth/2);
-				}
+		if (cellNumber % 2*getGridWidth() != getGridWidth()/2 - 1) {
+			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
+				return (cellNumber - getGridWidth()/2 + 1);
+			} else {
+				return (cellNumber - getGridWidth()/2);
 			}
 		} else {
-			if (cellNumber % 2*gridWidth != 3*gridWidth/4 - 1) {
-				if (cellNumber % (2*gridWidth) < gridWidth) {
-					return (cellNumber + gridWidth/2);
-				} else {
-					return (cellNumber + gridWidth/2 + 1);
-				}
+			if (isToroidal()) {
+				return (cellNumber - getGridWidth() + 1);
+			}
+		}
+		return -1;
+	}
+	
+	private int getNorthWestCell(Cell cell) {
+		int cellNumber = cell.getNumber();
+		if (cellNumber % 2*getGridWidth() != 0) {
+			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
+				return (cellNumber - getGridWidth()/2);
+			} else {
+				return (cellNumber - getGridWidth()/2 - 1);
+			}
+		} else {
+			if (isToroidal()) {
+				return (cellNumber - 1);
 			}
 		}
 		return -1;
@@ -73,23 +69,43 @@ public class TriangleNeighbors extends Neighbor implements NeighborInterface{
 	
 	private int getBelowCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-
-		if (getOrientation(cell).equals("up")) {
-			if (cellNumber < getGridSize() - getGridWidth()) {
-				return (cellNumber + getGridWidth());
+		if (cellNumber < getGridSize() - getGridWidth()/2) {
+			return (cellNumber + getGridWidth()/2);
+		} else {
+			if (isToroidal()) {
+				return (cellNumber % getGridWidth());
 			}
 		}
 		return -1;
 	}
 	
-	private int getAboveCell(Cell cell) {
-		int gridSize = getGridSize();
-		int gridWidth = getGridWidth();
+	private int getSouthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-		
-		if (getOrientation(cell).equals("down")) {
-			if (cellNumber < gridSize - gridWidth/2) {
-				return (cellNumber - gridWidth);
+		if (cellNumber % 2*getGridWidth() != 3*getGridWidth()/4 - 1) {
+			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
+				return (cellNumber + getGridWidth()/2);
+			} else {
+				return (cellNumber + getGridWidth()/2 + 1);
+			}
+		} else {
+			if (isToroidal()) {
+				return (cellNumber + 1);
+			}
+		}
+		return -1;
+	}
+	
+	private int getSouthWestCell(Cell cell) {
+		int cellNumber = cell.getNumber();
+		if (cellNumber % 2*getGridWidth() != 0) {
+			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
+				return (cellNumber + getGridWidth()/2 - 1);
+			} else {
+				return (cellNumber + getGridWidth()/2);
+			}
+		} else {
+			if (isToroidal()) {
+				return (cellNumber + getGridWidth() - 1);
 			}
 		}
 		return -1;
@@ -98,26 +114,27 @@ public class TriangleNeighbors extends Neighbor implements NeighborInterface{
 	@Override
 	public List<Cell> getImmediateNeighbors(Cell cell) {
 		List<Cell> neighbors = new ArrayList<Cell>();
-		int left, right, below, above;
 		
-		left = getLeftCell(cell);
-		if (left != -1) {
-			neighbors.add(getCellList().get(left));
-		}
-		
-		right = getRightCell(cell);
-		if (right != -1) {
-			neighbors.add(getCellList().get(right));
-		}
-		
-		below = getBelowCell(cell);
-		if (below != -1) {
-			neighbors.add(getCellList().get(below));
-		}
-		
-		above = getAboveCell(cell);
-		if (above != -1) {
-			neighbors.add(getCellList().get(above));
+		if (getOrientation(cell).equals("up")) {
+			int below, northeast, northwest;
+			
+			below = getBelowCell(cell);
+			northeast = getNorthEastCell(cell);
+			northwest = getNorthWestCell(cell);
+			
+			if (below != -1) { neighbors.add(getCellList().get(below)); }
+			if (northeast != -1) { neighbors.add(getCellList().get(northeast)); }
+			if (northwest != -1) { neighbors.add(getCellList().get(northwest)); }
+		} else {
+			int above, southeast, southwest;
+			
+			above = getAboveCell(cell);
+			southeast = getSouthEastCell(cell);
+			southwest = getSouthWestCell(cell);
+
+			if (above != -1) { neighbors.add(getCellList().get(above)); }
+			if (southeast != -1) { neighbors.add(getCellList().get(southeast)); }
+			if (southwest != -1) { neighbors.add(getCellList().get(southwest)); }
 		}
 		
 		return neighbors;
@@ -128,16 +145,5 @@ public class TriangleNeighbors extends Neighbor implements NeighborInterface{
 		List<Cell> neighbors = new ArrayList<Cell>();
 		return neighbors;
 	}
-
-	@Override
-	public List<Cell> getToroidalImmediateNeighbors(Cell cell) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Cell> getToroidalDiagonalNeighbors(Cell cell) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

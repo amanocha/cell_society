@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import engine.NeighborInterface;
+import engine.Neighbor;
 import structures.Animal;
 import structures.Cell;
 import structures.Grid;
@@ -14,7 +14,7 @@ public class UpdatePredatorPrey extends Update {
 	private int fishTime;
 	private int sharkTime;
 	
-	public UpdatePredatorPrey(Grid newGrid, NeighborInterface newNeighbors) {
+	public UpdatePredatorPrey(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();
 		fishTime = ((Animal) newGrid.getCellList().get(0)).getFishTime();

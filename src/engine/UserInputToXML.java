@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import readxml.XmlMapper;
 import readxml.XMLGenerator.XMLGenerator;
 
 public class UserInputToXML {
@@ -13,13 +14,15 @@ public class UserInputToXML {
 	private int numCells;
 	private int numStates;
 	private XMLGenerator xmlGenerator;
-	Properties prop;
+	private Properties prop;
+	private XmlMapper mapper;
 	
-	public UserInputToXML(int numCells, int numStates) {
+	public UserInputToXML(int numCells, int maxStates) {
 		this.globalsMap = new HashMap<String, String>();
 		this.numCells = numCells;
-		this.numStates = numStates;
+		this.numStates = maxStates;
 		this.xmlGenerator = new XMLGenerator();
+		this.mapper = new XmlMapper();
 		this.prop = new Properties();
 		try {
 			prop.load(getClass().getClassLoader().getResourceAsStream("simulation.properties"));
@@ -45,6 +48,10 @@ public class UserInputToXML {
 		addParameter(prop.getProperty("cellShape"), shape);
 	}
 	
+	public void setWrapping(String wrapping) {
+		addParameter(prop.getProperty("gridWrapping"), wrapping);
+	}
+	
 	public void setSatisfactionRate(double rate) {
 		addParameter(prop.getProperty("segregationSatisfactionRate"), Double.toString(rate));
 	}
@@ -64,6 +71,11 @@ public class UserInputToXML {
 	// Generate XML based on values in map
 	public void generateXML() {
 		xmlGenerator.createXML(globalsMap, numCells, numStates);
+		mapper.mapXml(xmlGenerator.getFileName());
+	}
+	
+	public XmlMapper getMapper() {
+		return mapper;
 	}
 	
 	// For debugging

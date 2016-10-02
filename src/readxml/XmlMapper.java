@@ -32,10 +32,11 @@ import structures.MetaData;
 import structures.SegregationCell;
 
 public class XmlMapper {
+	
 
 	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
-		xmlmap.mapXmlToGrid("GameOfLife.xml");
+		xmlmap.mapXml(myResource.getString("DefaultSelection"));
 	}*/
 	
 	private Map<String, String> globalsMap;
@@ -46,9 +47,9 @@ public class XmlMapper {
 	private Properties prop;
 	
 	public XmlMapper() {
-		this.globalsMap = new HashMap<String, String>();
+		//this.globalsMap = new HashMap<String, String>();
 		this.meta = new MetaData();
-		cells = new ArrayList<Cell>();
+		//this.cells = new ArrayList<Cell>();
 		this.prop = new Properties();
 		try {
 			prop.load(getClass().getClassLoader().getResourceAsStream("simulation.properties"));
@@ -59,10 +60,13 @@ public class XmlMapper {
 	
 	// Maps XML to a grid, loop, and metadata object
 	public void mapXml(String filename) {
+		this.cells = new ArrayList<Cell>();
+		this.globalsMap = new HashMap<String, String>();
 		// Get XML File loaded
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
-		inputFile = new File(classLoader.getResource(filename).getFile());
+		System.out.println(filename);
+		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
 
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -133,10 +137,10 @@ public class XmlMapper {
 		}
 		
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
-		
-
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
-		meta.setCellShape(shape, myGrid);
+		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
+		
+		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
 		myLoop = new Loop(meta, myGrid);
@@ -159,7 +163,7 @@ public class XmlMapper {
 	private Cell createFireCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
 		return new FireCell(cellIndex, 
 				cellInitialState, 
-				Double.parseDouble(globalsMap.get(prop.getProperty("energy"))));
+				Double.parseDouble(globalsMap.get(prop.getProperty("probabilityOfCatchingFire"))));
 	}
 	
 	private Cell createAnimalCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
