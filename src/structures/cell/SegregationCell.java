@@ -1,4 +1,4 @@
-package structures;
+package structures.cell;
 
 public class SegregationCell extends Cell { 
 	

@@ -7,19 +7,18 @@ import animation.controls.button.ButtonGo;
 import animation.controls.button.ButtonPause;
 import animation.controls.button.ButtonStop;
 import animation.controls.button.ButtonString;
+import animation.navigation.Navigator;
 import animation.simulation.shape.GridShape;
-import animation.simulation.shape.HexagonGrid;
-import animation.simulation.shape.TriangleGrid;
-import animation.simulation.shape.SquareGrid;
+import engine.Loop;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -39,14 +38,11 @@ public class GUISimulation {
 	private ScrollPane scroll;
 	private int myTime;
 	private LineChart<Number, Number> myChart;
+	private Navigator myNav;
 	
 	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
-		//this is the right piece of code when we get xml to read in shape
 		myGridIllustrator = info.getMeta().getGridShape();
-		System.out.println("this should print" + myGridIllustrator);
-		//myGridIllustrator = new SquareGrid();
-		System.out.println("this should print color: " + info.getMeta().getColor());
 		myGridIllustrator.setColor(info.getMeta().getColor());
 		stack = new StackPane();
 		this.engine = animation;
@@ -75,20 +71,17 @@ public class GUISimulation {
 		return stack;
 	}
 	
-	public Pane generateSimulationScreenButton() {
+	public Pane generateSimulationScreenButton(ResourceBundle resources, Group root) {
 		Button play = (new ButtonGo()).getButton();
 		play.setOnAction(e -> engine.play());
 		Button pause = (new ButtonPause()).getButton();
 		pause.setOnAction(e -> stopAnimation());
 		Button stop = (new ButtonStop()).getButton();
-		stop.setOnAction(e -> {
-			myInfo.mapXml(myInfo.getMeta().getFileName());
-			engine.play();
-		});
+		stop.setOnAction(e -> restart(root));
 		HBox hbox = new HBox((myScene.getWidth() * .40) / 3);
 		hbox.getChildren().addAll(play, pause, stop);
-		hbox.setLayoutX(myScene.getWidth() * .08);
-		hbox.setLayoutY(myScene.getHeight() * .90);
+		hbox.setLayoutX(myScene.getWidth() * .125);
+		hbox.setLayoutY(myScene.getHeight() * .92);
 		return hbox;
 	}
 	
@@ -112,6 +105,8 @@ public class GUISimulation {
 	public LineChart<Number, Number> generatSimulationChart(ResourceBundle resources) {
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
+		xAxis.setLabel(resources.getString("LineChartXTitle"));
+		yAxis.setLabel(resources.getString("LineChartYTitle"));
 		myChart = new LineChart<Number, Number>(xAxis, yAxis); 
 		myChart.setTitle(resources.getString("LineChartTitle"));
 		Iterator<Integer> stateItr = myGridIllustrator.iterator();
@@ -136,7 +131,17 @@ public class GUISimulation {
 	}
 	
 	private void step() {
+		stopAnimation();
 		engine.setCycleCount(1);
+		engine.play();
+	}
+	
+	private void restart(Group root) {
+		stopAnimation();
+		root.getChildren().clear();
+		myInfo.mapXml(myInfo.getMeta().getFileName());
+		myNav = new Navigator(myScene, root, myInfo);
+		myNav.createSimluationMenu();
 	}
 	
 	private ScrollPane makeScrollPane(double width, double height) {

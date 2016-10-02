@@ -7,7 +7,6 @@ import animation.controls.label.Header;
 import animation.controls.label.SmallLabel;
 import animation.controls.pane.PaneGenerator;
 import animation.navigation.Navigator;
-import engine.UserInputToXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -18,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
+import readxml.XMLGenerator.UserInputToXML;
 
 public class XmlSelection {
 	

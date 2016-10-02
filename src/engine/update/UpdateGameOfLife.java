@@ -2,9 +2,9 @@ package engine.update;
 
 import java.util.List;
 
-import engine.Neighbor;
-import structures.Cell;
+import engine.neighbors.Neighbor;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
