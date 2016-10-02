@@ -25,7 +25,7 @@ public class SquareNeighbors extends Neighbor {
 	
 	private int getEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-		if (cellNumber % getGridWidth() == (getGridWidth()-1)) {
+		if (cellNumber % getGridWidth() != (getGridWidth()-1)) {
 			return (cellNumber + 1);
 		} else {
 			if (isToroidal()) {

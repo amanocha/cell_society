@@ -16,11 +16,11 @@ public class UpdateGameOfLife extends Update {
 		neighbor = newNeighbors;
 	}
 	
+	@Override
 	public List<Cell> getNeighbors(Cell cell) {
-//		List<Cell> neighbors = getNeighbors(cell);
-//		neighbors.addAll(neighborsObject.getDiagonalNeighbors(cell));
-//		return neighbors;
-		return neighbor.getDiagonalNeighbors(cell);
+		List<Cell> neighbors = super.getNeighbors(cell);
+		neighbors.addAll(neighbor.getDiagonalNeighbors(cell));
+		return neighbors;
 	}
 	
 	/**

@@ -64,8 +64,8 @@ public class XmlMapper {
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
 		
-		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
-
+		//inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
+		inputFile = new File("data/xml/segregation_100.xml");
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
@@ -139,6 +139,7 @@ public class XmlMapper {
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
+		System.out.println(filename);
 		myLoop = new Loop(meta, myGrid);
 	}
 	
