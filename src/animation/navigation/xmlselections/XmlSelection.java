@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
+import animation.controls.label.SmallLabel;
 import animation.controls.pane.PaneGenerator;
 import animation.navigation.Navigator;
 import javafx.collections.FXCollections;
@@ -56,10 +57,12 @@ public class XmlSelection {
 	
 	public Pane generateXMLScreen() {
 		myScreen = myPane.getXMLMenuPane();
-		mySelector = makeGameSelectionCombo();
+		mySelector = makeSimulationSelectionCombo();
 		mySelector.setOnAction(e -> {
 			myNav.createXmlMenu(mySelector.getValue().toString());
 		});
+		myScreen.getChildren().add(createSimulationLabel());
+		myScreen.getChildren().add(createCellNumberLabel());
 		myScreen.getChildren().add(createCellNumberSlider());
 		myScreen.getChildren().add(mySelector);
 		myScreen.getChildren().add(makeXmlTitle());
@@ -69,6 +72,8 @@ public class XmlSelection {
 	public void addGridOptions() {
 		ComboBox<String> combo = createShapeComboBox(); 
 		combo.setOnAction(e -> myShape = combo.getValue());
+		myScreen.getChildren().add(createShapeLabel());
+		myScreen.getChildren().add(createGridTypeLabel());
 		myScreen.getChildren().add(combo);
 		ComboBox<String> combo1 = createGridTypeComboBox();
 		combo.setOnAction(e -> gridType = combo1.getValue());
@@ -98,19 +103,35 @@ public class XmlSelection {
 	public int getCellNumber() {
 		return myCellNumber * myCellNumber;
 	}
+	
+	public Label createSimulationLabel() {
+		return createSmallLabel("Simulation Selection", myScene.getWidth() * .22, myScene.getHeight() * .2);
+	}
+	
+	public Label createCellNumberLabel() {
+		return createSmallLabel("Cell Number", myScene.getWidth() * .3, myScene.getHeight() * .31);
+	}
+	
+	public Label createShapeLabel() {
+		return createSmallLabel("Shape", myScene.getWidth() * .3, myScene.getHeight() * .4);
+	}
+	
+	public Label createGridTypeLabel() {
+		return createSmallLabel("Grid Type", myScene.getWidth() * .3, myScene.getHeight() * .5);
+	}
 
 	public ComboBox<String> createShapeComboBox() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .5, myScene.getWidth() * .25, SHAPES);
+		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .4, myScene.getWidth() * .25, SHAPES);
 	}
 	
 	public ComboBox<String> createGridTypeComboBox() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .6, myScene.getWidth() * .25, GRID);
+		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .5, myScene.getWidth() * .25, GRID);
 	}
 	
 	private Label makeXmlTitle() {
 		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
 		title.setLayoutX(myScene.getWidth() * .34);
-		title.setLayoutY(myScene.getHeight() * .1);
+		title.setLayoutY(myScene.getHeight() * .08);
 		return title;
 	}
 	
@@ -124,12 +145,12 @@ public class XmlSelection {
 	}
 	
 	
-	private ComboBox<String> makeGameSelectionCombo() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .3, myScene.getWidth() * .25, SIMULATIONS);
+	private ComboBox<String> makeSimulationSelectionCombo() {
+		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .2, myScene.getWidth() * .25, SIMULATIONS);
 	}
 	
 	private Slider createCellNumberSlider() {
-		Slider slider = createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .4, myScene.getHeight() * .2, myScene.getWidth() * .25);
+		Slider slider = createGeneralSlider(0, 100, 50, 10, myScene.getWidth() * .4, myScene.getHeight() * .3, myScene.getWidth() * .25);
 		slider.setOnDragDone(e -> myCellNumber = (int) slider.getValue());
 		myCellNumber = (int) slider.getValue();
 		return slider;
@@ -155,6 +176,13 @@ public class XmlSelection {
 		combo.setLayoutY(y);
 		combo.setMinWidth(minwidth);
 		return combo;
+	}
+	
+	public Label createSmallLabel(String s, double x, double y) {
+		Label label = (new SmallLabel(s)).getLabel();
+		label.setLayoutX(x);
+		label.setLayoutY(y);
+		return label;
 	}
 
 	
