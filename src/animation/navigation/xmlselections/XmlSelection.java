@@ -55,10 +55,9 @@ public class XmlSelection {
 	}
 	
 	public Pane generateXMLScreen() {
-		myScreen.getChildren().clear();
 		myScreen = myPane.getXMLMenuPane();
 		mySelector = makeGameSelectionCombo();
-		mySelector.setOnTouchReleased(e -> {
+		mySelector.setOnAction(e -> {
 			myNav.createXmlMenu(mySelector.getValue().toString());
 		});
 		myScreen.getChildren().add(createCellNumberSlider());
