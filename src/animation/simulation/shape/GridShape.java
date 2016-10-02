@@ -18,8 +18,8 @@ public abstract class GridShape {
 
 	public Pane setUpScreen(Grid grid, int w, int h) {
 		screen.getChildren().clear();
-		screen.setMaxWidth(w + 2 * grid.getColumns()); //adjust for grid outline
-		screen.setMaxHeight(h + 2 * grid.getRows()); //adjust for grid outline
+		screen.setMaxWidth(w); //adjust for grid outline
+		screen.setMaxHeight(h); //adjust for grid outline
 		return screen;
 	}
 	

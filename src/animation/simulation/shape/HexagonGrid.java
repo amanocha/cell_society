@@ -12,7 +12,7 @@ import structures.MetaData;
 
 public class HexagonGrid extends GridShape {
 	
-private CellColor myColor;
+	private CellColor myColor;
 	
 	
 	public HexagonGrid() {
@@ -26,42 +26,43 @@ private CellColor myColor;
 
 
 	public Pane drawGrid(Grid grid, int w, int h) {
-		Pane screen = setUpScreen(grid, w, h);
+		Pane screen = (Pane) setUpScreen(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
-		int top = (w * 2) / ((3 * grid.getColumns() / 2) + 1);
+		int top = (w * 2) / ((3 * grid.getColumns()) + 1);
 		int diagonal = top / 2;
+		double height = h / grid.getRows();
 		int row = 1;
-		int wcount = 0;
-		int vcount = 0;
+		double wcount = 0;
+		double vcount = 1;
 		int count = 0;
 		System.out.println(grid.getCellList().size());
 		while (itr.hasNext()) {
 			Cell current = itr.next();
-			screen.getChildren().add(fillGrid(current, top, diagonal, wcount, vcount, row));
+			screen.getChildren().add(fillGrid(current, top, diagonal, height, wcount, vcount, row));
 			wcount = wcount + top * 2 + diagonal * 2;
 			count++;
 			if (count % (grid.getColumns() / 2) == 0) {
 				count = 0;
 				wcount = 0;
 				row++;
-				vcount = vcount + diagonal;
+				vcount = vcount + (height / 2);
 			}
 		}
 		return screen;
 	}
 	
-	private Shape fillGrid(Cell current, double top, double diag, double wcount, double vcount, int row) {
+	private Shape fillGrid(Cell current, double top, double diag, double height, double wcount, double vcount, int row) {
 		Polygon hexagon = new Polygon();
 		if (row % 2 != 0) {
 			wcount = wcount + diag + top;
 		}
 		hexagon.getPoints().setAll(new Double[] {
-				(wcount + top), vcount - diag,
+				(wcount + top), vcount - (height / 2),
 				(wcount + top + diag), vcount,
 				(wcount + top * 2 + diag), vcount,
-				(wcount + top * 2 + diag * 2), vcount - diag,
-				(wcount + top * 2 + diag), vcount - (diag * 2),
-				(wcount + top + diag), vcount - (diag * 2), });
+				(wcount + top * 2 + diag * 2), vcount - (height / 2),
+				(wcount + top * 2 + diag), vcount - (height),
+				(wcount + top + diag), vcount - (height), });
 		hexagon.setFill(myColor.getColor((current.getCurrentState())));
 		return hexagon;
 	}

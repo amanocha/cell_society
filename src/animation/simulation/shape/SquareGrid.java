@@ -29,9 +29,11 @@ public class SquareGrid extends GridShape {
 
 
 	public Pane drawGrid(Grid grid, int w, int h) {
-		Pane screen = setUpScreen(grid, w, h);
-		int width = (int) w / (grid.getColumns());
-		int height = (int) h / (grid.getRows());
+		Pane screen = new TilePane();
+		screen.setMaxWidth(w);
+		screen.setMaxHeight(h);
+		int width = (int) (w - 2 * grid.getColumns()) / (grid.getColumns());
+		int height = (int) (h - 2 * grid.getRows()) / (grid.getRows());
 		((TilePane) screen).setPrefColumns(grid.getColumns());
 		((TilePane) screen).setTileAlignment(Pos.CENTER);
 		((TilePane) screen).setHgap(2);

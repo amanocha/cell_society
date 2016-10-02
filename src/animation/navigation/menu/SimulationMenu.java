@@ -18,7 +18,7 @@ public class SimulationMenu extends Menu {
 	public void generateMenu() {
 		getRoot().getChildren().clear();
 		getRoot().getChildren().addAll(getGUI().generateSimulationScreenMainButton(myLoop), getGUI().generateSimulationScreenLabel(), 
-				getGUI().generateSimulationScreenControls(), myLoop.getSimulationGUI().generateSimulationScreenButton());
+				myLoop.getSimulationGUI().generateSimulationScreenControls(), myLoop.getSimulationGUI().generateSimulationScreenButton());
 		myLoop.init();
 	}
 	

@@ -15,7 +15,7 @@ public class UserInputToXML {
 	private XMLGenerator xmlGenerator;
 	Properties prop;
 	
-	public UserInputToXML(int numCells, int numStates) {
+	public UserInputToXML(int numCells) {
 		this.globalsMap = new HashMap<String, String>();
 		this.numCells = numCells;
 		this.numStates = numStates;
