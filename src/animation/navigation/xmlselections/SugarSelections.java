@@ -71,7 +71,7 @@ public class SugarSelections extends XmlSelection {
 		input.setInitSugar((int) myInitSugar.getValue());
 		input.setSugarGrowBackTime((int) mySugarGrowBack.getValue());
 		input.setVision((int) myVision.getValue());
-		input.setMetabolism((int) myMetabolism.getValue());
+		input.setSugarMetabolism((int) myMetabolism.getValue());
 		input.setSimulation(myResource.getString("PredatorPreyxml"));
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());
