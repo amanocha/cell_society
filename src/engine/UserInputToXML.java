@@ -71,6 +71,9 @@ public class UserInputToXML {
 	// Generate XML based on values in map
 	public void generateXML() {
 		xmlGenerator.createXML(globalsMap, numCells, numStates);
+		/*for(IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()){
+		    project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
+		}*/
 		mapper.mapXml(xmlGenerator.getFileName());
 	}
 	

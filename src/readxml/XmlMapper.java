@@ -64,8 +64,9 @@ public class XmlMapper {
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
 		
-		//inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
-		inputFile = new File("data/xml/segregation_100.xml");
+		System.out.println("data/xml/"+filename);
+		inputFile = new File("data/xml/"+filename);
+		//inputFile = new File("data/xml/segregation_100.xml");
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
