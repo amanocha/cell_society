@@ -11,7 +11,7 @@ public class SquareNeighbors extends Neighbor {
 		super(grid, wrapping);
 	}
 	
-	private int getNorthCell(Cell cell) {
+	public int getNorthCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber >= getGridWidth()) {
 			return (cellNumber - getGridWidth());
@@ -23,7 +23,7 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
-	private int getEastCell(Cell cell) {
+	public int getEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber % getGridWidth() != (getGridWidth()-1)) {
 			return (cellNumber + 1);
@@ -35,7 +35,7 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
-	private int getSouthCell(Cell cell) {
+	public int getSouthCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber < getGridSize() - getGridWidth()) {
 			return (cellNumber + getGridWidth());
@@ -47,7 +47,7 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
-	private int getWestCell(Cell cell) {
+	public int getWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber % getGridWidth() != 0) {
 			return (cellNumber - 1);
@@ -82,7 +82,7 @@ public class SquareNeighbors extends Neighbor {
 		return neighbors;
 	}
 	
-	private int getNorthEastCell(Cell cell) {
+	public int getNorthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber >= getGridWidth()) && (cellNumber % getGridWidth() != (getGridWidth()-1))) {
 			return (cellNumber - getGridWidth() + 1);
@@ -100,7 +100,7 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
-	private int getNorthWestCell(Cell cell) {
+	public int getNorthWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber >= getGridWidth()) && (cellNumber % getGridWidth() != 0)) {
 			return (cellNumber - getGridWidth() - 1);
@@ -118,7 +118,7 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
-	private int getSouthEastCell(Cell cell) {
+	public int getSouthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber < getGridSize() - getGridWidth()) && (cellNumber % getGridWidth() != (getGridWidth()-1))) {
 			return (cellNumber + getGridWidth() + 1);
@@ -136,7 +136,7 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
-	private int getSouthWestCell(Cell cell) {
+	public int getSouthWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber < getGridSize() - getGridWidth()) && (cellNumber % getGridWidth() != 0)) {
 			return (cellNumber + getGridWidth() - 1);

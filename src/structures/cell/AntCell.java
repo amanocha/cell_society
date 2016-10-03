@@ -19,6 +19,11 @@ public class AntCell extends Cell {
 	public Ant getAnt(int index) {
 		return ants.get(index);
 	}
+	
+	public Ant removeAnt(int index) {
+		return ants.remove(index);
+	}
+	
 	public List<Ant> getAntsList() {
 		return ants;
 	}
