@@ -16,11 +16,13 @@ import structures.cell.Cell;
 public class UpdateAnts extends Update {
 	private String shape;
 	private String wrapping;
+	private int maxLevelPheromones;
 	
-	public UpdateAnts(Grid newGrid, Neighbor newNeighbors, String shape, String wrapping) {
+	public UpdateAnts(Grid newGrid, Neighbor newNeighbors, String shape, String wrapping, int maxLevelPheromones) {
 		super(newGrid, newNeighbors);
 		this.shape = shape;
 		this.wrapping = wrapping;
+		this.maxLevelPheromones = maxLevelPheromones;
 	}
 	
 	/**
@@ -66,56 +68,47 @@ public class UpdateAnts extends Update {
 			antCell = dropFoodPheromones(antCell);
 			orientation = x;
 		}
-//		
-//		int bestOrientation = -1;
-//		
-//		
-//		// else if ant is at food source, just pick a neighbor
-//		if (antCell.getCurrentState() == 2) {
-//			bestOrientation = findNeighborWithMaxHomePheromones(antCell);
-//			if (bestOrientation != -1) {
-//				antCell.setOrientation(bestOrientation);
-//			}
-//		}
-//		else {
-//			bestOrientation = findForwardNeighborWithMaxHomePheromones(antCell);
-//			if (bestOrientation == -1) {
-//				bestOrientation = findNeighborWithMaxHomePheromones(antCell);
-//			}
-//			if (bestOrientation != -1) {
-//				//drop food pheromone at curr cell
-//				antCell.setNumFoodPheromones(antCell.getNumFoodPheromones()+1);
-//				
-//				//set orientation to best orientation
-//				antCell.setOrientation(bestOrientation);
-//				
-//				
-//				//move to next cell by swapping 
-//				// if ant located at nest then drop food item
-//				if (antCell.getCurrentState() == 3) {
-//					antCell.setHasFoodItem(false);
-//				} 
-//				
-//			} else {
-//				// don't move from current cell
-//			}
-//		}
-		
 		
 	}
 	
 	private AntCell dropFoodPheromones(AntCell antCell) {
-		// TODO Auto-generated method stub
+		if (antCell.getCurrentState() == 3) {
+			antCell.setNumHomePheromones(maxLevelPheromones);
+		} else {
+			List<Cell> neighbors = getOrderedNeighbors(antCell);
+			int maxOrientation = selectNeighborWithMaxHomePheromones(antCell);
+			AntCell ac = (AntCell)neighbors.get(maxOrientation);
+			int max = ac.getNumHomePheromones();
+			int des = max-2;
+			int d = des - antCell.getNumHomePheromones();
+			if (d > 0) {
+				antCell.setNumHomePheromones(antCell.getNumHomePheromones()+d);
+			}
+		}
 		return null;
 	}
+
+	private List<Cell> getOrderedNeighbors(AntCell antCell) {
+		SquareNeighbors neighbor = new SquareNeighbors(getGrid(), wrapping);
+		List<Cell> neighbors = neighbor.getOrderedNeighbors(antCell);
+		return neighbors;
+	}
+	
+//	private int findMaxNumHomePheromones(AntCell antCell) {
+//		SquareNeighbors neighbor = new SquareNeighbors(getGrid(), wrapping);
+//		List<Cell> neighbors = neighbor.getOrderedNeighbors(antCell);
+//		for(Cell c: neighbors) {
+//			AntCell ac = (AntCell) c;
+//			Max
+//		}
+//	}
 
 	private int selectNeighborWithMaxFoodPheromones(AntCell antCell) {
 		return selectNeighborWithMaxPheromones(antCell, "food");
 	}
 
 	private int selectForwardNeighbor(AntCell antCell, int antIndex, String pheromoneType) {
-		SquareNeighbors neighbor = new SquareNeighbors(getGrid(), wrapping);
-		List<Cell> neighbors = neighbor.getOrderedNeighbors(antCell);
+		List<Cell> neighbors = getOrderedNeighbors(antCell);
 		List<Integer> possibleLocations = new ArrayList<Integer>();
 		List<Integer> possibleLocationsNumPheromones = new ArrayList<Integer>();
 		
@@ -212,8 +205,7 @@ public class UpdateAnts extends Update {
 	private int selectNeighborWithMaxPheromones(AntCell antCell, String pheromoneType) {
 		int maxNumHomePheromones = 0;
 		int maxIndex = -1;
-		SquareNeighbors neighbor = new SquareNeighbors(getGrid(), wrapping);
-		List<Cell> neighbors = neighbor.getOrderedNeighbors(antCell);
+		List<Cell> neighbors = getOrderedNeighbors(antCell);
 		for(int i = 0; i < neighbors.size(); i++) {
 			AntCell ac = (AntCell) neighbors.get(i);
 			int numPheromones = 0;
