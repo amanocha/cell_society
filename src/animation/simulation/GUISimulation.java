@@ -97,10 +97,10 @@ public class GUISimulation {
 		VBox vbox = new VBox(10);
 		Button speed = (new ButtonString(resources.getString("ButtonSpeed"))).getButton();
 		speed.setPrefWidth(myScene.getWidth() * .20);
-		speed.setOnAction(e -> engine.setRate(engine.getCurrentRate() + 2));
+		speed.setOnAction(e -> speedUp());
 		Button slow = (new ButtonString(resources.getString("ButtonSlow"))).getButton();
 		slow.setPrefWidth(myScene.getWidth() * .20);
-		slow.setOnAction(e -> engine.setRate(engine.getCurrentRate() - 2));
+		slow.setOnAction(e -> slowDown());
 		Button step = (new ButtonString(resources.getString("ButtonStep"))).getButton();
 		step.setPrefWidth(myScene.getWidth() * .20);
 		step.setOnAction(e -> step());
@@ -110,6 +110,7 @@ public class GUISimulation {
 		return (Pane) vbox;
 	}
 	
+
 	public LineChart<Number, Number> generatSimulationChart(ResourceBundle resources) {
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
@@ -137,7 +138,17 @@ public class GUISimulation {
 		return myChart;
 	}
 	
-	public void play() {
+	private void speedUp(){
+		engine.setRate(engine.getCurrentRate() + 2);
+	}
+	
+	private void slowDown() {
+		if (engine.getCurrentRate() > 1) {
+			engine.setRate(engine.getCurrentRate() - 2);
+		}
+	}
+	
+	private void play() {
 		engine.setCycleCount(Timeline.INDEFINITE);
 		engine.play();
 	}
