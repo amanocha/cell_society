@@ -5,7 +5,9 @@ import java.util.List;
 import engine.neighbors.Neighbor;
 import structures.Grid;
 import structures.cell.Cell;
-
+/*
+ * Handles game logic for updating grid for game of life simulation
+ */
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
 	private Neighbor neighbor;
@@ -16,6 +18,9 @@ public class UpdateGameOfLife extends Update {
 		neighbor = newNeighbors;
 	}
 	
+	/**
+	 * Get immediate and diagonal neighbors of a given cell
+	 */
 	@Override
 	public List<Cell> getNeighbors(Cell cell) {
 		List<Cell> neighbors = super.getNeighbors(cell);

@@ -6,7 +6,9 @@ import engine.neighbors.Neighbor;
 import structures.Grid;
 import structures.cell.Cell;
 import structures.cell.FireCell;
-
+/*
+ * Class that handles logic for updating the grid for fire simulation
+ */
 public class UpdateFire extends Update {
 	private Grid grid;
 	
@@ -16,6 +18,7 @@ public class UpdateFire extends Update {
 	}
 	
 	/**
+	 * Determine new states on grid for fire simulation
 	 * 0 = empty
 	 * 1 = tree
 	 * 2 = burning

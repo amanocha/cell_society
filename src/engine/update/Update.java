@@ -5,7 +5,10 @@ import java.util.List;
 import engine.neighbors.Neighbor;
 import structures.Grid;
 import structures.cell.Cell;
-
+/*
+ * An abstract class that is responsible for the logic of
+ * updating the grid with new states on each game loop
+ */
 public abstract class Update {
 	private Grid grid;
 	private Neighbor neighbor;
