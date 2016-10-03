@@ -7,13 +7,26 @@ import javafx.scene.shape.Shape;
 import structures.Grid;
 import structures.cell.Cell;
 
+
+/**
+ * This is the Hexagon Grid class which draws a simulation with hexagon cells.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class HexagonGrid extends GridShape {
 	
+	/**
+	 * Calls the super constructor
+	 */
 	public HexagonGrid() {
 		super();
 	}
 
 
+	/**
+	 * Draws the grid entire grid for all the cells using hexagons
+	 */
 	public Pane drawGrid(Grid grid, int w, int h) {
 		Pane screen = (Pane) super.drawGrid(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
@@ -40,6 +53,17 @@ public class HexagonGrid extends GridShape {
 		return screen;
 	}
 	
+	/**
+	 * Draws one hexagon
+	 * @param current
+	 * @param top
+	 * @param diag
+	 * @param height
+	 * @param wcount
+	 * @param vcount
+	 * @param row
+	 * @return
+	 */
 	private Shape fillGrid(Cell current, double top, double diag, double height, double wcount, double vcount, int row) {
 		Polygon hexagon = new Polygon();
 		if (row % 2 != 0) {

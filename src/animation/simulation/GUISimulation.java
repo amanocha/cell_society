@@ -30,6 +30,12 @@ import readxml.XmlMapper;
 
 
 
+/**
+ * This is the GUI Simulation class creates the GUIs for the simulation page, including the animated GUIs.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class GUISimulation {
 	
 	private StackPane stack;
@@ -44,6 +50,12 @@ public class GUISimulation {
 	private Navigator myNav;
 	private Map<Integer, ArrayList<Point>> pointsList = new HashMap<Integer, ArrayList<Point>>();
 	
+	/**
+	 * Instantiates the GUI simulation instance variables
+	 * @param scene
+	 * @param info
+	 * @param animation
+	 */
 	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
 		myGridIllustrator = info.getMeta().getGridShape();
@@ -54,18 +66,17 @@ public class GUISimulation {
 		scroll = new ScrollPane();
 		myTime = info.getGrid().getNumCells();
 		for (int i = 0; i <= info.getMeta().getNumStates(); i++) {
-			System.out.println(i);
 			pointsList.put(i, new ArrayList<Point>());
 		}
 	}
-	
-	public Pane getStackPane() {
-		return stack;
-	}
 
+	/**
+	 * Generates the Pane for the screen
+	 * @return Pane
+	 */
 	public Pane generateSimulationScreen() {
 		stack.getChildren().remove(scroll);
-		double left = myScene.getWidth() * .1;
+		double left = myScene.getWidth() * .075;
 	    double top = myScene.getHeight() * .53;
 	    double other = myScene.getHeight() * .1;
 	    int width = (int) Math.round((myScene.getWidth() * .6 - other));
@@ -79,6 +90,12 @@ public class GUISimulation {
 		return stack;
 	}
 	
+	/**
+	 * Generates the buttons for play, pause, stop
+	 * @param resources
+	 * @param root
+	 * @return HBox
+	 */
 	public Pane generateSimulationScreenButton(ResourceBundle resources, Group root) {
 		Button play = (new ButtonGo()).getButton();
 		play.setOnAction(e -> play());
@@ -93,6 +110,11 @@ public class GUISimulation {
 		return hbox;
 	}
 	
+	/**
+	 * Generates the Step, slow down, speed up buttons
+	 * @param resources
+	 * @return VBox
+	 */
 	public Pane generateSimulationScreenControls(ResourceBundle resources) {
 		VBox vbox = new VBox(10);
 		Button speed = (new ButtonString(resources.getString("ButtonSpeed"))).getButton();
@@ -110,7 +132,11 @@ public class GUISimulation {
 		return (Pane) vbox;
 	}
 	
-
+	/**
+	 * Generates the LineChart that tracks cell populations
+	 * @param resources
+	 * @return LineChart
+	 */
 	public LineChart<Number, Number> generatSimulationChart(ResourceBundle resources) {
 		NumberAxis xAxis = new NumberAxis();
 		NumberAxis yAxis = new NumberAxis();
@@ -138,6 +164,7 @@ public class GUISimulation {
 		return myChart;
 	}
 	
+<<<<<<< HEAD
 	private void speedUp(){
 		engine.setRate(engine.getCurrentRate() + 2);
 	}
@@ -149,20 +176,52 @@ public class GUISimulation {
 	}
 	
 	private void play() {
+=======
+	/**
+	 * Starts the simulation
+	 */
+	public void play() {
+>>>>>>> master
 		engine.setCycleCount(Timeline.INDEFINITE);
 		engine.play();
 	}
 	
+	/**
+	 * Stops the simulation
+	 */
 	public void stopAnimation() {
 		engine.stop();
 	}
+
+	/**
+	 * Getter for the Line Chart
+	 * @return Line Chart
+	 */
+	public LineChart<Number, Number> getLineChart() {
+		return myChart;
+	}
 	
+	/**
+	 * Get the pane for the simulation
+	 * @return Pane
+	 */
+	public Pane getStackPane() {
+		return stack;
+	}
+	
+	/**
+	 * Changes the animation to step
+	 */
 	private void step() {
 		stopAnimation();
 		engine.setCycleCount(1);
 		engine.play();
 	}
 	
+	/**
+	 * Restarts the animation
+	 * @param root
+	 */
 	private void restart(Group root) {
 		stopAnimation();
 		root.getChildren().clear();
@@ -171,6 +230,12 @@ public class GUISimulation {
 		myNav.createSimluationMenu();
 	}
 	
+	/**
+	 * Makes the scroll pane to put the animation into
+	 * @param width
+	 * @param height
+	 * @return
+	 */
 	private ScrollPane makeScrollPane(double width, double height) {
 		scroll.setMaxWidth(width);
 	    scroll.setMaxHeight(height);
@@ -182,10 +247,6 @@ public class GUISimulation {
 	    scroll.setMinViewportHeight(height);
 	    scroll.setMinViewportWidth(width);
 	    return scroll;
-	}
-
-	public LineChart<Number, Number> getLineChart() {
-		return myChart;
 	}
 	
 }

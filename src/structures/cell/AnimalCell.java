@@ -1,17 +1,17 @@
 package structures.cell;
 
-public class Animal extends Cell {
+public class AnimalCell extends Cell {
 	private int time;
 	private int energy;
 	private int fishTime;
 	private int sharkTime;
 	
-	public Animal() {
+	public AnimalCell() {
 		super();
 		time = 0;
 	}
 	
-	public Animal(int cell_num, int cell_state, int initEnergy, int fish, int shark) {
+	public AnimalCell(int cell_num, int cell_state, int initEnergy, int fish, int shark) {
 		super(cell_num, cell_state);
 		time = 0;
 		energy = initEnergy;

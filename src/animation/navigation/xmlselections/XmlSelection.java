@@ -19,10 +19,17 @@ import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 import readxml.XMLGenerator.UserInputToXML;
 
+
+/**
+ * This is the Xml Selections class which creates the GUI elements for the Xml selection page generally, before anything 
+ * is selected from the combobox.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class XmlSelection {
 	
-	private static ObservableList<String> SIMULATIONS = 
-		    FXCollections.observableArrayList(
+	private static ObservableList<String> SIMULATIONS = FXCollections.observableArrayList(
 		    		"SEGREGATION", 
 		    		"GAME OF LIFE", 
 		    		"FIRE", 
@@ -47,6 +54,14 @@ public class XmlSelection {
 	private String gridType;
 	private Slider cellNumberSlider;
 
+	
+	/**
+	 * Sets up the instance variables for the xml Selection
+	 * @param scene
+	 * @param r
+	 * @param info
+	 * @param resource
+	 */
 	public XmlSelection(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		myPane = new PaneGenerator(scene);
 		myResource = resource;
@@ -55,6 +70,10 @@ public class XmlSelection {
 		System.out.println(myScreen);
 	}
 	
+	/**
+	 * Adds all the GUI elements to the root
+	 * @return
+	 */
 	public Pane generateXMLScreen() {
 		myScreen = myPane.getXMLMenuPane();
 		mySelector = makeSimulationSelectionCombo();
@@ -64,7 +83,6 @@ public class XmlSelection {
 		ComboBox<String> combo = createShapeComboBox(); 
 		combo.setOnAction(e -> {
 			myShape = combo.getValue();
-			System.out.println(myShape);
 		});
 		myScreen.getChildren().add(createShapeLabel());
 		myScreen.getChildren().add(createGridTypeLabel());
@@ -72,7 +90,6 @@ public class XmlSelection {
 		ComboBox<String> combo1 = createGridTypeComboBox();
 		combo1.setOnAction(e -> {
 			gridType = combo1.getValue();
-			System.out.println(gridType);
 		});
 		myScreen.getChildren().add(combo1);
 		myScreen.getChildren().add(createCellNumberSlider());
@@ -83,6 +100,11 @@ public class XmlSelection {
 		return myScreen;
 	}
 	
+	/**
+	 * Sets the user input to the back-end xml
+	 * @param numStates
+	 * @return
+	 */
 	public UserInputToXML startXMLMap(int numStates) {
 		UserInputToXML input = new UserInputToXML(getCellNumber());
 		input.setMaxStates(numStates);
@@ -91,6 +113,10 @@ public class XmlSelection {
 		return input;
 	}
 
+	/**
+	 * Translates the front-end display of the string for grid type to the back-end string
+	 * @return
+	 */
 	public String getWrapping() {
 		if (gridType.equals(myResource.getString("ToroidalLabel"))) {
 			return myResource.getString("Toroidalxml");
@@ -100,10 +126,10 @@ public class XmlSelection {
 		return myResource.getString("Normalxml");
 	}
 	
-	public Pane getScreen() {
-		return myScreen;
-	}
-	
+	/**
+	 * Translates the front-end display of the string for grid shape to the back-end string
+	 * @return
+	 */
 	public String getShape() {
 		if (myShape.equals(myResource.getString("SquareLabel"))) {
 			return myResource.getString("Squarexml");
@@ -115,54 +141,26 @@ public class XmlSelection {
 		return myResource.getString("Squarexml");
 	}
 	
+	/**
+	 * Gets the combobox for Simulation name
+	 * @return
+	 */
 	public ComboBox<String> getSimulationCombo() {
 		return mySelector;
 	}
 	
-	public Navigator getNavigator() {
-		return myNav;
-	}
-	
-	public String getGridType() {
-		return gridType;
-	}
-	
+	/** 
+	 * Gets the user selected cell number from the slider
+	 * @return slider input * slider input
+	 */
 	public int getCellNumber() {
 		return (int) cellNumberSlider.getValue() * (int) cellNumberSlider.getValue();
 	}
 	
-	public Label createSimulationLabel() {
-		return createSmallLabel(myResource.getString("SimulationLabel"), myScene.getWidth() * .22, myScene.getHeight() * .2);
-	}
-	
-	public Label createCellNumberLabel() {
-		return createSmallLabel(myResource.getString("CellNumberLabel"), myScene.getWidth() * .3, myScene.getHeight() * .31);
-	}
-	
-	public Label createShapeLabel() {
-		return createSmallLabel(myResource.getString("ShapeLabel"), myScene.getWidth() * .3, myScene.getHeight() * .4);
-	}
-	
-	public Label createGridTypeLabel() {
-		return createSmallLabel(myResource.getString("GridTypeLabel"), myScene.getWidth() * .3, myScene.getHeight() * .5);
-	}
-
-	public ComboBox<String> createShapeComboBox() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .4, myScene.getWidth() * .25, SHAPES);
-	}
-	
-	public ComboBox<String> createGridTypeComboBox() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .5, myScene.getWidth() * .25, GRID);
-	}
-	
-	private Label makeXmlTitle() {
-		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
-		title.setLayoutX(myScene.getWidth() * .34);
-		title.setLayoutY(myScene.getHeight() * .08);
-		return title;
-	}
-	
-	
+	/**
+	 * Makes the main menu button for all extensions
+	 * @return Button
+	 */
 	public Button makeMainMenuButton() {
 		Button button = (new ButtonString(myResource.getString("MainMenu"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .25);
@@ -171,16 +169,17 @@ public class XmlSelection {
 		return button;
 	}
 	
-	
-	private ComboBox<String> makeSimulationSelectionCombo() {
-		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .2, myScene.getWidth() * .25, SIMULATIONS);
-	}
-	
-	private Slider createCellNumberSlider() {
-		cellNumberSlider = createGeneralSlider(0, 50, 25, 10, myScene.getWidth() * .4, myScene.getHeight() * .3, myScene.getWidth() * .25);
-		return cellNumberSlider;
-	}
-	
+	/**
+	 * Makes the general slider that each slider uses 
+	 * @param start
+	 * @param end
+	 * @param position
+	 * @param tickunit
+	 * @param x
+	 * @param y
+	 * @param minwidth
+	 * @return
+	 */
 	public Slider createGeneralSlider(int start, int end, double position, double tickunit, double x, double y, double minwidth) {
 		Slider slider = new Slider(start, end, position);
 		slider.setShowTickLabels(true);
@@ -194,6 +193,14 @@ public class XmlSelection {
 		return slider;
 	}
 	
+	/**
+	 * Makes the general comboBox that each comboBox uses
+	 * @param x
+	 * @param y
+	 * @param minwidth
+	 * @param list
+	 * @return
+	 */
 	public ComboBox<String> createGeneralComboBox(double x, double y, double minwidth, ObservableList<String> list) {
 		ComboBox<String> combo = new ComboBox<String>();
 		combo.setItems(list);
@@ -203,11 +210,102 @@ public class XmlSelection {
 		return combo;
 	}
 	
+	/**
+	 * Creates a general label
+	 * @param s
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public Label createSmallLabel(String s, double x, double y) {
 		Label label = (new SmallLabel(s)).getLabel();
 		label.setLayoutX(x);
 		label.setLayoutY(y);
 		return label;
+	}
+	
+	/**
+	 * Getter for the xml selection screen
+	 * @return Pane
+	 */
+	public Pane getScreen() {
+		return myScreen;
+	}
+	
+	/**
+	 * Makes the simulation selection combo
+	 * @return ComboBox
+	 */
+	private ComboBox<String> makeSimulationSelectionCombo() {
+		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .2, myScene.getWidth() * .25, SIMULATIONS);
+	}
+	
+	/**
+	 * Makes the cell number slider
+	 * @return Slider
+	 */
+	private Slider createCellNumberSlider() {
+		cellNumberSlider = createGeneralSlider(0, 50, 25, 10, myScene.getWidth() * .4, myScene.getHeight() * .3, myScene.getWidth() * .25);
+		return cellNumberSlider;
+	}
+	
+	/**
+	 * Makes the xml Title
+	 * @return Label
+	 */
+	private Label makeXmlTitle() {
+		Label title = (new Header(myResource.getString("SimulationSelection"))).getLabel();
+		title.setLayoutX(myScene.getWidth() * .34);
+		title.setLayoutY(myScene.getHeight() * .08);
+		return title;
+	}
+	
+	/**
+	 * Creates the simulation label
+	 * @return
+	 */
+	private Label createSimulationLabel() {
+		return createSmallLabel(myResource.getString("SimulationLabel"), myScene.getWidth() * .22, myScene.getHeight() * .2);
+	}
+	
+	/**
+	 * Creates the cell number label
+	 * @return Label
+	 */
+	private Label createCellNumberLabel() {
+		return createSmallLabel(myResource.getString("CellNumberLabel"), myScene.getWidth() * .3, myScene.getHeight() * .31);
+	}
+	
+	/**
+	 * Creates the shape label
+	 * @return Label
+	 */
+	private Label createShapeLabel() {
+		return createSmallLabel(myResource.getString("ShapeLabel"), myScene.getWidth() * .3, myScene.getHeight() * .4);
+	}
+	
+	/**
+	 * Creates the grid type label
+	 * @return Label
+	 */
+	private Label createGridTypeLabel() {
+		return createSmallLabel(myResource.getString("GridTypeLabel"), myScene.getWidth() * .3, myScene.getHeight() * .5);
+	}
+	
+	/**
+	 * Creates the shape combobox
+	 * @return ComboBox
+	 */
+	private ComboBox<String> createShapeComboBox() {
+		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .4, myScene.getWidth() * .25, SHAPES);
+	}
+	
+	/**
+	 * Creates the grid type combobox
+	 * @return ComboBox
+	 */
+	private ComboBox<String> createGridTypeComboBox() {
+		return createGeneralComboBox(myScene.getWidth() * .38, myScene.getHeight() * .5, myScene.getWidth() * .25, GRID);
 	}
 
 	

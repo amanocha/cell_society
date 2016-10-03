@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 
 import structures.Grid;
 import structures.MetaData;
-import structures.cell.Animal;
+import structures.cell.AnimalCell;
 import structures.cell.Cell;
 import structures.cell.FireCell;
 import structures.cell.SegregationCell;
@@ -121,7 +121,7 @@ public class XmlMapper {
 			Cell newCell = new Cell();
 			
 			String simulation = prop.getProperty("simulation");
-			if (globalsMap.get(simulation).equals("predator prey")) {
+			if (globalsMap.get(prop.getProperty("simulation")).equals("predator_prey")) {
 				newCell = createAnimalCell(cellIndex, cellInitialState, globalsMap);
 			} else if (globalsMap.get(prop.getProperty("simulation")).equals("fire")) {
 				newCell = createFireCell(cellIndex, cellInitialState, globalsMap);
@@ -161,7 +161,7 @@ public class XmlMapper {
 	}
 	
 	private Cell createAnimalCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
-		return new Animal(cellIndex, cellInitialState, 
+		return new AnimalCell(cellIndex, cellInitialState, 
 				Integer.parseInt(globalsMap.get(prop.getProperty("energy"))), 
 				Integer.parseInt(globalsMap.get(prop.getProperty("fishReproductionTime"))), 
 				Integer.parseInt(globalsMap.get(prop.getProperty("sharkReproductionTime")))

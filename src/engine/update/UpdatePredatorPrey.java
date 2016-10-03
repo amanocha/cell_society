@@ -6,7 +6,7 @@ import java.util.Random;
 
 import engine.neighbors.Neighbor;
 import structures.Grid;
-import structures.cell.Animal;
+import structures.cell.AnimalCell;
 import structures.cell.Cell;
 
 public class UpdatePredatorPrey extends Update {
@@ -18,9 +18,9 @@ public class UpdatePredatorPrey extends Update {
 	public UpdatePredatorPrey(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
-		energy = ((Animal) newGrid.getCellList().get(0)).getEnergy();
-		fishTime = ((Animal) newGrid.getCellList().get(0)).getFishTime();
-		sharkTime = ((Animal) newGrid.getCellList().get(0)).getSharkTime();
+		energy = ((AnimalCell) newGrid.getCellList().get(0)).getEnergy();
+		fishTime = ((AnimalCell) newGrid.getCellList().get(0)).getFishTime();
+		sharkTime = ((AnimalCell) newGrid.getCellList().get(0)).getSharkTime();
 	}
 	
 	public Cell move(Cell cell, boolean reproduce) {
@@ -36,7 +36,7 @@ public class UpdatePredatorPrey extends Update {
 			if (cell.getCurrentState() == 1) {
 				//System.out.println(cell.getNumber() + " moved to " + emptyCell.getNumber());
 			}
-			swap((Animal) cell, (Animal) emptyCell); //cell's next state is empty, empty cell's next state is fish/shark
+			swap((AnimalCell) cell, (AnimalCell) emptyCell); //cell's next state is empty, empty cell's next state is fish/shark
 			if(reproduce) {
 				reproduce(cell, emptyCell); //change cell's state from empty to fish/shark
 			}
@@ -45,7 +45,7 @@ public class UpdatePredatorPrey extends Update {
 		return cell;
 	}
 	
-	public Cell eat(Animal shark, boolean reproduce) {
+	public Cell eat(AnimalCell shark, boolean reproduce) {
 		List<Cell> neighbors = getNeighbors(shark);
 		List<Cell> fishCells = new ArrayList<Cell>();
 		for(Cell neighbor : neighbors) {
@@ -58,7 +58,7 @@ public class UpdatePredatorPrey extends Update {
 			int fishCellIndex = selectCell(fishCells);
 			Cell fishCell = grid.getCellList().get(fishCellIndex);
 			//System.out.println(shark.getNumber() + " ate " + fishCell.getNumber());
-			swap(shark, (Animal) fishCell); //shark's next state is fish, fish's next state is shark
+			swap(shark, (AnimalCell) fishCell); //shark's next state is fish, fish's next state is shark
 			if(reproduce) {
 				reproduce(shark, fishCell);
 			} else {
@@ -77,7 +77,7 @@ public class UpdatePredatorPrey extends Update {
 		return newIndex;
 	}
 	
-	public void swap(Animal animal1, Animal animal2) {
+	public void swap(AnimalCell animal1, AnimalCell animal2) {
 		int animal1State = animal1.getCurrentState();
 		animal1.setNextState(animal2.getCurrentState());
 		animal2.setNextState(animal1State);
@@ -91,10 +91,10 @@ public class UpdatePredatorPrey extends Update {
 	
 	public void reproduce(Cell cell1, Cell cell2) {
 		cell1.setNextState(cell2.getNextState());
-		((Animal)cell1).setEnergy(energy);
+		((AnimalCell)cell1).setEnergy(energy);
 		//System.out.println(cell1.getNumber() + " state = " + cell1.getNextState() + " gave birth to " + cell2.getNumber() + " state = " + cell2.getNextState());
-		((Animal)cell1).setTime(-1);
-		((Animal)cell2).setTime(-1);
+		((AnimalCell)cell1).setTime(-1);
+		((AnimalCell)cell2).setTime(-1);
 	}
 	
 	/**
@@ -121,16 +121,16 @@ public class UpdatePredatorPrey extends Update {
 	
 	public void determineFishUpdates(ArrayList<Cell> fishes) {
 		for(Cell fish : fishes) {
-			boolean reproduce = ((Animal)fish).getTime() >= fishTime;
+			boolean reproduce = ((AnimalCell)fish).getTime() >= fishTime;
 			fish = move(fish, reproduce);
 		}
 	}
 	
 	public void determineSharkUpdates(ArrayList<Cell> sharks) {
 		for(Cell shark : sharks) {
-			boolean reproduce = ((Animal)shark).getTime() >= sharkTime;
-			shark = eat((Animal)shark, reproduce);
-			if (((Animal)shark).getEnergy() == 0) {
+			boolean reproduce = ((AnimalCell)shark).getTime() >= sharkTime;
+			shark = eat((AnimalCell)shark, reproduce);
+			if (((AnimalCell)shark).getEnergy() == 0) {
 				shark.setNextState(0);
 			}
 		}
@@ -140,7 +140,7 @@ public class UpdatePredatorPrey extends Update {
 		for(Cell cell : grid.getCellList()) {
 			cell.setPreviousState(cell.getCurrentState());
 			cell.setCurrentState(cell.getNextState());
-			Animal animal = (Animal) cell; 
+			AnimalCell animal = (AnimalCell) cell; 
 			if (cell.getCurrentState() == animalState) {
 				animal.setTime(animal.getTime() + 1);
 			}

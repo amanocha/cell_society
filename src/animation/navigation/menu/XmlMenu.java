@@ -12,13 +12,18 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import readxml.XmlMapper;
 
-public class XmlMenu extends Menu {
+/**
+ * This is the Xml Menu class which extends Menu. It adds all the GUI elements to the root to display the xml menu page.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
+public class XmlMenu implements Menu {
 	
 	private XmlSelection mySelection;
 	private Group root;
 	
 	public XmlMenu(Scene scene, Group r, GUIGenerator gui, XmlMapper info, ResourceBundle resource, String simulationname) {
-		super(r, gui);
 		root = r;
 		if (simulationname == null) {
 			mySelection = new XmlSelection(scene, r, info, resource);

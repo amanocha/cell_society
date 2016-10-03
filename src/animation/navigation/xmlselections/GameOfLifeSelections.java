@@ -10,6 +10,14 @@ import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 import readxml.XMLGenerator.UserInputToXML;
 
+
+/**
+ * This is the Game of Life Selections class which creates the GUI elements for the Xml selection page after selecting
+ * game of life from the combobox.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class GameOfLifeSelections extends XmlSelection {
 	
 	private Scene myScene;
@@ -17,7 +25,13 @@ public class GameOfLifeSelections extends XmlSelection {
 	private Navigator myNav;
 	private ResourceBundle myResource;
 	
-
+	/**
+	 * This creates the game of selection Pane
+	 * @param scene
+	 * @param r
+	 * @param info
+	 * @param resource
+	 */
 	public GameOfLifeSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
@@ -25,6 +39,9 @@ public class GameOfLifeSelections extends XmlSelection {
 		myResource = resource;
 	}
 	
+	/**
+	 * This adds all the GUI elements for game of life
+	 */
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		getSimulationCombo().setValue(myResource.getString("GameOfLifeLabel"));
@@ -37,6 +54,9 @@ public class GameOfLifeSelections extends XmlSelection {
 		return getScreen();
 	}
 	
+	/**
+	 * This maps all the info to the XML backend
+	 */
 	private void xmlMap() {
 		UserInputToXML input = super.startXMLMap(2);
 		input.setSimulation(myResource.getString("GameOfLifexml"));

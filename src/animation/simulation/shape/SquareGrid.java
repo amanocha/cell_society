@@ -10,13 +10,25 @@ import javafx.scene.shape.Shape;
 import structures.Grid;
 import structures.cell.Cell;
 
+
+/**
+ * This is the Square Grid class which draws a simulation with square cells.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class SquareGrid extends GridShape {
 
-	
+	/**
+	 * Calls the super constructor
+	 */
 	public SquareGrid() {
 		super();
 	}
 
+	/**
+	 * Draws the entire grid using square cells
+	 */
 	public Pane drawGrid(Grid grid, int w, int h) {
 		super.drawGrid(grid, w, h);
 		Pane screen = new TilePane();
@@ -25,8 +37,7 @@ public class SquareGrid extends GridShape {
 		screen.setPrefSize(w, h);
 		((TilePane) screen).setHgap(1);
 		((TilePane) screen).setVgap(1);
-		double width = ((w + ((TilePane) screen).getHgap()) / (grid.getColumns()) - ((TilePane) screen).getHgap());
-		//double height = ((h + ((TilePane) screen).getVgap()) / (grid.getRows())) - ((TilePane) screen).getVgap();
+		double width = Math.floor((((w + ((TilePane) screen).getHgap()) / (grid.getColumns()) - ((TilePane) screen).getHgap())));
 		((TilePane) screen).setPrefColumns(grid.getColumns());
 		((TilePane) screen).setTileAlignment(Pos.CENTER);
 		Iterator<Cell> itr = grid.iterator();
@@ -38,6 +49,13 @@ public class SquareGrid extends GridShape {
 		return screen;
 	}
 	
+
+	/**
+	 * Draws one square
+	 * @param current
+	 * @param dim
+	 * @return
+	 */
 	private Shape fillGrid(Cell current, double dim) {
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(getColor().getColor(current.getCurrentState()));
