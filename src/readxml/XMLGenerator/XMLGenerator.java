@@ -8,24 +8,14 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
 
+/*
+ * Class that generates xml given inputs
+ */
 public class XMLGenerator {
 	
 	private String fileName;
-	/*public static void main(String[] args) {
-		XMLGenerator x = new XMLGenerator();
-		Map<String, String> globalMap = new HashMap<String, String>();
-		globalMap.put("simulation", "game_of_life");
-		//globalMap.put("probCatch", "0.25");
-		//globalMap.put("satisfactionRate", "0.30");
-		//globalMap.put("energy", "10");
-		//globalMap.put("fishTime", "1");
-		//globalMap.put("sharkTime", "10");
-		globalMap.put("shape", "square");
-		globalMap.put("wrapping", "toroidal");
-		int index = 900; //the only parameter that needs to be changed when changing grid size
-		int maxStateValue = 2;
-		System.out.println(x.createXML(globalMap, index, maxStateValue));
-	}*/
+	
+	//Method to create the XML
 	public String createXML(Map<String, String> globalMap, int index) {
 		StringBuilder xml = new StringBuilder();
 		
@@ -67,7 +57,7 @@ public class XMLGenerator {
 		return xmlString;
 	}
 	
-	
+	// Actually writes the XML file
 	public String generateFile(String text, Map<String, String> globalMap, int index) {
 		Properties prop = new Properties();
 		try {
@@ -101,7 +91,7 @@ public class XMLGenerator {
 		return fileName;
 	}
 	
-
+	// Generates squares with random state values
 	public String generateSquareWithRandomState(int maxStateValue, int index) {
 		StringBuilder square = new StringBuilder();
 		int randomNum = (int)Math.floor(Math.random()*maxStateValue);

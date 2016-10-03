@@ -22,8 +22,11 @@ import engine.update.UpdatePredatorPrey;
 import engine.update.UpdateSegregation;
 import engine.update.UpdateSugar;
 
-public class MetaData {
+/*
+ *  Class that holds the global variables/data for a given simulation
+ */
 
+public class MetaData {
 
 	private String simulationName;
 	private Neighbor myNeighbor;
@@ -34,6 +37,7 @@ public class MetaData {
 	private String shape;
 	private int numStates;
 
+	// Create neighbors and shape objects based on shape value
 	public void setCellShape(Grid grid, String name, String wrapping) {
 		this.shape = name;
 		if (shape.equals("square")) {
@@ -50,6 +54,7 @@ public class MetaData {
 		}
 	}
 	
+	// Set simulation update and color based on simulation name
 	public void setSimulationName(String name, Grid grid) {
 		this.simulationName = name;
 		if (name.equals("fire")) {

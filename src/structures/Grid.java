@@ -6,8 +6,10 @@ import java.util.List;
 
 import structures.cell.Cell;
 
-
-
+/*
+ * The Grid class is the data structure that holds the necessary
+ * components to visualize a grid in the frontend
+ */
 public class Grid implements Iterable<Cell>{
 	
 	private List<Cell> cellList;
@@ -30,6 +32,7 @@ public class Grid implements Iterable<Cell>{
 		return cellList.size();
 	}
 	
+	// Resets drawing of grid
 	public void reset() {
 		this.cellList = this.initialCellList;
 		System.out.println("draw grid");
@@ -44,6 +47,7 @@ public class Grid implements Iterable<Cell>{
 		//System.out.println();
 	}
 
+	// Iterator to easily iterate each cell for drawing in front end
 	@Override
     public Iterator<Cell> iterator() {
         Iterator<Cell> iterator = new Iterator<Cell>() {
