@@ -12,6 +12,13 @@ import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 import readxml.XMLGenerator.UserInputToXML;
 
+/**
+ * This is the Fire Selections class which creates the GUI elements for the Xml selection page after selecting
+ * fire from the combobox.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class FireSelections extends XmlSelection {
 	
 	private Scene myScene;
@@ -20,14 +27,26 @@ public class FireSelections extends XmlSelection {
 	private Navigator myNav;
 	private ResourceBundle myResource; 
 	
+	
+	/**
+	 * This is the constructor for the fire selections class that sets up the xml selection page.
+	 * @param scene
+	 * @param r
+	 * @param info
+	 * @param resource
+	 */
 	public FireSelections(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
 		super(scene, r, info, resource);
 		myScene = scene;
 		root = r;
 		myResource = resource;
-		
 	}
 	
+	/**
+	 * This adds the GUI elements to the fire selections page.
+	 * 
+	 * @return Pane
+	 */
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		getSimulationCombo().setValue(myResource.getString("FireLabel"));
@@ -42,6 +61,9 @@ public class FireSelections extends XmlSelection {
 		return getScreen();
 	}
 	
+	/**
+	 * This creates passes the information from the page to the XML backend.
+	 */
 	private void xmlMap() {
 		UserInputToXML input = super.startXMLMap(3);
 		input.setSimulation(myResource.getString("Firexml"));
@@ -50,10 +72,18 @@ public class FireSelections extends XmlSelection {
 		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
+	/**
+	 * This creates the probability label GUI
+	 * @return Slider 
+	 */
 	public Label createProbLabel() {
 		return createSmallLabel(myResource.getString("ProbabilityLabel"), myScene.getWidth() * .25, myScene.getHeight() * .6);
 	}
 	
+	/**
+	 * This creates the probability slider GUI
+	 * @return
+	 */
 	public Slider createProbSlider() {
 		myProb = createGeneralSlider(0, 1, 0.5, 0.1, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
 		return myProb;

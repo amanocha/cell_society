@@ -1,28 +1,14 @@
 package animation.navigation.menu;
 
-import animation.navigation.GUIGenerator;
-import javafx.scene.Group;
+/**
+ * This is the interface for all the menus, it allows for all the menus to be implemented from the same class.
+ * 
+ * @author Hannah Fuchshuber
+ */
 
-public class Menu {
+public interface Menu {
 	
-	private Group root;
-	private GUIGenerator myGUI;
+	public void generateMenu();
 	
-	
-	public Menu(Group r, GUIGenerator gui) {
-		root = r;
-		myGUI = gui;
-	}
-	
-	public void generateMenu() {
-	}
-	
-	public Group getRoot() {
-		return root;
-	}
-	
-	public GUIGenerator getGUI() {
-		return myGUI;
-	}
 
 }

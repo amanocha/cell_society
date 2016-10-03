@@ -7,7 +7,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.TilePane;
+
+
+/**
+ * This is the Pane generator class, it makes the pane GUIs for each page - including the main page, 
+ * the simulation page, and the xml page.
+ * 
+ * @author Hannah Fuchshuber
+ */
 
 public class PaneGenerator {
 	
@@ -23,6 +30,10 @@ public class PaneGenerator {
 		xmlMenuPane = createXMLMenuPane();
 	}
 
+	/**
+	 * Creates the main menu pane
+	 * @return Main Menu Pane
+	 */
 	private Pane createMainMenuPane() {
 		GridPane grid = new GridPane();
 		grid.prefHeightProperty().bind(myScene.heightProperty());
@@ -49,10 +60,11 @@ public class PaneGenerator {
 		return grid;
 	}
 	
-	public GridPane getMainMenuPane() {
-		return (GridPane) myMainMenu;
-	}
 	
+	/**
+	 * Creates the Simulation Stack Pane
+	 * @return StackPane
+	 */
 	public Pane createSimulationMenuPane() {
 		StackPane pane = new StackPane();
 		pane.setPrefHeight(myScene.getHeight());
@@ -61,23 +73,35 @@ public class PaneGenerator {
 		return pane; 
 	}
 	
-	public StackPane getSimulationMenuPane() {
-		return (StackPane) mySimulationMenu;
-	}
-	
-	public TilePane createSimulationPane() {
-		TilePane pane = new TilePane();
-		pane.setStyle("-fx-background-color: #000000;");
-		pane.setMaxSize((myScene.getWidth() * 3) / 4, (myScene.getHeight() * 3) / 4);
-		pane.setPrefHeight((myScene.getWidth() * 3) / 4);
-		pane.setPrefWidth((myScene.getWidth() * 3) / 4);
-		return pane; 
-	}
-	
+	/**
+	 * Creates the Xml Menu Pane
+	 * @return Pane
+	 */
 	private Pane createXMLMenuPane() {
 		return new Pane();
 	}
 	
+	/**
+	 * Getter for the Simulation Pane
+	 * @return StackPane
+	 */
+	public StackPane getSimulationMenuPane() {
+		return (StackPane) mySimulationMenu;
+	}
+	
+	/**
+	 * Getter for the main menu pane
+	 * @return Pane
+	 */
+	public GridPane getMainMenuPane() {
+		return (GridPane) myMainMenu;
+	}
+	
+	
+	/**
+	 * Getter for the Xml Menu Pane
+	 * @return
+	 */
 	public Pane getXMLMenuPane() {
 		return xmlMenuPane;
 	}

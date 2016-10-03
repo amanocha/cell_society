@@ -17,6 +17,11 @@ import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 
 
+/**
+ * This is the GUI Generator, it creates the main page GUI, including the screen, buttons and title.
+ * 
+ * @author Hannah Fuchshuber
+ */
 
 public class GUIGenerator {
 
@@ -27,6 +32,13 @@ public class GUIGenerator {
 	private XmlMapper myInfo;
 	private Navigator myNav;
 	
+	/**
+	 * Sets up the instance variables
+	 * @param scene
+	 * @param r
+	 * @param resource
+	 * @param info
+	 */
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource, XmlMapper info) {
 		this.myScene = scene;
 		this.myResource = resource;
@@ -36,7 +48,10 @@ public class GUIGenerator {
 		myNav = new Navigator(scene, r, info);
 	}
 
-
+	/**
+	 * Generates the display GUI for the main screen
+	 * @return Pane
+	 */
 	public Pane generateMainScreen() {
 		GridPane grid = myPane.getMainMenuPane();
 		Label header = (new Header(myResource.getString("Title"))).getLabel(); 
@@ -49,6 +64,11 @@ public class GUIGenerator {
 		return grid;
 	}
 	
+	/**
+	 * Generates the simulation screen's main button
+	 * @param loop
+	 * @return Button
+	 */
 	public Button generateSimulationScreenMainButton(Loop loop) {
 		Button main = (new ButtonString(myResource.getString("MainMenu"))).getButton();
 		main.setOnAction(e -> {
@@ -62,15 +82,22 @@ public class GUIGenerator {
 	}
 
 
-	public Node generateSimulationScreenLabel() {
+	/**
+	 * Generates the Simulation screen's label
+	 * @return Label
+	 */
+	public Label generateSimulationScreenLabel() {
 		Label label = (new Header((myResource.getString("SimulationLabel")) + myInfo.getMeta().getSimulationName())).getLabel();
 		label.setLayoutX(myScene.getWidth() * .07);
-		label.setLayoutY(myScene.getHeight() * .06);
+		label.setLayoutY(myScene.getHeight() * .04);
 		return label;
 	}
 	
 	
-	
+	/**
+	 * Generates the main menu's start button
+	 * @return Button
+	 */
 	private Button startButton() {
 		Button button = (new ButtonString(myResource.getString("Start"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .5);
@@ -81,7 +108,10 @@ public class GUIGenerator {
 		return button;
 	}
 
-	
+	/**
+	 * Generates the main menu's parameter button
+	 * @return Button
+	 */
 	private Button parameterButton() {
 		Button button = (new ButtonString(myResource.getString("ParameterButton"))).getButton();
 		button.setPrefWidth(myScene.getWidth() * .5);
