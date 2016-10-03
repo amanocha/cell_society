@@ -69,6 +69,22 @@ public class UserInputToXML {
 		addParameter(prop.getProperty("sharkReproductionTime"), Integer.toString(time));
 	}
 	
+	public void setInitSugar(int initSugar) {
+		addParameter(prop.getProperty("initSugar"), Integer.toString(initSugar));
+	}
+	
+	public void setSugarGrowBackTime(int time) {
+		addParameter(prop.getProperty("sugarGrowBackTime"), Integer.toString(time));
+	}
+	
+	public void setVision(int vision) {
+		addParameter(prop.getProperty("vision"), Integer.toString(vision));
+	}
+	
+	public void setSugarMetabolism(int sugarMetabolism) {
+		addParameter(prop.getProperty("sugarMetabolism"), Integer.toString(sugarMetabolism));
+	}
+	
 	// Generate XML based on values in map
 	public void generateXML() {
 		xmlGenerator.createXML(globalsMap, numCells);

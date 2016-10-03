@@ -29,6 +29,7 @@ import structures.cell.AnimalCell;
 import structures.cell.Cell;
 import structures.cell.FireCell;
 import structures.cell.SegregationCell;
+import structures.cell.SugarCell;
 
 public class XmlMapper {
 	
@@ -120,13 +121,15 @@ public class XmlMapper {
 			// Create new cells based on type of simulation
 			Cell newCell = new Cell();
 			
-			String simulation = prop.getProperty("simulation");
+			//String simulation = prop.getProperty("simulation");
 			if (globalsMap.get(prop.getProperty("simulation")).equals("predator_prey")) {
 				newCell = createAnimalCell(cellIndex, cellInitialState, globalsMap);
 			} else if (globalsMap.get(prop.getProperty("simulation")).equals("fire")) {
 				newCell = createFireCell(cellIndex, cellInitialState, globalsMap);
 			} else if (globalsMap.get(prop.getProperty("simulation")).equals("segregation")) {
 				newCell = createSegregationCell(cellIndex, cellInitialState, globalsMap);
+			} else if (globalsMap.get(prop.getProperty("simulation")).equals("sugar")) {
+				newCell = createSugarCell(cellIndex, cellInitialState, globalsMap);
 			} else  {
 				newCell = createCell(cellIndex, cellInitialState);
 			}
@@ -167,6 +170,15 @@ public class XmlMapper {
 				Integer.parseInt(globalsMap.get(prop.getProperty("sharkReproductionTime")))
 				);
 
+	}
+	
+	private Cell createSugarCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
+		return new SugarCell(cellIndex, cellInitialState,
+				Integer.parseInt(globalsMap.get(prop.getProperty("initSugar"))),
+				Integer.parseInt(globalsMap.get(prop.getProperty("sugarGrowBackTime"))), 
+				Integer.parseInt(globalsMap.get(prop.getProperty("vision"))), 
+				Integer.parseInt(globalsMap.get(prop.getProperty("sugarMetabolism")))
+				);
 	}
 	
 	public Grid getGrid() {

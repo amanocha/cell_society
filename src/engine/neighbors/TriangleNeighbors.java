@@ -37,7 +37,7 @@ public class TriangleNeighbors extends Neighbor{
 	
 	private int getNorthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-		if (cellNumber % 2*getGridWidth() != getGridWidth()/2 - 1) {
+		if (cellNumber % (2*getGridWidth()) != getGridWidth()/2 - 1) {
 			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
 				return (cellNumber - getGridWidth()/2 + 1);
 			} else {
@@ -53,7 +53,7 @@ public class TriangleNeighbors extends Neighbor{
 	
 	private int getNorthWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-		if (cellNumber % 2*getGridWidth() != 0) {
+		if (cellNumber % (2*getGridWidth()) != 0) {
 			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
 				return (cellNumber - getGridWidth()/2);
 			} else {
@@ -81,7 +81,7 @@ public class TriangleNeighbors extends Neighbor{
 	
 	private int getSouthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-		if (cellNumber % 2*getGridWidth() != 3*getGridWidth()/4 - 1) {
+		if ((cellNumber % (2*getGridWidth())) != (3*getGridWidth()/2 - 1)) {
 			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
 				return (cellNumber + getGridWidth()/2);
 			} else {
@@ -97,7 +97,7 @@ public class TriangleNeighbors extends Neighbor{
 	
 	private int getSouthWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
-		if (cellNumber % 2*getGridWidth() != 0) {
+		if (cellNumber % (2*getGridWidth()) != 0) {
 			if (cellNumber % (2*getGridWidth()) < getGridWidth()) {
 				return (cellNumber + getGridWidth()/2 - 1);
 			} else {
@@ -105,7 +105,7 @@ public class TriangleNeighbors extends Neighbor{
 			}
 		} else {
 			if (isToroidal()) {
-				return (cellNumber + getGridWidth() - 1);
+				return (cellNumber + getGridWidth()/2 - 1);
 			}
 		}
 		return -1;
