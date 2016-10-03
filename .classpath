@@ -3,6 +3,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="data"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="/Users/dineshmanocha/Downloads/org.eclipse.core.resources-3.8.101.v20130717-0806 2.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
