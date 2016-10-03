@@ -78,12 +78,12 @@ public class PredatorPreySelections extends XmlSelection {
 	
 
 	private Slider createFishReproductiveSlider() {
-		myFishReproduction = createGeneralSlider(3, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .7, myScene.getWidth() * .25);
+		myFishReproduction = createGeneralSlider(0, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .7, myScene.getWidth() * .25);
 		return myFishReproduction;
 	}
 	
 	private Slider createSharkReproductiveSlider() {
-		mySharkReproduction = createGeneralSlider(3, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
+		mySharkReproduction = createGeneralSlider(0, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
 		return mySharkReproduction;
 	}
 }

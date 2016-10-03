@@ -40,7 +40,7 @@ public class SquareGrid extends GridShape {
 	
 	private Shape fillGrid(Cell current, double width, double height) {
 		double dim = width;
-		if (width < height) {
+		if (width > height) {
 			dim = height;
 		}
 		Rectangle rectangle = new Rectangle();

@@ -35,7 +35,7 @@ public class XmlSelection {
 	
 	private static ObservableList<String> GRID = FXCollections.observableArrayList(
 			"NORMAL",
-			"TOROADAL" );
+			"TOROIDAL" );
 	
 	private PaneGenerator myPane;
 	private ResourceBundle myResource;

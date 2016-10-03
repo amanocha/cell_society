@@ -66,7 +66,7 @@ public class UserInputToXML {
 	}
 	
 	public void setSharkReproductionTime(int time) {
-		addParameter(prop.getProperty("setSharkReproductionTime"), Integer.toString(time));
+		addParameter(prop.getProperty("sharkReproductionTime"), Integer.toString(time));
 	}
 	
 	// Generate XML based on values in map
