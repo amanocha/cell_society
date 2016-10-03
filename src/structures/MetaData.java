@@ -6,6 +6,7 @@ import animation.simulation.color.FireColor;
 import animation.simulation.color.GameOfLifeColor;
 import animation.simulation.color.PredatorPreyColor;
 import animation.simulation.color.SegregationColor;
+import animation.simulation.color.SugarColor;
 import animation.simulation.shape.GridShape;
 import animation.simulation.shape.HexagonGrid;
 import animation.simulation.shape.SquareGrid;
@@ -19,6 +20,7 @@ import engine.update.UpdateFire;
 import engine.update.UpdateGameOfLife;
 import engine.update.UpdatePredatorPrey;
 import engine.update.UpdateSegregation;
+import engine.update.UpdateSugar;
 
 public class MetaData {
 
@@ -65,6 +67,10 @@ public class MetaData {
 		if (name.equals("segregation")) {
 			myUpdate = new UpdateSegregation(grid, myNeighbor);
 			myColor = new SegregationColor();
+		}
+		if (name.equals("sugar")) {
+			myUpdate = new UpdateSugar(grid, myNeighbor);
+			myColor = new SugarColor();
 		}
 	}
 

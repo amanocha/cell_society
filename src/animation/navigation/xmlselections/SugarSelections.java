@@ -44,7 +44,7 @@ public class SugarSelections extends XmlSelection {
 	 */
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
-		getSimulationCombo().setValue(myResource.getString("PredatorPreyLabel"));
+		getSimulationCombo().setValue(myResource.getString("SugarLabel"));
 		Button button = makeMainMenuButton();
 		button.setOnAction(e -> {
 			xmlMap();
@@ -72,7 +72,7 @@ public class SugarSelections extends XmlSelection {
 		input.setSugarGrowBackTime((int) mySugarGrowBack.getValue());
 		input.setVision((int) myVision.getValue());
 		input.setSugarMetabolism((int) myMetabolism.getValue());
-		input.setSimulation(myResource.getString("PredatorPreyxml"));
+		input.setSimulation(myResource.getString("Sugarxml"));
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());
 	}
@@ -82,7 +82,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Label
 	 */
 	public Label createSugarGrowthLabel() {
-		return createSmallLabel(myResource.getString("SugarGrowBackLabel"), myScene.getWidth() * .3, myScene.getHeight() * .8);
+		return createSmallLabel(myResource.getString("SugarGrowBackLabel"), myScene.getWidth() * .3, myScene.getHeight() * .72);
 	}
 	
 	/**
@@ -90,7 +90,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Label
 	 */
 	public Label createVisionLabel() {
-		return createSmallLabel(myResource.getString("SugarVisionLabel"), myScene.getWidth() * .25, myScene.getHeight() * .7);
+		return createSmallLabel(myResource.getString("SugarVisionLabel"), myScene.getWidth() * .25, myScene.getHeight() * .66);
 	}
 	
 	
@@ -107,7 +107,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Label
 	 */
 	public Label createInitialSugarLabel() {
-		return createSmallLabel(myResource.getString("SugarInitialValueLabel"), myScene.getWidth() * .25, myScene.getHeight() * .8);
+		return createSmallLabel(myResource.getString("SugarInitialValueLabel"), myScene.getWidth() * .25, myScene.getHeight() * .78);
 	}
 	
 	/**
@@ -115,7 +115,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Slider
 	 */
 	private Slider createSugarGrowthSlider() {
-		mySugarGrowBack = createGeneralSlider(1, 5, 2, 1, myScene.getWidth() * .4, myScene.getHeight() * .8, myScene.getWidth() * .25);
+		mySugarGrowBack = createGeneralSlider(1, 5, 2, 1, myScene.getWidth() * .4, myScene.getHeight() * .72, myScene.getWidth() * .25);
 		return mySugarGrowBack;
 	}
 	
@@ -124,7 +124,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Slider
 	 */
 	private Slider createVisionSlider() {
-		myVision = createGeneralSlider(1, 6, 3, 1, myScene.getWidth() * .4, myScene.getHeight() * .7, myScene.getWidth() * .25);
+		myVision = createGeneralSlider(1, 6, 3, 1, myScene.getWidth() * .4, myScene.getHeight() * .66, myScene.getWidth() * .25);
 		return myVision;
 	}
 	
@@ -142,7 +142,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Slider
 	 */
 	private Slider createInitialSugarSlider() {
-		myInitSugar = createGeneralSlider(5, 25, 15, 5, myScene.getWidth() * .4, myScene.getHeight() * .8, myScene.getWidth() * .25);
+		myInitSugar = createGeneralSlider(5, 25, 15, 5, myScene.getWidth() * .4, myScene.getHeight() * .78, myScene.getWidth() * .25);
 		return myInitSugar;
 	}
 
