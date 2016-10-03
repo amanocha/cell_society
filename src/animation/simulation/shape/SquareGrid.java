@@ -26,23 +26,19 @@ public class SquareGrid extends GridShape {
 		((TilePane) screen).setHgap(1);
 		((TilePane) screen).setVgap(1);
 		double width = ((w + ((TilePane) screen).getHgap()) / (grid.getColumns()) - ((TilePane) screen).getHgap());
-		double height = ((h + ((TilePane) screen).getVgap()) / (grid.getRows())) - ((TilePane) screen).getVgap();
+		//double height = ((h + ((TilePane) screen).getVgap()) / (grid.getRows())) - ((TilePane) screen).getVgap();
 		((TilePane) screen).setPrefColumns(grid.getColumns());
 		((TilePane) screen).setTileAlignment(Pos.CENTER);
 		Iterator<Cell> itr = grid.iterator();
 		while(itr.hasNext()) {
 			Cell current = itr.next();
 			insertStatesList(current.getCurrentState());
-			screen.getChildren().add(fillGrid(current, width, height));
+			screen.getChildren().add(fillGrid(current, width));
 		}
 		return screen;
 	}
 	
-	private Shape fillGrid(Cell current, double width, double height) {
-		double dim = width;
-		if (width > height) {
-			dim = height;
-		}
+	private Shape fillGrid(Cell current, double dim) {
 		Rectangle rectangle = new Rectangle();
 		rectangle.setFill(getColor().getColor(current.getCurrentState()));
 		rectangle.setWidth(dim);
