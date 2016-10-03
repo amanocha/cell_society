@@ -2,23 +2,15 @@ package readxml.XMLGenerator;
 
 import java.io.BufferedWriter;
 import java.io.File;
-
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.ResourcesPlugin;
 
 public class XMLGenerator {
 	
 	private String fileName;
-<<<<<<< HEAD
 	/*public static void main(String[] args) {
 		XMLGenerator x = new XMLGenerator();
 		Map<String, String> globalMap = new HashMap<String, String>();
@@ -34,24 +26,7 @@ public class XMLGenerator {
 		int maxStateValue = 2;
 		System.out.println(x.createXML(globalMap, index, maxStateValue));
 	}*/
-	public String createXML(Map<String, String> globalMap, int index, int maxStateValue) {
-=======
-//	public static void main(String[] args) {
-//		XMLGenerator x = new XMLGenerator();
-//		Map<String, String> globalMap = new HashMap<String, String>();
-//		globalMap.put("simulation", "game of life");
-//		globalMap.put("probCatch", "0.25");
-//		globalMap.put("satisfactionRate", "0.30");
-//		globalMap.put("energy", "10");
-//		globalMap.put("fishTime", "1");
-//		globalMap.put("sharkTime", "10");
-//		globalMap.put("shape", "square");
-//		int index = 900; //the only parameter that needs to be changed when changing grid size
-//		int maxStateValue = 2;
-//		System.out.println(x.createXML(globalMap, index, maxStateValue));
-//	}
 	public String createXML(Map<String, String> globalMap, int index) {
->>>>>>> master
 		StringBuilder xml = new StringBuilder();
 		
 		// BEGIN FILE
@@ -104,12 +79,7 @@ public class XMLGenerator {
 		fileName = simulationName + "_" + index + ".xml";
 		System.out.println("WRITING FILE");
 		File file = new File("data/xml/" + fileName);
-		PrintWriter writer;
 		BufferedWriter output = null;
-		//IResource dfile = ResourcesPlugin.getWorkspace().getRoot().getFile("PathToMyFile");
-		//dfile.refreshLocal(IResource.DEPTH_ZERO, null);
-		//IResource res = (IResource)ResourcesPlugin.getWorkspace().getRoot().findMember("data/xml/" + fileName);
-		//res.refreshLocal(IResource.DEPTH_INFINITE, null);
 		try {
 			output = new BufferedWriter(new FileWriter(file));
 			output.write(text);

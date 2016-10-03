@@ -62,15 +62,10 @@ public class XmlMapper {
 		this.globalsMap = new HashMap<String, String>();
 		// Get XML File loaded
 		File inputFile;
-		ClassLoader classLoader = getClass().getClassLoader();
-		
-<<<<<<< HEAD
+
 		System.out.println("data/xml/"+filename);
 		inputFile = new File("data/xml/"+filename);
-=======
-		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
->>>>>>> master
-		//inputFile = new File("data/xml/segregation_100.xml");
+
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
