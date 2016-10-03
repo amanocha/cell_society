@@ -2,10 +2,10 @@ package engine.update;
 
 import java.util.Random;
 
-import engine.Neighbor;
-import structures.Cell;
+import engine.neighbors.Neighbor;
+import structures.cell.Cell;
 import structures.Grid;
-import structures.SlimeCell;
+import structures.cell.SlimeCell;
 
 public class UpdateSlime extends Update {
 	private Grid grid;

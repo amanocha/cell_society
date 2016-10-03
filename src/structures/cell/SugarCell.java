@@ -1,4 +1,4 @@
-package structures;
+package structures.cell;
 
 public class SugarCell extends Cell {
 	private int sugar;
