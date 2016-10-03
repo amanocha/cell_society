@@ -168,6 +168,12 @@ public class HexagonalNeighbors extends Neighbor{
 		return neighbors;
 	}
 	
+	@Override
+	public List<Cell> getSurroundingNeighbors(Cell cell, int vision) {
+		List<Cell> neighbors = new ArrayList<Cell>();
+		return neighbors;
+	}
+	
 	/**
 	 * 0 = north
 	 * 1 = northeast

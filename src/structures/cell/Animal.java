@@ -3,29 +3,20 @@ package structures.cell;
 public class Animal extends Cell {
 	private int time;
 	private int energy;
-	private int sharkTime;
 	private int fishTime;
+	private int sharkTime;
 	
 	public Animal() {
 		super();
 		time = 0;
-		energy = 0;
 	}
 	
-	public Animal(int cell_num, int cell_state, int energy, int fish, int shark) {
+	public Animal(int cell_num, int cell_state, int initEnergy, int fish, int shark) {
 		super(cell_num, cell_state);
 		time = 0;
-		this.energy = energy;
+		energy = initEnergy;
 		this.fishTime = fish;
 		this.sharkTime = shark;
-	}
-	
-	public int getFishTime() {
-		return fishTime;
-	}
-	
-	public int getSharkTime() {
-		return sharkTime;
 	}
 	
 	public int getTime() {
@@ -34,6 +25,14 @@ public class Animal extends Cell {
 	
 	public int getEnergy() {
 		return energy;
+	}
+	
+	public int getFishTime() {
+		return fishTime;
+	}
+	
+	public int getSharkTime() {
+		return sharkTime;
 	}
 	
 	public void setTime(int time) {

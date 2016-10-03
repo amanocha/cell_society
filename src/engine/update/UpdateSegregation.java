@@ -28,6 +28,7 @@ public class UpdateSegregation extends Update {
 		satisfaction = ((SegregationCell) newGrid.getCellList().get(0)).getSatisfaction();
 	}
 	
+	@Override
 	public List<Cell> getNeighbors(Cell cell) {
 		List<Cell> neighbors = super.getNeighbors(cell);
 		neighbors.addAll(neighbor.getDiagonalNeighbors(cell));
@@ -52,7 +53,7 @@ public class UpdateSegregation extends Update {
 	public void move(Cell cell) {
 		Random random = new Random();
 		int emptyCellIndex = random.nextInt(emptyCells.size());
-		Cell emptyCell = grid.getCellList().get(emptyCellIndex);
+		Cell emptyCell = emptyCells.get(emptyCellIndex);
 		emptyCells.add(cell);
 		emptyCells.remove(emptyCell);
 		swap(cell, emptyCell);

@@ -90,8 +90,6 @@ public class XmlSelection {
 		return input;
 	}
 
-	
-	
 	public String getWrapping() {
 		if (gridType.equals(myResource.getString("ToroidalLabel"))) {
 			return myResource.getString("Toroidalxml");

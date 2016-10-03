@@ -32,7 +32,6 @@ import structures.cell.SegregationCell;
 
 public class XmlMapper {
 	
-
 	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
 		xmlmap.mapXml(myResource.getString("DefaultSelection"));
@@ -64,9 +63,9 @@ public class XmlMapper {
 		// Get XML File loaded
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
-		System.out.println(filename);
-		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
-
+		
+		//inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
+		inputFile = new File("data/xml/segregation_100.xml");
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
@@ -140,6 +139,7 @@ public class XmlMapper {
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
+		System.out.println(filename);
 		myLoop = new Loop(meta, myGrid);
 	}
 	
