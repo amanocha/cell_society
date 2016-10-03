@@ -55,7 +55,7 @@ public class UpdateAnts extends Update {
 	 * @param antIndex
 	 * @return Updated grid for changes as a result of updating one ant cell
 	 */
-	private Grid antReturnToNest(AntCell antCell, int antIndex) {
+	private void antReturnToNest(AntCell antCell, int antIndex) {
 		int orientation = -1;
 		if (antCell.getCurrentState()==2) {
 			orientation = selectNeighborWithMaxHomePheromones(antCell);
@@ -66,7 +66,37 @@ public class UpdateAnts extends Update {
 		}
 		if (x != -1) {
 			antCell = dropFoodPheromones(antCell);
-			orientation = x;
+			antCell.getAnt(antIndex).setOrientation(orientation);
+			//move to x
+			moveTo(antCell, antIndex, x);
+			
+		}
+		
+	}
+	
+
+	/**
+	 * Move an ant in antCell to x location
+	 */
+	private void moveTo(AntCell antCell, int antIndex, int x) {
+		SquareNeighbors sn = new SquareNeighbors(getGrid(), shape);
+		AntCell destinationCell = antCell;
+		if (x==0) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getNorthWestCell(antCell));
+		} else if (x==1) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getNorthCell(antCell));
+		} else if (x==2) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getNorthEastCell(antCell));
+		} else if (x==3) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getEastCell(antCell));
+		} else if (x==4) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getSouthEastCell(antCell));
+		} else if (x==5) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getSouthCell(antCell));
+		} else if (x==6) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getSouthWestCell(antCell));
+		} else if (x==7) {
+			destinationCell = (AntCell) getGrid().getCellList().get(sn.getWestCell(antCell));
 		}
 		
 	}
@@ -93,15 +123,6 @@ public class UpdateAnts extends Update {
 		List<Cell> neighbors = neighbor.getOrderedNeighbors(antCell);
 		return neighbors;
 	}
-	
-//	private int findMaxNumHomePheromones(AntCell antCell) {
-//		SquareNeighbors neighbor = new SquareNeighbors(getGrid(), wrapping);
-//		List<Cell> neighbors = neighbor.getOrderedNeighbors(antCell);
-//		for(Cell c: neighbors) {
-//			AntCell ac = (AntCell) c;
-//			Max
-//		}
-//	}
 
 	private int selectNeighborWithMaxFoodPheromones(AntCell antCell) {
 		return selectNeighborWithMaxPheromones(antCell, "food");
