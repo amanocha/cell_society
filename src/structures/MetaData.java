@@ -10,10 +10,10 @@ import animation.simulation.shape.GridShape;
 import animation.simulation.shape.HexagonGrid;
 import animation.simulation.shape.SquareGrid;
 import animation.simulation.shape.TriangleGrid;
-import engine.SquareNeighbors;
-import engine.TriangleNeighbors;
-import engine.HexagonalNeighbors;
-import engine.Neighbor;
+import engine.neighbors.HexagonalNeighbors;
+import engine.neighbors.Neighbor;
+import engine.neighbors.SquareNeighbors;
+import engine.neighbors.TriangleNeighbors;
 import engine.update.Update;
 import engine.update.UpdateFire;
 import engine.update.UpdateGameOfLife;
@@ -30,6 +30,7 @@ public class MetaData {
 	private String myFile;
 	private GridShape myShape;
 	private String shape;
+	private int numStates;
 
 	public void setCellShape(Grid grid, String name, String wrapping) {
 		this.shape = name;
@@ -97,6 +98,10 @@ public class MetaData {
 	public String getShape() {
 		return shape;
 	}
+	
+	public int getNumStates() {
+		return numStates;
+	}
 
 	
 	/*****SETTERS*****/
@@ -111,6 +116,10 @@ public class MetaData {
 	
 	public void setFileName(String file) {
 		myFile = file;
+	}
+
+	public void setNumStates(int num) {
+		numStates = num;
 	}
 	
 }

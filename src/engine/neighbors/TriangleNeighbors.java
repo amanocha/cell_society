@@ -1,10 +1,10 @@
-package engine;
+package engine.neighbors;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class TriangleNeighbors extends Neighbor{
 	
@@ -146,4 +146,50 @@ public class TriangleNeighbors extends Neighbor{
 		return neighbors;
 	}
 	
+	@Override
+	public List<Cell> getSurroundingNeighbors(Cell cell, int vision) {
+		List<Cell> neighbors = new ArrayList<Cell>();
+		return neighbors;
+	}
+	
+	/**
+	 * Up:
+	 * 0 = northwest
+	 * 1 = northeast
+	 * 2 = below
+	 * Down:
+	 * 0 = above
+	 * 1 = southeast
+	 * 2 = southwest
+	 * @param cell
+	 * @return
+	 */
+	@Override
+	public List<Cell> getOrderedNeighbors(Cell cell) {
+		List<Cell> neighbors = new ArrayList<Cell>();
+		
+		if (getOrientation(cell).equals("up")) {
+			int northwest, northeast, below;
+		
+			northwest = getNorthWestCell(cell);
+			northeast = getNorthEastCell(cell);
+			below = getBelowCell(cell);
+			
+			neighbors.add(getCellList().get(northwest));
+			neighbors.add(getCellList().get(northeast));
+			neighbors.add(getCellList().get(below));
+		} else {
+			int above, southeast, southwest;
+			
+			above = getAboveCell(cell);
+			southeast = getSouthEastCell(cell);
+			southwest = getSouthWestCell(cell);
+			
+			neighbors.add(getCellList().get(above));
+			neighbors.add(getCellList().get(southeast));
+			neighbors.add(getCellList().get(southwest));
+		}
+		
+		return neighbors;
+	}
 }

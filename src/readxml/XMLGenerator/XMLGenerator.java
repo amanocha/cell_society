@@ -1,10 +1,9 @@
 package readxml.XMLGenerator;
 
+import java.io.BufferedWriter;
 import java.io.File;
-
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Map.Entry;
@@ -12,21 +11,22 @@ import java.util.Map.Entry;
 public class XMLGenerator {
 	
 	private String fileName;
-//	public static void main(String[] args) {
-//		XMLGenerator x = new XMLGenerator();
-//		Map<String, String> globalMap = new HashMap<String, String>();
-//		globalMap.put("simulation", "game of life");
-//		globalMap.put("probCatch", "0.25");
-//		globalMap.put("satisfactionRate", "0.30");
-//		globalMap.put("energy", "10");
-//		globalMap.put("fishTime", "1");
-//		globalMap.put("sharkTime", "10");
-//		globalMap.put("shape", "square");
-//		int index = 900; //the only parameter that needs to be changed when changing grid size
-//		int maxStateValue = 2;
-//		System.out.println(x.createXML(globalMap, index, maxStateValue));
-//	}
-	public String createXML(Map<String, String> globalMap, int index, int maxStateValue) {
+	/*public static void main(String[] args) {
+		XMLGenerator x = new XMLGenerator();
+		Map<String, String> globalMap = new HashMap<String, String>();
+		globalMap.put("simulation", "game_of_life");
+		//globalMap.put("probCatch", "0.25");
+		//globalMap.put("satisfactionRate", "0.30");
+		//globalMap.put("energy", "10");
+		//globalMap.put("fishTime", "1");
+		//globalMap.put("sharkTime", "10");
+		globalMap.put("shape", "square");
+		globalMap.put("wrapping", "toroidal");
+		int index = 900; //the only parameter that needs to be changed when changing grid size
+		int maxStateValue = 2;
+		System.out.println(x.createXML(globalMap, index, maxStateValue));
+	}*/
+	public String createXML(Map<String, String> globalMap, int index) {
 		StringBuilder xml = new StringBuilder();
 		
 		// BEGIN FILE
@@ -53,8 +53,10 @@ public class XMLGenerator {
 		
 		// GENERATE XML FOR SQUARES/CELLS + STATES
 		xml.append("<cells>");
+		Integer numStates = Integer.parseInt(globalMap.get("numstates"));
+		System.out.println("Num States: "+numStates);
 		for(int i = 0; i < index; i++) {
-			xml.append(generateSquareWithRandomState(maxStateValue, i));
+			xml.append(generateSquareWithRandomState(numStates, i));
 		}
 		xml.append("</cells>");
 		
@@ -75,13 +77,20 @@ public class XMLGenerator {
 		}
 		String simulationName = globalMap.get(prop.getProperty("simulation"));
 		fileName = simulationName + "_" + index + ".xml";
-		File file = new File("data/xml/"+fileName);
-		PrintWriter writer;
+		System.out.println("WRITING FILE");
+		File file = new File("data/xml/" + fileName);
+		BufferedWriter output = null;
 		try {
-			writer = new PrintWriter(file);
-			writer.println(text);
-			writer.close();
-		} catch (FileNotFoundException e) {
+			output = new BufferedWriter(new FileWriter(file));
+			output.write(text);
+			output.close();
+			//iFile.refreshLocal(IResource.DEPTH_ZERO, null);
+			//writer = new PrintWriter(file);
+			//writer.println(text);
+			//writer.flush();
+			//writer.close();
+		//} catch (FileNotFoundException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

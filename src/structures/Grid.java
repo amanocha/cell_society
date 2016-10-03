@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import structures.cell.Cell;
+
 
 
 public class Grid implements Iterable<Cell>{

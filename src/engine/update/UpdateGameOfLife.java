@@ -1,9 +1,10 @@
 package engine.update;
 
 import java.util.List;
-import engine.Neighbor;
-import structures.Cell;
+
+import engine.neighbors.Neighbor;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
@@ -11,6 +12,15 @@ public class UpdateGameOfLife extends Update {
 	
 	public UpdateGameOfLife(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
+		grid = newGrid;
+		neighbor = newNeighbors;
+	}
+	
+	@Override
+	public List<Cell> getNeighbors(Cell cell) {
+		List<Cell> neighbors = super.getNeighbors(cell);
+		neighbors.addAll(neighbor.getDiagonalNeighbors(cell));
+		return neighbors;
 	}
 	
 	/**

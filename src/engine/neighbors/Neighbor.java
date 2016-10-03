@@ -1,9 +1,9 @@
-package engine;
+package engine.neighbors;
 
 import java.util.List;
 
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public abstract class Neighbor {
 	private Grid grid;
@@ -21,6 +21,10 @@ public abstract class Neighbor {
 	public abstract List<Cell> getImmediateNeighbors(Cell cell);
 	
 	public abstract List<Cell> getDiagonalNeighbors(Cell cell);
+	
+	public abstract List<Cell> getSurroundingNeighbors(Cell cell, int vision);
+	
+	public abstract List<Cell> getOrderedNeighbors(Cell cell);
 	
 	public boolean isToroidal() {
 		return (wrapping.equals("toroidal"));

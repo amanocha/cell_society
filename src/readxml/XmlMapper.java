@@ -23,17 +23,16 @@ import engine.Loop;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-import structures.Animal;
-import structures.AntCell;
-import structures.Cell;
-import structures.FireCell;
 import structures.Grid;
 import structures.MetaData;
-import structures.SegregationCell;
+import structures.cell.AnimalCell;
+import structures.cell.AntCell;
+import structures.cell.Cell;
+import structures.cell.FireCell;
+import structures.cell.SegregationCell;
 
 public class XmlMapper {
 	
-
 	/*public static void main(String[] args) {
 		XmlMapper xmlmap = new XmlMapper();
 		xmlmap.mapXml(myResource.getString("DefaultSelection"));
@@ -64,9 +63,9 @@ public class XmlMapper {
 		this.globalsMap = new HashMap<String, String>();
 		// Get XML File loaded
 		File inputFile;
-		ClassLoader classLoader = getClass().getClassLoader();
-		System.out.println(filename);
-		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
+
+		System.out.println("data/xml/"+filename);
+		inputFile = new File("data/xml/"+filename);
 
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -101,6 +100,7 @@ public class XmlMapper {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
 			String value = charChildren.get(1).getTextContent();
+			System.out.println(name + "," +value);
 			globalsMap.put(name, value);
 		}
 		
@@ -122,7 +122,7 @@ public class XmlMapper {
 			Cell newCell = new Cell();
 			
 			String simulation = prop.getProperty("simulation");
-			if (globalsMap.get(simulation).equals("predator prey")) {
+			if (globalsMap.get(prop.getProperty("simulation")).equals("predator_prey")) {
 				newCell = createAnimalCell(cellIndex, cellInitialState, globalsMap);
 			} else if (globalsMap.get(prop.getProperty("simulation")).equals("fire")) {
 				newCell = createFireCell(cellIndex, cellInitialState, globalsMap);
@@ -139,10 +139,12 @@ public class XmlMapper {
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
 		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
-		
+		System.out.println(globalsMap.get(prop.getProperty("maxStates")));
+		meta.setNumStates(Integer.parseInt(globalsMap.get(prop.getProperty("maxStates"))));
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
+		System.out.println(filename);
 		myLoop = new Loop(meta, myGrid);
 	}
 	
@@ -150,9 +152,8 @@ public class XmlMapper {
 		return new Cell(cellIndex, cellInitialState);
 	}
 	
-	private Cell createAntCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap) {
-		return new AntCell(cellIndex, cellInitialState);
-				
+	private Cell createAntCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalMap) {
+		 return new AntCell(cellIndex, cellInitialState);
 	}
 	
 	private Cell createSegregationCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
@@ -167,7 +168,7 @@ public class XmlMapper {
 	}
 	
 	private Cell createAnimalCell(Integer cellIndex, Integer cellInitialState, Map<String, String> globalsMap){
-		return new Animal(cellIndex, cellInitialState, 
+		return new AnimalCell(cellIndex, cellInitialState, 
 				Integer.parseInt(globalsMap.get(prop.getProperty("energy"))), 
 				Integer.parseInt(globalsMap.get(prop.getProperty("fishReproductionTime"))), 
 				Integer.parseInt(globalsMap.get(prop.getProperty("sharkReproductionTime")))

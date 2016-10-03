@@ -2,9 +2,9 @@ package engine.update;
 
 import java.util.List;
 
-import engine.Neighbor;
-import structures.Cell;
+import engine.neighbors.Neighbor;
 import structures.Grid;
+import structures.cell.Cell;
 
 public abstract class Update {
 	private Grid grid;
@@ -53,5 +53,9 @@ public abstract class Update {
 	
 	public Grid getGrid() {
 		return grid;
+	}
+	
+	public void setGrid(Grid grid) {
+		this.grid = grid;
 	}
 }

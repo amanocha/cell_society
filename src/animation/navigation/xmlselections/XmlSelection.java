@@ -7,7 +7,6 @@ import animation.controls.label.Header;
 import animation.controls.label.SmallLabel;
 import animation.controls.pane.PaneGenerator;
 import animation.navigation.Navigator;
-import engine.UserInputToXML;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Group;
@@ -18,6 +17,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
+import readxml.XMLGenerator.UserInputToXML;
 
 public class XmlSelection {
 	
@@ -26,7 +26,7 @@ public class XmlSelection {
 		    		"SEGREGATION", 
 		    		"GAME OF LIFE", 
 		    		"FIRE", 
-		    		"WA-TOR" );
+		    		"PREDATOR/PREY" );
 
 	private static ObservableList<String> SHAPES = FXCollections.observableArrayList(
 			"SQUARE",
@@ -35,7 +35,7 @@ public class XmlSelection {
 	
 	private static ObservableList<String> GRID = FXCollections.observableArrayList(
 			"NORMAL",
-			"TOROADAL" );
+			"TOROIDAL" );
 	
 	private PaneGenerator myPane;
 	private ResourceBundle myResource;
@@ -45,7 +45,6 @@ public class XmlSelection {
 	private ComboBox<String> mySelector;
 	private String myShape;
 	private String gridType;
-	//private int myCellNumber;
 	private Slider cellNumberSlider;
 
 	public XmlSelection(Scene scene, Group r, XmlMapper info, ResourceBundle resource) {
@@ -84,15 +83,14 @@ public class XmlSelection {
 		return myScreen;
 	}
 	
-	public UserInputToXML startXMLMap() {
-		UserInputToXML input = new UserInputToXML(getCellNumber(), 2);
+	public UserInputToXML startXMLMap(int numStates) {
+		UserInputToXML input = new UserInputToXML(getCellNumber());
+		input.setMaxStates(numStates);
 		input.setShape(getShape());
 		input.setWrapping(getWrapping());
 		return input;
 	}
 
-	
-	
 	public String getWrapping() {
 		if (gridType.equals(myResource.getString("ToroidalLabel"))) {
 			return myResource.getString("Toroidalxml");

@@ -6,8 +6,8 @@ import java.util.Iterator;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class TriangleGrid extends GridShape {
 
@@ -67,5 +67,6 @@ public class TriangleGrid extends GridShape {
 		triangle.setFill(getColor().getColor((current.getCurrentState())));
 		return triangle;
 	}
+
 
 }

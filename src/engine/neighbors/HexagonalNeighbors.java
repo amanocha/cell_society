@@ -1,10 +1,10 @@
-package engine;
+package engine.neighbors;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class HexagonalNeighbors extends Neighbor{
 	
@@ -164,6 +164,12 @@ public class HexagonalNeighbors extends Neighbor{
 	
 	@Override
 	public List<Cell> getDiagonalNeighbors(Cell cell) {
+		List<Cell> neighbors = new ArrayList<Cell>();
+		return neighbors;
+	}
+	
+	@Override
+	public List<Cell> getSurroundingNeighbors(Cell cell, int vision) {
 		List<Cell> neighbors = new ArrayList<Cell>();
 		return neighbors;
 	}

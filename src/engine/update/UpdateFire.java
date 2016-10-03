@@ -2,10 +2,10 @@ package engine.update;
 
 import java.util.Random;
 
-import engine.Neighbor;
-import structures.Cell;
+import engine.neighbors.Neighbor;
 import structures.Grid;
-import structures.FireCell;
+import structures.cell.Cell;
+import structures.cell.FireCell;
 
 public class UpdateFire extends Update {
 	

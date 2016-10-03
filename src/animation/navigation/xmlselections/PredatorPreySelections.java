@@ -3,7 +3,6 @@ package animation.navigation.xmlselections;
 import java.util.ResourceBundle;
 
 import animation.navigation.Navigator;
-import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
+import readxml.XMLGenerator.UserInputToXML;
 
 public class PredatorPreySelections extends XmlSelection {
 	
@@ -48,7 +48,7 @@ public class PredatorPreySelections extends XmlSelection {
 	}
 	
 	private void xmlMap() {
-		UserInputToXML input = super.startXMLMap();
+		UserInputToXML input = super.startXMLMap(3);
 		input.setEnergy((int) myEnergy.getValue());
 		input.setFishReproductionTime((int) myFishReproduction.getValue());
 		input.setSharkReproductionTime((int) mySharkReproduction.getValue());
@@ -78,12 +78,12 @@ public class PredatorPreySelections extends XmlSelection {
 	
 
 	private Slider createFishReproductiveSlider() {
-		myFishReproduction = createGeneralSlider(3, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .7, myScene.getWidth() * .25);
+		myFishReproduction = createGeneralSlider(0, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .7, myScene.getWidth() * .25);
 		return myFishReproduction;
 	}
 	
 	private Slider createSharkReproductiveSlider() {
-		mySharkReproduction = createGeneralSlider(3, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
+		mySharkReproduction = createGeneralSlider(0, 20, 8, 5, myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
 		return mySharkReproduction;
 	}
 }
