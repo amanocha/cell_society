@@ -8,20 +8,31 @@ import animation.simulation.color.CellColor;
 import javafx.scene.layout.Pane;
 import structures.Grid;
 
+/**
+ * This is the abstract GridShape class, which each type of shape extends in order to draw the different types of grids.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 
 public abstract class GridShape {
 	
-	private int maxState = 0; 
 	private Pane screen;
 	private CellColor myColor;
 	private Map<Integer, Integer> statesList;
 	
+	
+	/**
+	 * Sets up the instance variables
+	 */
 	public GridShape() {
 		this.screen = new Pane();
 		statesList = new HashMap<Integer, Integer>();
 	}
 	
-	
+	/**
+	 * Sets up the pane for drawing the grid
+	 */
 	public Pane drawGrid(Grid grid, int w, int h) {
 		statesList = new HashMap<Integer, Integer>();
 		screen.getChildren().clear();
@@ -30,18 +41,10 @@ public abstract class GridShape {
 		return screen;
 	}
 	
-	public Pane getScreen() {
-		return screen;
-	}
-	
-	public void setColor(CellColor color) {
-		myColor = color;
-	}
-	
+	/**
+	 * Makes an array list of all the states 
+	 */
 	public void insertStatesList(int state) {
-		if (state > maxState) {
-			maxState = state;
-		}
 		if (statesList.get(state) == null) {
 			statesList.put(state, 1);
 		} else {
@@ -49,18 +52,10 @@ public abstract class GridShape {
 		}
 	}
 	
-	public int getMaxState() {
-		return maxState; 
-	}
-	
-	public int numberOfStates() {
-		return statesList.size();
-	}
-	
-	public CellColor getColor() {
-		return myColor;
-	}
-	
+	/**
+	 * Iterator for the cell List to create the line chart
+	 * @return
+	 */
 	public Iterator<Integer> iterator() {
         Iterator<Integer> iterator = new Iterator<Integer>() {
 
@@ -85,6 +80,27 @@ public abstract class GridShape {
         return iterator;
     }
 
+	/**
+	 * Getter for the cell color
+	 * @return
+	 */
+	public CellColor getColor() {
+		return myColor;
+	}
+	
+	/**
+	 * Gets the main screen
+	 */
+	public Pane getScreen() {
+		return screen;
+	}
+	
+	/**
+	 * Set the color to the Cellcolor
+	 */
+	public void setColor(CellColor color) {
+		myColor = color;
+	}
 	
 
 }

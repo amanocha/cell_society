@@ -12,6 +12,15 @@ import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 import readxml.XMLGenerator.UserInputToXML;
 
+
+/**
+ * This is the Segregation Selections class which creates the GUI elements for the Xml selection page after selecting
+ * segregation from the combobox.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
+
 public class SegregationSelections extends XmlSelection {
 	
 	private Slider mySatisfactionSlider;
@@ -26,7 +35,11 @@ public class SegregationSelections extends XmlSelection {
 		root = r;
 		myResource = resource;
 	}
-
+	
+	
+	/**
+	 * Adds all the GUI elements for Segregation selection page
+	 */
 	public Pane generateXMLScreen() {
 		super.generateXMLScreen();
 		getSimulationCombo().setValue(myResource.getString("SegregationLabel"));
@@ -42,6 +55,9 @@ public class SegregationSelections extends XmlSelection {
 		return getScreen();
 	}
 	
+	/**
+	 * Maps all the user inputs to back-end xml
+	 */
 	private void xmlMap() {
 		UserInputToXML input = super.startXMLMap(3);
 		input.setSatisfactionRate(mySatisfactionSlider.getValue());
@@ -50,10 +66,18 @@ public class SegregationSelections extends XmlSelection {
 		myNav = new Navigator(myScene, root, input.getMapper());
 	}
 	
-	public Label createSatisfactionLabel() {
+	/**
+	 * Creates satisfaction label
+	 * @return Label
+	 */
+	private Label createSatisfactionLabel() {
 		return createSmallLabel(myResource.getString("SatisfactionLabel"), myScene.getWidth() * .25, myScene.getHeight() * .6);
 	}
 	
+	/**
+	 * Creates satisfaction slider
+	 * @return Slider
+	 */
 	private Slider createSatisfactionSlider() {
 		mySatisfactionSlider = createGeneralSlider(0, 1, 0.5, 0.1,  myScene.getWidth() * .4, myScene.getHeight() * .6, myScene.getWidth() * .25);
 		return mySatisfactionSlider;

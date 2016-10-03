@@ -9,13 +9,24 @@ import javafx.scene.shape.Shape;
 import structures.Grid;
 import structures.cell.Cell;
 
+/**
+ * This is the Triangle Grid class which draws a simulation with triangle cells.
+ * 
+ * @author Hannah Fuchshuber
+ */
+
 public class TriangleGrid extends GridShape {
 
+	/**
+	 * Calls the super constructor
+	 */
 	public TriangleGrid() {
 		super();
 	}
 	
-	
+	/**
+	 * Draws the entire grid using triangles
+	 */
 	public Pane drawGrid(Grid grid, int w, int h) {
 		Pane screen = super.drawGrid(grid, w, h);
 		Iterator<Cell> itr = grid.iterator();
@@ -40,7 +51,18 @@ public class TriangleGrid extends GridShape {
 		return screen;
 	}
 	
-
+	/**
+	 * Draws one triangle
+	 * @param current
+	 * @param screenwid
+	 * @param screenheight
+	 * @param wcount
+	 * @param vcount
+	 * @param width
+	 * @param height
+	 * @param row
+	 * @return
+	 */
 	private Shape fillGrid(Cell current, double screenwid, double screenheight, int wcount, int vcount, double width, double height, int row) {
 		Polygon triangle = new Polygon();
 		if (row % 4 == 1) {
