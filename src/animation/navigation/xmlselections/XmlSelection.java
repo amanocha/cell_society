@@ -33,7 +33,8 @@ public class XmlSelection {
 		    		"SEGREGATION", 
 		    		"GAME OF LIFE", 
 		    		"FIRE", 
-		    		"PREDATOR/PREY" );
+		    		"PREDATOR/PREY",
+		    		"SUGAR" );
 
 	private static ObservableList<String> SHAPES = FXCollections.observableArrayList(
 			"SQUARE",

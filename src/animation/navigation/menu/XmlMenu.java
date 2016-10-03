@@ -35,6 +35,8 @@ public class XmlMenu implements Menu {
 			mySelection = new SegregationSelections(scene, r, info, resource);
 		} else if(simulationname.equals(resource.getString("GameOfLifeLabel"))) {
 			mySelection = new GameOfLifeSelections(scene, r, info, resource);
+		} else if(simulationname.equals(resource.getString("SugarLabel"))) {
+			mySelection = new SugarSelections(scene, r, info, resource);
 		}
 	}
 		
