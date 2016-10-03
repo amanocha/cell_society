@@ -7,6 +7,7 @@ import animation.navigation.xmlselections.FireSelections;
 import animation.navigation.xmlselections.GameOfLifeSelections;
 import animation.navigation.xmlselections.PredatorPreySelections;
 import animation.navigation.xmlselections.SegregationSelections;
+import animation.navigation.xmlselections.SugarSelections;
 import animation.navigation.xmlselections.XmlSelection;
 import javafx.scene.Group;
 import javafx.scene.Scene;
