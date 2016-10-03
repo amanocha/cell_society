@@ -1,7 +1,6 @@
 package animation.navigation.xmlselections;
 
 import java.util.ResourceBundle;
-
 import animation.navigation.Navigator;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -11,6 +10,13 @@ import javafx.scene.control.Slider;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
 import readxml.XMLGenerator.UserInputToXML;
+
+/**
+ * This is the Sugar Selections class which creates the GUI elements for the Xml selection page after selecting
+ * sugar from the combobox.
+ * 
+ * @author Hannah Fuchshuber
+ */
 
 public class SugarSelections extends XmlSelection {
 	
@@ -82,7 +88,7 @@ public class SugarSelections extends XmlSelection {
 	 * @return Label
 	 */
 	public Label createSugarGrowthLabel() {
-		return createSmallLabel(myResource.getString("SugarGrowBackLabel"), myScene.getWidth() * .3, myScene.getHeight() * .72);
+		return createSmallLabel(myResource.getString("SugarGrowBackLabel"), myScene.getWidth() * .25, myScene.getHeight() * .72);
 	}
 	
 	/**
