@@ -164,7 +164,6 @@ public class GUISimulation {
 		return myChart;
 	}
 	
-<<<<<<< HEAD
 	private void speedUp(){
 		engine.setRate(engine.getCurrentRate() + 2);
 	}
@@ -175,13 +174,10 @@ public class GUISimulation {
 		}
 	}
 	
-	private void play() {
-=======
 	/**
 	 * Starts the simulation
 	 */
 	public void play() {
->>>>>>> master
 		engine.setCycleCount(Timeline.INDEFINITE);
 		engine.play();
 	}
