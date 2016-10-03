@@ -1,7 +1,9 @@
 import animation.navigation.Navigator;
 import javafx.application.Application;
 import javafx.stage.Stage;
-
+/*
+ * The application starts from this main class
+ */
 public class Main extends Application {
 
 	private static final int WIDTH = 800;

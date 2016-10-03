@@ -1,5 +1,8 @@
 package structures.cell;
 
+/*
+ * Cell type for fire simulation
+ */
 public class FireCell extends Cell {
 	
 	private Double probsCatch;

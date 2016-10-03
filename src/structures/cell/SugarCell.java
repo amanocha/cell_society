@@ -1,5 +1,8 @@
 package structures.cell;
 
+/*
+ * Class that holds data for a sugar "cell"/object
+ */
 public class SugarCell extends Cell {
 	private int sugar;
 	private int sugarTime;

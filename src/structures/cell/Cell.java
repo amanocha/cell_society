@@ -1,5 +1,8 @@
 package structures.cell;
 
+/*
+ * General Cell class that holds common data between all types of simulation "cells"
+ */
 public class Cell {
 	private int number;
 	private int previous_state;

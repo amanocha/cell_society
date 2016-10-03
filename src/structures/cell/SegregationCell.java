@@ -1,5 +1,7 @@
 package structures.cell;
-
+/*
+ * Segregation cell for segregation simulation
+ */
 public class SegregationCell extends Cell { 
 	
 	private double satisfaction;

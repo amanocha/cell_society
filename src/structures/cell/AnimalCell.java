@@ -1,5 +1,8 @@
 package structures.cell;
 
+/*
+ * Animal Cell which holds data for wa-tor
+ */
 public class AnimalCell extends Cell {
 	private int time;
 	private int energy;

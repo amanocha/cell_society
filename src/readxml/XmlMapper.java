@@ -30,14 +30,10 @@ import structures.cell.Cell;
 import structures.cell.FireCell;
 import structures.cell.SegregationCell;
 import structures.cell.SugarCell;
-
+/*
+ * Maps an XML file to a grid, metadata, and loop object
+ */
 public class XmlMapper {
-	
-	/*public static void main(String[] args) {
-		XmlMapper xmlmap = new XmlMapper();
-		xmlmap.mapXml(myResource.getString("DefaultSelection"));
-	}*/
-	
 	private Map<String, String> globalsMap;
 	private MetaData meta;
 	private List<Cell> cells;
@@ -148,6 +144,9 @@ public class XmlMapper {
 		myLoop = new Loop(meta, myGrid);
 	}
 	
+	/*
+	 * Following createCell methods simply create instances of cells given the correct constructor inputs
+	 */
 	private Cell createCell(Integer cellIndex, Integer cellInitialState){
 		return new Cell(cellIndex, cellInitialState);
 	}

@@ -8,6 +8,9 @@ import java.util.Properties;
 
 import readxml.XmlMapper;
 
+/*
+ * Takes user input and maps it to the XML Generator
+ */
 public class UserInputToXML {
 	private Map<String, String> globalsMap;
 	private int numCells;
@@ -33,6 +36,9 @@ public class UserInputToXML {
 		globalsMap.put(key, value);
 	}
 	
+	/*
+	 * All following set methods add key/value pairs to the global map
+	 */
 	public void setMaxStates(int numStates) {
 		addParameter(prop.getProperty("maxStates"), Integer.toString(numStates));
 	}
