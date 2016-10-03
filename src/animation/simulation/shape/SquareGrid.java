@@ -49,6 +49,7 @@ public class SquareGrid extends GridShape {
 		return screen;
 	}
 	
+
 	/**
 	 * Draws one square
 	 * @param current
