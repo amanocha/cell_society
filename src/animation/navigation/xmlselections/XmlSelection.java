@@ -84,7 +84,8 @@ public class XmlSelection {
 	}
 	
 	public UserInputToXML startXMLMap(int numStates) {
-		UserInputToXML input = new UserInputToXML(getCellNumber(), numStates);
+		UserInputToXML input = new UserInputToXML(getCellNumber());
+		input.setMaxStates(numStates);
 		input.setShape(getShape());
 		input.setWrapping(getWrapping());
 		return input;

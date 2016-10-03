@@ -26,7 +26,7 @@ public class XMLGenerator {
 //		int maxStateValue = 2;
 //		System.out.println(x.createXML(globalMap, index, maxStateValue));
 //	}
-	public String createXML(Map<String, String> globalMap, int index, int maxStateValue) {
+	public String createXML(Map<String, String> globalMap, int index) {
 		StringBuilder xml = new StringBuilder();
 		
 		// BEGIN FILE
@@ -53,8 +53,10 @@ public class XMLGenerator {
 		
 		// GENERATE XML FOR SQUARES/CELLS + STATES
 		xml.append("<cells>");
+		Integer numStates = Integer.parseInt(globalMap.get("numstates"));
+		System.out.println("Num States: "+numStates);
 		for(int i = 0; i < index; i++) {
-			xml.append(generateSquareWithRandomState(maxStateValue, i));
+			xml.append(generateSquareWithRandomState(numStates, i));
 		}
 		xml.append("</cells>");
 		

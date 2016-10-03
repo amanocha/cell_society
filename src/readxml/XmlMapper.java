@@ -64,8 +64,8 @@ public class XmlMapper {
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
 		
-		//inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
-		inputFile = new File("data/xml/segregation_100.xml");
+		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
+		//inputFile = new File("data/xml/segregation_100.xml");
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = null;
@@ -99,6 +99,7 @@ public class XmlMapper {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
 			String value = charChildren.get(1).getTextContent();
+			System.out.println(name + "," +value);
 			globalsMap.put(name, value);
 		}
 		
@@ -135,7 +136,8 @@ public class XmlMapper {
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
 		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
-		//meta.setNumStates(Integer.parseInt(globalsMap.get(prop.getProperty("maxStates"))));
+		System.out.println(globalsMap.get(prop.getProperty("maxStates")));
+		meta.setNumStates(Integer.parseInt(globalsMap.get(prop.getProperty("maxStates"))));
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
