@@ -1,18 +1,26 @@
 package engine.update;
 
 import java.util.List;
-
 import engine.neighbors.Neighbor;
 import structures.Grid;
 import structures.cell.Cell;
-/*
- * An abstract class that is responsible for the logic of
- * updating the grid with new states on each game loop
+
+/**
+ * This is the Update class, which serves as an abstract super class that contains methods needed to implement the logic of
+ * updating the grid with new states in each iteration of a simulation.
+ * 
+ * @author Aninda Manocha
  */
+
 public abstract class Update {
 	private Grid grid;
 	private Neighbor neighbor;
 	
+	/**
+	 * Constructor
+	 * @param grid - the grid
+	 * @param neighbor - the Neighbor object that gives access to methods that can calculate neighbors of a given cell
+	 */
 	public Update(Grid grid, Neighbor neighbor) {
 		this.grid = grid;
 		this.neighbor = neighbor;

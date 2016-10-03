@@ -1,7 +1,6 @@
 package engine.neighbors;
 
 import java.util.List;
-
 import structures.Grid;
 import structures.cell.Cell;
 
@@ -19,6 +18,11 @@ public abstract class Neighbor {
 	private int gridWidth;
 	private String wrapping;
 	
+	/**
+	 * Constructor that takes in a Grid object in order to access the grid dimensions and cell list. 
+	 * @param grid - the grid
+	 * @param wrapping - the grid wrapping style
+	 */
 	public Neighbor(Grid grid, String wrapping) {
 		this.grid = grid;
 		this.gridSize = grid.getNumCells();
@@ -44,7 +48,8 @@ public abstract class Neighbor {
 	 * Gets all of the neighbors in the four compass directions of a given cell that are no further than a certain number
 	 * of cells away.
 	 * @param cell - the cell whose neighbors are to be determined
-	 * @param vision - the upper bound on the number of cells (counting the given cell)between a neighbor and the given cell
+	 * @param vision - the upper bound on the number of cells (counting the given cell) between a neighbor and the given 
+	 * cell
 	 * @return a list of cells that are surrounding neighbors
 	 */
 	public abstract List<Cell> getSurroundingNeighbors(Cell cell, int vision);

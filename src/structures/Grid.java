@@ -6,9 +6,11 @@ import java.util.List;
 
 import structures.cell.Cell;
 
-/*
- * The Grid class is the data structure that holds the necessary
- * components to visualize a grid in the frontend
+/**
+ * This is the Grid class, which is the data structure that stores all cells and holds the necessary components to 
+ * visualize a grid (for the frontend).
+ * 
+ * @author Aninda Manocha
  */
 public class Grid implements Iterable<Cell>{
 	
@@ -18,7 +20,13 @@ public class Grid implements Iterable<Cell>{
 	private int columns;
 	private String cellShape;
 	
-	
+	/**
+	 * Constructor
+	 * @param cellList - the list of cells to store in the grid
+	 * @param rows - the number of rows in the grid
+	 * @param columns - the number of columns in the grid
+	 * @param meta - the data that contains information about grid cells
+	 */
 	public Grid(List<Cell> cellList, int rows, int columns, MetaData meta) {
 		this.cellList = cellList;
 		this.initialCellList = new ArrayList<Cell>(cellList.size()); 
@@ -28,26 +36,25 @@ public class Grid implements Iterable<Cell>{
 		this.cellShape = meta.getShape();
 	}
 	
+	/**
+	 * Gets the number of cells in the grid (a perfect square).
+	 * @return the number of cells
+	 */
 	public int getNumCells() {
 		return cellList.size();
 	}
 	
-	// Resets drawing of grid
+	/**
+	 * Resets the grid so that it returns to the initial state (before the simulation ran).
+	 */
 	public void reset() {
 		this.cellList = this.initialCellList;
-		System.out.println("draw grid");
-		int count = 0;
-		for(int i = 0; i < this.getRows(); i++) {
-			for (int j = 0; j < this.getColumns(); j++) {
-				System.out.print(initialCellList.get(count).getCurrentState() + " ");
-				count++;
-			}
-			System.out.println();
-		}
-		//System.out.println();
 	}
 
-	// Iterator to easily iterate each cell for drawing in front end
+	/**
+	 *  Creates an iterator for the frontend to iterate through in order to access all cells and their information so that
+	 *  they can be drawn according to their states.
+	 */
 	@Override
     public Iterator<Cell> iterator() {
         Iterator<Cell> iterator = new Iterator<Cell>() {

@@ -1,17 +1,26 @@
 package engine.update;
 
 import java.util.List;
-
 import engine.neighbors.Neighbor;
 import structures.Grid;
 import structures.cell.Cell;
-/*
- * Handles game logic for updating grid for game of life simulation
+
+/**
+ * This is the UpdateGameOfLife class, which extends the Update class and contains methods needed to implement the logic of
+ * updating the grid with new states in each iteration of the Game of Life simulation.
+ * 
+ * @author Aninda Manocha
  */
+
 public class UpdateGameOfLife extends Update {
 	private Grid grid;
 	private Neighbor neighbor;
 	
+	/**
+	 * Constructor
+	 * @param newGrid - the grid
+	 * @param newNeighbor - the Neighbor object that gives access to methods that can calculate neighbors of a given cell
+	 */
 	public UpdateGameOfLife(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
@@ -19,7 +28,9 @@ public class UpdateGameOfLife extends Update {
 	}
 	
 	/**
-	 * Get immediate and diagonal neighbors of a given cell
+	 * Overrides the getNeighbors() method in order to consider both the immediate and diagonal neighbors of a given cell.
+	 * @param cell - the given cell
+	 * @return ArrayList of all neighbors
 	 */
 	@Override
 	public List<Cell> getNeighbors(Cell cell) {

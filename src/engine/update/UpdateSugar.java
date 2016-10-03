@@ -2,11 +2,17 @@ package engine.update;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import engine.neighbors.Neighbor;
 import structures.cell.Cell;
 import structures.cell.SugarCell;
 import structures.Grid;
+
+/**
+ * This is the UpdateSugar class, which extends the Update class and contains methods needed to implement the logic 
+ * of updating the grid with new states in each iteration of the Sugar simulation.
+ * 
+ * @author Aninda Manocha
+ */
 
 public class UpdateSugar extends Update {
 	private Grid grid;
@@ -15,6 +21,11 @@ public class UpdateSugar extends Update {
 	private int vision;
 	private int sugarMetabolism;
 	
+	/**
+	 * Constructor that creates a list of empty cells and gets the sugar grow back time, vision, and sugar metabolism
+	 * @param newGrid - the grid
+	 * @param newNeighbor - the Neighbor object that gives access to methods that can calculate neighbors of a given cell
+	 */
 	public UpdateSugar(Grid newGrid, Neighbor newNeighbors) {
 		super(newGrid, newNeighbors);
 		grid = newGrid;
@@ -24,13 +35,22 @@ public class UpdateSugar extends Update {
 		sugarMetabolism = ((SugarCell) newGrid.getCellList().get(0)).getSugarMetabolism();
 	}
 	
+	/**
+	 * Overrides the getNeighbors() method in order to consider the surrounding neighbors of a given cell.
+	 * @param cell - the given cell
+	 * @return ArrayList of all neighbors
+	 */
 	@Override
 	public List<Cell> getNeighbors(Cell cell) {
 		List<Cell> neighbors = neighbor.getSurroundingNeighbors(cell, vision);
 		return neighbors;
 	}
 	
-	
+	/**
+	 * Determines the nearby vacant patch with the most sugar.
+	 * @param patches - the list of patch cells
+	 * @return the neighboring patch with the most sugar
+	 */
 	public Cell getMaxSugarCell(ArrayList<Cell> patches) {
 		int max = 0, currentSugar;
 		Cell maxSugarCell = patches.get(0);
@@ -44,6 +64,11 @@ public class UpdateSugar extends Update {
 		return maxSugarCell;
 	}
 	
+	/**
+	 * Swaps an agent and patch cell to simulate the movement of the agent cell.
+	 * @param sugar1 - the agent
+	 * @param sugar2 - the patch
+	 */
 	public void swap(SugarCell sugar1, SugarCell sugar2) { //sugar1 becomes patch, sugar2 becomes agent
 		int sugar1State = sugar1.getCurrentState();
 		sugar1.setNextState(sugar2.getCurrentState());
@@ -57,7 +82,10 @@ public class UpdateSugar extends Update {
 	}
 	
 	/**
-	 * (0 = 0 sugar, 1 = 1 sugar, 2 = 2 sugar, 3 = 3 sugar, 4 = 4 sugar, 5 = 5 sugar, 6 = agent)
+	 * Determines the next state of each cell based on the rules of SugarScape. There are six states for patch cells and 
+	 * one state for agent cells (0 = 0 sugar, 1 = 1 sugar, 2 = 2 sugar, 3 = 3 sugar, 4 = 4 sugar, 5 = 5 sugar, 6 = agent).
+	 * The patch cells are updated first (so they can gain more sugar before an agent takes the sugar) and then the agent 
+	 * cells.
 	 */
 	@Override
 	public void determineUpdates() {
@@ -76,6 +104,10 @@ public class UpdateSugar extends Update {
 		displayCells(6);
 	}
 	
+	/**
+	 * Determines which patch cells need their states updated.
+	 * @param fishes - the list of patch cells
+	 */
 	public void determinePatchUpdates(ArrayList<Cell> patches) {
 		for (Cell patch : patches) {
 			if (((SugarCell) patch).getSugarTime() == sugarGrowBackTime) {
@@ -89,6 +121,10 @@ public class UpdateSugar extends Update {
 		}
 	}
 	
+	/**
+	 * Determines which agents cells need their states updated.
+	 * @param agents - the list of agents cells
+	 */
 	public void determineAgentUpdates(ArrayList<Cell> agents) {
 		ArrayList<Cell> patches = new ArrayList<Cell>();
 		for (Cell agent : agents) {
@@ -113,6 +149,10 @@ public class UpdateSugar extends Update {
 		}
 	}
 	
+	/**
+	 * Updates all cell states and updates the time of cells according to whichever cell type (agent or patch) was most 
+	 * recently updated.
+	 */
 	public void displayCells(int sugarState) {
 		for(Cell cell : grid.getCellList()) {
 			cell.setPreviousState(cell.getCurrentState());

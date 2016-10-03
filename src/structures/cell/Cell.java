@@ -1,14 +1,20 @@
 package structures.cell;
 
-/*
- * General Cell class that holds common data between all types of simulation "cells"
+/**
+ * This is the Cell class which contains data for all cell properties.
+ * 
+ * @author Aninda Manocha
  */
+
 public class Cell {
 	private int number;
 	private int previous_state;
 	private int current_state;
 	private int next_state;
 	
+	/**
+	 * Default constructor
+	 */
 	public Cell() {
 		number = 0;
 		previous_state = -1;
@@ -16,6 +22,11 @@ public class Cell {
 		next_state = -1;
 	}
 	
+	/**
+	 * Constructor
+	 * @param num - the cell number
+	 * @param state - the cell's current (initial) state
+	 */
 	public Cell(int cell_num, int cell_state) {
 		number = cell_num;
 		previous_state = -1;

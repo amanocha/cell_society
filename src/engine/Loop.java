@@ -1,7 +1,6 @@
 package engine;
 
 import java.util.ResourceBundle;
-
 import animation.simulation.GUISimulation;
 import engine.update.Update;
 import javafx.animation.KeyFrame;
