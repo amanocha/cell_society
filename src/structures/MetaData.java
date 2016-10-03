@@ -30,6 +30,7 @@ public class MetaData {
 	private String myFile;
 	private GridShape myShape;
 	private String shape;
+	private int numStates;
 
 	public void setCellShape(Grid grid, String name, String wrapping) {
 		this.shape = name;
@@ -97,6 +98,10 @@ public class MetaData {
 	public String getShape() {
 		return shape;
 	}
+	
+	public int getNumStates() {
+		return numStates;
+	}
 
 	
 	/*****SETTERS*****/
@@ -111,6 +116,10 @@ public class MetaData {
 	
 	public void setFileName(String file) {
 		myFile = file;
+	}
+
+	public void setNumStates(int num) {
+		numStates = num;
 	}
 	
 }

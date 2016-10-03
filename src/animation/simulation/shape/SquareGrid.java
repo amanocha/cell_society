@@ -18,6 +18,7 @@ public class SquareGrid extends GridShape {
 	}
 
 	public Pane drawGrid(Grid grid, int w, int h) {
+		super.drawGrid(grid, w, h);
 		Pane screen = new TilePane();
 		screen.setMaxWidth(w);
 		screen.setMaxHeight(h);

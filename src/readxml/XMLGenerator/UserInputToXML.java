@@ -35,6 +35,10 @@ public class UserInputToXML {
 		globalsMap.put(key, value);
 	}
 	
+	public void setMaxStates(int States) {
+		addParameter(prop.getProperty("maxStates"), Integer.toString(numStates));
+	}
+	
 	public void setSimulation(String simulationName) {
 		addParameter(prop.getProperty("simulation"), simulationName);
 	}

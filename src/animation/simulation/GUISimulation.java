@@ -1,6 +1,10 @@
 package animation.simulation;
 
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import animation.controls.button.ButtonGo;
@@ -9,7 +13,6 @@ import animation.controls.button.ButtonStop;
 import animation.controls.button.ButtonString;
 import animation.navigation.Navigator;
 import animation.simulation.shape.GridShape;
-import engine.Loop;
 import javafx.animation.Timeline;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -39,6 +42,7 @@ public class GUISimulation {
 	private int myTime;
 	private LineChart<Number, Number> myChart;
 	private Navigator myNav;
+	private Map<Integer, ArrayList<Point>> pointsList = new HashMap<Integer, ArrayList<Point>>();
 	
 	public GUISimulation(Scene scene, XmlMapper info, Timeline animation) {
 		this.myScene = scene;
@@ -49,6 +53,10 @@ public class GUISimulation {
 		myInfo = info;
 		scroll = new ScrollPane();
 		myTime = info.getGrid().getNumCells();
+		for (int i = 0; i <= info.getMeta().getNumStates(); i++) {
+			System.out.println(i);
+			pointsList.put(i, new ArrayList<Point>());
+		}
 	}
 	
 	public Pane getStackPane() {
@@ -110,13 +118,19 @@ public class GUISimulation {
 		myChart = new LineChart<Number, Number>(xAxis, yAxis); 
 		myChart.setTitle(resources.getString("LineChartTitle"));
 		Iterator<Integer> stateItr = myGridIllustrator.iterator();
+		int count = 0;
 		while(stateItr.hasNext()) {
 			int cellnum = stateItr.next();
-			System.out.println(myTime);
-			XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
 			myTime = myTime + myInfo.getGrid().getNumCells();
-			series.getData().add(new XYChart.Data<Number, Number>(myTime, cellnum));
+			pointsList.get(count).add(new Point(myTime, cellnum));
+			XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
+			for (int i = 0; i < pointsList.get(count).size(); i++) {
+				System.out.println(pointsList.get(count).get(i).getX());
+				System.out.println(pointsList.get(count).get(i).getY());
+				series.getData().add(new XYChart.Data<Number, Number>(pointsList.get(count).get(i).getX(), pointsList.get(count).get(i).getY()));
+			}
 			myChart.getData().add(series);
+			count++;
 		}
 		myChart.setLayoutX(myScene.getWidth() * .60);
 		myChart.setLayoutY(myScene.getHeight() * .52);

@@ -136,7 +136,7 @@ public class XmlMapper {
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
 		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
-		
+		//meta.setNumStates(Integer.parseInt(globalsMap.get(prop.getProperty("maxStates"))));
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
