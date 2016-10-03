@@ -23,12 +23,12 @@ import engine.Loop;
 import org.w3c.dom.Node;
 import org.w3c.dom.Element;
 
-import structures.Animal;
-import structures.Cell;
-import structures.FireCell;
 import structures.Grid;
 import structures.MetaData;
-import structures.SegregationCell;
+import structures.cell.Animal;
+import structures.cell.Cell;
+import structures.cell.FireCell;
+import structures.cell.SegregationCell;
 
 public class XmlMapper {
 	
@@ -64,8 +64,12 @@ public class XmlMapper {
 		File inputFile;
 		ClassLoader classLoader = getClass().getClassLoader();
 		
+<<<<<<< HEAD
 		System.out.println("data/xml/"+filename);
 		inputFile = new File("data/xml/"+filename);
+=======
+		inputFile = new File(classLoader.getResource("xml/"+filename).getFile());
+>>>>>>> master
 		//inputFile = new File("data/xml/segregation_100.xml");
 		// DBFactory for parsing XML using DOM method
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -100,6 +104,7 @@ public class XmlMapper {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
 			String value = charChildren.get(1).getTextContent();
+			System.out.println(name + "," +value);
 			globalsMap.put(name, value);
 		}
 		
@@ -136,7 +141,8 @@ public class XmlMapper {
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
 		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
-		
+		System.out.println(globalsMap.get(prop.getProperty("maxStates")));
+		meta.setNumStates(Integer.parseInt(globalsMap.get(prop.getProperty("maxStates"))));
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	

@@ -1,4 +1,4 @@
-package engine;
+package readxml.XMLGenerator;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -7,20 +7,17 @@ import java.util.Map.Entry;
 import java.util.Properties;
 
 import readxml.XmlMapper;
-import readxml.XMLGenerator.XMLGenerator;
 
 public class UserInputToXML {
 	private Map<String, String> globalsMap;
 	private int numCells;
-	private int numStates;
 	private XMLGenerator xmlGenerator;
 	private Properties prop;
 	private XmlMapper mapper;
 	
-	public UserInputToXML(int numCells, int maxStates) {
+	public UserInputToXML(int numCells) {
 		this.globalsMap = new HashMap<String, String>();
 		this.numCells = numCells;
-		this.numStates = maxStates;
 		this.xmlGenerator = new XMLGenerator();
 		this.mapper = new XmlMapper();
 		this.prop = new Properties();
@@ -34,6 +31,10 @@ public class UserInputToXML {
 	// Adds key value pair to the map
 	public void addParameter(String key, String value) {
 		globalsMap.put(key, value);
+	}
+	
+	public void setMaxStates(int numStates) {
+		addParameter(prop.getProperty("maxStates"), Integer.toString(numStates));
 	}
 	
 	public void setSimulation(String simulationName) {
@@ -70,10 +71,14 @@ public class UserInputToXML {
 	
 	// Generate XML based on values in map
 	public void generateXML() {
+<<<<<<< HEAD:src/engine/UserInputToXML.java
 		xmlGenerator.createXML(globalsMap, numCells, numStates);
 		/*for(IProject project : ResourcesPlugin.getWorkspace().getRoot().getProjects()){
 		    project.refreshLocal(IResource.DEPTH_INFINITE, new NullProgressMonitor());
 		}*/
+=======
+		xmlGenerator.createXML(globalsMap, numCells);
+>>>>>>> master:src/readxml/XMLGenerator/UserInputToXML.java
 		mapper.mapXml(xmlGenerator.getFileName());
 	}
 	

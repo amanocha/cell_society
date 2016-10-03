@@ -1,10 +1,10 @@
-package engine;
+package engine.neighbors;
 
 import java.util.List;
 import java.util.ArrayList;
 
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public class HexagonalNeighbors extends Neighbor{
 	

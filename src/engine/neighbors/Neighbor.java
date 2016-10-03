@@ -1,9 +1,9 @@
-package engine;
+package engine.neighbors;
 
 import java.util.List;
 
-import structures.Cell;
 import structures.Grid;
+import structures.cell.Cell;
 
 public abstract class Neighbor {
 	private Grid grid;

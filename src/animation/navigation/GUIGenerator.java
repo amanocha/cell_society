@@ -6,7 +6,6 @@ import animation.controls.button.ButtonString;
 import animation.controls.label.Header;
 import animation.controls.label.Message;
 import animation.controls.pane.PaneGenerator;
-import animation.navigation.menu.Menu;
 import engine.Loop;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -23,12 +22,10 @@ public class GUIGenerator {
 
 	
 	private PaneGenerator myPane;
-	private Menu myMenu;
 	private Scene myScene;
 	private ResourceBundle myResource;
 	private XmlMapper myInfo;
 	private Navigator myNav;
-	private Group root;
 	
 	public GUIGenerator(Scene scene, Group r, ResourceBundle resource, XmlMapper info) {
 		this.myScene = scene;
@@ -37,7 +34,6 @@ public class GUIGenerator {
 		myResource = resource;
 		myInfo = info;
 		myNav = new Navigator(scene, r, info);
-		root = r;
 	}
 
 
@@ -47,7 +43,7 @@ public class GUIGenerator {
 		grid.add(header, 1, 0);
 		grid.add(startButton(), 1, 1);
 		grid.add(parameterButton(), 1, 2);
-		Label text = (new Message(myResource.getString("CurrentSimulation"))).getLabel();
+		Label text = (new Message((myResource.getString("CurrentSimulation")) + myInfo.getMeta().getSimulationName())).getLabel();
 		text.setPrefWidth(myScene.getWidth() * .5);
 		grid.add(text, 1, 4);
 		return grid;
@@ -67,7 +63,7 @@ public class GUIGenerator {
 
 
 	public Node generateSimulationScreenLabel() {
-		Label label = (new Header(myResource.getString("SimulationLabel"))).getLabel();
+		Label label = (new Header((myResource.getString("SimulationLabel")) + myInfo.getMeta().getSimulationName())).getLabel();
 		label.setLayoutX(myScene.getWidth() * .07);
 		label.setLayoutY(myScene.getHeight() * .06);
 		return label;

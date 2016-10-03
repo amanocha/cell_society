@@ -11,7 +11,7 @@ import structures.Grid;
 
 public abstract class GridShape {
 	
-
+	private int maxState = 0; 
 	private Pane screen;
 	private CellColor myColor;
 	private Map<Integer, Integer> statesList;
@@ -39,11 +39,18 @@ public abstract class GridShape {
 	}
 	
 	public void insertStatesList(int state) {
+		if (state > maxState) {
+			maxState = state;
+		}
 		if (statesList.get(state) == null) {
 			statesList.put(state, 1);
 		} else {
 			statesList.put(state, statesList.get(state) + 1);
 		}
+	}
+	
+	public int getMaxState() {
+		return maxState; 
 	}
 	
 	public int numberOfStates() {

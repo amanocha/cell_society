@@ -3,12 +3,12 @@ package animation.navigation.xmlselections;
 import java.util.ResourceBundle;
 
 import animation.navigation.Navigator;
-import engine.UserInputToXML;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import readxml.XmlMapper;
+import readxml.XMLGenerator.UserInputToXML;
 
 public class GameOfLifeSelections extends XmlSelection {
 	
@@ -38,9 +38,7 @@ public class GameOfLifeSelections extends XmlSelection {
 	}
 	
 	private void xmlMap() {
-		System.out.println(getCellNumber());
-		UserInputToXML input = new UserInputToXML(getCellNumber(), 2);
-		input = super.startXMLMap(input);
+		UserInputToXML input = super.startXMLMap(2);
 		input.setSimulation(myResource.getString("GameOfLifexml"));
 		input.generateXML();
 		myNav = new Navigator(myScene, root, input.getMapper());

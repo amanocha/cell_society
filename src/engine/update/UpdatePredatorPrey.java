@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import engine.Neighbor;
-import structures.Animal;
-import structures.Cell;
+import engine.neighbors.Neighbor;
 import structures.Grid;
+import structures.cell.Animal;
+import structures.cell.Cell;
 
 public class UpdatePredatorPrey extends Update {
 	private Grid grid;

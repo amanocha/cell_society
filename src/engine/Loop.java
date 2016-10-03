@@ -14,7 +14,7 @@ import structures.Grid;
 import structures.MetaData;
 
 public class Loop {
-	private static final int FRAMES_PER_SECOND = 5;
+	private static final int FRAMES_PER_SECOND = 1;
     private static final int MILLISECOND_DELAY = 1000/FRAMES_PER_SECOND;
     
 	private Timeline animation;
@@ -42,9 +42,11 @@ public class Loop {
 		update = info.getMeta().getUpdate();
 		myResources = resources;
 	}
+	
 
 	public void init() {
 		root.getChildren().add(mySimulationPane.generateSimulationScreen());
+		root.getChildren().add(mySimulationPane.generatSimulationChart(myResources));
 		KeyFrame frame = new KeyFrame(Duration.millis(MILLISECOND_DELAY), e -> step());
 		animation.setCycleCount(Timeline.INDEFINITE);
 		animation.getKeyFrames().add(frame);
@@ -52,10 +54,6 @@ public class Loop {
 	}
 
 	private void step() {
-		root.getChildren().remove(mySimulationPane.getStackPane());
-		update.determineUpdates();
-		update.updateCells();
-		root.getChildren().add(mySimulationPane.generateSimulationScreen());
 			//System.out.println("draw grid");
 			int count = 0;
 			for(int i = 0; i < grid.getRows(); i++) {

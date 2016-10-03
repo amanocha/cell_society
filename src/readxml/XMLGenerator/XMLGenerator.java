@@ -18,6 +18,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 public class XMLGenerator {
 	
 	private String fileName;
+<<<<<<< HEAD
 	/*public static void main(String[] args) {
 		XMLGenerator x = new XMLGenerator();
 		Map<String, String> globalMap = new HashMap<String, String>();
@@ -34,6 +35,23 @@ public class XMLGenerator {
 		System.out.println(x.createXML(globalMap, index, maxStateValue));
 	}*/
 	public String createXML(Map<String, String> globalMap, int index, int maxStateValue) {
+=======
+//	public static void main(String[] args) {
+//		XMLGenerator x = new XMLGenerator();
+//		Map<String, String> globalMap = new HashMap<String, String>();
+//		globalMap.put("simulation", "game of life");
+//		globalMap.put("probCatch", "0.25");
+//		globalMap.put("satisfactionRate", "0.30");
+//		globalMap.put("energy", "10");
+//		globalMap.put("fishTime", "1");
+//		globalMap.put("sharkTime", "10");
+//		globalMap.put("shape", "square");
+//		int index = 900; //the only parameter that needs to be changed when changing grid size
+//		int maxStateValue = 2;
+//		System.out.println(x.createXML(globalMap, index, maxStateValue));
+//	}
+	public String createXML(Map<String, String> globalMap, int index) {
+>>>>>>> master
 		StringBuilder xml = new StringBuilder();
 		
 		// BEGIN FILE
@@ -60,8 +78,10 @@ public class XMLGenerator {
 		
 		// GENERATE XML FOR SQUARES/CELLS + STATES
 		xml.append("<cells>");
+		Integer numStates = Integer.parseInt(globalMap.get("numstates"));
+		System.out.println("Num States: "+numStates);
 		for(int i = 0; i < index; i++) {
-			xml.append(generateSquareWithRandomState(maxStateValue, i));
+			xml.append(generateSquareWithRandomState(numStates, i));
 		}
 		xml.append("</cells>");
 		
