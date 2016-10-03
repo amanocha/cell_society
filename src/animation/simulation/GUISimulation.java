@@ -81,7 +81,7 @@ public class GUISimulation {
 	
 	public Pane generateSimulationScreenButton(ResourceBundle resources, Group root) {
 		Button play = (new ButtonGo()).getButton();
-		play.setOnAction(e -> engine.play());
+		play.setOnAction(e -> play());
 		Button pause = (new ButtonPause()).getButton();
 		pause.setOnAction(e -> stopAnimation());
 		Button stop = (new ButtonStop()).getButton();
@@ -125,8 +125,6 @@ public class GUISimulation {
 			pointsList.get(count).add(new Point(myTime, cellnum));
 			XYChart.Series<Number, Number> series = new XYChart.Series<Number, Number>();
 			for (int i = 0; i < pointsList.get(count).size(); i++) {
-				System.out.println(pointsList.get(count).get(i).getX());
-				System.out.println(pointsList.get(count).get(i).getY());
 				series.getData().add(new XYChart.Data<Number, Number>(pointsList.get(count).get(i).getX(), pointsList.get(count).get(i).getY()));
 			}
 			myChart.getData().add(series);
@@ -139,6 +137,10 @@ public class GUISimulation {
 		return myChart;
 	}
 	
+	public void play() {
+		engine.setCycleCount(Timeline.INDEFINITE);
+		engine.play();
+	}
 	
 	public void stopAnimation() {
 		engine.stop();
