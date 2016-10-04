@@ -68,7 +68,6 @@ public class XmlSelection {
 		myResource = resource;
 		myNav = new Navigator(scene, r, info);
 		myScene = scene;
-		System.out.println(myScreen);
 	}
 	
 	/**

@@ -54,7 +54,6 @@ public class XMLGenerator {
 		// GENERATE XML FOR SQUARES/CELLS + STATES
 		xml.append("<cells>");
 		Integer numStates = Integer.parseInt(globalMap.get("numstates"));
-		System.out.println("Num States: "+numStates);
 		for(int i = 0; i < index; i++) {
 			xml.append(generateSquareWithRandomState(numStates, i));
 		}
@@ -77,7 +76,6 @@ public class XMLGenerator {
 		}
 		String simulationName = globalMap.get(prop.getProperty("simulation"));
 		fileName = simulationName + "_" + index + ".xml";
-		System.out.println("WRITING FILE");
 		File file = new File("data/xml/" + fileName);
 		BufferedWriter output = null;
 		try {

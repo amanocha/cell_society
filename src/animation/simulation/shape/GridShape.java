@@ -63,7 +63,6 @@ public abstract class GridShape {
 
             @Override
             public boolean hasNext() {
-            	System.out.println(statesList);
             	return currentIndex < statesList.size() && statesList.get(currentIndex) != null;
             }
 

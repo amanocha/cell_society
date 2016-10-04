@@ -64,7 +64,7 @@ public class XmlMapper {
 		// Get XML File loaded
 		File inputFile;
 
-		System.out.println("data/xml/"+filename);
+
 		inputFile = new File("data/xml/"+filename);
 
 		// DBFactory for parsing XML using DOM method
@@ -100,7 +100,6 @@ public class XmlMapper {
 			List<Node> charChildren = getListOfChildNodes(n);
 			String name = charChildren.get(0).getTextContent();
 			String value = charChildren.get(1).getTextContent();
-			System.out.println(name + "," +value);
 			globalsMap.put(name, value);
 		}
 		
@@ -139,12 +138,10 @@ public class XmlMapper {
 		myGrid = new Grid(cells, (int)Math.sqrt(indexValue), (int)Math.sqrt(indexValue), meta);
 		String shape = globalsMap.get(prop.getProperty("cellShape"));
 		String wrapping = globalsMap.get(prop.getProperty("gridWrapping"));
-		System.out.println(globalsMap.get(prop.getProperty("maxStates")));
 		meta.setNumStates(Integer.parseInt(globalsMap.get(prop.getProperty("maxStates"))));
 		meta.setCellShape(myGrid, shape, wrapping);
 		meta.setSimulationName(globalsMap.get("simulation"), myGrid);	
 		meta.setFileName(filename);	
-		System.out.println(filename);
 		myLoop = new Loop(meta, myGrid);
 	}
 	

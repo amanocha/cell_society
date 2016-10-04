@@ -1,7 +1,6 @@
 package engine.update;
 
 import java.util.List;
-
 import engine.neighbors.Neighbor;
 import structures.Grid;
 import structures.cell.Cell;

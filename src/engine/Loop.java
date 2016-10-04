@@ -18,7 +18,6 @@ public class Loop {
     private static final int MILLISECOND_DELAY = 1000/FRAMES_PER_SECOND;
     
 	private Timeline animation;
-	private Grid grid;
 	private Update update;
 	private Group root;
 	private Scene myScene;
@@ -29,7 +28,6 @@ public class Loop {
 	
 	public Loop(MetaData meta, Grid grid) {
 		this.animation = new Timeline();
-		this.grid = grid;
 	}
 	
 	public Loop(Scene s, XmlMapper info, Group r, ResourceBundle resources) {
@@ -38,7 +36,6 @@ public class Loop {
 		this.root = r;
 		this.myScene = s;
 		mySimulationPane = new GUISimulation(myScene, myInfo, animation);
-		this.grid = info.getGrid();
 		update = info.getMeta().getUpdate();
 		myResources = resources;
 	}
