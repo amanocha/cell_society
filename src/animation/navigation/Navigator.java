@@ -1,3 +1,7 @@
+// This entire file is part of my masterpiece.
+// HANNAH FUCHSHUBER
+
+
 package animation.navigation;
 
 
@@ -15,14 +19,15 @@ import readxml.XmlMapper;
 
 /**
  * This is the Navigator class which handles the logic for deciding which menu should be opened depending on
- * what the user chooses. 
+ * what the user chooses. I think that this is good design because it uses inheritance instead of using an 
+ * if-else statement to generate the different types of Menus. I think that all the methods are easily readable 
+ * and short. 
  * 
  * @author Hannah Fuchshuber
  */
 
 public class Navigator {
 	
-	private static final String STYLESHEET = "style.css";
 	private static final String LANGUAGE = "simulation";
 	
 	private static Stage myStage;
@@ -31,13 +36,11 @@ public class Navigator {
 	private double width;
 	private double height;
 	private XmlMapper myInfo;
-	private MainMenu mainMenu;
-	private XmlMenu xmlMenu;
-	private SimulationMenu simulationMenu;
 	private ResourceBundle myResource;
 	
 	/**
-	 * Generates the constructor called from main with default simulation
+	 * Generates the constructor called from main with default simulation. This constructor is only called from main,
+	 * because it calls mapXML.
 	 * @param s
 	 * @param w
 	 * @param h
@@ -52,7 +55,8 @@ public class Navigator {
 	}
 
 	/**
-	 * Generates the constructor for every other call to Navigator
+	 * Generates the constructor for every other call to Navigator. This is the constructor called every other time that 
+	 * Navigator is initiated in this program. It already has the XMLMapper passed in.
 	 * @param scene
 	 * @param r
 	 * @param info
@@ -66,40 +70,40 @@ public class Navigator {
 	}
 	
 	/**
-	 * Initializes the scene and the stage (only called from main)
+	 * Initializes the scene and the stage (only called from main). This sets up the Stage and the Scene for the first time
 	 */
 	public void init() {
 		root = new Group();
     	myScene = new Scene(root, width, height, Color.DIMGRAY);
     	myScene.getStylesheets().add(this.getClass()
-    			.getResource(STYLESHEET).toExternalForm());
+    			.getResource(myResource.getString("StyleSheet")).toExternalForm());
         myStage.setScene(myScene);
         myStage.show();
         createMainMenu();
 	}
 	
 	/**
-	 * Instantiates the xml Menu class
+	 * Instantiates the xml Menu class. This is called every time that the XML Menu is created.
 	 * @param The simulation selected
 	 */
 	public void createXmlMenu(String name) {
-		xmlMenu = new XmlMenu(myScene, root, new GUIGenerator(myScene, root, myResource, myInfo), myInfo, myResource, name); 
+		XmlMenu xmlMenu = new XmlMenu(myScene, root, new GUIGenerator(myScene, root, myResource, myInfo), myInfo, myResource, name); 
 		xmlMenu.generateMenu();
 	}
 	
 	/**
-	 * Instantiates the simulation menu class
+	 * Instantiates the simulation menu class. This is called every time that Simulation Menu is created.
 	 */
 	public void createSimluationMenu() {
-		simulationMenu = new SimulationMenu(myScene, root, myInfo, new GUIGenerator(myScene, root, myResource, myInfo), myResource);
+		SimulationMenu simulationMenu = new SimulationMenu(myScene, root, myInfo, new GUIGenerator(myScene, root, myResource, myInfo), myResource);
 		simulationMenu.generateMenu();
 	}
 	
 	/**
-	 * Instantiates the main menu class
+	 * Instantiates the main menu class. This is called every time the main menu is created.
 	 */
 	public void createMainMenu() {
-		mainMenu = new MainMenu(root, new GUIGenerator(myScene, root, myResource, myInfo));
+		MainMenu mainMenu = new MainMenu(root, new GUIGenerator(myScene, root, myResource, myInfo));
         mainMenu.generateMenu();
 	}
 	
