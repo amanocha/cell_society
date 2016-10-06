@@ -72,6 +72,13 @@ public abstract class Neighbor {
 	public abstract List<Cell> getSurroundingNeighbors(Cell cell, int vision);
 	
 	/**
+	 * Gets all of the neighbors of a given cell in a specific order.
+	 * @param cell - the given cell
+	 * @return a list of ordered neighbors
+	 */
+	public abstract List<Cell> getOrderedNeighbors(Cell cell);
+	
+	/**
 	 * Determines if the grid wrapping style is set to toroidal
 	 * @return whether the grid wrapping is set to toroidal
 	 */
