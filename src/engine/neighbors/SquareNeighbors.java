@@ -2,15 +2,32 @@ package engine.neighbors;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import structures.Grid;
 import structures.cell.Cell;
 
+/**
+ * This is the SquareNeighbor class, which contains the methods needed to determine the different types neighbors of a
+ * cell when the cell shape is square.
+ * 
+ * @author Aninda Manocha
+ */
+
 public class SquareNeighbors extends Neighbor {
+	
+	/**
+	 * Constructor that takes in a Grid object in order to inherit the grid dimensions and cell list from the parent class.
+	 * @param grid - the grid
+	 * @param wrapping - the grid wrapping style
+	 */
 	public SquareNeighbors(Grid grid, String wrapping) {
 		super(grid, wrapping);
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located north relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getNorthCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber >= getGridWidth()) {
@@ -23,6 +40,11 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located east relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber % getGridWidth() != (getGridWidth()-1)) {
@@ -35,6 +57,11 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located south relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getSouthCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber < getGridSize() - getGridWidth()) {
@@ -47,6 +74,11 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located west relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if (cellNumber % getGridWidth() != 0) {
@@ -60,9 +92,10 @@ public class SquareNeighbors extends Neighbor {
 	}
 	
 	/**
-	 * Determines the immediate neighbors (north, east, south, west) of a given cell.
-	 * @param cell - the given cell
-	 * @return ArrayList of the immediate neighbors
+	 * Determines the four immediate neighbors (north, east, south, west) of a given cell. They are located in the four
+	 * compass directions.
+	 * @param cell - the cell whose neighbors are to be determined
+	 * @return a list of cells that are immediate neighbors
 	 */
 	@Override
 	public List<Cell> getImmediateNeighbors(Cell cell) {
@@ -82,6 +115,11 @@ public class SquareNeighbors extends Neighbor {
 		return neighbors;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located northeast relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getNorthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber >= getGridWidth()) && (cellNumber % getGridWidth() != (getGridWidth()-1))) {
@@ -100,6 +138,11 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located northwest relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getNorthWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber >= getGridWidth()) && (cellNumber % getGridWidth() != 0)) {
@@ -118,6 +161,11 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located southeast relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getSouthEastCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber < getGridSize() - getGridWidth()) && (cellNumber % getGridWidth() != (getGridWidth()-1))) {
@@ -136,6 +184,11 @@ public class SquareNeighbors extends Neighbor {
 		return -1;
 	}
 	
+	/**
+	 * Determines the cell number of the cell in the grid located southwest relative to a given cell.
+	 * @param cell - the given cell
+	 * @return the cell number
+	 */
 	private int getSouthWestCell(Cell cell) {
 		int cellNumber = cell.getNumber();
 		if ((cellNumber < getGridSize() - getGridWidth()) && (cellNumber % getGridWidth() != 0)) {
@@ -155,9 +208,9 @@ public class SquareNeighbors extends Neighbor {
 	}
 	
 	/**
-	 * Determines the diagonal neighbors (northeast, northwest, southeast, southwest) of a given cell.
-	 * @param cell - the given cell
-	 * @return ArrayList of the diagonal neighbors
+	 * Determines the four diagonal neighbors (northeast, northwest, southeast, southwest) of a given cell.
+	 * @param cell - the cell whose neighbors are to be determined
+	 * @return a list of cells that are immediate neighbors
 	 */
 	@Override
 	public List<Cell> getDiagonalNeighbors(Cell cell) {
@@ -177,6 +230,14 @@ public class SquareNeighbors extends Neighbor {
 		return neighbors;
 	}
 	
+	/**
+	 * Gets all of the neighbors in the four compass directions of a given cell that are no further than a certain number
+	 * of cells away. This is used for the Sugar simulation.
+	 * @param cell - the cell whose neighbors are to be determined
+	 * @param vision - the upper bound on the number of cells (counting the given cell) between a neighbor and the given 
+	 * cell
+	 * @return a list of cells that are surrounding neighbors
+	 */
 	@Override
 	public List<Cell> getSurroundingNeighbors(Cell cell, int vision) {
 		List<Cell> neighbors = new ArrayList<Cell>();
@@ -204,6 +265,8 @@ public class SquareNeighbors extends Neighbor {
 	}
 	
 	/**
+	 * Creates an ordered list of neighbors of a given cell in order to map the location of neighbors relative to a cell.
+	 * The following mapping:
 	 * 0 = northwest
 	 * 1 = north
 	 * 2 = northeast
@@ -212,8 +275,13 @@ public class SquareNeighbors extends Neighbor {
 	 * 5 = south
 	 * 6 = southwest
 	 * 7 = west
-	 * @param cell
-	 * @return
+	 * 
+	 * creates the configurations:
+	 * 0 1 2
+	 * 7   3
+	 * 6 5 4
+	 * @param cell - the given cell
+	 * @return the ordered list of neighboring cells
 	 */
 	@Override
 	public List<Cell> getOrderedNeighbors(Cell cell) {

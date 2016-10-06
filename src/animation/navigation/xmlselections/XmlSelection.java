@@ -266,7 +266,7 @@ public class XmlSelection {
 	 * @return
 	 */
 	private Label createSimulationLabel() {
-		return createSmallLabel(myResource.getString("SimulationLabel"), myScene.getWidth() * .22, myScene.getHeight() * .2);
+		return createSmallLabel(myResource.getString("SimulationLabel"), myScene.getWidth() * .2975, myScene.getHeight() * .2);
 	}
 	
 	/**
