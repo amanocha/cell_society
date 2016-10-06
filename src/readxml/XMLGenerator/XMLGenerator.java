@@ -1,3 +1,10 @@
+/**
+ * This is part of Alan Guo's  masterpiece (to show what the masterpiece is interfacing).
+ * 
+ * This XML generator is used by the UserInputToXML masterpiece to generate
+ * an XML file based on the parameters set in UserInputToXML.
+ */
+
 package readxml.XMLGenerator;
 
 import java.io.BufferedWriter;
