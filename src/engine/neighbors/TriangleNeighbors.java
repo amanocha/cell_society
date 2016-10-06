@@ -235,7 +235,6 @@ public class TriangleNeighbors extends Neighbor{
 	 * @param cell - the given cell
 	 * @return the ordered list of neighboring cells
 	 */
-	@Override
 	public List<Cell> getOrderedNeighbors(Cell cell) {
 		List<Cell> neighbors = new ArrayList<Cell>();
 		

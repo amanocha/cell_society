@@ -1,17 +1,30 @@
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ * 
+ * The purpose of this class is to determine the neighbors of a given cell when the cell shape is square. This class is
+ * an example subclass of the Neighbor parent class and illustrates how the general neighbor methods can be implemented
+ * and specified for a given cell shape. All of the information (and math) needed to create a square grid of cells is 
+ * encapsulated within this class. This class is open for extension if other types of neighbors need to be added to the
+ * parent class, and therefore other types of neighbors need to be determined for all of the cell shapes. Additional
+ * methods can simply be added. Lastly, this class also utilizes small methods and breaks up a problem into several
+ * small parts. A square cell can have 8 neighbors (immediate plus diagonal), and the computation of each of these 8 
+ * neighbors is placed in a small method so that there is a short method to determine each individual neighbor. This
+ * improves the readability of the code in that it is more clear what is being calculated.
+ */
+
 package engine.neighbors;
 
 import java.util.ArrayList;
 import java.util.List;
 import structures.Grid;
 import structures.cell.Cell;
-
 /**
  * This is the SquareNeighbor class, which contains the methods needed to determine the different types neighbors of a
  * cell when the cell shape is square.
  * 
  * @author Aninda Manocha
  */
-
 public class SquareNeighbors extends Neighbor {
 	
 	/**
@@ -283,7 +296,6 @@ public class SquareNeighbors extends Neighbor {
 	 * @param cell - the given cell
 	 * @return the ordered list of neighboring cells
 	 */
-	@Override
 	public List<Cell> getOrderedNeighbors(Cell cell) {
 		List<Cell> neighbors = new ArrayList<Cell>();
 		int northwest, north, northeast, east, southeast, south, southwest, west;
