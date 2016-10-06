@@ -1,3 +1,11 @@
+/**
+ * This is part of Alan Guo's  masterpiece (to show what the masterpiece is interfacing).
+ * 
+ * This selection class and all of its subclasses have a method called: startXml or mapXml.
+ * I wanted to include these classes to show how easy it is to generate an XML file using the
+ * UserToInputXml class as an interface/abstraction between the frontend and actual XML generator.
+ */
+
 package animation.navigation.xmlselections;
 
 import java.util.ResourceBundle;

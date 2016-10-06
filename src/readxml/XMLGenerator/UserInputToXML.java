@@ -1,3 +1,19 @@
+/**
+ * This is the main part of Alan Guo's code masterpiece.
+ * 
+ * Purpose of this code is to provide functions for the front end develoepr
+ * to take their user input and map set those properties using the endpoints
+ * (or methods) from this class. They can set all the properties and then 
+ * generate an XML file using this class.
+ * 
+ * I think that this is well designed because 
+ * 1. It has short, succint methods
+ * 2. It utilizes a properties file for constants
+ * 3. It effectively separates the front end from the XML / backend data generation
+ * 4. It provides the front end with an interface to easily set initial parameters
+ * 5. It is easily extensible. You can simply add a function in the same format as the others
+ * 		if you need to add properties to the global characteristics map
+ */
 package readxml.XMLGenerator;
 
 import java.io.IOException;
