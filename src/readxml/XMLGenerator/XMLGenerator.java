@@ -1,8 +1,15 @@
+// This entire file is part of my masterpiece.
+// Alan Guo
 /**
  * This is part of Alan Guo's  masterpiece (to show what the masterpiece is interfacing).
+
  * 
  * This XML generator is used by the UserInputToXML masterpiece to generate
  * an XML file based on the parameters set in UserInputToXML.
+ * 
+ * This is well designed because it has extracted methods that separate the functionality
+ * into descriptive methods. It is easy to follow which part of the XML you are generating
+ * line by line in the code.
  */
 
 package readxml.XMLGenerator;
@@ -30,6 +37,47 @@ public class XMLGenerator {
 		xml.append("<file>");
 		
 		// GENERATE XML FOR GLOBAL CHARACTERISTICS
+		appendGlobalCharacteristics(globalMap, xml);
+		
+		// GENERATE XML FOR INDEX (NUM CELLS)
+		appendNumCells(index, xml);
+		
+		// GENERATE XML FOR SQUARES/CELLS + STATES
+		appendCells(globalMap, index, xml);
+		
+		// EOF
+		xml.append("</file>");
+		String xmlString = xml.toString();
+		fileName = generateFile(xmlString, globalMap, index);
+		return xmlString;
+	}
+
+	/*
+	 * Appends cells into XML
+	 */
+	private void appendCells(Map<String, String> globalMap, int index, StringBuilder xml) {
+		xml.append("<cells>");
+		Integer numStates = Integer.parseInt(globalMap.get("numstates"));
+		System.out.println("Num States: "+numStates);
+		for(int i = 0; i < index; i++) {
+			xml.append(generateSquareWithRandomState(numStates, i));
+		}
+		xml.append("</cells>");
+	}
+	
+	/*
+	 * Appends number of cells in XML
+	 */
+	private void appendNumCells(int index, StringBuilder xml) {
+		xml.append("<index>");
+		xml.append(index);
+		xml.append("</index>");
+	}
+
+	/*
+	 * Appends global characteristics into XML
+	 */
+	private void appendGlobalCharacteristics(Map<String, String> globalMap, StringBuilder xml) {
 		xml.append("<globalCharacteristic>");
 		for (Entry<String, String> entry : globalMap.entrySet()) {
 			xml.append("<globalCharacteristic>");
@@ -42,29 +90,9 @@ public class XMLGenerator {
 			xml.append("</globalCharacteristic>");
 		}
 		xml.append("</globalCharacteristic>");
-		
-		// GENERATE XML FOR INDEX (NUM CELLS)
-		xml.append("<index>");
-		xml.append(index);
-		xml.append("</index>");
-		
-		// GENERATE XML FOR SQUARES/CELLS + STATES
-		xml.append("<cells>");
-		Integer numStates = Integer.parseInt(globalMap.get("numstates"));
-		System.out.println("Num States: "+numStates);
-		for(int i = 0; i < index; i++) {
-			xml.append(generateSquareWithRandomState(numStates, i));
-		}
-		xml.append("</cells>");
-		
-		// EOF
-		xml.append("</file>");
-		String xmlString = xml.toString();
-		fileName = generateFile(xmlString, globalMap, index);
-		return xmlString;
 	}
 	
-	// Actually writes the XML file
+	// Actually writes/generates the XML file
 	public String generateFile(String text, Map<String, String> globalMap, int index) {
 		Properties prop = new Properties();
 		try {
@@ -81,14 +109,7 @@ public class XMLGenerator {
 			output = new BufferedWriter(new FileWriter(file));
 			output.write(text);
 			output.close();
-			//iFile.refreshLocal(IResource.DEPTH_ZERO, null);
-			//writer = new PrintWriter(file);
-			//writer.println(text);
-			//writer.flush();
-			//writer.close();
-		//} catch (FileNotFoundException e) {
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return fileName;
@@ -101,12 +122,10 @@ public class XMLGenerator {
 	// Generates squares with random state values
 	public String generateSquareWithRandomState(int maxStateValue, int index) {
 		StringBuilder square = new StringBuilder();
-		int randomNum = (int)Math.floor(Math.random()*maxStateValue);
+		int randomNum = generateRandomIntUpTo(maxStateValue);
 		square.append("<cell>");
 		
-		square.append("<index>");
-		square.append(index);
-		square.append("</index>");
+		appendNumCells(index, square);
 		
 		square.append("<characteristic>");
 		
@@ -121,5 +140,9 @@ public class XMLGenerator {
 		square.append("</characteristic>");
 		square.append("</cell>");
 		return square.toString();
+	}
+
+	private int generateRandomIntUpTo(int maxStateValue) {
+		return (int)Math.floor(Math.random()*maxStateValue);
 	}
 }

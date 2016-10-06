@@ -1,5 +1,7 @@
+// This entire file is part of my masterpiece.
+// Alan Guo
 /**
- * This is part of Alan Guo's  masterpiece (to show what the masterpiece is interfacing).
+ * Only the mapXml method is part of Alan Guo's  masterpiece (to show what the masterpiece is interfacing).
  * 
  * This selection class and all of its subclasses have a method called: startXml or mapXml.
  * I wanted to include these classes to show how easy it is to generate an XML file using the

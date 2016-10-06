@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+// Alan Guo
 /**
  * This is the main part of Alan Guo's code masterpiece.
  * 
