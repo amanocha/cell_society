@@ -1,3 +1,20 @@
+/*
+ * Aninda Manocha
+ * This entire file is part of my masterpiece.
+ * 
+ * The purpose of this class is to hold the methods needed for determining different types of neighbors. All simulations
+ * require determining the immediate neighbors of a cell, Game of Life and Segregation require diagonal neighbors as 
+ * well, and SugarScape requires surrounding neighbors (neighbors in the four compass directions that are up to a 
+ * certain number of patches away from the cell). Therefore, these different neighbor types need to be implemented for 
+ * all three cell shapes. This class therefore contains the common features among the classes that extend from it (each
+ * pertaining to a different cell shape). By having a super class, there is a sort of "contract" created in that each of
+ * the extending classes must implement the abstract methods in this super class, which is necessary because the same
+ * neighbor methods are needed regardless of cell shape. This super class allows for different cell shapes to be 
+ * implemented and the neighbors of a cell can still be determined. Additional cell shapes can be added simply by 
+ * creating more classes that extend this one. Additionally, this class illustrates inheritance, which is an important 
+ * and useful concept in object-oriented programming. 
+ */
+
 package engine.neighbors;
 
 import java.util.List;
@@ -55,26 +72,11 @@ public abstract class Neighbor {
 	public abstract List<Cell> getSurroundingNeighbors(Cell cell, int vision);
 	
 	/**
-	 * Gets the list of neighbors in the order in which they appear in the clockwise direction.
-	 * @param cell - the cell whose neighbors are to be determined
-	 * @return an ordered list of cells that are neighbors
-	 */
-	public abstract List<Cell> getOrderedNeighbors(Cell cell);
-	
-	/**
 	 * Determines if the grid wrapping style is set to toroidal
 	 * @return whether the grid wrapping is set to toroidal
 	 */
 	public boolean isToroidal() {
 		return (wrapping.equals("toroidal"));
-	}
-	
-	/**
-	 * Determines if the grid wrapping style is set to infinite
-	 * @return whether the grid wrapping is set to infinite
-	 */
-	public boolean isInfinite() {
-		return (wrapping.equals("infinite"));
 	}
 	
 	/*****GETTERS*****/
